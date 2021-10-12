@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Oil Wale</title>
+
+</head>
+
+<body>
+
+    <header class="navbar navbar-light sticky-top bg-light flex-md-nowrap p-0 shadow navbar-color border-bottom-orange">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 " routerLink="#"> <i class="fas fa-oil-can px-1"></i> OIL
+            WALE
+        </a>
+
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="dropstart px-4 d-none d-md-block ">
+            <a class="" routerLink="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <img class="user-img" src="/assets/img/user.png" alt="User" height="40px" width="40px">
+            </a>
+
+
+            <div class="dropdown-menu  dropdown-menu-start p-3 border border-2 width-200"
+                aria-labelledby="dropdownMenuLink">
+                <div class="text-center">
+
+                    <img class="user-img mr-1" src="/assets/img/user.png" alt="User" height="90px" width="90px">
+
+                    <div class="col-12 pt-2 ">
+                        <!-- <p class="lead">${user.name }</p> -->
+                        <small class="text-muted">ADMIN</small>
+                    </div>
+                </div>
+                <hr class="">
+                <div class="col-12">
+                    <ul class="list-group-flush px-0">
+                        <li class="list-group-item"><a routerLink="#" class="text-secondary"> <i
+                                    class="fas fa-user-circle"></i>
+                                Profile
+                            </a></li>
+                        <li class="list-group-item"><a routerLink="#"> <i class="fas fa-chart-line"></i> Activities
+                            </a></li>
+                        <!--  <li class="list-group-item account-dropdown"><a routerLink="#">Something else here</a></li> -->
+                    </ul>
+
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-danger btn-sm">Log Out</button>
+                    </div>
+                </div>
+
+                <div class="col-12 text-muted ">
+                    <small class="mb-1 "> <i class="fas fa-envelope"></i>
+
+                    </small>
+                </div>
+                <div class=" col-12  text-muted">
+                    <small class="mb-1 "> <i class="fas fa-mobile"></i>
+                        <!-- ${user.mobile} -->
+                    </small>
+                </div>
+                <!-- some text to display -->
+            </div>
+
+        </div>
+        <!-- 
+		<div class="">
+			<div class="d-flex justify-content-spaced-around align-items-center">
+				<div class="mr-1"></div>
+
+
+
+			</div>
+		</div>
+		 -->
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="w-100  p-2 d-md-none">
+                        <div class="d-flex justify-content-spaced-around align-items-center">
+                            <div class="mr-1">
+                                <img class="user-img mr-1" src="/assets/img/user.png" alt="User" height="60px"
+                                    width="60px">
+                            </div>
+
+                            <div class="m-1">
+                                <div class="col-12 text-muted ">
+                                    <small class="mb-1 text-light"> <i class="fas fa-envelope"></i>
+                                    </small>
+                                </div>
+                                <div class=" col-12  text-muted">
+                                    <small class="mb-1 text-light"> <i class="fas fa-mobile"></i>
+                                    </small>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li (click)="setActive('dashboard')" class="nav-item pt-1 "><a
+                                class="nav-link tab-item text-light active"
+                                [ngClass]="{'active-tab':active=='dashboard'}" routerLink="/dashboard"> <i
+                                    class="fas fa-home"></i> Dashboard
+                            </a></li>
+
+                        <li (click)="setActive('garages')" [ngClass]="{'active-tab':active=='garages'}"
+                            class="nav-item pt-1"><a class="nav-link tab-item text-light " routerLink="/garages">
+                                <i class="fas fa-wrench"></i> Garages
+                            </a></li>
+
+
+                        <li (click)="setActive('customers')" [ngClass]="{'active-tab':active=='customers'}"
+                            class="nav-item pt-1"><a class="nav-link tab-item text-light active"
+                                routerLink="/customers"> <i class="fas fa-users"></i> Customers
+                            </a></li>
+                        <li (click)="setActive('products')" [ngClass]="{'active-tab':active=='products'}"
+                            class="nav-item pt-1"><a class="nav-link tab-item text-light  active"
+                                routerLink="/products"> <i class="fas fa-tags"></i> Products
+                            </a></li>
+                        <li (click)="setActive('vehicles')" [ngClass]="{'active-tab':active=='vehicles'}"
+                            class="nav-item pt-1"><a class="nav-link tab-item text-light active" routerLink="/vehicles">
+                                <i class="fas fa-motorcycle"></i> Vehicles
+                            </a></li>
+                        <li (click)="setActive('schemes')" [ngClass]="{'active-tab':active=='schemes'}"
+                            class="nav-item pt-1"><a class="nav-link tab-item text-light active" routerLink="/schemes">
+                                <i class="fas fa-object-ungroup"></i> Schemes
+                            </a></li>
+                        <li (click)="setActive('accounts')" [ngClass]="{'active-tab':active=='accounts'}"
+                            class="nav-item pt-1"><a class="nav-link tab-item text-light active" routerLink="/accounts">
+                                <i class="fas fa-user-circle"></i> Manage
+                                Accouts
+                            </a></li>
+                    </ul>
+
+                    <hr>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item"><a class="nav-link tab-item text-light" routerLink="#"> <i
+                                    class="fas fa-user"></i> My Account
+                            </a></li>
+                        <li class="nav-item pt-1"><a class="nav-link tab-item text-light" routerLink="#"> <i
+                                    class="fas fa-clipboard-list"></i> My Activities
+                            </a></li>
+                        <li class="nav-item pt-1"><a class="nav-link tab-item text-light" routerLink="logout"> <i
+                                    class="fas fa-sign-out-alt"></i> Logout
+                            </a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Loading...</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="exampleModalBody">...</div>
+                        <div class="modal-footer" id="exampleModalFooter">
+                            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					  <button type="button" class="btn btn-primary">Save changes</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button trigger modal -->
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Launch demo modal</button> -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
+                <router-outlet></router-outlet>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+<style>
+    .error {
+        color: red;
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+<div class="d-flex flex-wrap pt-3">
+    <h3 class="h3"><i class="fas fa-tags"></i> Products</h3>
+</div>
+
+<!-- Page nav startes -->
+<ul class="nav border-bottom" id="myTab" role="tablist">
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark active border-bottom-orange products-tab" onclick="change_tab('products-tab', 0)"
+            id="all_products-tab" data-bs-toggle="tab" data-bs-target="#all_products" type="button" role="tab"
+            aria-controls="all_products" aria-selected="true">
+            <i class="fas fa-border-all"></i> All Products</a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark products-tab" onclick="change_tab('products-tab', 1)" id="add_products-tab"
+            data-bs-toggle="tab" data-bs-target="#add_products" type="button" role="tab" aria-controls="add_products"
+            aria-selected="false">
+            <i class="fas fa-plus"></i> Add Product</a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark products-tab" onclick="change_tab('products-tab', 2)" id="product_activities-tab"
+            data-bs-toggle="tab" data-bs-target="#product_activities" type="button" role="tab"
+            aria-controls="product_activities" aria-selected="false">
+            <i class="fas fa-code-branch"></i> Product Activities</a>
+    </li>
+</ul>
+<!-- page nav ends -->
+
+<!-- wrapper -->
+<div class="tab-content" id="myTabContent">
+    <!-- all products -->
+    <div class="tab-pane fade show active" id="all_products" role="tabpanel" aria-labelledby="all_products-tab">
+        <!-- table starts -->
+        <div class="py-3">
+            <div class="py-2 text-center">
+                <h5 class="h5">All Products</h5>
+                <h3 *ngIf="products.length==0">No Data Available</h3>
+            </div>
+            <div class="w-100 d-none" id="products_table_msg">
+                <div class="d-flex justify-content-end">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div id="products_table_msg_body"></div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="mx-auto mt-4">
+                <div class="table-responsive">
+                    <table datatable id="all_products_table" *ngIf="products.length > 0"
+                        class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
+                        <thead class="background-orange text-white">
+                            <tr class="">
+                                <!-- <th>#</th> -->
+                                <th>Name</th>
+                                <th>Specification</th>
+                                <th>Grade</th>
+                                <th>Packet Size</th>
+                                <th>Availability</th>
+                                <!-- <th>Image</th> -->
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of products">
+                                <td>{{product.productName}}</td>
+                                <td>{{product.specification}}</td>
+                                <td>{{product.grade}}</td>
+                                <td>{{product.packingSize}}</td>
+                                <td>{{product.active}}</td>
+                                <td> <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- table ends -->
+    </div>
+    <!-- all products ends-->
+
+    <!-- add product -->
+    <div class="tab-pane fade" id="add_products" role="tabpanel" aria-labelledby="add_products-tab">
+        <div class="pt-3">
+            <div class="py-2 text-center">
+                <h5 class="h5">Add Product</h5>
+            </div>
+            <div class="mx-auto col-lg-8 col-md-10 col-sm-12 mb-3" id="garageAddForm">
+                <div id="add_product_response" class="my-3">
+                    <div *ngIf="newAddedProduct" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong> <i class="fas fa-check-circle"></i> Success!</strong> Product
+                        {{newAddedProduct["productName"]}} added
+                        successfully.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+                <form class="py-3" id="add_products_form" (ngSubmit)="addProduct()" [formGroup]="product">
+                    <div class="row mb-3">
+                        <label for="Product_Name" class="col-sm-2 col-form-label">Product Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="productName" class="form-control" formControlName="productName"
+                                placeholder="Name of product..." id="Product_Name" />
+                            <span class="error"
+                                *ngIf="product.get('productName')?.hasError('required') && product.get('productName')?.touched">
+                                This field is required.</span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="Specification" class="col-sm-2 col-form-label">Specification</label>
+                        <div class="col-sm-10">
+                            <textarea name="specification" class="form-control" formControlName="specification"
+                                id="Specification" cols="" placeholder="Specification for product..."
+                                rows="5"></textarea>
+                            <span class="error"
+                                *ngIf="product.get('specification')?.hasError('required') && product.get('specification')?.touched">
+                                This field is required.</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Grade" class="col-sm-2 col-form-label">Grade</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="grade" formControlName="grade"
+                                placeholder="ex - 5W-30, 10W-40, etc..." id="Grade" />
+                            <span class="error"
+                                *ngIf="product.get('grade')?.hasError('required') && product.get('grade')?.touched">
+                                This field is required.</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Quantity" class="col-sm-2 col-form-label">Packet Size</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="packingSize" class="form-control" formControlName="packingSize"
+                                placeholder="10 ltr, 5 ltr, etc..." id="packingSize" />
+                            <span class="error"
+                                *ngIf="product.get('packingSize')?.hasError('required') && product.get('packingSize')?.touched">
+                                This field is required.</span>
+                        </div>
+                    </div>
+                    <!-- <div class="row mb-3">
+                  <label for="Product_Image" class="col-sm-2 col-form-label">Product Image</label>
+                  <div class="col-sm-10">
+                    <input type="file" path="productImage" id="Product_Image" />
+                  </div>
+                </div> -->
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" [disabled]="!product.valid" id="add_products_submit"
+                            class="btn background-orange text-white">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- add product -->
+
+    <!-- product activitites -->
+    <div class="tab-pane fade" id="product_activities" role="tabpanel" aria-labelledby="product_activities-tab">
+        <!-- activities starts -->
+        <div class="pt-3">
+            <div class="py-2 text-center">
+                <h5 class="h5">Product Activities</h5>
+            </div>
+            <div class="py-2">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">12/02/2021, 19:15 --> An item</li>
+                    <li class="list-group-item">12/02/2021, 19:15 --> A second item</li>
+                    <li class="list-group-item">12/02/2021, 19:15 --> A third item</li>
+                    <li class="list-group-item">12/02/2021, 19:15 --> A fourth item</li>
+                    <li class="list-group-item">12/02/2021, 19:15 --> And a fifth one</li>
+                </ul>
+
+                <!-- <table class="table table-borderless">
+                  <tbody>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+      
+                  </tbody>
+                </table> -->
+            </div>
+        </div>
+        <!-- activity ends -->
+    </div>
+    <!-- product activitites -->
+</div>
+<!-- wrapper ends -->

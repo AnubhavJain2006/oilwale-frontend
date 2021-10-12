@@ -1,0 +1,234 @@
+<div class="d-flex flex-wrap pt-3">
+    <h3 class="h3"><i class="fas fa-motorcycle"></i> Vehicles</h3>
+</div>
+
+<!-- Page nav startes -->
+<ul class="nav border-bottom" id="myTab" role="tablist">
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark active border-bottom-orange vehicles-tab" onclick="change_tab('vehicles-tab', 0)"
+            id="all_vehicles-tab" data-bs-toggle="tab" data-bs-target="#all_vehicles" type="button" role="tab"
+            aria-controls="all_vehicles" aria-selected="true">
+            <i class="fas fa-border-all"></i> All vehicles</a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark vehicles-tab" onclick="change_tab('vehicles-tab', 1)" id="add_products-tab"
+            data-bs-toggle="tab" data-bs-target="#add_vehicle" type="button" role="tab" aria-controls="add_vehicle"
+            aria-selected="false">
+            <i class="fas fa-plus"></i> Add Vehicle</a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark vehicles-tab" onclick="change_tab('vehicles-tab', 2)" id="product_activities-tab"
+            data-bs-toggle="tab" data-bs-target="#vehicles_activities" type="button" role="tab"
+            aria-controls="vehicles_activities" aria-selected="false">
+            <i class="fas fa-code-branch"></i> Vehicle Activities</a>
+    </li>
+</ul>
+<!-- page nav ends -->
+
+<!-- wrapper -->
+<div class="tab-content" id="myTabContent">
+    <!-- all Vehicle -->
+    <div class="tab-pane show active" id="all_vehicles" role="tabpanel" aria-labelledby="all_vehicles-tab">
+        <!-- table starts -->
+        <div class="py-3">
+            <div class="py-2 text-center">
+                <h5 class="h5">All Vehicles</h5>
+            </div>
+            <div class="mx-auto mt-4">
+                <div class="table-responsive">
+                    <table datatable class="table  table-bordered table-hover rounded text-center pt-3 mb-3">
+                        <thead class="background-orange text-white">
+                            <tr class="">
+                                <th>#</th>
+                                <th>Company</th>
+                                <th>Model</th>
+                                <!-- <th>Grade</th> -->
+                                <!-- <th>Quantity</th> -->
+                                <!-- <th>Status</th> -->
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Bajaj</td>
+                                <td>Pulsar</td>
+                                <!-- <td>4th Garde</td> -->
+                                <!-- <td> <span class="badge bg-primary">5 ltr</span> </td> -->
+                                <!-- <td><span class="badge bg-success">Active</span></td> -->
+                                <td>
+                                    <button class="btn btn-outline-primary" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Details"><i
+                                            class="fas fa-info-circle"></i></button>
+                                    <button class="btn btn-outline-warning"><i class="fas fa-pen"></i></button>
+                                    <button class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Yamaha</td>
+                                <td>R15</td>
+                                <!-- <td>4th Garde</td> -->
+                                <!-- <td> <span class="badge bg-primary">5 ltr</span> </td> -->
+                                <!-- <td><span class="badge bg-secondary">Concluded</span></td> -->
+                                <td>
+                                    <button class="btn btn-outline-primary" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Details"><i
+                                            class="fas fa-info-circle"></i></button>
+                                    <button class="btn btn-outline-warning"><i class="fas fa-pen"></i></button>
+                                    <button class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Suzuki</td>
+                                <td>Hayabusa</td>
+                                <!-- <td>4th Garde</td> -->
+                                <!-- <td> <span class="badge bg-primary">5 ltr</span> </td> -->
+                                <!-- <td><span class="badge bg-secondary">Concluded</span></td> -->
+                                <td>
+                                    <button class="btn btn-outline-primary" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Details"><i
+                                            class="fas fa-info-circle"></i></button>
+                                    <button class="btn btn-outline-warning"><i class="fas fa-pen"></i></button>
+                                    <button class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Hero Honda</td>
+                                <td>Splender</td>
+                                <!-- <td>4th Garde</td> -->
+                                <!-- <td> <span class="badge bg-primary">5 ltr</span> </td> -->
+                                <!-- <td><span class="badge bg-secondary">Concluded</span></td> -->
+                                <td>
+                                    <button class="btn btn-outline-primary" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Details"><i
+                                            class="fas fa-info-circle"></i></button>
+                                    <button class="btn btn-outline-warning"><i class="fas fa-pen"></i></button>
+                                    <button class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- table ends -->
+    </div>
+    <!-- all Vehicle ends-->
+
+    <!-- add Vehicle -->
+    <div class="tab-pane fade" id="add_vehicle" role="tabpanel" aria-labelledby="add_vehicle-tab">
+        <div class="pt-3">
+            <div class="py-2 text-center">
+                <h5 class="h5">Add New Vehicle</h5>
+            </div>
+            <div class="mx-auto col-lg-8 col-md-10 col-sm-12 border-bottom mb-3" id="garageAddForm">
+                <!-- form start -->
+                <form class="p-3">
+                    <div class="row mb-3">
+                        <label for="Company" class="col-sm-2 col-form-label">Company</label>
+                        <div class="col-sm-10">
+                            <select class="form-select form-select" name="vehicleCompany" id="companyList"
+                                aria-label=".form-select-lg example"></select>
+                            <div class="d-flex justify-content-end">
+                                <small><button type="button" class="my-2 btn btn-sm link" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal" onclick="open_company_modal()">Company not
+                                        listed?</button></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="Model" class="col-sm-2 col-form-label">Model</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="vehicleModel" id="Model" />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="Product" class="col-sm-2 col-form-label">Suggested Product</label>
+                        <div class="col-sm-10">
+                            <div id="suggestionArea">
+                                <select class="form-select form-select mt-1" name="suggestedProduct"
+                                    aria-label=".form-select-lg example">
+                                    <option value="0">Choose...</option>
+                                    <option value="1">Product1</option>
+                                    <option value="2">Product1</option>
+                                    <option value="3">Product1</option>
+                                </select>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <a type="button" class="mx-4" onclick="addSuggestionField()"><i
+                                        class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end mt-3">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <!-- form ends -->
+        </div>
+    </div>
+    <!-- add Vehicle -->
+
+    <!-- add Vehicle  company-->
+    <div class="tab-pane fade" id="add_vehicle_company" role="tabpanel" aria-labelledby="add_vehicle_company-tab">
+        <div class="py-3">
+            <div class="py-2 text-center">Add Company</div>
+        </div>
+    </div>
+    <!-- add Vehicle company -->
+
+    <!-- Vehicle activitites -->
+    <div class="tab-pane fade" id="vehicles_activities" role="tabpanel" aria-labelledby="vehicles_activities-tab">
+        <!-- activities starts -->
+        <div class="pt-5">
+            <div class="py-2 border-bottom">
+                <h5 class="h5"><i class="fas fa-chevron-right"></i> Recent Activity in Vehicles</h5>
+            </div>
+            <div class="py-2">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">12/02/2021 --> <a href="#">@Admin</a> added <a href="#">#Splender</a>
+                    </li>
+                    <li class="list-group-item">12/02/2021 --> <a href="#">@Admin</a> added <a href="#">#Pulsar</a>
+                    </li>
+                    <li class="list-group-item">12/02/2021 --> <a href="#">@Admin</a> added <a href="#">#R15</a>
+                    </li>
+                </ul>
+
+                <!-- <table class="table table-borderless">
+                  <tbody>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+      
+                  </tbody>
+                </table> -->
+            </div>
+        </div>
+        <!-- activities end -->
+    </div>
+    <!-- Vehicle activitites -->
+</div>
+<!-- wrapper ends -->

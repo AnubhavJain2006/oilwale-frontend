@@ -1,0 +1,204 @@
+<div class="d-flex flex-wrap pt-3">
+    <h3 class="h3"><i class="fas fa-object-ungroup"></i> Schemes</h3>
+</div>
+
+<!-- Page nav startes -->
+<ul class="nav border-bottom" id="myTab" role="tablist">
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark active border-bottom-orange scheme-tab" onclick="change_tab('scheme-tab', 0)"
+            id="all_scheme-tab" data-bs-toggle="tab" data-bs-target="#all_scheme" type="button" role="tab"
+            aria-controls="all_scheme" aria-selected="true">
+            <i class="fas fa-border-all"></i> All Schemes</a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark scheme-tab" onclick="change_tab('scheme-tab', 1)" id="add_scheme-tab"
+            data-bs-toggle="tab" data-bs-target="#add_scheme" type="button" role="tab" aria-controls="add_scheme"
+            aria-selected="false">
+            <i class="fas fa-plus"></i> Add Scheme</a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark scheme-tab" onclick="change_tab('scheme-tab', 2)" id="scheme_activities-tab"
+            data-bs-toggle="tab" data-bs-target="#scheme_activities" type="button" role="tab"
+            aria-controls="scheme_activities" aria-selected="false">
+            <i class="fas fa-code-branch"></i> Schemes Activities</a>
+    </li>
+</ul>
+<!-- page nav ends -->
+
+<!-- wrapper -->
+<div class="tab-content" id="myTabContent">
+    <!-- all schemes -->
+    <div class="tab-pane show active" id="all_scheme" role="tabpanel" aria-labelledby="all_scheme-tab">
+        <!-- table starts -->
+        <div class="py-3">
+            <div style="float: right;">
+                <select (change)="onChange($event)" name="" id="">
+                    <option selected value="Active">Active Schemes</option>
+                    <option value="Concluded">Concluded Schemes</option>
+                    <option value="UpComing">UpComing Schemes</option>
+                </select>
+
+            </div>
+            <div class="py-2 text-center">
+                <h5 class="h5">All Schemes</h5>
+                <h2 class="text-center" *ngIf="isDataAvailable">Data Not Available</h2>
+            </div>
+            <div class="mx-2 mt-4">
+
+                <div class="table-responsive">
+                    <table *ngIf="schemeList?.length>0" datatable
+                        class="table table-bordered table-hover rounded text-center pt-3 mb-3" id="all_schemes_table">
+                        <thead class="background-orange text-white">
+                            <tr class="">
+                                <!-- <th>#</th> -->
+                                <th>Scheme</th>
+                                <th>Description</th>
+                                <th>Start Data</th>
+                                <th>End Data</th>
+                                <th>Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let scheme of schemeList">
+                                <td>{{scheme.schemeName}}</td>
+                                <td>{{scheme.description}}</td>
+                                <td>{{scheme.startedAt | date}}</td>
+                                <td>{{scheme.endedAt | date}}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- table ends -->
+    </div>
+    <!-- all schemes end -->
+
+    <!-- add schemes -->
+    <div class="tab-pane fade" id="add_scheme" role="tabpanel" aria-labelledby="add_scheme-tab">
+        <!-- form -->
+        <div class="" id="garageAddForm">
+            <div class="pt-3">
+                <div class="py-2 text-center">
+                    <h5 class="h5">New Scheme</h5>
+                </div>
+                <form class="mx-auto col-lg-8 col-md-10 col-sm-12 smb-3" id="add_scheme_form" (ngSubmit)="addScheme()"
+                    [formGroup]="scheme">
+                    <div id="add_scheme_response"></div>
+                    <div class="row mb-3">
+                        <label for="Product_Name" class="col-sm-2 col-form-label">Scheme Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="schemeName" formControlName="schemeName" class="form-control"
+                                id="Product_Name" placeholder="Scheme name" />
+                            <span class="error"
+                                *ngIf="scheme.get('schemeName')?.hasError('required') && scheme.get('schemeName')?.touched">This
+                                field is required.</span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="Specification" class="col-sm-2 col-form-label">Description</label>
+                        <div class="col-sm-10">
+                            <textarea name="description" class="form-control" id="description"
+                                formControlName="description" cols="" rows="5"
+                                placeholder="A cool description for scheme ..."></textarea>
+                            <span class="error"
+                                *ngIf="scheme.get('description')?.hasError('required') && scheme.get('description')?.touched">This
+                                field is required.</span>
+
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="Specification" class="col-sm-2 col-form-label">Start Date</label>
+                        <div class="col-sm-10">
+                            <input type="date" (ngModelChange)="validateDate()" name="startedAt"
+                                formControlName="startedAt" class="form-control" id="startedAt" />
+                            <span class="error"
+                                *ngIf="scheme.get('startedAt')?.hasError('required') && scheme.get('startedAt')?.touched">This
+                                field is required.</span>
+
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="Specification" class="col-sm-2 col-form-label">End Date</label>
+                        <div class="col-sm-10">
+                            <input type="date" (ngModelChange)="validateDate()" name="endedAt" class="form-control"
+                                formControlName="endedAt" id="endedAt" />
+                            <span class="error"
+                                *ngIf="scheme.get('endedAt')?.hasError('required') && scheme.get('endedAt')?.touched">This
+                                field is required.</span>
+
+                            <div *ngIf="isValidDates==true" id="endedAtmsg" class="text-warning"><small> <i
+                                        class='fas fa-exclamation-circle'></i>
+                                    End date is before Start date</small></div>
+
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" [disabled]="!(!isValidDates && scheme.valid)" id="scheme_submit_btn"
+                            class="btn background-orange text-white">Add
+                            scheme</button>
+                    </div>
+                </form>
+            </div>
+            <!-- form ends -->
+        </div>
+    </div>
+    <!-- add schemes end -->
+
+    <!-- act  schemes -->
+    <div class="tab-pane fade" id="scheme_activities" role="tabpanel" aria-labelledby="scheme_activities-tab">
+        <!-- activities starts -->
+        <div class="pt-5">
+            <div class="py-2 border-bottom">
+                <h5 class="h5"><i class="fas fa-chevron-right"></i> Schemes Accepted By</h5>
+            </div>
+            <div class="py-2">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">12/02/2021 --> <a href="#">@Ghanshyam Garage</a> accepted <a
+                            href="#">#Anniverrsary Scheme</a></li>
+                    <li class="list-group-item">12/02/2021 --> <a href="#">@Jain Garage</a> accepted <a
+                            href="#">#Anniverrsary Scheme</a></li>
+                    <li class="list-group-item">12/02/2021 --> <a href="#">@Kardam Garage</a> accepted <a
+                            href="#">#Anniverrsary Scheme</a></li>
+                    <li class="list-group-item">12/02/2021 --> <a href="#">@Amir Garages</a> accepted <a
+                            href="#">#Anniverrsary Scheme</a></li>
+                    <li class="list-group-item">12/02/2021 --> <a href="#">@Quick Fix Garage</a> accepted <a
+                            href="#">#Holi
+                            Celebrations Scheme</a></li>
+                </ul>
+
+                <!-- <table class="table table-borderless">
+                    <tbody>
+                      <tr>
+                        <td>12/02/2021, 19:15</td>
+                        <td>A long description of some activity</td>
+                      </tr>
+                      <tr>
+                        <td>12/02/2021, 19:15</td>
+                        <td>A long description of some activity</td>
+                      </tr>
+                      <tr>
+                        <td>12/02/2021, 19:15</td>
+                        <td>A long description of some activity</td>
+                      </tr>
+                      <tr>
+                        <td>12/02/2021, 19:15</td>
+                        <td>A long description of some activity</td>
+                      </tr>
+                      <tr>
+                        <td>12/02/2021, 19:15</td>
+                        <td>A long description of some activity</td>
+                      </tr>
+        
+                    </tbody>
+                  </table> -->
+            </div>
+        </div>
+        <!-- act end -->
+    </div>
+    <!-- act schemes end -->
+</div>

@@ -1,0 +1,140 @@
+<div class="d-flex flex-wrap pt-3">
+    <h3 class="h3"><i class="fas fa-users"></i> Customers</h3>
+</div>
+<!-- Page nav startes -->
+<ul class="nav border-bottom" id="myTab" role="tablist">
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark active border-bottom-orange customers-tab" onclick="change_tab('customers-tab', 0)"
+            id="all_customers-tab" data-bs-toggle="tab" data-bs-target="#all_customers" type="button" role="tab"
+            aria-controls="all_customers" aria-selected="true">
+            <i class="fas fa-border-all"></i> All Customers</a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark customers-tab" id="customer_activities-tab"
+            onclick="change_tab('customers-tab', 1)" data-bs-toggle="tab" data-bs-target="#customer_activities"
+            type="button" role="tab" aria-controls="customer_activities" aria-selected="false">
+            <i class="fas fa-code-branch"></i> Customer Activities</a>
+    </li>
+</ul>
+<!-- page nav ends -->
+
+<div class="tab-content" id="myTabContent">
+    <!-- All Customer div -->
+
+    <div class="tab-pane fade show active" id="all_customers" role="tabpanel" aria-labelledby="all_customers-tab">
+        <!-- table starts -->
+        <div class="py-3">
+            <div class="mx-2 mt-4 rounded">
+                <div class="table-responsive">
+                    <table datatable id="all_customer_table" *ngIf="customers.length>0"
+                        class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
+                        <thead class="background-orange text-white">
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Area</th>
+                                <th>Pincode</th>
+                                <!-- <th>Vehicle Number</th> -->
+                                <th>Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let customer of customers">
+                                <tr>
+                                    <td>{{customer.customerName}}</td>
+                                    <td>{{customer.customerPhoneNumber}}</td>
+                                    <td>{{customer.customerAddress}}</td>
+                                    <td>{{customer.customerPincode}}</td>
+                                    <td> <button class="btn btn-outline-primary"
+                                            (click)="getCustomerId(customer.customerId)"> <i
+                                                class="fas fa-info-circle"></i>
+                                        </button> </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- table ends -->
+    </div>
+
+    <div class="tab-pane fade" id="customer_activities" role="tabpanel" aria-labelledby="customer_activities-tab">
+        <!-- activities starts -->
+        <div class="py-3">
+            <div class="table-responsive mt-4">
+                <table
+                    class="table table-bordered make_datatable table-hover text-center rounded make_datatable pt-3 mb-3">
+                    <thead class="background-orange text-white">
+                        <tr>
+                            <th>
+                                <p class="my-1">Activity ID</p>
+                            </th>
+                            <th>
+                                <p class="my-1">Date</p>
+                            </th>
+                            <th>
+                                <p class="my-1">Time</p>
+                            </th>
+                            <th>
+                                <p class="my-1">User</p>
+                            </th>
+                            <th>
+                                <p class="my-1">Activity</p>
+                            </th>
+                            <th>
+                                <p class="my-1">Category</p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ACT001235</td>
+                            <td>12/02/2021</td>
+                            <td>19:15</td>
+                            <td><a href="">@Admin21</a></td>
+                            <td>A long description of some activity</td>
+                            <td>Customer</td>
+                        </tr>
+                        <tr>
+                            <td>ACT001235</td>
+                            <td>12/02/2021</td>
+                            <td>19:15</td>
+                            <td><a href="">@Admin21</a></td>
+                            <td>A long description of some activity</td>
+                            <td>Customer</td>
+                        </tr>
+                        <tr>
+                            <td>ACT001235</td>
+                            <td>12/02/2021</td>
+                            <td>19:15</td>
+                            <td><a href="">@Admin21</a></td>
+                            <td>A long description of some activity</td>
+                            <td>Customer</td>
+                        </tr>
+                        <tr>
+                            <td>ACT001235</td>
+                            <td>12/02/2021</td>
+                            <td>19:15</td>
+                            <td><a href="">@Admin21</a></td>
+                            <td>A long description of some activity</td>
+                            <td>Customer</td>
+                        </tr>
+                        <tr>
+                            <td>ACT001235</td>
+                            <td>12/02/2021</td>
+                            <td>19:15</td>
+                            <td><a href="">@Admin21</a></td>
+                            <td>A long description of some activity</td>
+                            <td>Customer</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="../../../assets/js/customers.js"></script>

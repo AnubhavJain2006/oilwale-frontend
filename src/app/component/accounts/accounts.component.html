@@ -1,0 +1,338 @@
+<div class="modal fade" id="AccountModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title  text-danger" id="exampleModalLabel"> <i class="fas fa-trash"></i> Delete
+                    Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this account: </p>
+                <p><small>Name : </small>{{modalName}}</p>
+                <p><small>Email : </small> {{modalEmail}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                    (click)="confirmDelete(modalAdminId)">Delete
+                    Account</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex flex-wrap flex-md-nowrap pt-3">
+    <h3 class="h3"><i class="fas fa-user-circle"></i> Manage Accounts</h3>
+</div>
+
+<ul class="nav border-bottom" id="myTab" role="tablist">
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark active border-bottom-orange accounts-tab" id="all_accounts-tab"
+            onclick="change_tab('accounts-tab', 0)" data-bs-toggle="tab" data-bs-target="#all_accounts" type="button"
+            role="tab" aria-controls="all_accounts" aria-selected="false">
+            <i class="fas fa-border-all"></i> All Accounts
+        </a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark accounts-tab" onclick="change_tab('accounts-tab', 1)" id="add_accounts-tab"
+            data-bs-toggle="tab" data-bs-target="#add_accounts" type="button" role="tab" aria-controls="add_accounts"
+            aria-selected="true">
+            <i class="fas fa-plus"></i> Add Accounts
+        </a>
+    </li>
+
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark accounts-tab" id="accounts_activities-tab" onclick="change_tab('accounts-tab', 2)"
+            data-bs-toggle="tab" data-bs-target="#accounts_activities" type="button" role="tab"
+            aria-controls="accounts_activities" aria-selected="false">
+            <i class="fas fa-code-branch"></i> Accounts Activities
+        </a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark accounts-tab" id="deleted_accounts-tab" onclick="change_tab('accounts-tab', 3)"
+            data-bs-toggle="tab" data-bs-target="#deleted_accounts" type="button" role="tab"
+            aria-controls="deleted_accounts" aria-selected="false">
+            <i class="fas fa-user-slash"></i> Deleted Accounts
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane active show" id="all_accounts" role="tabpanel" aria-labelledby="all_accounts-tab">
+        <div class="py-3">
+            <div class="py-2 text-center">
+                <h5 class="h5">All Accounts</h5>
+            </div>
+
+            <div class="d-flex justify-content-end mr-3 my-2">
+                <button id="fetch_accounts_list" class="btn d-none" onclick="get_admin_list('active')"><i
+                        class="fas fa-sync-alt"></i> Refreh List</button>
+            </div>
+            <div id="accounts_message_div"></div>
+
+            <ul class="list-group list-group-flush" id="all_accounts_list">
+                <li class="list-group-item d-flex flex-wrap justify-content-between align-items-start p-md-3"
+                    *ngFor="let account of activeAccountList">
+                    <img src="../../../assets/img/user.png" class="px-md-3" height="120px" alt="" />
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{account.name}}</div>
+                        <small class="text-muted">
+                            <span>
+                                {{account.email}} <br />
+                                {{account.phoneNumber}} <br />
+                            </span>
+                        </small>
+                        <p>
+                            <button class="btn btn-sm bg-primary text-white m-1"><i
+                                    class="fas fa-info-circle"></i></button>
+                            <button class="btn btn-sm bg-danger text-white m-1" data-bs-toggle="modal"
+                                data-bs-target="#AccountModal"
+                                (click)="setModal(account.adminId,account.name,account.email)"><i
+                                    class="fas fa-trash"></i></button>
+                        </p>
+
+                    </div>
+                    <div>
+                        {{account.activeText}}
+                    </div>
+                    <div>
+
+                        <span *ngIf="(account.privilege=='admin')" class="badge bg-primary rounded-pill">Admin</span>
+
+                        <span *ngIf="(account.privilege=='moderator')"
+                            class="badge bg-info rounded-pill">Moderator</span>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="add_accounts" role="tabpanel" aria-labelledby="add_accounts-tab">
+        <div class="pt-3">
+            <div class="py-2 text-center">
+                <h5 class="h5">Add Account</h5>
+
+            </div>
+            <div *ngIf="newAddedAccount" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong><i class="fas fa-check-circle"></i> Success!</strong> New Account with name
+                <strong>{{newAddedAccount.name}}</strong> added successfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="mx-auto col-lg-8 col-md-10 col-sm-12 border-bottom mb-3">
+                <div id="add_account_response" class="my-3"></div>
+                <form class="py-3" id="add_accounts_form" method="POST" [formGroup]=" account"
+                    (ngSubmit)="addAccount()">
+                    <div class="row mb-3">
+                        <label for="Full_Name" class="col-sm-3 col-form-label">Full Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="name" name="name" id="Full_Name" />
+                            <span class="error"
+                                *ngIf="account.get('name')?.hasError('required') && account.get('name')?.touched">This
+                                field is
+                                required.</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Email_Id" class="col-sm-3 col-form-label">Email Address</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" formControlName="email" name="email"
+                                id="Email_Id" />
+                            <span class="error"
+                                *ngIf="account.get('email')?.hasError('required') && account.get('email')?.touched">This
+                                field is
+                                required.</span>
+                            <span class="error" *ngIf="account.get('email')?.hasError('email')">Invalid Email</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Email_Id" class="col-sm-3 col-form-label">Privilege</label>
+                        <div class="col-sm-9">
+                            <select class="form-select" formControlName="privilege" name="privilege" id="Privilege"
+                                required>
+                                <option value="">-- SELECT --</option>
+                                <option value="moderator">Moderator</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                            <span class="error"
+                                *ngIf="account.get('privilege')?.hasError('required') && account.get('privilege')?.touched">This
+                                field is
+                                required.</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Phone_Number" class="col-sm-3 col-form-label">Phone Number</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="phoneNumber" name="phoneNumber"
+                                id="Phone_Number" />
+                            <span class="error"
+                                *ngIf="account.get('phoneNumber')?.hasError('required') && account.get('phoneNumber')?.touched">This
+                                field is
+                                required.</span>
+                            <span class="error"
+                                *ngIf=" account.get('phoneNumber')?.hasError('maxlength') && account.get('phoneNumber')?.hasError('maxlength')">Phone
+                                Must contain 10 digits.</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Alternative_Number" class="col-sm-3 col-form-label">Alternative Number</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="alternateNumber" class="form-control"
+                                formControlName="alternateNumber" id="Alternative_Number" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Password" class="col-sm-3 col-form-label">Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" name="password" formControlName="password" class="form-control"
+                                id="Password" />
+
+                            <span class="d-block error">*Password should be minimum of 8 Character.</span>
+                            <span class="error d-block">*Password must contain atleast one special character one upper
+                                character and one lower
+                                character.</span>
+                            <span class="error d-block" *ngIf=" account.get('password')?.hasError('required') &&
+                                account.get('password')?.touched">This
+                                field is
+                                required.</span>
+                            <span class="error d-block" *ngIf=" account.get('password')?.hasError('pattern') ">Invalid
+                                Password</span>
+
+                            <!-- <span class="error d-block" *ngIf="account.get('password')?.hasError('pattern')">
+                                *Password should be minimum of 8 Character.*Password must contain atleast one special
+                                character one upper
+                                character and one lower
+                                character.
+                            </span> -->
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Address" class="col-sm-3 col-form-label">Address</label>
+                        <div class="col-sm-9">
+                            <textarea name="address" class="form-control" formControlName="address" id="Address" cols=""
+                                rows="5"></textarea>
+                            <span class="error"
+                                *ngIf="account.get('address')?.hasError('required') && account.get('address')?.touched">This
+                                field is
+                                required.</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Pincode" class="col-sm-3 col-form-label">Pincode</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="pincode" name="pincode"
+                                id="Pincode" />
+                            <span class="error"
+                                *ngIf="account.get('pincode')?.hasError('required') && account.get('pincode')?.touched">This
+                                field is
+                                required.</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn background-orange text-white" [disabled]="!account.valid"
+                            id="add_account_submit">Add
+                            Account</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="accounts_activities" role="tabpanel" aria-labelledby="garage_activities-tab">
+        <!-- activities starts -->
+        <div class="pt-3">
+            <div class="py-2 text-center">
+                <h5 class="h5">Account Activites</h5>
+            </div>
+            <div class="py-2 border-bottom">
+                <h5 class="h5"><i class="fas fa-chevron-right"></i> Recent activities in Accounts</h5>
+            </div>
+            <div class="py-2">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">12/02/2021, 19:15 --> An item</li>
+                    <li class="list-group-item">12/02/2021, 19:15 --> A second item</li>
+                    <li class="list-group-item">12/02/2021, 19:15 --> A third item</li>
+                    <li class="list-group-item">12/02/2021, 19:15 --> A fourth item</li>
+                    <li class="list-group-item">12/02/2021, 19:15 --> And a fifth one</li>
+                </ul>
+
+                <!-- <table class="table table-borderless">
+                  <tbody>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+                    <tr>
+                      <td>12/02/2021, 19:15</td>
+                      <td>A long description of some activity</td>
+                    </tr>
+      
+                  </tbody>
+                </table> -->
+            </div>
+        </div>
+        <!-- activities ends -->
+    </div>
+
+    <div class="tab-pane fade" id="deleted_accounts" role="tabpanel" aria-labelledby="deleted_accounts-tab">
+        <div class="py-3">
+            <div class="py-2 text-center">
+                <h5 class="h5">Deleted Accounts</h5>
+            </div>
+
+            <div class="d-flex justify-content-end mr-3 my-2">
+                <button id="fetch_accounts_list_deleted" class="btn d-none" onclick="get_admin_list('inactive')"><i
+                        class="fas fa-sync-alt"></i> Refreh List</button>
+            </div>
+            <div id="accounts_message_div_deleted"></div>
+            <ul class="list-group list-group-flush" id="all_deleted_accounts_list">
+
+                <li class="list-group-item d-flex flex-wrap justify-content-between align-items-start p-md-3"
+                    *ngFor="let account of deactiveAccountList">
+                    <img src="../../../assets/img/user.png" class="px-md-3" height="120px" alt="" />
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{account.name}}</div>
+                        <small class="text-muted">
+                            <span>
+                                {{account.email}} <br />
+                                {{account.phoneNumber}} <br />
+                            </span>
+                        </small>
+                        <p>
+                            <button class="btn btn-sm bg-primary text-white m-1"><i
+                                    class="fas fa-info-circle"></i></button>
+                            <button class="btn btn-sm bg-info bg-primary text-white m-1"><i class="fas fa-undo-alt"
+                                    (click)="revertAccount(account.adminId)"></i></button>
+
+                        </p>
+
+                    </div>
+                    <div>
+                        {{account.activeText}}
+                    </div>
+                    <div>
+
+                        <span *ngIf="(account.privilege=='admin')" class="badge bg-primary rounded-pill">Admin</span>
+
+                        <span *ngIf="(account.privilege=='moderator')"
+                            class="badge bg-info rounded-pill">Moderator</span>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
