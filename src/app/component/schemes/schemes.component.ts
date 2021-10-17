@@ -31,12 +31,12 @@ export class SchemesComponent implements OnInit {
   async loadSchemes(str: string) {
     if (str == "Active") {
       await this.schemeService.loadAllActiveScheme().then((resp: any) => {
-        console.log(resp);
+        //console.log(resp);
         this.schemeList = resp;
         this.isDataAvailable = false;
       }, err => {
         this.schemeList = "";
-        console.log(err);
+        //console.log(err);
         if (err.error.text != "") {
           this.isDataAvailable = true;
         }
@@ -44,13 +44,13 @@ export class SchemesComponent implements OnInit {
     }
     else if (str == "Concluded") {
       await this.schemeService.loadAllConcludedScheme().then((resp: any) => {
-        console.log(resp);
+        //console.log(resp);
         this.schemeList = resp;
-        // console.log(resp["error"])
+        // ////console.log(resp["error"])
         this.isDataAvailable = false;
       }, err => {
         this.schemeList = "";
-        console.log(err);
+        // console.log(err);
         if (err.error.text != "") {
           this.isDataAvailable = true;
         }
@@ -58,13 +58,13 @@ export class SchemesComponent implements OnInit {
     }
     else {
       await this.schemeService.loadAllUpComingScheme().then((resp: any) => {
-        console.log(resp);
+        //console.log(resp);
         this.schemeList = resp;
         this.isDataAvailable = false;
       }, err => {
         this.schemeList = "";
-        console.log(err);
-        console.log("Error of err " + err.error.text)
+        //console.log(err);
+        //console.log("Error of err " + err.error.text)
         if (err.error.text != "") {
           this.isDataAvailable = true;
         }
@@ -74,17 +74,17 @@ export class SchemesComponent implements OnInit {
 
   onChange(schemeType: any) {
     let str: string = schemeType.target.value;
-    console.log(str)
+    //console.log(str)
     this.loadSchemes(str);
   }
 
   addScheme() {
-    console.log(this.scheme.value)
+    //console.log(this.scheme.value)
     this.schemeService.addNewScheme(this.scheme.value).subscribe(resp => {
-      console.log(resp);
+      //console.log(resp);
       this.scheme.reset();
     }, err => {
-      console.log("Error in scheme add" + err)
+      //console.log("Error in scheme add" + err)
     })
 
   }

@@ -14,7 +14,8 @@ export class AdminService {
     return this.httpClient.get(environment.baseUrl + "api/allDeactiveAdmins").toPromise();
   }
   _deleteAccount = new Subject<void>();
-
+  activeAccountList: Array<any> = [];
+  deactiveAccountList: Array<any> = [];
   get deletedAccount() {
     return this._deleteAccount;
   }

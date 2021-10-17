@@ -29,11 +29,18 @@ export class AccountsComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]),
       privilege: new FormControl('', Validators.required)
     })
-    this.loadAccounts();
-    this.loadDeativeAccount();
-    console.log(this.account.valid);
-
-
+    if (this.accountService.activeAccountList.length == 0) {
+      this.loadAccounts();
+    }
+    else {
+      this.activeAccountList = this.accountService.activeAccountList;
+    }
+    if (this.accountService.deactiveAccountList.length == 0) {
+      this.loadDeativeAccount();
+    }
+    else {
+      this.deactiveAccountList = this.accountService.deactiveAccountList;
+    }
   }
 
   ngOnInit(): void {
@@ -50,6 +57,7 @@ export class AccountsComponent implements OnInit {
     await this.accountService.loadDeactivAccounts().then(resp => {
       console.log(resp);
       this.deactiveAccountList = resp;
+      this.accountService.deactiveAccountList = this.deactiveAccountList;
     }, err => {
       console.log(err);
     })
@@ -59,6 +67,7 @@ export class AccountsComponent implements OnInit {
     await this.accountService.loadActiveAccounts().then(resp => {
       console.log(resp);
       this.activeAccountList = resp;
+      this.accountService.activeAccountList = this.activeAccountList;
     }, err => {
       console.log(err);
     })
