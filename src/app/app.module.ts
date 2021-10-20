@@ -14,6 +14,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AccountsComponent } from './component/accounts/accounts.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './component/login/login.component';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     SchemesComponent,
     VehiclesComponent,
     AccountsComponent,
+    LoginComponent,
 
   ],
   imports: [

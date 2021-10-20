@@ -1,3 +1,4 @@
+import { LoginComponent } from './component/login/login.component';
 import { AccountsComponent } from './component/accounts/accounts.component';
 import { VehiclesComponent } from './component/vehicles/vehicles.component';
 import { SchemesComponent } from './component/schemes/schemes.component';
@@ -10,7 +11,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: "", component: DashboardComponent },
+  { path: "", component: LoginComponent },
   { path: "dashboard", component: DashboardComponent },
   { path: "garages", component: GaragesComponent },
   { path: "customers", component: CustomersComponent },

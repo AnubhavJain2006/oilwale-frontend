@@ -18,6 +18,8 @@ export class AccountsComponent implements OnInit {
   activeAccountList: Array<any> = [];
   deactiveAccountList: Array<any> = [];
   account: FormGroup;
+
+
   constructor(private accountService: AdminService) {
     this.account = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -33,6 +35,7 @@ export class AccountsComponent implements OnInit {
       this.loadAccounts();
     }
     else {
+
       this.activeAccountList = this.accountService.activeAccountList;
     }
     if (this.accountService.deactiveAccountList.length == 0) {

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="box mx-1 mx-md-0">
+            <div class="row d-flex align-items-center">
+                <div class="col-md-5">
+                    <div class="py-3">
+
+                        <img src="/assets/img/mpl.jpeg" class="img-fluid mx-3 px-0 d-md-block d-none" alt="Logo image">
+                    </div>
+
+                </div>
+                <div class="col-md-7 pb-5 px-3">
+                    <form class="" (ngSubmit)="login()" [formGroup]="loginText">
+                        <h1 class="font-weight-bold py-4 d-none d-md-block">OilWale</h1>
+                        <h1 class="font-weight-bold py-4 text-center d-md-none d-sm-block">OilWale</h1>
+
+                        <h4>Sign into your account</h4>
+                        <div class="form-row">
+                            <div class="col-md-11">
+                                <input type="email" formControlName="email" name="email" placeholder="Email-address"
+                                    class="form-control my-3 py-3">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-11">
+                                <input type="password" placeholder="Password" name="password" formControlName="password"
+                                    class="form-control my-3 py-3">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-11">
+                                <button class="btn1 mt-3 ">Login</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <p class="pt-4"><a href="#">Forget Password?</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="row vh-100 g-0">
+        <div class="col-md-5">
+            <div class="d-flex align-items-center">
+                <p>skldjhfsd</p>
+                <p>dfsdf</p>
+            </div>
+        </div>
+        <div class="col-md-7">
+            this is form
+        </div>
+    </div> -->
+
+
+</body>
+
+</html>

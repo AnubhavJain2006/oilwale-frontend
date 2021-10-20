@@ -1,2 +1,7 @@
-<app-header></app-header>
+<div *ngIf="router.url != '/'">
+    <app-header></app-header>
+</div>
+<div *ngIf="router.url=='/'">
+    <app-login></app-login>
+</div>
 <!-- <router-outlet></router-outlet> -->

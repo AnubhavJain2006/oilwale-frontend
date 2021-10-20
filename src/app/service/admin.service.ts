@@ -9,13 +9,19 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AdminService {
+  authenticate(loginText: any): Observable<any> {
+    return this.httpClient.post(environment.baseUrl + "api/authenticate", loginText);
+  }
   loadDeactivAccounts(): Promise<any> {
 
     return this.httpClient.get(environment.baseUrl + "api/allDeactiveAdmins").toPromise();
   }
   _deleteAccount = new Subject<void>();
+
   activeAccountList: Array<any> = [];
+
   deactiveAccountList: Array<any> = [];
+
   get deletedAccount() {
     return this._deleteAccount;
   }
