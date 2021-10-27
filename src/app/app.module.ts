@@ -16,6 +16,8 @@ import { AccountsComponent } from './component/accounts/accounts.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './component/login/login.component';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './interceptor/jwt/jwt.interceptor'
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,13 @@ import { LoginComponent } from './component/login/login.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
