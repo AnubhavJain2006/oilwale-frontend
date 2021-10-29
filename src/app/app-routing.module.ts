@@ -7,6 +7,7 @@ import { CustomersComponent } from './component/customers/customers.component';
 import { GaragesComponent } from './component/garages/garages.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HeaderComponent } from './component/header/header.component';
+import { MyaccountComponent } from './component/myaccount/myaccount.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: "products", component: ProductsComponent },
   { path: "schemes", component: SchemesComponent },
   { path: "vehicles", component: VehiclesComponent },
-  { path: "accounts", component: AccountsComponent }
+  { path: "accounts", component: AccountsComponent },
+  { path: "myaccount", component: MyaccountComponent}
 ];
 
 @NgModule({

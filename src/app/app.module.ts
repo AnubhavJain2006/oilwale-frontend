@@ -17,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './component/login/login.component';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from './interceptor/jwt/jwt.interceptor'
+import { JwtInterceptor } from './interceptor/jwt/jwt.interceptor';
+import { MyaccountComponent } from './component/myaccount/myaccount.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,7 @@ import { JwtInterceptor } from './interceptor/jwt/jwt.interceptor'
     VehiclesComponent,
     AccountsComponent,
     LoginComponent,
+    MyaccountComponent,
 
   ],
   imports: [

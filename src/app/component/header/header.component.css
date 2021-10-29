@@ -207,3 +207,7 @@ select:focus {
 .user-img {
     border-radius: 50%;
 }
+
+.text-orange {
+    color: #ff5722;
+}

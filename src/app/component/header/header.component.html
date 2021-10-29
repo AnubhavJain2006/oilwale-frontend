@@ -15,8 +15,7 @@
 
     <header class="navbar navbar-light sticky-top bg-light flex-md-nowrap p-0 shadow navbar-color border-bottom-orange">
         <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 " routerLink="#"> <i class="fas fa-oil-can px-1"></i> OIL
-            WALE
-        </a>
+            WALE</a>
 
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
@@ -30,58 +29,43 @@
             </a>
 
 
-            <div class="dropdown-menu  dropdown-menu-start p-3 border border-2 width-200"
+            <div class="dropdown-menu  dropdown-menu-start px-3 border border-2 width-200"
                 aria-labelledby="dropdownMenuLink">
                 <div class="text-center">
 
                     <img class="user-img mr-1" src="/assets/img/user.png" alt="User" height="90px" width="90px">
 
                     <div class="col-12 pt-2 ">
-                        <!-- <p class="lead">${user.name }</p> -->
                         <small class="text-muted">ADMIN</small>
                     </div>
                 </div>
                 <hr class="">
                 <div class="col-12">
-                    <ul class="list-group-flush px-0">
-                        <li class="list-group-item"><a routerLink="#" class="text-secondary"> <i
-                                    class="fas fa-user-circle"></i>
+                    <ul class="list-unstyled px-0">
+                        <li class="py-1">
+                            <a routerLink="#" class="text-decoration-none text-secondary"> 
+                                <i class="fas fa-user-circle"></i>
                                 Profile
-                            </a></li>
-                        <li class="list-group-item"><a routerLink="#"> <i class="fas fa-chart-line"></i> Activities
-                            </a></li>
-                        <!--  <li class="list-group-item account-dropdown"><a routerLink="#">Something else here</a></li> -->
+                            </a>
+                        </li>
+                        <li class="py-1">
+                            <a routerLink="#" class="text-decoration-none text-secondary"> 
+                                <i class="fas fa-chart-line"></i>
+                                 Activities
+                            </a>
+                        </li>
+                        <li class="py-1">
+                            <a routerLink="#" class="text-decoration-none text-secondary"> 
+                                <i class="fas fa-sign-out-alt"></i>
+                                 Logout
+                            </a>
+                        </li>
                     </ul>
-
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-danger btn-sm">Log Out</button>
-                    </div>
                 </div>
-
-                <div class="col-12 text-muted ">
-                    <small class="mb-1 "> <i class="fas fa-envelope"></i>
-
-                    </small>
-                </div>
-                <div class=" col-12  text-muted">
-                    <small class="mb-1 "> <i class="fas fa-mobile"></i>
-                        <!-- ${user.mobile} -->
-                    </small>
-                </div>
-                <!-- some text to display -->
             </div>
 
         </div>
-        <!-- 
-		<div class="">
-			<div class="d-flex justify-content-spaced-around align-items-center">
-				<div class="mr-1"></div>
-
-
-
-			</div>
-		</div>
-		 -->
+        
     </header>
     <div class="container-fluid">
         <div class="row">
@@ -145,7 +129,8 @@
 
                     <hr>
                     <ul class="nav flex-column mb-2">
-                        <li class="nav-item"><a class="nav-link tab-item text-light" routerLink="#"> <i
+                        <li (click)="setActive('myaccount')" [ngClass]="{'active-tab':active=='myaccount'}"
+                            class="nav-item"><a class="nav-link tab-item text-light active" routerLink="/myaccount"> <i
                                     class="fas fa-user"></i> My Account
                             </a></li>
                         <li class="nav-item pt-1"><a class="nav-link tab-item text-light" routerLink="#"> <i
