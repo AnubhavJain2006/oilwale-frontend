@@ -1,0 +1,72 @@
+<div class="d-flex flex-wrap pt-3">
+    <h3 class="h3"><i class="fas fa-user"></i> My Account</h3>
+</div>
+
+<!-- Page nav startes -->
+<ul class="nav border-bottom" id="myTab" role="tablist">
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark active border-bottom-orange myaccount-tab" onclick="change_tab('myaccount-tab', 0)"
+            id="all_myaccount-tab" data-bs-toggle="tab" data-bs-target="#all_myaccount" type="button" role="tab"
+            aria-controls="all_myaccount" aria-selected="true">
+            <i class="fas fa-border-all"></i> Personal Information</a>
+    </li>
+    <!-- <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark myaccount-tab" id="other_details-tab"
+            onclick="change_tab('myaccount-tab', 1)" data-bs-toggle="tab" data-bs-target="#other_details"
+            type="button" role="tab" aria-controls="other_details" aria-selected="false">
+            <i class="fas fa-code-branch"></i> Customer Activities</a>
+    </li> -->
+</ul>
+<!-- page nav ends -->
+
+<div class="tab-content" id="myTabContent">
+    <!-- All Customer div -->
+
+    <div class="tab-pane fade show active" id="all_myaccount" role="tabpanel" aria-labelledby="all_myaccount-tab">
+        <!-- table starts -->
+        <div class="py-3 px-md-3">
+            <div class="py-2 text-center"> <h5> Personal Information</h5></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="user-img mr-1" src="/assets/img/user.png" alt="User" width="120px">
+                    <br>
+                    -- name of person --
+                </div>
+                <div class="col-md-8">
+                    <table class="table table-borderless p-md-3">
+                        <tr>
+                            <td>Name</td>
+                            <td>-- pending -- </td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>-- pending -- </td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td>
+                            <td>-- pending -- </td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>-- pending -- </td>
+                        </tr>
+                        <tr>
+                            <td>Authority</td>
+                            <td>Moderator / Admin </td>
+                        </tr>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+        <!-- table ends -->
+    </div>
+
+    <!-- <div class="tab-pane fade" id="other_details" role="tabpanel" aria-labelledby="other_details-tab">
+        <!-- activities starts -->
+        <!-- <div class="py-3"> -->
+           
+        <!-- </div> -->
+    <!-- </div> --> 
+</div>
+
