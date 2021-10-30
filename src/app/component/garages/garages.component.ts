@@ -20,7 +20,7 @@ export class GaragesComponent implements OnInit {
   newAddedGarage: any = "";
 
   constructor(private garageService: GarageService, private router: Router) {
-
+    
     if (this.garageService.garageList.length == 0) {
       this.loadAllGarages();
     }

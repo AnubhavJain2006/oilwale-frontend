@@ -1,6 +1,6 @@
+import { AuthGuard } from './service/AuthGaurd/auth.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
@@ -43,6 +43,7 @@ import { MyaccountComponent } from './component/myaccount/myaccount.component'
     ReactiveFormsModule
   ],
   providers: [
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

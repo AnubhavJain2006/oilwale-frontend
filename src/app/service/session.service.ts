@@ -11,9 +11,8 @@ export class SessionService {
   constructor(private router: Router) { }
 
   isLoggedIn() {
-    this.authToken = localStorage.getItem('authToken');
-    console.log(this.authToken);
-    if (this.authToken == null)
+    // console.log(this.authToken);
+    if (!(localStorage.getItem('authToken') != null && localStorage.getItem('isLoggedIn') != null))
       return false;
     else {
       return true;
@@ -22,6 +21,7 @@ export class SessionService {
 
   loggedOut() {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('isLoggedIn')
     this.router.navigateByUrl("/");
   }
 

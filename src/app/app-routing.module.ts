@@ -10,17 +10,18 @@ import { HeaderComponent } from './component/header/header.component';
 import { MyaccountComponent } from './component/myaccount/myaccount.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './service/AuthGaurd/auth.guard';
 
 const routes: Routes = [
   { path: "", component: LoginComponent },
-  { path: "dashboard", component: DashboardComponent },
-  { path: "garages", component: GaragesComponent },
-  { path: "customers", component: CustomersComponent },
-  { path: "products", component: ProductsComponent },
-  { path: "schemes", component: SchemesComponent },
-  { path: "vehicles", component: VehiclesComponent },
-  { path: "accounts", component: AccountsComponent },
-  { path: "myaccount", component: MyaccountComponent}
+  { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: "garages", component: GaragesComponent, canActivate: [AuthGuard] },
+  { path: "customers", component: CustomersComponent, canActivate: [AuthGuard] },
+  { path: "products", component: ProductsComponent, canActivate: [AuthGuard] },
+  { path: "schemes", component: SchemesComponent, canActivate: [AuthGuard] },
+  { path: "vehicles", component: VehiclesComponent, canActivate: [AuthGuard] },
+  { path: "accounts", component: AccountsComponent, canActivate: [AuthGuard] },
+  { path: "myaccount", component: MyaccountComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

@@ -12,7 +12,6 @@ import { SessionService as SS } from '../../service/session.service'
 export class LoginComponent implements OnInit {
   errorMessage: string = '';
   loginText: FormGroup;
-
   constructor(private adminService: AdminService, private router: Router) {
     this.loginText = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
@@ -30,6 +29,7 @@ export class LoginComponent implements OnInit {
     this.adminService.authenticate(this.loginText.value).subscribe(resp => {
       if (resp[0].token != null) {
         localStorage.setItem('authToken', resp[0].token);
+        localStorage.setItem('isLoggedIn', "true");
         this.router.navigateByUrl('/dashboard')
       }
       else {
