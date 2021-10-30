@@ -10,6 +10,7 @@ export class AppComponent {
   title = 'oilwale';
 
   constructor(public router: Router) {
-    console.log(this.router.url + " Router")
+    // console.log(this.router.url + " Router")
+    console.log("App Component")
   }
 }

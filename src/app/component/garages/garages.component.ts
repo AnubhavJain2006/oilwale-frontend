@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Garage } from 'src/app/interface/garage';
 import { GarageService } from 'src/app/service/garage.service';
 import { Subscription, timer } from 'rxjs';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-garages',
