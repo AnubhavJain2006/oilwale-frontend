@@ -1,3 +1,4 @@
+import { SessionService, SessionService as SS } from '../../service/session.service'
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sessionService: SessionService) { }
 
   ngOnInit(): void {
   }
@@ -15,5 +16,10 @@ export class HeaderComponent implements OnInit {
   active: string = "dashboard";
   setActive(activeLink: string) {
     this.active = activeLink;
+  }
+
+  logout() {
+    console.log("Logged Out")
+    this.sessionService.loggedOut()
   }
 }

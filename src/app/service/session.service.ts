@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,11 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class SessionService {
 
-  static authToken: any = null;
+  authToken: any = null;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  static isLoggedIn() {
+  isLoggedIn() {
     this.authToken = localStorage.getItem('authToken');
     console.log(this.authToken);
     if (this.authToken == null)
@@ -19,8 +20,9 @@ export class SessionService {
     }
   }
 
-  static loggedOut() {
+  loggedOut() {
     localStorage.removeItem('authToken');
+    this.router.navigateByUrl("/");
   }
 
 }

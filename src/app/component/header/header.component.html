@@ -43,21 +43,21 @@
                 <div class="col-12">
                     <ul class="list-unstyled px-0">
                         <li class="py-1">
-                            <a routerLink="#" class="text-decoration-none text-secondary"> 
+                            <a routerLink="#" class="text-decoration-none text-secondary">
                                 <i class="fas fa-user-circle"></i>
                                 Profile
                             </a>
                         </li>
                         <li class="py-1">
-                            <a routerLink="#" class="text-decoration-none text-secondary"> 
+                            <a routerLink="#" class="text-decoration-none text-secondary">
                                 <i class="fas fa-chart-line"></i>
-                                 Activities
+                                Activities
                             </a>
                         </li>
                         <li class="py-1">
-                            <a routerLink="#" class="text-decoration-none text-secondary"> 
+                            <a (click)="logout()" class="text-decoration-none text-secondary">
                                 <i class="fas fa-sign-out-alt"></i>
-                                 Logout
+                                Logout
                             </a>
                         </li>
                     </ul>
@@ -65,7 +65,7 @@
             </div>
 
         </div>
-        
+
     </header>
     <div class="container-fluid">
         <div class="row">
@@ -136,7 +136,7 @@
                         <li class="nav-item pt-1"><a class="nav-link tab-item text-light" routerLink="#"> <i
                                     class="fas fa-clipboard-list"></i> My Activities
                             </a></li>
-                        <li class="nav-item pt-1"><a class="nav-link tab-item text-light" routerLink="logout"> <i
+                        <li class="nav-item pt-1"><a class="nav-link tab-item text-light" (click)="logout()"> <i
                                     class="fas fa-sign-out-alt"></i> Logout
                             </a></li>
                     </ul>
