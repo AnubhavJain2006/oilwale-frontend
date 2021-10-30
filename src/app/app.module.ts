@@ -18,7 +18,9 @@ import { LoginComponent } from './component/login/login.component';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './interceptor/jwt/jwt.interceptor';
-import { MyaccountComponent } from './component/myaccount/myaccount.component'
+import { MyaccountComponent } from './component/myaccount/myaccount.component';
+import { LoginFormComponent } from './component/login-helper/login-form/login-form.component';
+import { ForgetPaaswordComponent } from './component/login-helper/forget-paasword/forget-paasword.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +34,8 @@ import { MyaccountComponent } from './component/myaccount/myaccount.component'
     AccountsComponent,
     LoginComponent,
     MyaccountComponent,
+    LoginFormComponent,
+    ForgetPaaswordComponent,
 
   ],
   imports: [

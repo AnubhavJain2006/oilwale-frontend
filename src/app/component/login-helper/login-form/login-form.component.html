@@ -1,0 +1,25 @@
+<form class="" (ngSubmit)="login()" [formGroup]="loginText">
+    <h1 class="font-weight-bold py-4 d-none d-md-block">OilWale</h1>
+    <h1 class="font-weight-bold py-4 text-center d-md-none d-sm-block">OilWale</h1>
+
+    <h4>Sign into your account</h4>
+    <div class="form-row">
+        <div class="col-md-11">
+            <input type="email" formControlName="email" name="email" placeholder="Email-address"
+                class="form-control my-3 py-3">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-11">
+            <input type="password" placeholder="Password" name="password" formControlName="password"
+                class="form-control my-3 py-3">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-11">
+            <button class="btn1 mt-3 ">Login</button>
+        </div>
+    </div>
+</form>
+
+<p class="pt-4"><button class="btn" (click)="forgetClick()">Forget Password?</button></p>
