@@ -16,7 +16,7 @@ export class MyaccountComponent implements OnInit {
       // console.log(resp)
       this.userData = resp;
     }, err => {
-      // console.log(err)
+      console.log(err)
 
     });
   }

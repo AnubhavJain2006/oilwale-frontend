@@ -57,7 +57,7 @@ export class AdminService {
     }))
   }
 
-  getAdminByEmail() {
+  getAdminByEmail(): Observable<any> {
     let authToken: string | null = localStorage.getItem('authToken');
     let token = authToken != null ? jwt_decode(authToken) : null;
     console.log(JSON.parse(JSON.stringify(token)).sub)
