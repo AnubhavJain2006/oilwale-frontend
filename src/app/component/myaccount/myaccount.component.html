@@ -1,73 +1,91 @@
+
+<div *ngIf="userData">
+
+
 <div class="d-flex flex-wrap pt-3">
     <h3 class="h3"><i class="fas fa-user"></i> My Account</h3>
 </div>
 
-<!-- Page nav startes -->
-<ul class="nav border-bottom" id="myTab" role="tablist">
-    <li class="nav-item mx-1" role="presentation">
-        <a class="nav-link text-dark active border-bottom-orange myaccount-tab" onclick="change_tab('myaccount-tab', 0)"
-            id="all_myaccount-tab" data-bs-toggle="tab" data-bs-target="#all_myaccount" type="button" role="tab"
-            aria-controls="all_myaccount" aria-selected="true">
-            <i class="fas fa-border-all"></i> Personal Information</a>
-    </li>
-    <!-- <li class="nav-item mx-1" role="presentation">
-        <a class="nav-link text-dark myaccount-tab" id="other_details-tab"
-            onclick="change_tab('myaccount-tab', 1)" data-bs-toggle="tab" data-bs-target="#other_details"
-            type="button" role="tab" aria-controls="other_details" aria-selected="false">
-            <i class="fas fa-code-branch"></i> Customer Activities</a>
-    </li> -->
-</ul>
-<!-- page nav ends -->
+<div class="w-100 text-center py-2">
+    <img class="user-img mr-1" src="/assets/img/user.png" alt="User" width="120px"><br>
+    <p class="lead fw-bold pb-0 mb-0">{{userData.name}}</p>
+    <span *ngIf="userData.privilege == 'moderator' " class="badge bg-primary">Moderator</span> 
+    <span *ngIf="userData.privilege == 'admin' " class="badge bg-secondary"> Admin</span>
+</div>
 
-<div class="tab-content" id="myTabContent">
-    <!-- All Customer div -->
+<div class="row mt-3">
+    <div class="col-lg-6">
+        <div class="p-3">
+            <p class="fw-bold">PERSONAL INFORMATION</p>
 
-    <div class="tab-pane fade show active" id="all_myaccount" role="tabpanel" aria-labelledby="all_myaccount-tab">
-        <!-- table starts -->
-        <div class="py-3 px-md-3">
-            <div class="py-2 text-center">
-                <h5> Personal Information</h5>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <img class="user-img mr-1" src="/assets/img/user.png" alt="User" width="120px">
-                    <br>
-                    <h3>{{userData.name}}</h3>
-                </div>
-                <div class="col-md-8">
-                    <table class="table table-borderless p-md-3">
-                        <tr>
-                            <td>Name</td>
-                            <td>{{userData.name}}</td>
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td>{{userData.email}}</td>
-                        </tr>
-                        <tr>
-                            <td>Phone</td>
-                            <td>{{userData.phoneNumber}}</td>
-                        </tr>
-                        <tr>
-                            <td>Address</td>
-                            <td>{{userData.address}}</td>
-                        </tr>
-                        <tr>
-                            <td>Authority</td>
-                            <td>{{userData.privilege}}</td>
-                        </tr>
-                    </table>
-                </div>
-
-            </div>
+            <table class="table table-bordered table-hover p-md-3">
+                <tbody>
+                    <tr>
+                        <td class="p-3">Full Name</td>
+                        <td class="p-3">{{userData.name}}</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3">Email</td>
+                        <td class="p-3">{{userData.email}}</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3">Phone</td>
+                        <td class="p-3">{{userData.phoneNumber}}</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3">Alternate Phone</td>
+                        <td class="p-3">{{userData.alternateNumber}}</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3">Address</td>
+                        <td class="p-3">{{userData.address}}</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3">Pincode</td>
+                        <td class="p-3">{{userData.pincode}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <!-- table ends -->
     </div>
-
-    <!-- <div class="tab-pane fade" id="other_details" role="tabpanel" aria-labelledby="other_details-tab">
-        <!-- activities starts -->
-    <!-- <div class="py-3"> -->
-
-    <!-- </div> -->
-    <!-- </div> -->
+    <div class="col-lg-6">
+        <div class="p-3">
+            <p class="fw-bold">ACCOUNT INFORMATION</p>
+            <table class="table table-bordered table-hover p-md-3">
+                <tbody>
+                    <tr >
+                        <td class="p-3  ">Account ID</td>
+                        <td class="p-3">{{userData.adminId}}</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3 ">Created At</td>
+                        <td class="p-3">{{userData.createdAt | date:"mediumDate"}}</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3 ">Updated At</td>
+                        <td class="p-3">{{userData.updateAt | date:"mediumDate"}}</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3 ">Privilege</td>
+                        <td class="p-3"> 
+                            <span *ngIf="userData.privilege == 'moderator' " class="badge bg-primary">Moderator</span> 
+                            <span *ngIf="userData.privilege == 'admin' " class="badge bg-secondary"> Admin</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p-3 ">Status</td>
+                        <td class="p-3"> 
+                            <span *ngIf="userData.active == true" class="badge bg-success">Active</span> 
+                            <span *ngIf="userData.active == false" class="badge bg-danger">Deactivated</span> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p-3 ">Password</td>
+                        <td ><a href="#">Change Password</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </div>

@@ -13,7 +13,7 @@ export class MyaccountComponent implements OnInit {
 
   constructor(private adminService: AdminService) {
     this.adminService.getAdminByEmail().subscribe(resp => {
-      // console.log(resp)
+      console.log(resp)
       this.userData = resp;
     }, err => {
       console.log(err)
