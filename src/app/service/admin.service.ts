@@ -4,6 +4,8 @@ import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
+import jwt_decode from "jwt-decode";
+
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +55,13 @@ export class AdminService {
     return this.httpClient.put(environment.baseUrl + "api/revertAccount/" + adminId, null).pipe(tap(() => {
       this._deleteAccount.next();
     }))
+  }
+
+  getAdminByEmail() {
+    let authToken: string | null = localStorage.getItem('authToken');
+    let token = authToken != null ? jwt_decode(authToken) : null;
+    console.log(JSON.parse(JSON.stringify(token)).sub)
+    return this.httpClient.get(environment.baseUrl + "api/getAdminByEmail/" + JSON.parse(JSON.stringify(token)).sub)
   }
 
   constructor(private httpClient: HttpClient) { }
