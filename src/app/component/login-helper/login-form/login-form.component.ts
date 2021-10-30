@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from './../../../service/admin.service';
 
@@ -14,7 +15,7 @@ export class LoginFormComponent implements OnInit {
 
   loginText: FormGroup;
 
-  constructor(private adminService: AdminService, private loginComp:LoginComponent) {
+  constructor(private adminService: AdminService, private loginComp: LoginComponent, private router: Router) {
     this.loginText = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', Validators.required)
@@ -29,9 +30,12 @@ export class LoginFormComponent implements OnInit {
     console.log(this.loginText.value)
     console.log()
     this.adminService.authenticate(this.loginText.value).subscribe(resp => {
-      // console.log(resp);
-      // console.log(resp[0].token)
-      localStorage.setItem('authToken', resp[0].token);
+      if (resp[0].token != null) {
+        localStorage.setItem('authToken', resp[0].token);
+        localStorage.setItem('isLoggedIn', "true");
+        this.router.navigateByUrl("/dashboard");
+
+      }
     }, err => {
       console.log(err);
     });

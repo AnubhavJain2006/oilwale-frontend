@@ -11,7 +11,7 @@ import { ProductsComponent } from './component/products/products.component';
 import { SchemesComponent } from './component/schemes/schemes.component';
 import { VehiclesComponent } from './component/vehicles/vehicles.component';
 import { DataTablesModule } from 'angular-datatables';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountsComponent } from './component/accounts/accounts.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './component/login/login.component';
@@ -37,6 +37,7 @@ import { ForgetPaaswordComponent } from './component/login-helper/forget-paaswor
     LoginFormComponent,
     ForgetPaaswordComponent,
 
+
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,8 @@ import { ForgetPaaswordComponent } from './component/login-helper/forget-paaswor
     DataTablesModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     AuthGuard,

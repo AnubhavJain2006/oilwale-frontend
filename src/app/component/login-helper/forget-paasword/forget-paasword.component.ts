@@ -8,13 +8,14 @@ import { LoginComponent } from '../../login/login.component';
 })
 export class ForgetPaaswordComponent implements OnInit {
 
-  emailValidationSuccess:boolean = false;
-  sendTarget:string = "";
+  emailValidationSuccess: boolean = false;
+  sendTarget: string = "";
+  otp: string = "";
+  email: string = "";
 
-
-  constructor( private loginComp:LoginComponent) {
+  constructor(private loginComp: LoginComponent) {
     this.sendTarget = "Send OTP";
-   }
+  }
 
   ngOnInit(): void {
   }

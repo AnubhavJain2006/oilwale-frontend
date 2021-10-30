@@ -2,24 +2,25 @@
 <h1 class="font-weight-bold py-4 text-center d-md-none d-sm-block">OilWale</h1>
 
 <h4 class="">Forget Password</h4>
-    <div class="form-row">
-        <div class="col-md-11">
-            <small class="text-muted">Enter your email id for OTP</small>
-            <input type="email" [readonly]="emailValidationSuccess?true:false" formControlName="email" name="email" placeholder="Email-address" class="form-control my-3 py-3">
+<div class="form-row">
+    <div class="col-md-11">
+        <small class="text-muted">Enter your email id for OTP</small>
+        <input type="email" [readonly]="emailValidationSuccess?true:false" name="email" [(ngModel)]="email"
+            placeholder="Email-address" class="form-control my-3 py-3">
 
-        </div>
     </div>
-    <div *ngIf="emailValidationSuccess" class="form-row">
-        <div class="col-md-11">
-            <input type="password" placeholder="Enter OTP send to your email id" name="otp" formControlName="password"
-                class="form-control my-3 py-3">
-        </div>
+</div>
+<div *ngIf="emailValidationSuccess" class="form-row">
+    <div class="col-md-11">
+        <input type="text" placeholder="Enter OTP send to your email id" name="otp" [(ngModel)]="otp"
+            class="form-control my-3 py-3">
     </div>
-    <div class="form-row">
-        <div class="col-md-11">
-            <button class="btn1 mt-3" (click)="verifyEmail()">{{ sendTarget }}</button>
-        </div>
+    {{otp}} {{email}}
+</div>
+<div class="form-row">
+    <div class="col-md-11">
+        <button class="btn1 mt-3" (click)="verifyEmail()">{{ sendTarget }}</button>
     </div>
+</div>
 
 <p class="pt-4"><button class="btn" (click)="signInClick()">Sign In?</button></p>
-
