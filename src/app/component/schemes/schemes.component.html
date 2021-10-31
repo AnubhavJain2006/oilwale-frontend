@@ -30,18 +30,23 @@
     <!-- all schemes -->
     <div class="tab-pane show active" id="all_scheme" role="tabpanel" aria-labelledby="all_scheme-tab">
         <!-- table starts -->
-        <div class="py-3">
-            <div style="float: right;">
-                <select (change)="onChange($event)" name="" id="">
-                    <option selected value="Active">Active Schemes</option>
-                    <option value="Concluded">Concluded Schemes</option>
-                    <option value="UpComing">UpComing Schemes</option>
-                </select>
-
-            </div>
+        <div class="py-3">            
             <div class="py-2 text-center">
                 <h5 class="h5">All Schemes</h5>
-                <h3 *ngIf="isDataAvailable">Data Not Available</h3>
+            </div>
+            
+            <div class="d-flex justify-content-end">
+                <div class="w-md-25">
+
+                    <select (change)="onChange($event)" class="form-select" name="" id="">
+                        <option selected value="Active">Active Schemes</option>
+                        <option value="Concluded">Concluded Schemes</option>
+                        <option value="UpComing">UpComing Schemes</option>
+                    </select>
+                </div>
+            </div>
+            <div class="py-2 text-center">
+                <p class="lead" *ngIf="isDataAvailable">Data Not Available</p>
             </div>
             <div class="mx-2 mt-4">
 
