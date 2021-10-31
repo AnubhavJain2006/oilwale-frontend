@@ -1,0 +1,54 @@
+<div class="pt-3">
+    <div class="py-2 text-center">
+        <h5 class="h5">Add New Vehicle</h5>
+    </div>
+    <div class="mx-auto col-lg-8 col-md-10 col-sm-12 border-bottom mb-3" id="garageAddForm">
+        <!-- form start -->
+        <form class="p-3">
+            <div class="row mb-3">
+                <label for="Company" class="col-sm-2 col-form-label">Company</label>
+                <div class="col-sm-10">
+                    <select class="form-select form-select" name="vehicleCompany" id="companyList"
+                        aria-label=".form-select-lg example"></select>
+                    <div class="d-flex justify-content-end">
+                        <small><button type="button" class="my-2 btn btn-sm link" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" onclick="open_company_modal()">Company not
+                                listed?</button></small>
+                    </div>
+                </div>
+            </div>
+            
+            <p *ngFor="let company of allCompanies "> {{ company.vehicleCompany}}</p>
+            <p>ha ha </p>
+            <div class="row mb-3">
+                <label for="Model" class="col-sm-2 col-form-label">Model</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="vehicleModel" id="Model" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="Product" class="col-sm-2 col-form-label">Suggested Product</label>
+                <div class="col-sm-10">
+                    <div id="suggestionArea">
+                        <select class="form-select form-select mt-1" name="suggestedProduct" [multiple]
+                            aria-label=".form-select-lg example">
+                            <option value="0">Choose...</option>
+                            <option value="1">Product1</option>
+                            <option value="2">Product1</option>
+                            <option value="3">Product1</option>
+                        </select>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <a type="button" class="mx-4" onclick="addSuggestionField()"><i
+                                class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end mt-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+    <!-- form ends -->
+</div>

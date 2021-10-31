@@ -20,7 +20,10 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './interceptor/jwt/jwt.interceptor';
 import { MyaccountComponent } from './component/myaccount/myaccount.component';
 import { LoginFormComponent } from './component/login-helper/login-form/login-form.component';
-import { ForgetPaaswordComponent } from './component/login-helper/forget-paasword/forget-paasword.component'
+import { ForgetPaaswordComponent } from './component/login-helper/forget-paasword/forget-paasword.component';
+import { AllVehiclesComponent } from './component/vehicles-helper/all-vehicles/all-vehicles.component';
+import { AddVehicleComponent } from './component/vehicles-helper/add-vehicle/add-vehicle.component'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +39,8 @@ import { ForgetPaaswordComponent } from './component/login-helper/forget-paaswor
     MyaccountComponent,
     LoginFormComponent,
     ForgetPaaswordComponent,
+    AllVehiclesComponent,
+    AddVehicleComponent,
 
 
   ],
