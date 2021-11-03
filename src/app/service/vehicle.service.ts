@@ -14,8 +14,14 @@ export class VehicleService {
   constructor(private httpClient:HttpClient) { }
 
   getVehicles():Observable<Vehicle[]> {
-    const url = `${environment.baseUrl}api/getVehicles`;
+    let url = `${environment.baseUrl}api/getVehicles`;
     return this.httpClient.get<Vehicle[]>(url);
   }
 
-}
+  addVehicle(vehicle: Vehicle):Observable<Vehicle> {
+    let url = `${environment.baseUrl}api/addVehicle`;
+    return this.httpClient.post<Vehicle>(url, vehicle);
+  }
+
+} 
+

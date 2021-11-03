@@ -12,7 +12,7 @@ import { data } from 'jquery';
 })
 export class AllVehiclesComponent implements OnInit {
   
-  dtOptions: DataTables.Settings = {}
+  // dtOptions: DataTables.Settings = {}
   // vehicles: Vehicle[] = [];
 
   // using trigger to ensure fetching before rendering
@@ -23,7 +23,7 @@ export class AllVehiclesComponent implements OnInit {
   constructor(private vehicleService: VehicleService, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    this.dtOptions = {
+    $("#allVehicleTable").DataTable({
       ajax: {
         url: 'https://oilwale.herokuapp.com/api/getVehicles',
         dataSrc: ''
@@ -32,19 +32,44 @@ export class AllVehiclesComponent implements OnInit {
       
       columns: [
         {
-          title: 'Model',
-          data: 'vehicleModel'
-        },
-        {
-          title: 'Company',
+        
           data: 'vehicleCompany'
         },
         {
-          title: "creat",
-          data: 'createdAt'
+         
+          data: 'vehicleModel'
+        },
+        {
+          // type: 'datetime',
+          
+          data: 'createdAt',
+          render: function (data) {
+           let date = new Date(data);
+           return date.toDateString();
+          }
+        },
+        {
+          
+          data: 'suggestedProduct',
+          render: function(data) {
+            return data.length;
+          }
+        },
+        {
+          
+          data: 'active',
+          render: (data) => {
+            if ( data == true) {
+              return '<span class="badge bg-success">Active</span>';
+            }
+            else {
+              return '<span class="badge bg-secondary">Deactivated</span>';
+            }
+          }
         }
-      ]  
-    }
+      ],
+      
+    })
     // this.dtOptions = {
     //   pagingType: 'full_numbers',
     //   pageLength: 4,    
@@ -68,5 +93,43 @@ export class AllVehiclesComponent implements OnInit {
     // unsubscribe to event
     // this.dtTrigger.unsubscribe();
   }
+
+reloadVehicles() {
+  console.log("haha");
+  var vehiceTable = $("#allVehicleTable").DataTable()
+
+  vehiceTable.destroy();
+  $("#allVehicleTable").DataTable({
+    ajax: {
+      url: 'https://oilwale.herokuapp.com/api/getVehicles',
+      dataSrc: ''
+    },
+    
+    
+    columns: [
+      {
+        
+        data: 'vehicleCompany'
+      },
+      {
+       
+        data: 'vehicleModel'
+      },
+      {
+        
+        data: 'createdAt'
+      },
+      {
+        
+        data: '_id'
+      },
+      {
+        
+        data: 'vehicleCompanyId'
+      }
+    ]  
+  })
+
+}
 
 }

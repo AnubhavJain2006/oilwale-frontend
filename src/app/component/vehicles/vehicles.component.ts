@@ -18,12 +18,29 @@ export class VehiclesComponent implements OnInit {
   vehicleCompanies: VehicleCompany[] = [];
   allSuggestionProducts: Product[] = [];
 
-  constructor(private productService: ProductService, private vehicleCompanyService: VehicleCompanyService) { }
+  // helper variables
+  addVehicleSuccess: boolean = false;
+  addVehicleLoading: boolean = false;
+
+  constructor(private productService: ProductService, private vehicleCompanyService: VehicleCompanyService, private vehicleService: VehicleService) { }
 
   ngOnInit(): void {
     // this.vehicleService.getVehicles().subscribe(vehicles => this.vehicles = vehicles);
     this.vehicleCompanyService.getVehicleCompanies().subscribe(vehicleCompanies => this.vehicleCompanies = vehicleCompanies)
     this.productService.getAllProducts().subscribe(products => this.allSuggestionProducts = products)
    }
+
+  addVehicle(vehicle: Vehicle) {
+    this.addVehicleLoading = true;
+    this.vehicleService.addVehicle(vehicle).subscribe((addedVehicle) => {
+      console.log(addedVehicle);
+      console.log("success");
+      this.addVehicleSuccess = true;
+      this.addVehicleLoading = false;
+      setTimeout(() => {
+        this.addVehicleSuccess = false;
+      }, 5000);
+    })
+  }   
 
 }

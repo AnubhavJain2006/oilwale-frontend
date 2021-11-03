@@ -1,60 +1,110 @@
 <div class="pt-3">
-    <div class="py-2 text-center">
-        <h5 class="h5">Add New Vehicle</h5>
-    </div>
-    <div class="mx-auto col-lg-8 col-md-10 col-sm-12 border-bottom mb-3" id="garageAddForm">
-        <!-- form start -->
-        <form [formGroup]="addVehicleForm" class="p-3">
-            Value: {{ addVehicleForm.value | json}}
-            <div class="row mb-3">
-                <label for="Company" class="col-sm-2 col-form-label">Company</label>
-                <div class="col-sm-10">
-                    <select class="form-select form-select" name="vehicleCompany" id="companyList" formControlName="vehicleCompany"
-                        aria-label=".form-select-lg example">
-                        <option *ngFor="let company of vehicleCompanies" value="{{ company.vehicleCompanyId }}">{{ company.vehicleCompany }}</option>
-                    </select>
-                    <div class="d-flex justify-content-end">
-                        <small><button type="button" class="my-2 btn btn-sm link" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" onclick="open_company_modal()">Company not
-                                listed?</button></small>
-                    </div>
-                </div>
+  <div class="py-2 text-center">
+    <h5 class="h5">Add New Vehicle</h5>
+  </div>
+  <div
+    class="mx-auto col-lg-8 col-md-10 col-sm-12 border-bottom mb-3"
+    id="garageAddForm"
+  >
+    <!-- form start -->
+    <div *ngIf="addVehicleSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+      <div id="products_table_msg_body"><strong> <i class="fas fa-check-circle"></i> Success!</strong> Vehicle added succesfully!</div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+    <form class="p-3" (ngSubmit)="onSubmit()">
+      <div *ngIf="addVehicleSuccess == true">
+        <p>Vehicle added successfully!</p>
+      </div>
+      <div class="row mb-3">
+        <label for="Company" class="col-sm-2 col-form-label">Company</label>
+        <div class="col-sm-10">
+          <select
+            class="form-select form-select"
+            name="vehicleCompany"
+            id="companyList"
+            [(ngModel)]="formInputCompany"
+            aria-label=".form-select-lg example"
+          >
+            <option
+              *ngFor="let company of vehicleCompanies"
+              value="{{ company.vehicleCompanyId }}"
+            >
+              {{ company.vehicleCompany }}
+            </option>
+          </select>
+          <div class="d-flex justify-content-end">
+            <small>
+              <button
+                type="button"
+                class="my-2 btn btn-sm link"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                onclick="open_company_modal()"
+              >
+                Company not listed?
+              </button>
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="Model" class="col-sm-2 col-form-label">Model</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            name="vehicleModel"
+            [(ngModel)]="formInputModel"
+            class="form-control"
+            id="Model"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="Product" class="col-sm-2 col-form-label"
+          >Suggested Product(s)</label
+        >
+        <div class="col-sm-10">
+          <div id="suggestionArea">
+            <div
+              *ngFor="let product of suggestedProducts"
+              class="form-check"
+              >
+              <div class="d-flex justify-content-between">
+
+                  <label
+                  class="form-check-label"
+                  for="{{ product.productId }}"
+                  >
+                  {{ product.productName }}</label
+                  >
+                  
+                  <input
+                  type="checkbox"
+                  class="form-check-input"
+                  (click)="addSuggesstedProduct(product.productId)"
+                  id="{{ product.productId }}"
+                  />
+
             </div>
-            
-            <div class="row mb-3">
-                <label for="Model" class="col-sm-2 col-form-label">Model</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="vehicleModel" id="Model" formControlName="vehicleModel" />
-                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end mt-3">
+        <button type="submit" class="btn background-orange text-white">
+            <div *ngIf="addVehicleLoading == false">
+                Submit
             </div>
 
-            <div class="row mb-3">
-                <label for="Product" class="col-sm-2 col-form-label">Suggested Product(s)</label>
-                <div class="col-sm-10">
-                    <div id="suggestionArea">
-                        <select name="" id="" formControlName="suggestedProducts" multiple class="form-select" size="{{ suggestedProducts.length}}">
-                            <option *ngFor="let product of suggestedProducts" value="{{ product.productId }}">{{ product.productName }}</option>
-                        </select>
-
-                        <!-- <div *ngFor="let product of suggestedProducts" class="form-check">
-                            <input class="form-check-input" type="checkbox" name="suggestedProducts" value="{{ product.productId }}" id="{{ product.productId }}" formControlName="suggestedProducts">
-                            <label class="form-check-label" for="vehicleCompany"> {{ product.productName }}</label>
-                        </div> -->
-                    </div>
-                    
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <!-- <div *ngFor="let product of suggestedProducts" class="form-check">
-                            <input class="form-check-input" type="checkbox" name="suggestedProducts" value="{{ product.productId }}" id="{{ product.productId }}" formControlName="suggestedProducts">
-                            <label class="form-check-label" for="vehicleCompany"> {{ product.productName }}</label>
-                        </div> -->
-            </div>
-            <div class="d-flex justify-content-end mt-3">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
-    </div>
-    <!-- form ends -->
+            <div *ngIf="addVehicleLoading" class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span> 
+              </div>
+        </button>
+      </div>
+    </form>
+  </div>
+  <!-- form ends -->
 </div>

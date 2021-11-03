@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { VehicleCompany } from 'src/app/interface/vehicle-company';
 import { Product } from 'src/app/interface/product';
+import { Vehicle } from 'src/app/interface/vehicle';
 
 @Component({
   selector: 'app-add-vehicle',
@@ -12,39 +12,61 @@ import { Product } from 'src/app/interface/product';
 export class AddVehicleComponent implements OnInit {
   @Input() vehicleCompanies!: VehicleCompany[];
   @Input() suggestedProducts !: Product[];
+  @Input() addVehicleSuccess !: boolean;
+  @Input() addVehicleLoading !: boolean;
+  @Output() onAddVehicle: EventEmitter<Vehicle> = new EventEmitter();
 
-  addVehicleForm: FormGroup = new FormGroup({});
+  formInputCompany: string = "";
+  formInputModel: string = "";
+  formInputSuggestedProducts: string[] = [];
 
 
-  constructor(private formBuilder:FormBuilder) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.addVehicleForm = this.formBuilder.group({
-      vehicleCompany: '',
-      vehicleModel: '',
-      suggestedProducts: this.formBuilder.array([]),
-    })
+   
    }
+
+   addSuggesstedProduct(productId: string) {
+     let index = this.formInputSuggestedProducts.indexOf(productId)
+    //  console.log(index);
+
+     if(index == -1) {
+       this.formInputSuggestedProducts.push(productId);
+     }
+     else{
+       this.formInputSuggestedProducts.splice(index, 1);
+     }
+   }
+
+   onSubmit() {
+     if (!this.formInputCompany) {
+       alert("Choose a company!");
+       return;
+     }
+
+     if (!this.formInputModel) {
+       alert("Give a Model name for the vehicle");
+       return;
+     }
+
+     const newVehicle = {
+      vehicleId: "",
+      vehicleCompanyId: this.formInputCompany,
+      vehicleModel: this.formInputModel,
+      suggestedProduct: this.formInputSuggestedProducts,
+      isActive: true
+     }
+
     
 
-  get suggestedProductForms() {
-    return this.addVehicleForm.get('suggestedProducts') as FormArray;
-  }
+     this.onAddVehicle.emit(newVehicle);
 
-  addSuggestedProduct(productId:string) {
-    let sparray =  this.suggestedProductForms.value;
-    console.log(sparray);
-  }
+    //  reset the form
+    this.formInputCompany = "";
+    this.formInputModel = "";
 
-  //  addSuggestedProduct(product: string) {
-  //    let index:number = this.selectedProducts.indexOf(product);
+   }
 
-  //    if (index == -1) {
-  //      this.selectedProducts.push(product);
-  //    }
-  //    else {
-  //      this.selectedProducts.splice(index, 1);
-  //    }
-  //  }
 
 }
