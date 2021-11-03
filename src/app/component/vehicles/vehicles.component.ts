@@ -4,7 +4,9 @@ import { VehicleService } from 'src/app/service/vehicle.service';
 import { VehicleCompanyService } from 'src/app/service/vehicle-company.service';
 
 import { Vehicle } from 'src/app/interface/vehicle';
+import { Product } from 'src/app/interface/product';
 import { VehicleCompany } from '../../interface/vehicle-company';
+import { ProductService } from 'src/app/service/product.service';
 
 @Component({
   selector: 'app-vehicles',
@@ -14,11 +16,14 @@ import { VehicleCompany } from '../../interface/vehicle-company';
 export class VehiclesComponent implements OnInit {
   vehicles: Vehicle[] = [];
   vehicleCompanies: VehicleCompany[] = [];
+  allSuggestionProducts: Product[] = [];
 
-  constructor(private vehicleService: VehicleService, private vehicleCompanyService: VehicleCompanyService) { }
+  constructor(private productService: ProductService, private vehicleCompanyService: VehicleCompanyService) { }
 
   ngOnInit(): void {
     // this.vehicleService.getVehicles().subscribe(vehicles => this.vehicles = vehicles);
-    // this.vehicleCompanyService.getVehicleCompanies().subscribe(vehicleCompanies => this.vehicleCompanies = vehicleCompanies)
+    this.vehicleCompanyService.getVehicleCompanies().subscribe(vehicleCompanies => this.vehicleCompanies = vehicleCompanies)
+    this.productService.getAllProducts().subscribe(products => this.allSuggestionProducts = products)
    }
+
 }

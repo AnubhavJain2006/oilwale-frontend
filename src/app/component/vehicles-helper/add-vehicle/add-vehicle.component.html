@@ -4,12 +4,15 @@
     </div>
     <div class="mx-auto col-lg-8 col-md-10 col-sm-12 border-bottom mb-3" id="garageAddForm">
         <!-- form start -->
-        <form class="p-3">
+        <form [formGroup]="addVehicleForm" class="p-3">
+            Value: {{ addVehicleForm.value | json}}
             <div class="row mb-3">
                 <label for="Company" class="col-sm-2 col-form-label">Company</label>
                 <div class="col-sm-10">
-                    <select class="form-select form-select" name="vehicleCompany" id="companyList"
-                        aria-label=".form-select-lg example"></select>
+                    <select class="form-select form-select" name="vehicleCompany" id="companyList" formControlName="vehicleCompany"
+                        aria-label=".form-select-lg example">
+                        <option *ngFor="let company of vehicleCompanies" value="{{ company.vehicleCompanyId }}">{{ company.vehicleCompany }}</option>
+                    </select>
                     <div class="d-flex justify-content-end">
                         <small><button type="button" class="my-2 btn btn-sm link" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal" onclick="open_company_modal()">Company not
@@ -18,32 +21,35 @@
                 </div>
             </div>
             
-            <p *ngFor="let company of allCompanies "> {{ company.vehicleCompany}}</p>
-            <p>ha ha </p>
             <div class="row mb-3">
                 <label for="Model" class="col-sm-2 col-form-label">Model</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="vehicleModel" id="Model" />
+                    <input type="text" class="form-control" name="vehicleModel" id="Model" formControlName="vehicleModel" />
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="Product" class="col-sm-2 col-form-label">Suggested Product</label>
+                <label for="Product" class="col-sm-2 col-form-label">Suggested Product(s)</label>
                 <div class="col-sm-10">
                     <div id="suggestionArea">
-                        <select class="form-select form-select mt-1" name="suggestedProduct" [multiple]
-                            aria-label=".form-select-lg example">
-                            <option value="0">Choose...</option>
-                            <option value="1">Product1</option>
-                            <option value="2">Product1</option>
-                            <option value="3">Product1</option>
+                        <select name="" id="" formControlName="suggestedProducts" multiple class="form-select" size="{{ suggestedProducts.length}}">
+                            <option *ngFor="let product of suggestedProducts" value="{{ product.productId }}">{{ product.productName }}</option>
                         </select>
+
+                        <!-- <div *ngFor="let product of suggestedProducts" class="form-check">
+                            <input class="form-check-input" type="checkbox" name="suggestedProducts" value="{{ product.productId }}" id="{{ product.productId }}" formControlName="suggestedProducts">
+                            <label class="form-check-label" for="vehicleCompany"> {{ product.productName }}</label>
+                        </div> -->
                     </div>
-                    <div class="d-flex justify-content-end">
-                        <a type="button" class="mx-4" onclick="addSuggestionField()"><i
-                                class="fas fa-plus"></i></a>
-                    </div>
+                    
                 </div>
+            </div>
+
+            <div class="row mb-3">
+                <!-- <div *ngFor="let product of suggestedProducts" class="form-check">
+                            <input class="form-check-input" type="checkbox" name="suggestedProducts" value="{{ product.productId }}" id="{{ product.productId }}" formControlName="suggestedProducts">
+                            <label class="form-check-label" for="vehicleCompany"> {{ product.productName }}</label>
+                        </div> -->
             </div>
             <div class="d-flex justify-content-end mt-3">
                 <button type="submit" class="btn btn-primary">Submit</button>

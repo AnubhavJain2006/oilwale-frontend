@@ -30,4 +30,8 @@ export class ProductService {
     return this.httpClient.get(environment.baseUrl + "api/getAllProduct").toPromise();
   }
 
+  getAllProducts(): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(environment.baseUrl + "api/getAllProduct");
+  }
+
 }
