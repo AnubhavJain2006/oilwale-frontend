@@ -11,6 +11,7 @@ import jwt_decode from "jwt-decode";
   providedIn: 'root'
 })
 export class AdminService {
+
   authenticate(loginText: any): Observable<any> {
     return this.httpClient.post(environment.baseUrl + "api/authenticate", loginText);
   }
@@ -64,5 +65,15 @@ export class AdminService {
     return this.httpClient.get(environment.baseUrl + "api/getAdminByEmail/" + JSON.parse(JSON.stringify(token)).sub)
   }
 
+  forgotPassword(email: string): Observable<any> {
+    return this.httpClient.post(environment.baseUrl + "api/forgotPassword", email);
+  }
+
+
+  verifyOtp() {
+    
+  }
   constructor(private httpClient: HttpClient) { }
+
+
 }
