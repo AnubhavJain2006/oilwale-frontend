@@ -1,6 +1,6 @@
 export interface Vehicle {
     vehicleId: string;
-    vehicleCompany: string;
+    vehicleCompanyId: string;
     vehicleModel: string;
     suggestedProduct: Array<string>;
     isActive: boolean;
