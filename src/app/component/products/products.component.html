@@ -73,7 +73,10 @@
                                 <td>{{product.grade}}</td>
                                 <td>{{product.packingSize}}</td>
                                 <td>{{product.active}}</td>
-                                <td> <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button>
+                                <td> 
+                                    <a routerLink="/products/{{product.productId}}">
+                                    <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
