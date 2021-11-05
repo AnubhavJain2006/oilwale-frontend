@@ -55,7 +55,9 @@ export class AddVehicleComponent implements OnInit {
       vehicleCompanyId: this.formInputCompany,
       vehicleModel: this.formInputModel,
       suggestedProduct: this.formInputSuggestedProducts,
-      isActive: true
+      active: true,
+      updatedAt: "",
+      createdAt: ""
      }
 
     

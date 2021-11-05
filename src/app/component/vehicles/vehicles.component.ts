@@ -22,6 +22,8 @@ export class VehiclesComponent implements OnInit {
   addVehicleSuccess: boolean = false;
   addVehicleLoading: boolean = false;
 
+  showReloadTableOption:boolean = false;
+
   constructor(private productService: ProductService, private vehicleCompanyService: VehicleCompanyService, private vehicleService: VehicleService) { }
 
   ngOnInit(): void {
@@ -37,6 +39,8 @@ export class VehiclesComponent implements OnInit {
       console.log("success");
       this.addVehicleSuccess = true;
       this.addVehicleLoading = false;
+      this.showReloadTableOption = true;
+
       setTimeout(() => {
         this.addVehicleSuccess = false;
       }, 5000);

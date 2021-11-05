@@ -3,5 +3,7 @@ export interface Vehicle {
     vehicleCompanyId: string;
     vehicleModel: string;
     suggestedProduct: Array<string>;
-    isActive: boolean;
+    active: boolean;
+    createdAt: string;
+    updatedAt: string;
 }

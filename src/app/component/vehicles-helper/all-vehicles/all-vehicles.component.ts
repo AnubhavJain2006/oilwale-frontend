@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit,Renderer2, Input } from '@angular/core';
 import { VehicleService } from 'src/app/service/vehicle.service';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
-import { Vehicle } from 'src/app/interface/vehicle';
-import { data } from 'jquery';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-vehicles',
@@ -11,8 +9,8 @@ import { data } from 'jquery';
   styleUrls: ['./all-vehicles.component.css']
 })
 export class AllVehiclesComponent implements OnInit {
-  
-  // dtOptions: DataTables.Settings = {}
+  @Input() showReload!: boolean;
+  dtOptions: DataTables.Settings = {}
   // vehicles: Vehicle[] = [];
 
   // using trigger to ensure fetching before rendering
@@ -20,44 +18,51 @@ export class AllVehiclesComponent implements OnInit {
 
   // allVehicles:Vehicle[] = [];
 
-  constructor(private vehicleService: VehicleService, private httpClient: HttpClient) { }
+  constructor(private router:Router, private renderer: Renderer2) { }
 
   ngOnInit(): void {
-    $("#allVehicleTable").DataTable({
+    this.dtOptions = {
       ajax: {
         url: 'https://oilwale.herokuapp.com/api/getVehicles',
         dataSrc: ''
       },
       
-      
       columns: [
         {
-        
+          title: 'Company',
+          className: 'align-middle order-column',
+          width: "150px",
           data: 'vehicleCompany'
         },
         {
-         
+          title: 'Model',
+          className: 'align-middle',
           data: 'vehicleModel'
         },
         {
-          // type: 'datetime',
-          
+          title: 'Added On',
           data: 'createdAt',
+          className: 'align-middle',
+          width: '150px',
           render: function (data) {
            let date = new Date(data);
            return date.toDateString();
           }
         },
-        {
-          
+        { 
+          title: "Suggested Products",
           data: 'suggestedProduct',
+          className: 'align-middle',
+          width: '100px',
           render: function(data) {
             return data.length;
-          }
+          },
         },
         {
-          
+          title: "Status",
           data: 'active',
+          className: 'align-middle',
+          width: '100px',
           render: (data) => {
             if ( data == true) {
               return '<span class="badge bg-success">Active</span>';
@@ -66,27 +71,17 @@ export class AllVehiclesComponent implements OnInit {
               return '<span class="badge bg-secondary">Deactivated</span>';
             }
           }
-        }
-      ],
+        }],
+        rowCallback:(row: Node, data: any[] | Object, index: number) => {
+          const self = this;
+          $('td', row).off('click');
+          $('td', row).on('click', () => {
+            self.openInfo(data);
+          });
+          return row;
+        } 
       
-    })
-    // this.dtOptions = {
-    //   pagingType: 'full_numbers',
-    //   pageLength: 4,    
-    // }
-
-    // this.httpClient.get<Vehicle[]>('https://oilwale.herokuapp.com/api/getVehicles')
-    //   .subscribe( data => {
-    //     this.allVehicles = (data as any).data;
-    //     this.dtTrigger.next();
-    //   })
-
-    // this.vehicleService.getVehicles()
-    //   .subscribe(data => {
-    //     this.allVehicles = (data as any).data;
-    //     // calling dt trigger to manually render table
-    //     this.dtTrigger.next();
-    //   });
+    }
   }
 
   ngOnDestroy(): void {
@@ -105,31 +100,56 @@ reloadVehicles() {
       dataSrc: ''
     },
     
-    
     columns: [
       {
-        
         data: 'vehicleCompany'
       },
       {
-       
         data: 'vehicleModel'
       },
       {
-        
-        data: 'createdAt'
+        data: 'createdAt',
+        render: function (data) {
+         let date = new Date(data);
+         return date.toDateString();
+        }
       },
       {
-        
-        data: '_id'
+        data: 'suggestedProduct',
+        render: function(data) {
+          return data.length;
+        }
       },
       {
-        
-        data: 'vehicleCompanyId'
-      }
-    ]  
+        data: 'active',
+        render: (data) => {
+          if ( data == true) {
+            return '<span class="badge bg-success">Active</span>';
+          }
+          else {
+            return '<span class="badge bg-secondary">Deactivated</span>';
+          }
+        }
+      }],
+      rowCallback:(row: Node, data: any[] | Object, index: number) => {
+        const self = this;
+        $('td', row).off('click');
+        $('td', row).on('click', () => {
+          self.openInfo(data);
+        });
+        return row;
+      } 
   })
 
+}
+
+openInfo(info: any) {
+  console.log("info" + info._id);
+  this.router.navigate(['/vehicles/'+info._id]);
+}
+
+infoClick() {
+  console.log("Click");
 }
 
 }
