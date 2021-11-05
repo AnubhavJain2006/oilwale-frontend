@@ -1,6 +1,7 @@
 import { LoginComponent } from './component/login/login.component';
 import { AccountsComponent } from './component/accounts/accounts.component';
 import { VehiclesComponent } from './component/vehicles/vehicles.component';
+import { VehicleInfoComponent } from './component/vehicles-helper/vehicle-info/vehicle-info.component';
 import { SchemesComponent } from './component/schemes/schemes.component';
 import { ProductsComponent } from './component/products/products.component';
 import { CustomersComponent } from './component/customers/customers.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: "products", component: ProductsComponent, canActivate: [AuthGuard] },
   { path: "schemes", component: SchemesComponent, canActivate: [AuthGuard] },
   { path: "vehicles", component: VehiclesComponent, canActivate: [AuthGuard] },
+  { path: "vehicles/:id", component: VehicleInfoComponent, canActivate: [AuthGuard]},
   { path: "accounts", component: AccountsComponent, canActivate: [AuthGuard] },
   { path: "myaccount", component: MyaccountComponent, canActivate: [AuthGuard] }
 ];

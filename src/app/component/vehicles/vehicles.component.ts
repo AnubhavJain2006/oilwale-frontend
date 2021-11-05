@@ -37,6 +37,7 @@ export class VehiclesComponent implements OnInit {
       console.log("success");
       this.addVehicleSuccess = true;
       this.addVehicleLoading = false;
+
       setTimeout(() => {
         this.addVehicleSuccess = false;
       }, 5000);

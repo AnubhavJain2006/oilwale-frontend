@@ -23,5 +23,10 @@ export class VehicleService {
     return this.httpClient.post<Vehicle>(url, vehicle);
   }
 
+  getVehicleById(vehicleid: string): Observable<Vehicle> {
+    let url = environment.baseUrl + "api/getVehicle/" + vehicleid;
+    return this.httpClient.get<Vehicle>(url);
+  }
+
 } 
 

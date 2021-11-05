@@ -22,7 +22,8 @@ import { MyaccountComponent } from './component/myaccount/myaccount.component';
 import { LoginFormComponent } from './component/login-helper/login-form/login-form.component';
 import { ForgetPaaswordComponent } from './component/login-helper/forget-paasword/forget-paasword.component';
 import { AllVehiclesComponent } from './component/vehicles-helper/all-vehicles/all-vehicles.component';
-import { AddVehicleComponent } from './component/vehicles-helper/add-vehicle/add-vehicle.component'
+import { AddVehicleComponent } from './component/vehicles-helper/add-vehicle/add-vehicle.component';
+import { VehicleInfoComponent } from './component/vehicles-helper/vehicle-info/vehicle-info.component'
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AddVehicleComponent } from './component/vehicles-helper/add-vehicle/add
     ForgetPaaswordComponent,
     AllVehiclesComponent,
     AddVehicleComponent,
+    VehicleInfoComponent,
 
 
   ],
