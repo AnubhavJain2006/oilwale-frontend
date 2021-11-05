@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./myaccount.component.css']
 })
 export class MyaccountComponent implements OnInit {
-  userData: any;
+  userData!: Admin;
 
   constructor(private adminService: AdminService) {
     this.adminService.getAdminByEmail().subscribe(resp => {

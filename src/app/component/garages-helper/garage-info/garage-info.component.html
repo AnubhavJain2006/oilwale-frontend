@@ -1,0 +1,115 @@
+<p class="lead" *ngIf="dataLoadingStatus">Loading ...</p>
+<div *ngIf="!dataLoadingStatus">
+    <div class="d-flex flex-wrap py-3">
+        <h3 class="h3"><i class="fas fa-wrench"></i> Garages <i class="fas fa-angle-right"></i> {{ garageDetails.garageName }}</h3>
+    </div>
+
+    <div class="w-100 text-center py-2">
+        <img class="img-thumbnail mr-1" src="/assets/img/user.png" alt="User" width="180px"><br>
+        <p class="lead fw-bold pb-0 mb-0">{{garageDetails.garageName}}</p>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-lg-6">
+            <div class="p-md-3">
+                <p class="fw-bold">GARAGE INFORMATION</p>
+                <table class="table table-hover table-bordered p-md-3">
+                    <tbody>
+                        <tr>
+                            <td class="p-3">Garage Name</td>
+                            <td class="p-3">{{ garageDetails.garageName }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Owner Name</td>
+                            <td class="p-3">{{ garageDetails.name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Phone number</td>
+                            <td class="p-3">{{ garageDetails.phoneNumber }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Alternate phone </td>
+                            <td class="p-3">{{ garageDetails.alternateNumber }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">GST</td>
+                            <td class="p-3">
+                                <span *ngIf="!garageDetails.gstNumber"> - </span>
+                                <span *ngIf="garageDetails.gstNumber"> {{ garageDetails.garageName }} </span>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Address</td>
+                            <td class="p-3">{{ garageDetails.address }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Area</td>
+                            <td class="p-3">{{ garageDetails.area }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Pincode</td>
+                            <td class="p-3">{{ garageDetails.pincode }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Referral Code</td>
+                            <td class="p-3">{{ garageDetails.referralCode }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="p-md-3">
+                <p class="fw-bold">GARAGE DATA</p>
+                <table class="table table-hover table-bordered p-md-3">
+                    <tbody>
+                        <tr>
+                            <td class="p-3">Garage id</td>
+                            <td class="p-3"> {{ garageDetails.garageId }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Added on</td>
+                            <td class="p-3"> {{ garageDetails.createdAt }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Last updated</td>
+                            <td class="p-3"> {{ garageDetails.updatedAt }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Status</td>
+                            <td class="p-3">
+                                <span *ngIf="garageDetails.active == true" class="badge bg-success">Active</span> 
+                                <span *ngIf="garageDetails.active == false" class="badge bg-danger">Deactivated</span> 
+
+                            </td>
+                        <tr>
+                            <td class="p-3">Update garage info</td>
+                            <td class="p-3"> <a href="#">Update</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-md-3">
+                <p class="fw-bold text-danger">DANGER ZONE!</p>
+                <table class="table table-hover table-bordered p-md-3">
+                    <tbody>
+
+                        <tr *ngIf="garageDetails.active">
+                            <td class="p-3">Deactivate Account</td>
+                            <td class="p-3"><a href="#" class="link-danger">Deactivate Garage Account</a></td>
+                        </tr>
+                        <tr *ngIf="!garageDetails.active">
+                            <td class="p-3">Enable Account</td>
+                            <td class="p-3"><a href="#" class="link-success">Enable Garage Account</a></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Delete Account</td>
+                            <td class="p-3"><a href="#" class="link-danger">Delete Account</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

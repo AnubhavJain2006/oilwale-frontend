@@ -32,6 +32,10 @@ export class SchemeService {
   }
   loadAllUpComingScheme() {
     return this.httpClient.get(environment.baseUrl + "api/allUpcomingScheme").toPromise();
-
   }
+
+  // getSchemeById(id: string): Observable<Scheme> {
+  //   return this.httpClient.get<Scheme>(environment.baseUrl + )
+  // }
+
 }

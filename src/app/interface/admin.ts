@@ -9,6 +9,7 @@ export interface Admin {
     image: string;
     password: string;
     privilege: string;
-    createdAt: Date;
-    updateAt: Date;
+    createdAt: string;
+    updateAt: string;
+    active: boolean;
 }

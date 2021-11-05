@@ -23,17 +23,17 @@
                         </tr>
                         <tr>
                             <td class="p-3">Suggested Products</td>
-                            <td class="p-3"> <span class="badge background-orange"> {{ vehicleDetails.suggestedProduct.length }}  </span> </td>
+                            <td class="p-3"> <span class="badge background-orange"> {{ vehicleDetails.suggestedProductDetails.length }}  </span> </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="p-3" *ngIf="vehicleDetails.suggestedProduct.length > 0">
+            <div class="p-3" *ngIf="vehicleDetails.suggestedProductDetails.length > 0">
                 <p class="fw-bold">SUGGESTED PRODUCTS LIST</p>
                 <div class="vstack gap-2">
-                    <div *ngFor="let prod of vehicleDetails.suggestedProduct" class="px-md-2">
+                    <div *ngFor="let prod of vehicleDetails.suggestedProductDetails" class="px-md-2">
 
-                        <div > - {{ prod }} <i class="fas fa-link"></i> </div>
+                        <div > - <a class="text-decoration-none" routerLink="/products/{{ prod.productId }}"> {{ prod.productName }} <i class="fas fa-link"></i></a> </div>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     <tbody>
                         <tr>
                             <td class="p-3">Vehicle Id</td>
-                            <td class="p-3"> {{ vehicleDetails.vehicleId }}</td>
+                            <td class="p-3"> {{ vehicleDetails._id }}</td>
                         </tr>
                         <tr>
                             <td class="p-3">Added on</td>

@@ -2,7 +2,7 @@
 
 <div *ngIf="!dataLoadingStatus">
     <div class="d-flex flex-wrap py-3">
-        <h3 class="h3"><i class="fas fa-motorcycle"></i> Customers <i class="fas fa-angle-right"></i> {{ customerDetails.customerName }}</h3>
+        <h3 class="h3"><i class="fas fa-users"></i> Customers <i class="fas fa-angle-right"></i> {{ customerDetails.customerName }}</h3>
     </div>
 
     <div class="row my-3">
@@ -45,7 +45,19 @@
                 </table>
             </div>
             <div class="p-3">
-                SHOW CUSTOMER Vehicles
+                <p class="fw-bold">  {{ customerDetails.customerName | uppercase}}'s VEHICLES: </p>
+                <div class="vstack gap-3">
+                    <div class="border-start border-2 px-md-2 mx-sm-1 px-sm-1 mx-md-2">
+                        <span class="lead">Hero Honda - Splender (2012)</span> <br>
+                        <small class="text-secondary">GJ01 1A 1234 - 1245 km</small><br>
+                        <small class="text-secondary">Daily travel - 15 km</small>
+                    </div>
+                    <div class="border-start border-2 px-md-2 mx-md-2">
+                        <span class="lead">Mercedez - Benz (2020)</span> <br>
+                        <small class="text-secondary">GJ01 1A 1234 - 46457 km</small><br>
+                        <small class="text-secondary">Daily travel - 1 km</small>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-lg-6">

@@ -1,3 +1,5 @@
+import {CustomerVehicle} from './customer-vehicle';
+
 export interface Customer {
     customerId: string;
     customerName: string;
@@ -5,7 +7,7 @@ export interface Customer {
     customerAddress: string;
     customerPincode: string;
     garageReferralCode: string;
-    customerVehicle: Array<string>;
+    customerVehicle: Array<CustomerVehicle>;
     createdAt: string;
     updatedAt: string;
     active: boolean;

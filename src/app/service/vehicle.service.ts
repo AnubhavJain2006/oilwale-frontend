@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { Vehicle } from '../interface/vehicle';
+import { VehicleInfo } from '../interface/vehicle-info';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,9 @@ export class VehicleService {
     return this.httpClient.post<Vehicle>(url, vehicle);
   }
 
-  getVehicleById(vehicleid: string): Observable<Vehicle> {
+  getVehicleById(vehicleid: string): Observable<VehicleInfo> {
     let url = environment.baseUrl + "api/getVehicle/" + vehicleid;
-    return this.httpClient.get<Vehicle>(url);
+    return this.httpClient.get<VehicleInfo>(url);
   }
 
 } 

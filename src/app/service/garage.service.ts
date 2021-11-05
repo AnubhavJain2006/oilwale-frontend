@@ -31,4 +31,8 @@ export class GarageService {
   }
 
   constructor(private httpClient: HttpClient) { }
+
+  getGarageById(id: string): Observable<Garage> {
+    return this.httpClient.get<Garage>(environment.baseUrl + 'api/getGarageById/' + id);
+  }
 }
