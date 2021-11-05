@@ -45,10 +45,11 @@
                                     <td>{{customer.customerPhoneNumber}}</td>
                                     <td>{{customer.customerAddress}}</td>
                                     <td>{{customer.customerPincode}}</td>
-                                    <td> <button class="btn btn-outline-primary"
-                                            (click)="getCustomerId(customer.customerId)"> <i
-                                                class="fas fa-info-circle"></i>
-                                        </button> </td>
+                                    <td> 
+                                        <a routerLink="/products/{{customer.customerId}}">
+                                            <button class="btn btn-outline-primary"> <i class="fas fa-info-circle"></i> </button> 
+                                        </a>
+                                    </td>
                                 </tr>
                             </ng-container>
                         </tbody>

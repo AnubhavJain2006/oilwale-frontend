@@ -31,7 +31,5 @@ export class CustomersComponent implements OnInit {
     })
 
   }
-  getCustomerId(customerId: string) {
-    console.log(customerId)
-  }
+
 }

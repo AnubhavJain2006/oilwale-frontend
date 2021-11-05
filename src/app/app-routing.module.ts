@@ -1,11 +1,17 @@
 import { LoginComponent } from './component/login/login.component';
 import { AccountsComponent } from './component/accounts/accounts.component';
+
 import { VehiclesComponent } from './component/vehicles/vehicles.component';
 import { VehicleInfoComponent } from './component/vehicles-helper/vehicle-info/vehicle-info.component';
+
 import { SchemesComponent } from './component/schemes/schemes.component';
+
 import { ProductsComponent } from './component/products/products.component';
 import { ProductsInfoComponent } from './component/products-helper/products-info/products-info.component';
+
 import { CustomersComponent } from './component/customers/customers.component';
+import { CustomerInfoComponent } from './component/customers-helper/customer-info/customer-info.component';
+
 import { GaragesComponent } from './component/garages/garages.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HeaderComponent } from './component/header/header.component';
@@ -18,7 +24,10 @@ const routes: Routes = [
   { path: "", component: LoginComponent },
   { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard] },
   { path: "garages", component: GaragesComponent, canActivate: [AuthGuard] },
+
+
   { path: "customers", component: CustomersComponent, canActivate: [AuthGuard] },
+  { path: "customers/:id", component: CustomerInfoComponent, canActivate: [AuthGuard] },
 
   { path: "products", component: ProductsComponent, canActivate: [AuthGuard] },
   { path: "products/:id", component: ProductsInfoComponent, canActivate: [AuthGuard] },
