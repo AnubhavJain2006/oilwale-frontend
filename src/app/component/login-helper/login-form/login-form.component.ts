@@ -30,12 +30,13 @@ export class LoginFormComponent implements OnInit {
     console.log(this.loginText.value)
     console.log()
     this.adminService.authenticate(this.loginText.value).subscribe(resp => {
+      console.log(resp + "Service")
       if (resp[0].token != null) {
         localStorage.setItem('authToken', resp[0].token);
         localStorage.setItem('isLoggedIn', "true");
         this.router.navigateByUrl("/dashboard");
-
       }
+      console.log(resp)
     }, err => {
       console.log(err);
     });

@@ -1,3 +1,5 @@
+import { JsonPipe } from '@angular/common';
+import { AdminService } from './../../../service/admin.service';
 import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from '../../login/login.component';
 
@@ -9,12 +11,12 @@ import { LoginComponent } from '../../login/login.component';
 export class ForgetPaaswordComponent implements OnInit {
 
   emailValidationSuccess: boolean = false;
-  sendTarget: string = "";
+
   otp: string = "";
   email: string = "";
+  isValidEmail: boolean = true;
+  constructor(private loginComp: LoginComponent, private adminService: AdminService) {
 
-  constructor(private loginComp: LoginComponent) {
-    this.sendTarget = "Send OTP";
   }
 
   ngOnInit(): void {
@@ -25,8 +27,20 @@ export class ForgetPaaswordComponent implements OnInit {
   }
 
   verifyEmail() {
-    this.emailValidationSuccess = true;
-    this.sendTarget = "Verify";
+    this.adminService.forgotPassword(this.email).subscribe(resp => {
+      console.log(resp.data);
+
+      if (resp.data == "Success")
+        this.emailValidationSuccess = true;
+      else
+        this.isValidEmail = false;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  verifyOtp() {
+    this.adminService.verifyOtp()
   }
 
 }
