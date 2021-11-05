@@ -1,1 +1,68 @@
-<p>scheme-info works!</p>
+<p class="lead" *ngIf="dataLoadingStatus">Loading ...</p>
+
+
+
+<div *ngIf="!dataLoadingStatus">
+    <div class="d-flex flex-wrap py-3">
+        <h3 class="h3"><i class="fas fa-users"></i> Scheme <i class="fas fa-angle-right"></i> </h3>
+    </div>
+
+
+    <div class="row my-3">
+        <div class="col-lg-6">
+            <div class="p-3">
+                <p class="fw-bold">SCHEME INFORMATION</p>
+                <table class="table table-bordered table-hover p-md-3">
+                    <tbody>
+                        <tr>
+                            <td class="p-3">Name</td>
+                            <td class="p-3">{{schemeDetails.schemeName}}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Description</td>
+                            <td class="p-3">{{schemeDetails.description}}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Status</td>
+                            <td class="p-3"> </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Packing Size</td>
+                            <td class="p-3"> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="p-3">
+                <p class="fw-bold">SCHEME DATA</p>
+                <table class="table table-bordered table-hover p-md-3">
+                    <tbody>
+                        <tr>
+                            <td class="p-3">Product Id</td>
+                            <td class="p-3">{{schemeDetails.schemeId}} </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Start Date</td>
+                            <td class="p-3">{{schemeDetails.startedAt | date}}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">End Date</td>
+                            <td class="p-3">{{schemeDetails.endedAt | date}}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Status</td>
+                            <td class="p-3">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Edit product details</td>
+                            <td class="p-3"><span class="link-primary">Edit</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
