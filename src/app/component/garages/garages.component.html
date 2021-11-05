@@ -98,10 +98,11 @@
                                     <td>{{garage.address}}</td>
                                     <td>{{garage.pincode}}</td>
                                     <td>{{garage.referralCode}}</td>
-                                    <td> <button class="btn btn-outline-primary"
-                                            (click)="getGarageDetail(garage.garageId )"><i
-                                                class="fas fa-info-circle"></i>
-                                        </button> </td>
+                                    <td>
+                                        <a routerLink="/garages/{{ garage.garageId }}">
+                                            <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button> 
+                                        </a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

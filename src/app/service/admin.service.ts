@@ -15,10 +15,11 @@ export class AdminService {
   authenticate(loginText: any): Observable<any> {
     return this.httpClient.post(environment.baseUrl + "api/authenticate", loginText);
   }
-  loadDeactivAccounts(): Promise<any> {
 
+  loadDeactivAccounts(): Promise<any> {
     return this.httpClient.get(environment.baseUrl + "api/allDeactiveAdmins").toPromise();
   }
+
   _deleteAccount = new Subject<void>();
 
   activeAccountList: Array<any> = [];
@@ -40,10 +41,10 @@ export class AdminService {
       this._deleteAccount.next();
     }));
   }
+
   loadActiveAccounts(): Promise<any> {
     return this.httpClient.get(environment.baseUrl + "api/allActiveAdmins").toPromise();
   }
-
 
   addAccount(value: any): Observable<any> {
     return this.httpClient.post(environment.baseUrl + "api/addAdmin", value).pipe(tap(() => {
@@ -74,6 +75,10 @@ export class AdminService {
     
   }
   constructor(private httpClient: HttpClient) { }
+
+  getAdminById(id:string):Observable<Admin> {
+    return this.httpClient.get<Admin>(environment.baseUrl + 'api/getAdmin/' + id);
+  }
 
 
 }

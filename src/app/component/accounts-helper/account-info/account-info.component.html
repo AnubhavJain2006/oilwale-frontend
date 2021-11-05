@@ -1,0 +1,105 @@
+<p class="lead" *ngIf="dataLoadingStatus || currentUserdatailLoading">Loading ...</p>
+<div *ngIf="!dataLoadingStatus && !currentUserdatailLoading">
+    <div class="d-flex flex-wrap py-3">
+        <h3 class="h3"><i class="fas fa-user-circle"></i> Accounts <i class="fas fa-angle-right"></i> {{ adminDetails.name }}</h3>
+    </div>
+
+    <div class="w-100 text-center py-2">
+        <img class="img-thumbnail mr-1" src="/assets/img/user.png" alt="User" width="180px"><br>
+        <p class="lead fw-bold pb-0 mb-0">{{adminDetails.name}}</p>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-lg-6">
+            <div class="p-md-3">
+                <p class="fw-bold">ADMIN INFORMATION</p>
+                <table class="table table-hover table-bordered p-md-3">
+                    <tbody>
+                        <tr>
+                            <td class="p-3">Admin Name</td>
+                            <td class="p-3">{{ adminDetails.name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Email</td>
+                            <td class="p-3">{{ adminDetails.email }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Privilege</td>
+                            <td class="p-3">
+                                <span *ngIf="adminDetails.privilege == 'moderator' " class="badge bg-primary">Moderator</span> 
+                                <span *ngIf="adminDetails.privilege == 'admin' " class="badge bg-secondary"> Admin</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Phone number</td>
+                            <td class="p-3">{{ adminDetails.phoneNumber }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Alternate phone </td>
+                            <td class="p-3">{{ adminDetails.alternateNumber }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Address</td>
+                            <td class="p-3">{{ adminDetails.address }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Pincode</td>
+                            <td class="p-3">{{ adminDetails.pincode }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="p-md-3">
+                <p class="fw-bold">ADMIN DATA</p>
+                <table class="table table-hover table-bordered p-md-3">
+                    <tbody>
+                        <tr>
+                            <td class="p-3">Admin id</td>
+                            <td class="p-3"> {{ adminDetails.adminId }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Added on</td>
+                            <td class="p-3"> {{ adminDetails.createdAt | date:"medium"}}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Last updated</td>
+                            <td class="p-3"> {{ adminDetails.updateAt | date:"medium"}}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Status</td>
+                            <td class="p-3">
+                                <span *ngIf="adminDetails.active == true" class="badge bg-success">Active</span> 
+                                <span *ngIf="adminDetails.active == false" class="badge bg-danger">Deactivated</span> 
+
+                            </td>
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-md-3" *ngIf="adminDetails.adminId != currentUser.adminId">
+                <p class="fw-bold text-danger">ACTION ZONE!</p>
+                <table class="table table-hover table-bordered p-md-3">
+                    <tbody>
+                        <tr>
+                            <td class="p-3">Update garage info</td>
+                            <td class="p-3"> <a href="#">Update</a></td>
+                        </tr>
+                        <tr *ngIf="adminDetails.active">
+                            <td class="p-3">Deactivate Account</td>
+                            <td class="p-3"><a href="#" class="link-danger">Deactivate Garage Account</a></td>
+                        </tr>
+                        <tr *ngIf="!adminDetails.active">
+                            <td class="p-3">Enable Account</td>
+                            <td class="p-3"><a href="#" class="link-success">Enable Garage Account</a></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Delete Account</td>
+                            <td class="p-3"><a href="#" class="link-danger">Delete Account</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { VehicleService } from 'src/app/service/vehicle.service';
-import { Vehicle } from 'src/app/interface/vehicle';
+import { VehicleInfo } from 'src/app/interface/vehicle-info';
 
 @Component({
   selector: 'app-vehicle-info',
@@ -11,7 +11,7 @@ import { Vehicle } from 'src/app/interface/vehicle';
 })
 export class VehicleInfoComponent implements OnInit {
   id !: string;
-  vehicleDetails!: Vehicle;
+  vehicleDetails!: VehicleInfo;
   dataLoadingStatus: boolean = true;
   
 

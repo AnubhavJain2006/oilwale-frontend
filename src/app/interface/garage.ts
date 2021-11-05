@@ -10,5 +10,8 @@ export interface Garage {
     area: string;
     image: string;
     referralCode: string;
-    isActive: boolean;
+    // isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
+    active: boolean;
 }

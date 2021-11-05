@@ -24,7 +24,11 @@ import { ForgetPaaswordComponent } from './component/login-helper/forget-paaswor
 import { AllVehiclesComponent } from './component/vehicles-helper/all-vehicles/all-vehicles.component';
 import { AddVehicleComponent } from './component/vehicles-helper/add-vehicle/add-vehicle.component';
 import { VehicleInfoComponent } from './component/vehicles-helper/vehicle-info/vehicle-info.component';
-import { ProductsInfoComponent } from './component/products-helper/products-info/products-info.component'
+import { ProductsInfoComponent } from './component/products-helper/products-info/products-info.component';
+import { CustomerInfoComponent } from './component/customers-helper/customer-info/customer-info.component';
+import { GarageInfoComponent } from './component/garages-helper/garage-info/garage-info.component';
+import { SchemeInfoComponent } from './component/schemes-helper/scheme-info/scheme-info.component';
+import { AccountInfoComponent } from './component/accounts-helper/account-info/account-info.component'
 
 @NgModule({
   declarations: [
@@ -45,6 +49,10 @@ import { ProductsInfoComponent } from './component/products-helper/products-info
     AddVehicleComponent,
     VehicleInfoComponent,
     ProductsInfoComponent,
+    CustomerInfoComponent,
+    GarageInfoComponent,
+    SchemeInfoComponent,
+    AccountInfoComponent,
 
 
   ],

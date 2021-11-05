@@ -8,6 +8,7 @@ export interface VehicleInfo {
     "vehicleModel": string,
     "suggestedProductDetails": Array<Product>
     "createdAt": string,
+    "updatedAt": string,
     "active": boolean
 
 }
