@@ -6,4 +6,6 @@ export interface Product {
     packingSize: string;
     productImage: string;
     active: boolean;
+    createdAt: string;
+    updatedAt: string;
 }

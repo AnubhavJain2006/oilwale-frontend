@@ -1,0 +1,78 @@
+<p class="lead" *ngIf="dataLoadingStatus">Loading ...</p>
+
+
+
+<div *ngIf="!dataLoadingStatus">
+    <div class="d-flex flex-wrap py-3">
+        <h3 class="h3"><i class="fas fa-motorcycle"></i> Products <i class="fas fa-angle-right"></i> {{ productDetails.productName }}</h3>
+    </div>
+
+    <div class="w-100 text-center py-2">
+        <img class="img-thumbnail mr-1" src="/assets/img/product.jpeg" alt="User" width="180px"><br>
+        <p class="lead fw-bold pb-0 mb-0">{{productDetails.productName}}</p>
+        <span class="badge bg-primary">{{ productDetails.grade }} Grade</span> 
+    </div>
+
+    <div class="row my-3">
+        <div class="col-lg-6">
+            <div class="p-3">
+                <p class="fw-bold">PRODUCT INFORMATION</p>
+                <table class="table table-bordered table-hover p-md-3">
+                    <tbody>                        
+                        <tr>
+                            <td class="p-3">Name</td>
+                            <td class="p-3"> {{ productDetails.productName }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Specification</td>
+                            <td class="p-3"> {{ productDetails.specification }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Grade</td>
+                            <td class="p-3"> {{ productDetails.grade }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Packing Size</td>
+                            <td class="p-3"> {{ productDetails.packingSize }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="p-3">
+                <p class="fw-bold">PRODUCT DATA</p>
+                <table class="table table-bordered table-hover p-md-3">
+                    <tbody>
+                        <tr>
+                            <td class="p-3">Product Id</td>
+                            <td class="p-3"> {{ productDetails.productId }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Added on</td>
+                            <td class="p-3"> {{ productDetails.createdAt | date:"medium" }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Last Updated</td>
+                            <td class="p-3">
+                                <span *ngIf="productDetails.updatedAt == productDetails.createdAt"> <small> - </small> </span>
+                                <span *ngIf="productDetails.updatedAt != productDetails.createdAt"> {{ productDetails.updatedAt | date:"medium" }} </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Status</td>
+                            <td class="p-3"> 
+                                <span *ngIf="productDetails.active == true" class="badge bg-success">Active</span> 
+                                <span *ngIf="productDetails.active == false" class="badge bg-danger">Deactivated</span> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Edit product details</td>
+                            <td class="p-3"><span class="link-primary">Edit</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

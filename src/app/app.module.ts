@@ -23,7 +23,8 @@ import { LoginFormComponent } from './component/login-helper/login-form/login-fo
 import { ForgetPaaswordComponent } from './component/login-helper/forget-paasword/forget-paasword.component';
 import { AllVehiclesComponent } from './component/vehicles-helper/all-vehicles/all-vehicles.component';
 import { AddVehicleComponent } from './component/vehicles-helper/add-vehicle/add-vehicle.component';
-import { VehicleInfoComponent } from './component/vehicles-helper/vehicle-info/vehicle-info.component'
+import { VehicleInfoComponent } from './component/vehicles-helper/vehicle-info/vehicle-info.component';
+import { ProductsInfoComponent } from './component/products-helper/products-info/products-info.component'
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { VehicleInfoComponent } from './component/vehicles-helper/vehicle-info/v
     AllVehiclesComponent,
     AddVehicleComponent,
     VehicleInfoComponent,
+    ProductsInfoComponent,
 
 
   ],
