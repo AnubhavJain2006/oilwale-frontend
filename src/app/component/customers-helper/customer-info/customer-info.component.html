@@ -1,1 +1,87 @@
-<p>customer-info works!</p>
+<p class="lead" *ngIf="dataLoadingStatus">Loading ...</p>
+
+<div *ngIf="!dataLoadingStatus">
+    <div class="d-flex flex-wrap py-3">
+        <h3 class="h3"><i class="fas fa-motorcycle"></i> Customers <i class="fas fa-angle-right"></i> {{ customerDetails.customerName }}</h3>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-lg-6">
+            <div class="p-3">
+                <p class="fw-bold">CUSTOMER INFORMATION</p>
+                <table class="table table-bordered table-hover p-md-3">
+                    <tbody>                        
+                        <tr>
+                            <td class="p-3">Name</td>
+                            <td class="p-3"> {{ customerDetails.customerName }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Address</td>
+                            <td class="p-3"> {{ customerDetails.customerAddress }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Pincode</td>
+                            <td class="p-3"> {{ customerDetails.customerPincode }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Phone Number</td>
+                            <td class="p-3"> {{ customerDetails.customerPhoneNumber }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Garage Refferal Code</td>
+                            <td class="p-3"> 
+                                 {{ customerDetails.garageReferralCode }} 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Total Vehicles</td>
+                            <td class="p-3"> 
+                                
+                                <span *ngIf="!customerDetails.customerVehicle"> - </span>
+                                <span *ngIf="customerDetails.customerVehicle && customerDetails.customerVehicle.length"> {{ customerDetails.customerVehicle.length }} </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-3">
+                SHOW CUSTOMER Vehicles
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="p-3">
+                <p class="fw-bold">CUSTOMER DATA</p>
+                <table class="table table-bordered table-hover p-md-3">
+                    <tbody>
+                        <tr>
+                            <td class="p-3">Customer Id</td>
+                            <td class="p-3"> {{ customerDetails.customerId }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Added on</td>
+                            <td class="p-3"> {{ customerDetails.createdAt | date:"medium" }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Last Updated</td>
+                            <td class="p-3">
+                                <span *ngIf="!customerDetails.customerVehicle"> - </span>
+                                <span *ngIf="customerDetails.customerVehicle"> {{ customerDetails.updatedAt | date:"medium" }} </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Status</td>
+                            <td class="p-3"> 
+                                <span *ngIf="customerDetails.active == true" class="badge bg-success">Active</span> 
+                                <span *ngIf="customerDetails.active == false" class="badge bg-danger">Deactivated</span> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Edit product details</td>
+                            <td class="p-3"><span class="link-primary">Edit</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

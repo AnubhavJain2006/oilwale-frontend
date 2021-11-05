@@ -6,4 +6,7 @@ export interface Customer {
     customerPincode: string;
     garageReferralCode: string;
     customerVehicle: Array<string>;
+    createdAt: string;
+    updatedAt: string;
+    active: boolean;
 }
