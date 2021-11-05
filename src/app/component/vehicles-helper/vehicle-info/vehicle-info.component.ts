@@ -13,19 +13,7 @@ export class VehicleInfoComponent implements OnInit {
   id !: string;
   vehicleDetails!: Vehicle;
   dataLoadingStatus: boolean = true;
-
-  // vehicleDetails : Vehicle = {
-  //   vehicleId  : "",
-  //   vehicleCompanyId : "",
-  //   vehicleModel : "",
-  //   suggestedProduct : [],
-  //   isActive : false,
-  // };
   
-
-  // setting default values
-  
-
 
   constructor(private activatedRoute: ActivatedRoute, private vehicleService: VehicleService) { }
 

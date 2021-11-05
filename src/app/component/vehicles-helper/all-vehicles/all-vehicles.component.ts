@@ -9,14 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./all-vehicles.component.css']
 })
 export class AllVehiclesComponent implements OnInit {
-  @Input() showReload!: boolean;
   dtOptions: DataTables.Settings = {}
-  // vehicles: Vehicle[] = [];
-
-  // using trigger to ensure fetching before rendering
-  // dtTrigger: Subject<any> = new Subject<any>();
-
-  // allVehicles:Vehicle[] = [];
 
   constructor(private router:Router, private renderer: Renderer2) { }
 
@@ -84,72 +77,10 @@ export class AllVehiclesComponent implements OnInit {
     }
   }
 
-  ngOnDestroy(): void {
-    // unsubscribe to event
-    // this.dtTrigger.unsubscribe();
-  }
-
-reloadVehicles() {
-  console.log("haha");
-  var vehiceTable = $("#allVehicleTable").DataTable()
-
-  vehiceTable.destroy();
-  $("#allVehicleTable").DataTable({
-    ajax: {
-      url: 'https://oilwale.herokuapp.com/api/getVehicles',
-      dataSrc: ''
-    },
-    
-    columns: [
-      {
-        data: 'vehicleCompany'
-      },
-      {
-        data: 'vehicleModel'
-      },
-      {
-        data: 'createdAt',
-        render: function (data) {
-         let date = new Date(data);
-         return date.toDateString();
-        }
-      },
-      {
-        data: 'suggestedProduct',
-        render: function(data) {
-          return data.length;
-        }
-      },
-      {
-        data: 'active',
-        render: (data) => {
-          if ( data == true) {
-            return '<span class="badge bg-success">Active</span>';
-          }
-          else {
-            return '<span class="badge bg-secondary">Deactivated</span>';
-          }
-        }
-      }],
-      rowCallback:(row: Node, data: any[] | Object, index: number) => {
-        const self = this;
-        $('td', row).off('click');
-        $('td', row).on('click', () => {
-          self.openInfo(data);
-        });
-        return row;
-      } 
-  })
-
-}
 
 openInfo(info: any) {
   console.log("info" + info._id);
   this.router.navigate(['/vehicles/'+info._id]);
-}
-
-infoClick() {
-  console.log("Click");
 }
 
 }
