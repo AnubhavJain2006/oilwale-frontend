@@ -10,6 +10,9 @@ import { environment } from 'src/environments/environment';
 })
 export class GarageService {
 
+
+  constructor(private httpClient: HttpClient) { }
+
   garageList: Array<Garage> = [];
   _refreshNeeded = new Subject<void>();
 
@@ -18,7 +21,7 @@ export class GarageService {
   }
 
   addNewGarage(garage: Garage): Observable<any> {
-    return this.httpClient.post(environment.baseUrl + "api/addGarage", garage).pipe(tap(() => {
+    return this.httpClient.post(environment.baseUrl + "api/garage", garage).pipe(tap(() => {
       this._refreshNeeded.next();
     }));
   }
@@ -27,12 +30,11 @@ export class GarageService {
 
   }
   getAllGarages(): Promise<any> {
-    return this.httpClient.get(environment.baseUrl + "api/getAllGarages").toPromise()
+    return this.httpClient.get(environment.baseUrl + "api/garage/active").toPromise()
   }
 
-  constructor(private httpClient: HttpClient) { }
 
   getGarageById(id: string): Observable<Garage> {
-    return this.httpClient.get<Garage>(environment.baseUrl + 'api/getGarageById/' + id);
+    return this.httpClient.get<Garage>(environment.baseUrl + 'api/garage/' + id);
   }
 }
