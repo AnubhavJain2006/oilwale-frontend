@@ -17,7 +17,7 @@ export class AdminService {
   }
 
   loadDeactivAccounts(): Promise<any> {
-    return this.httpClient.get(environment.baseUrl + "api/allDeactiveAdmins").toPromise();
+    return this.httpClient.get(environment.baseUrl + "api/admins/deactived").toPromise();
   }
 
   _deleteAccount = new Subject<void>();
@@ -37,17 +37,17 @@ export class AdminService {
   }
 
   deleteAccount(adminId: string): Observable<any> {
-    return this.httpClient.delete(environment.baseUrl + "api/deleteAdmin/" + adminId).pipe(tap(() => {
+    return this.httpClient.delete(environment.baseUrl + "api/admin/" + adminId).pipe(tap(() => {
       this._deleteAccount.next();
     }));
   }
 
   loadActiveAccounts(): Promise<any> {
-    return this.httpClient.get(environment.baseUrl + "api/allActiveAdmins").toPromise();
+    return this.httpClient.get(environment.baseUrl + "api/admins/active").toPromise();
   }
 
   addAccount(value: any): Observable<any> {
-    return this.httpClient.post(environment.baseUrl + "api/addAdmin", value).pipe(tap(() => {
+    return this.httpClient.post(environment.baseUrl + "api/admin", value).pipe(tap(() => {
       this._refreshNeeded.next();
 
     }));;
@@ -63,7 +63,7 @@ export class AdminService {
     let authToken: string | null = localStorage.getItem('authToken');
     let token = authToken != null ? jwt_decode(authToken) : null;
     console.log(JSON.parse(JSON.stringify(token)).sub)
-    return this.httpClient.get(environment.baseUrl + "api/getAdminByEmail/" + JSON.parse(JSON.stringify(token)).sub)
+    return this.httpClient.get(environment.baseUrl + "api/adminByEmail/" + JSON.parse(JSON.stringify(token)).sub)
   }
 
   forgotPassword(email: string): Observable<any> {
@@ -77,7 +77,7 @@ export class AdminService {
   constructor(private httpClient: HttpClient) { }
 
   getAdminById(id:string):Observable<Admin> {
-    return this.httpClient.get<Admin>(environment.baseUrl + 'api/getAdmin/' + id);
+    return this.httpClient.get<Admin>(environment.baseUrl + 'api/admin/' + id);
   }
 
 

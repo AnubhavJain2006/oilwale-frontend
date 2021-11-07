@@ -69,7 +69,11 @@
                                 <td>{{scheme.description}}</td>
                                 <td>{{scheme.startedAt | date}}</td>
                                 <td>{{scheme.endedAt | date}}</td>
-                                <td></td>
+                                <td>
+                                    <a class="btn btn-outline-primary" routerLink="/schemes/{{ scheme.schemeId }}">
+                                        <i class="fas fa-info"></i>
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

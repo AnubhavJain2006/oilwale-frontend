@@ -5,12 +5,14 @@ import { AccountInfoComponent } from './component/accounts-helper/account-info/a
 
 import { VehiclesComponent } from './component/vehicles/vehicles.component';
 import { VehicleInfoComponent } from './component/vehicles-helper/vehicle-info/vehicle-info.component';
+import { VehicleEditComponent } from './component/vehicles-helper/vehicle-edit/vehicle-edit.component';
 
 import { SchemesComponent } from './component/schemes/schemes.component';
 import { SchemeInfoComponent } from './component/schemes-helper/scheme-info/scheme-info.component';
 
 import { ProductsComponent } from './component/products/products.component';
 import { ProductsInfoComponent } from './component/products-helper/products-info/products-info.component';
+import { ProductEditComponent } from './component/products-helper/product-edit/product-edit.component';
 
 import { CustomersComponent } from './component/customers/customers.component';
 import { CustomerInfoComponent } from './component/customers-helper/customer-info/customer-info.component';
@@ -38,12 +40,14 @@ const routes: Routes = [
 
   { path: "products", component: ProductsComponent, canActivate: [AuthGuard] },
   { path: "products/:id", component: ProductsInfoComponent, canActivate: [AuthGuard] },
+  { path: "products/:id/edit", component: ProductEditComponent, canActivate: [AuthGuard] },
 
   { path: "schemes", component: SchemesComponent, canActivate: [AuthGuard] },
   { path: "schemes/:id", component: SchemeInfoComponent, canActivate: [AuthGuard] },
 
   { path: "vehicles", component: VehiclesComponent, canActivate: [AuthGuard] },
   { path: "vehicles/:id", component: VehicleInfoComponent, canActivate: [AuthGuard]},
+  { path: "vehicles/:id/edit", component: VehicleEditComponent, canActivate: [AuthGuard]},
 
   { path: "accounts", component: AccountsComponent, canActivate: [AuthGuard] },
   { path: "accounts/:id", component: AccountInfoComponent, canActivate: [AuthGuard] },

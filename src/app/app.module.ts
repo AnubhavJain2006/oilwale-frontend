@@ -28,7 +28,9 @@ import { ProductsInfoComponent } from './component/products-helper/products-info
 import { CustomerInfoComponent } from './component/customers-helper/customer-info/customer-info.component';
 import { GarageInfoComponent } from './component/garages-helper/garage-info/garage-info.component';
 import { SchemeInfoComponent } from './component/schemes-helper/scheme-info/scheme-info.component';
-import { AccountInfoComponent } from './component/accounts-helper/account-info/account-info.component'
+import { AccountInfoComponent } from './component/accounts-helper/account-info/account-info.component';
+import { VehicleEditComponent } from './component/vehicles-helper/vehicle-edit/vehicle-edit.component';
+import { ProductEditComponent } from './component/products-helper/product-edit/product-edit.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { AccountInfoComponent } from './component/accounts-helper/account-info/a
     GarageInfoComponent,
     SchemeInfoComponent,
     AccountInfoComponent,
+    VehicleEditComponent,
+    ProductEditComponent,
 
 
   ],

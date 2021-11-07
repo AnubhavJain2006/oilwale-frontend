@@ -15,7 +15,7 @@
                     <tbody>
                         <tr>
                             <td class="p-3">Company Name</td>
-                            <td class="p-3"> {{ vehicleDetails.vehicleCompanyId }}</td>
+                            <td class="p-3"> {{ vehicleDetails.vehicleCompany.vehicleCompany }}</td>
                         </tr>
                         <tr>
                             <td class="p-3">Model</td>
@@ -65,9 +65,20 @@
                                 <span *ngIf="vehicleDetails.active == false" class="badge bg-danger">Deactivated</span> 
                             </td>
                         </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-3">
+                <p class="fw-bold">ACTION ZONE!</p>
+                <table class="table table-bordered table-hover p-md-3">
+                    <tbody>
                         <tr>
-                            <td class="p-3">Edit Vehicle details</td>
-                            <td class="p-3"><span class="link-primary">Edit</span></td>
+                            <td class="p-3">Update vehicle</td>
+                            <td class="p-3"> <a routerLink="/vehicles/{{ vehicleDetails._id }}/edit"> Update vehicle info </a></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Delete Vehicle</td>
+                            <td class="p-3">Delete</td>
                         </tr>
                     </tbody>
                 </table>

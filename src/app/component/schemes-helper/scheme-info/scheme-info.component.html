@@ -1,1 +1,76 @@
-<p>scheme-info works!</p>
+<p class="lead" *ngIf="dataLoadingStatus">Loading ...</p>
+<div *ngIf="!dataLoadingStatus">
+    <div class="d-flex flex-wrap py-3">
+        <h3 class="h3"><i class="fas fa-object-ungroup"></i> Schemes <i class="fas fa-angle-right"></i> {{ schemeDetails.schemeName }}</h3>
+    </div>
+
+    <!-- <div class="w-100 text-center py-2">
+        <img class="img-thumbnail mr-1" src="/assets/img/user.png" alt="User" width="180px"><br>
+        <p class="lead fw-bold pb-0 mb-0">{{garageDetails.garageName}}</p>
+    </div> -->
+
+    <div class="row my-3">
+        <div class="col-lg-6">
+            <div class="p-md-3">
+                <p class="fw-bold">SCHEME INFORMATION</p>
+                <table class="table table-hover table-bordered p-md-3">
+                    <tbody>
+                        <tr>
+                            <td class="p-3">Garage Name</td>
+                            <td class="p-3">{{ schemeDetails.schemeName }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Description</td>
+                            <td class="p-3">{{ schemeDetails.description }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Start At </td>
+                            <td class="p-3">{{ schemeDetails.startedAt }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Conclud At</td>
+                            <td class="p-3">
+                                {{ schemeDetails.endedAt }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="p-md-3">
+                <p class="fw-bold">SCHEME DATA</p>
+                <table class="table table-hover table-bordered p-md-3">
+                    <tbody>
+                        <tr>
+                            <td class="p-3">Scheme id</td>
+                            <td class="p-3"> {{ schemeDetails.schemeId }}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Status</td>
+                            <td class="p-3">
+                                <span *ngIf="schemeDetails.status == true" class="badge bg-success">Active</span> 
+                                <span *ngIf="schemeDetails.status == false" class="badge bg-danger">Deactivated</span> 
+
+                            </td>
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-md-3">
+                <p class="fw-bold">ACTION ZONE!</p>
+                <table class="table table-hover table-bordered p-md-3">
+                    <tbody>
+                        <tr>
+                            <td class="p-3">Update scheme info</td>
+                            <td class="p-3"> <a href="#" class="link-primary">Update</a></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Delete Scheme</td>
+                            <td class="p-3"><a href="#" class="link-danger">Delete Scheme</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
