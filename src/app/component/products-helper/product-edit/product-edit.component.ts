@@ -20,6 +20,9 @@ export class ProductEditComponent implements OnInit {
   updateProductLoadingFlag: boolean = false;
   updateProductSuccessFlag: boolean = false;
   updateProductErrorFlag: boolean = false;
+  validationMessageShow: boolean = false;
+
+  validationFlag: boolean = true;
 
   constructor(private router: ActivatedRoute ,private productService: ProductService) { }
 
@@ -33,6 +36,18 @@ export class ProductEditComponent implements OnInit {
   }
 
   updateProduct(): void {
+
+    if(!this.validationCheck()){
+      this.validationFlag = false;
+
+      this.validationMessageShow = true;
+
+      setTimeout(() => {
+        this.validationMessageShow = false;
+      }, 5000);
+      return;
+    }
+
     this.updateProductLoadingFlag = true;
     this.productService.updateProduct(this.productDetails).subscribe(data => {
       this.updateProductLoadingFlag = false;
@@ -44,6 +59,22 @@ export class ProductEditComponent implements OnInit {
         this.updateProductSuccessFlag = false;
       }, 5000);
     })
+  }
+
+  validationCheck(): boolean {
+    if (this.productDetails.productName.length == 0)
+      return false;
+
+    if (this.productDetails.specification.length == 0)
+      return false;
+
+    if (this.productDetails.grade.length == 0)
+      return false;
+
+    if (this.productDetails.packingSize.length == 0)
+      return false;
+
+    return true;
   }
 
 }

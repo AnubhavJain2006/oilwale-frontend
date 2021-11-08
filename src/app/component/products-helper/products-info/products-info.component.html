@@ -94,7 +94,7 @@
                             <td class="p-3">
                                 <button (click)="onDeleteProduct(productDetails.productId)" [disabled]="deleteLoadingFlag" class="btn link-danger">
                                     <span *ngIf="!deleteLoadingFlag">
-                                        Delete Products
+                                        Delete Product
                                     </span>
                                     <span *ngIf="deleteLoadingFlag">
                                         <div class="spinner-border spinner-border-sm" role="status">
@@ -107,9 +107,9 @@
                         <tr *ngIf="productDetails.active == false">
                             <td class="p-3">Restore Product</td>
                             <td class="p-3 text-success">
-                                <button (click)="onRestoreProduct()" class="btn link-success">
+                                <button (click)="onRestoreProduct()" [disabled]="restoreLoadingFlag" class="btn link-success">
                                     <span *ngIf="!restoreLoadingFlag">
-                                        Restore
+                                        Restore Product
                                     </span>
                                     <span *ngIf="restoreLoadingFlag">
                                         <div class="spinner-border spinner-border-sm" role="status">
