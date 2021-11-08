@@ -44,4 +44,10 @@ export class ProductService {
     return this.httpClient.delete<Product>(url);
   }
 
+  // updates the product
+  updateProduct(product: Product): Observable<Product> {
+    let url = environment.baseUrl + "api/product";
+    return this.httpClient.put<Product>(url, product);
+  }
+
 }

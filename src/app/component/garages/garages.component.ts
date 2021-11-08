@@ -19,6 +19,8 @@ export class GaragesComponent implements OnInit {
   areas: Array<any> = [];
   newAddedGarage: any = "";
 
+  garageShowTableName: string = "active";
+
   constructor(private garageService: GarageService, private router: Router) {
     
     if (this.garageService.garageList.length == 0) {

@@ -77,11 +77,11 @@
                         </tr>
                         <tr>
                             <td class="p-3">Added on</td>
-                            <td class="p-3"> {{ garageDetails.createdAt }}</td>
+                            <td class="p-3"> {{ garageDetails.createdAt | date:"medium" }}</td>
                         </tr>
                         <tr>
                             <td class="p-3">Last updated</td>
-                            <td class="p-3"> {{ garageDetails.updatedAt }}</td>
+                            <td class="p-3"> {{ garageDetails.updatedAt |  date:"medium"}}</td>
                         </tr>
                         <tr>
                             <td class="p-3">Status</td>

@@ -106,7 +106,18 @@
                         </tr>
                         <tr *ngIf="productDetails.active == false">
                             <td class="p-3">Restore Product</td>
-                            <td class="p-3 text-success"><a href="#" class="link-success">Restore</a></td>
+                            <td class="p-3 text-success">
+                                <button (click)="onRestoreProduct()" class="btn link-success">
+                                    <span *ngIf="!restoreLoadingFlag">
+                                        Restore
+                                    </span>
+                                    <span *ngIf="restoreLoadingFlag">
+                                        <div class="spinner-border spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </span>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

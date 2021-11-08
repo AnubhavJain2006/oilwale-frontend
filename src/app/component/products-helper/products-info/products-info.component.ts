@@ -13,8 +13,10 @@ export class ProductsInfoComponent implements OnInit {
   id !: string;
   productDetails!: Product;
   dataLoadingStatus:boolean = true;
+  newProduct!: Product;   // for update - restore
 
   deleteLoadingFlag: boolean = false;
+  restoreLoadingFlag: boolean = false;
 
   constructor(private router: ActivatedRoute ,private productService: ProductService) { }
 
@@ -32,6 +34,17 @@ export class ProductsInfoComponent implements OnInit {
       this.productDetails.active = false;
       this.deleteLoadingFlag = false;
     })
+  }
+
+  onRestoreProduct() {
+    this.newProduct = this.productDetails;
+    this.newProduct.active = !this.newProduct.active;
+    this.restoreLoadingFlag = true;
+    this.productService.updateProduct(this.newProduct).subscribe(data => {
+      this.restoreLoadingFlag = false;
+      this.productDetails = data;
+    })
+
   }
 
 }

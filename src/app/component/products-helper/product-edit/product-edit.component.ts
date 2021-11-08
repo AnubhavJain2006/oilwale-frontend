@@ -14,6 +14,12 @@ export class ProductEditComponent implements OnInit {
   productDetails!: Product;
   dataLoadingStatus:boolean = true;
 
+  productDisplayName: string = "";
+
+  // flags
+  updateProductLoadingFlag: boolean = false;
+  updateProductSuccessFlag: boolean = false;
+  updateProductErrorFlag: boolean = false;
 
   constructor(private router: ActivatedRoute ,private productService: ProductService) { }
 
@@ -22,6 +28,21 @@ export class ProductEditComponent implements OnInit {
     this.productService.getProductById(this.id).subscribe((details) => {
       this.productDetails = details;
       this.dataLoadingStatus = false;
+      this.productDisplayName = this.productDetails.productName;
+    })
+  }
+
+  updateProduct(): void {
+    this.updateProductLoadingFlag = true;
+    this.productService.updateProduct(this.productDetails).subscribe(data => {
+      this.updateProductLoadingFlag = false;
+      this.updateProductSuccessFlag = true;
+      this.productDetails = data;
+
+      this.productDisplayName = this.productDetails.productName;
+      setTimeout(() => {
+        this.updateProductSuccessFlag = false;
+      }, 5000);
     })
   }
 
