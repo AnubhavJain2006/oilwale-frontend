@@ -37,17 +37,17 @@ export class DeletedGaragesComponent implements OnInit, OnDestroy, AfterViewInit
         {
           // title: 'Garage Name',
           className: 'align-middle',
-          width: '100px',
+          // width: '100px',
           data: 'garageName',
         },
         {
           // title: 'Owner Name',
-          width: '20%',
+          // width: '20%',
           data: 'name'
         },
         {
           // title: 'Phone number',
-          width: '20%',
+          // width: '20%',
           data: 'phoneNumber'
         },
         {
@@ -56,16 +56,25 @@ export class DeletedGaragesComponent implements OnInit, OnDestroy, AfterViewInit
           data: 'alternateNumber'
         },
         {
-          title: 'Area',
+          // title: 'Area',
           // width: '10%',
           data: 'area'
         },
         {
-          title: 'Referral Code',
+          // title: 'Referral Code',
           // width: '500px',
           data: 'referralCode'
         }
-      ]
+      ],
+
+      rowCallback:(row: Node, data: any[] | Object, index: number) => {
+        const self = this;
+        $('td', row).off('click');
+        $('td', row).on('click', () => {
+          self.openInfo(data);
+        });
+        return row;
+      }, 
     }
   }
 
@@ -79,7 +88,7 @@ export class DeletedGaragesComponent implements OnInit, OnDestroy, AfterViewInit
 
   openInfo(info: any) {
     console.log("info" + info._id);
-    // this.router.navigate(['/vehicles/'+info._id]);
+    this.router.navigate(['/garages/'+info.garageId]);
   }
 
   rerender():void {

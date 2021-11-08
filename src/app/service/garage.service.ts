@@ -37,4 +37,8 @@ export class GarageService {
   getGarageById(id: string): Observable<Garage> {
     return this.httpClient.get<Garage>(environment.baseUrl + 'api/garage/' + id);
   }
+
+  deleteGarageById(id: string): Observable<Garage> {
+    return this.httpClient.delete<Garage>(environment.baseUrl + 'api/garage/' + id);
+  }
 }

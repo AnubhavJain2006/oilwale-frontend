@@ -1,6 +1,3 @@
-import { Scheme } from './../../../interface/scheme';
-import { SchemeService } from './../../../service/scheme.service';
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SchemeService } from 'src/app/service/scheme.service';

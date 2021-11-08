@@ -20,27 +20,27 @@ export class ProductService {
   }
 
   addProduct(value: Product): Observable<any> {
-    return this.httpClient.post(environment.baseUrl + "api/addProduct", value).pipe(tap(() => {
+    return this.httpClient.post(environment.baseUrl + "api/product", value).pipe(tap(() => {
       this._refreshNeeded.next();
     }));
   }
 
 
   loadAllProducts(): Promise<any> {
-    return this.httpClient.get(environment.baseUrl + "api/getAllProduct").toPromise();
+    return this.httpClient.get(environment.baseUrl + "api/products").toPromise();
   }
 
   getAllProducts(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(environment.baseUrl + "api/getAllProduct");
+    return this.httpClient.get<Product[]>(environment.baseUrl + "api/products");
   }
 
   getProductById(id: string): Observable<Product> {
-    return this.httpClient.get<Product>(environment.baseUrl+ "api/getProductById/" + id);
+    return this.httpClient.get<Product>(environment.baseUrl+ "api/product/" + id);
   }
 
   // deactivates a product
   deleteProductById(id: string): Observable<Product> {
-    let url = environment.baseUrl + "api/deleteProduct/" + id;
+    let url = environment.baseUrl + "api/product/" + id;
     return this.httpClient.delete<Product>(url);
   }
 

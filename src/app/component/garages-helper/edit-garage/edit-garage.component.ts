@@ -5,17 +5,14 @@ import { GarageService } from 'src/app/service/garage.service';
 import { Garage } from 'src/app/interface/garage';
 
 @Component({
-  selector: 'app-garage-info',
-  templateUrl: './garage-info.component.html',
-  styleUrls: ['./garage-info.component.css']
+  selector: 'app-edit-garage',
+  templateUrl: './edit-garage.component.html',
+  styleUrls: ['./edit-garage.component.css']
 })
-export class GarageInfoComponent implements OnInit {
+export class EditGarageComponent implements OnInit {
   id!: string;
   garageDetails!:Garage;
   dataLoadingStatus:boolean = true;
-
-  // flags
-  deleteLoadingFlag: boolean = false;
 
   constructor(private router: ActivatedRoute, private garageService: GarageService) { }
 
@@ -24,14 +21,6 @@ export class GarageInfoComponent implements OnInit {
     this.garageService.getGarageById(this.id).subscribe(data => {
       this.garageDetails = data;
       this.dataLoadingStatus = false;
-    })
-  }
-
-  deactivateAccount(id: string) {
-    this.deleteLoadingFlag = true;
-    this.garageService.deleteGarageById(id).subscribe(data => {
-      this.garageDetails = data;
-      this.deleteLoadingFlag = false;
     })
   }
 

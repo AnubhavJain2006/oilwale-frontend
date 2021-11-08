@@ -1,0 +1,94 @@
+<p class="lead" *ngIf="dataLoadingStatus">Fetching data ...</p>
+<div *ngIf="!dataLoadingStatus">
+    <div class="d-flex flex-wrap py-3">
+        <h3 class="h3">
+            <a routerLink="/garages" class="text-decoration-none text-dark">
+                <i class="fas fa-wrench"></i> Garages 
+            </a>
+            <a routerLink="/garages/{{ garageDetails.garageId }}" class="text-decoration-none text-dark">
+                <i class="fas fa-angle-right"></i> {{ garageDetails.garageName }}
+            </a>
+            <i class="fas fa-angle-right"></i> Edit
+        </h3>        
+    </div>
+
+    <div class="py-2 text-center">
+        <p class=" lead fw-normal"> Editing - <span class="font-monospace"> {{ garageDetails.garageName }}</span></p>
+    </div>
+
+    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+        <form>
+            <div class="row mb-2">
+                <label for="id" class="col-form-label col-sm-2">Garage Id</label>
+                <div class="col-sm-10">
+                    <input type="text" disabled readonly value="{{ garageDetails.garageId }}" name="id" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="ownerName" class="col-form-label col-sm-2">Owner Name</label>
+                <div class="col-sm-10">
+                    <input type="text" name="ownerName" [(ngModel)]="garageDetails.name" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="garageName" class="col-form-label col-sm-2">Garage Name</label>
+                <div class="col-sm-10">
+                    <input type="text" name="garageName" [(ngModel)]="garageDetails.garageName" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="phoneNumber" class="col-form-label col-sm-2">Phone number</label>
+                <div class="col-sm-10">
+                    <input type="text" name="phoneNumber" [(ngModel)]="garageDetails.phoneNumber" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="alternatePhone" class="col-form-label col-sm-2">Alternate Phone</label>
+                <div class="col-sm-10">
+                    <input type="text" name="alternatePhone" [(ngModel)]="garageDetails.alternateNumber" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="gstNumber" class="col-form-label col-sm-2">GST Number</label>
+                <div class="col-sm-10">
+                    <input type="text" name="gstNumber" [(ngModel)]="garageDetails.gstNumber" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="address" class="col-form-label col-sm-2">Address</label>
+                <div class="col-sm-10">
+                    <textarea name="address" id="address" [(ngModel)]="garageDetails.address" rows="5" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="area" class="col-form-label col-sm-2">Area</label>
+                <div class="col-sm-10">
+                    <input type="text" name="area"  class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="pincode" class="col-form-label col-sm-2">Pincode</label>
+                <div class="col-sm-10">
+                    <input type="text" name="pincode" [(ngModel)]="garageDetails.pincode" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="" class="col-form-label col-sm-2">Status</label>
+                <div class="col-sm-10">
+                    <select name="status" id="status" class="form-select" [(ngModel)]="garageDetails.active">
+                        <option value=true [selected]="garageDetails.active == true">Active</option>
+                        <option value="false" [selected]="garageDetails.active == false">Disabled</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-2">
+                <button class="btn background-orange text-white">Update {{ garageDetails.garageName }}</button>
+            </div>
+
+        </form>
+    </div>
+
+
+
+</div>

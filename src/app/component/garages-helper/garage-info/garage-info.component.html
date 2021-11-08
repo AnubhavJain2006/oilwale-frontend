@@ -1,7 +1,11 @@
 <p class="lead" *ngIf="dataLoadingStatus">Loading ...</p>
 <div *ngIf="!dataLoadingStatus">
     <div class="d-flex flex-wrap py-3">
-        <h3 class="h3"><i class="fas fa-wrench"></i> Garages <i class="fas fa-angle-right"></i> {{ garageDetails.garageName }}</h3>
+        <h3 class="h3">
+            <a routerLink="/garages" class="text-decoration-none text-dark">
+                <i class="fas fa-wrench"></i> Garages 
+            </a>
+            <i class="fas fa-angle-right"></i> {{ garageDetails.garageName }}</h3>
     </div>
 
     <div class="w-100 text-center py-2">
@@ -29,7 +33,10 @@
                         </tr>
                         <tr>
                             <td class="p-3">Alternate phone </td>
-                            <td class="p-3">{{ garageDetails.alternateNumber }}</td>
+                            <td class="p-3">
+                                {{ garageDetails.alternateNumber }}
+                                <span *ngIf="!garageDetails.alternateNumber"> - </span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="p-3">GST</td>
@@ -96,19 +103,30 @@
                         </tr>
                         <tr>
                             <td class="p-3">Update garage info</td>
-                            <td class="p-3"> <a href="#" class="link-primary">Update</a></td>
+                            <td class="p-3"> <a routerLink="/garages/{{ garageDetails.garageId }}/edit" class="btn link-primary">Update</a></td>
                         </tr>
                         <tr *ngIf="garageDetails.active">
                             <td class="p-3">Deactivate Account</td>
-                            <td class="p-3"><a href="#" class="link-warning">Deactivate Garage Account</a></td>
+                            <td class="p-3">
+                                <button (click)="deactivateAccount(garageDetails.garageId)" [disabled]="deleteLoadingFlag" class="btn link-danger">
+                                    <span *ngIf="!deleteLoadingFlag">
+                                        Deactivate Garage Account
+                                    </span>
+                                    <span *ngIf="deleteLoadingFlag">
+                                        <div class="spinner-border spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                          </div>
+                                    </span>
+                                </button>
+                            </td>
                         </tr>
                         <tr *ngIf="!garageDetails.active">
                             <td class="p-3">Enable Account</td>
                             <td class="p-3"><a href="#" class="link-success">Enable Garage Account</a></td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="!garageDetails.active">
                             <td class="p-3">Delete Account</td>
-                            <td class="p-3"><a href="#" class="link-danger">Delete Account</a></td>
+                            <td class="p-3"><a href="#" class="link-danger">Permanently Delete Account</a></td>
                         </tr>
                     </tbody>
                 </table>

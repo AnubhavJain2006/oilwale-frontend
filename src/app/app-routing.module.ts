@@ -19,6 +19,7 @@ import { CustomerInfoComponent } from './component/customers-helper/customer-inf
 
 import { GaragesComponent } from './component/garages/garages.component';
 import { GarageInfoComponent } from './component/garages-helper/garage-info/garage-info.component';
+import { EditGarageComponent } from './component/garages-helper/edit-garage/edit-garage.component';
 
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HeaderComponent } from './component/header/header.component';
@@ -33,7 +34,7 @@ const routes: Routes = [
 
   { path: "garages", component: GaragesComponent, canActivate: [AuthGuard] },
   { path: "garages/:id", component: GarageInfoComponent, canActivate: [AuthGuard] },
-
+  { path: "garages/:id/edit", component: EditGarageComponent, canActivate: [AuthGuard] },
 
   { path: "customers", component: CustomersComponent, canActivate: [AuthGuard] },
   { path: "customers/:id", component: CustomerInfoComponent, canActivate: [AuthGuard] },

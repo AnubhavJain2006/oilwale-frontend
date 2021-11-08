@@ -14,10 +14,10 @@ export class CustomerService {
   constructor(private httpClient: HttpClient) { }
 
   getAllCustomer(): Promise<any> {
-    return this.httpClient.get(environment.baseUrl + "api/getCustomers").toPromise();
+    return this.httpClient.get(environment.baseUrl + "api/customers").toPromise();
   }
 
   getCustomerById(id: string): Observable<Customer> {
-    return this.httpClient.get<Customer>(environment.baseUrl + 'api/getCustomerById/' + id );
+    return this.httpClient.get<Customer>(environment.baseUrl + 'api/customer/' + id );
   }
 }
