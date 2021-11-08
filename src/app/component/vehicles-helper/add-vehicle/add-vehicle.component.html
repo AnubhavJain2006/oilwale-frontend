@@ -10,7 +10,11 @@
     <div *ngIf="addVehicleSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
       <div id="products_table_msg_body"><strong> <i class="fas fa-check-circle"></i> Success!</strong> Vehicle added succesfully!</div>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
+    </div>
+    <div *ngIf="addVehicleFailure" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <div id="products_table_msg_body"><strong> <i class="fas fa-exclaimation"></i> Error!</strong> Some erroroccured!</div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <form class="p-3" (ngSubmit)="onSubmit()">
       <div *ngIf="addVehicleSuccess == true">
         <p>Vehicle added successfully!</p>

@@ -31,6 +31,8 @@ import { SchemeInfoComponent } from './component/schemes-helper/scheme-info/sche
 import { AccountInfoComponent } from './component/accounts-helper/account-info/account-info.component';
 import { VehicleEditComponent } from './component/vehicles-helper/vehicle-edit/vehicle-edit.component';
 import { ProductEditComponent } from './component/products-helper/product-edit/product-edit.component';
+import { DeletedGaragesComponent } from './component/garages-helper/deleted-garages/deleted-garages.component';
+import { ActiveGaragesComponent } from './component/garages-helper/active-garages/active-garages.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { ProductEditComponent } from './component/products-helper/product-edit/p
     AccountInfoComponent,
     VehicleEditComponent,
     ProductEditComponent,
+    DeletedGaragesComponent,
+    ActiveGaragesComponent,
 
 
   ],

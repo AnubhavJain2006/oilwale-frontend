@@ -1,17 +1,31 @@
-import { Component, OnInit, AfterViewInit,Renderer2, Input } from '@angular/core';
-import { VehicleService } from 'src/app/service/vehicle.service';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, AfterViewInit,Renderer2, Input, OnDestroy, ViewChild } from '@angular/core';
+// import { VehicleService } from 'src/app/service/vehicle.service';
+// import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { DataTableDirective, DataTablesModule } from 'angular-datatables';
+import { Subject } from 'rxjs';
+import { VehicleInfo } from 'src/app/interface/vehicle-info';
+
 
 @Component({
   selector: 'app-all-vehicles',
   templateUrl: './all-vehicles.component.html',
   styleUrls: ['./all-vehicles.component.css']
 })
-export class AllVehiclesComponent implements OnInit {
+export class AllVehiclesComponent implements OnInit, OnDestroy, AfterViewInit {
+  @Input() allVehicles!: VehicleInfo[];
+  @Input() refreshDataFlag!: boolean;
+
+  @ViewChild(DataTableDirective, {static: false})
+  dtElement!: DataTableDirective;
+
+  // dtSource: DataTables.Api = ;
+
   dtOptions: DataTables.Settings = {}
 
-  constructor(private router:Router, private renderer: Renderer2) { }
+  dtTrigger: Subject<any> = new Subject();
+
+  constructor(private router:Router, ) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -19,7 +33,7 @@ export class AllVehiclesComponent implements OnInit {
         url: 'https://oilwale.herokuapp.com/api/getVehicles',
         dataSrc: ''
       },
-      
+      info: true,
       columns: [
         {
           title: 'Company',
@@ -72,15 +86,36 @@ export class AllVehiclesComponent implements OnInit {
             self.openInfo(data);
           });
           return row;
-        } 
-      
+        }, 
     }
   }
 
+  ngAfterViewInit(): void {
+    this.dtTrigger.next();
+  }
 
-openInfo(info: any) {
-  console.log("info" + info._id);
-  this.router.navigate(['/vehicles/'+info._id]);
-}
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
+  }
 
+  openInfo(info: any) {
+    console.log("info" + info._id);
+    this.router.navigate(['/vehicles/'+info._id]);
+  }
+
+  rerender():void {
+  this.dtElement.dtInstance.then((dtInstance: DataTables.Api)=> {
+    dtInstance.destroy()
+
+    this.dtTrigger.next();
+  })
+  }
+
+  ajaxReloadFunction() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.ajax.reload();
+    })
+  }
+
+  
 }

@@ -14,9 +14,9 @@ export class VehicleService {
 
   constructor(private httpClient:HttpClient) { }
 
-  getVehicles():Observable<Vehicle[]> {
+  getVehicles():Observable<VehicleInfo[]> {
     let url = `${environment.baseUrl}api/getVehicles`;
-    return this.httpClient.get<Vehicle[]>(url);
+    return this.httpClient.get<VehicleInfo[]>(url);
   }
 
   addVehicle(vehicle: Vehicle):Observable<Vehicle> {
@@ -27,6 +27,12 @@ export class VehicleService {
   getVehicleById(vehicleid: string): Observable<VehicleInfo> {
     let url = environment.baseUrl + "api/getVehicle/" + vehicleid;
     return this.httpClient.get<VehicleInfo>(url);
+  }
+
+  // deactivates the vehicle
+  deleteVehicleById(id: string): Observable<VehicleInfo> {
+    let url = environment.baseUrl + "api/deleteVehicle/" + id; 
+    return this.httpClient.delete<VehicleInfo>(url);
   }
 
 } 

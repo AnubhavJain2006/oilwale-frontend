@@ -38,4 +38,10 @@ export class ProductService {
     return this.httpClient.get<Product>(environment.baseUrl+ "api/getProductById/" + id);
   }
 
+  // deactivates a product
+  deleteProductById(id: string): Observable<Product> {
+    let url = environment.baseUrl + "api/deleteProduct/" + id;
+    return this.httpClient.delete<Product>(url);
+  }
+
 }

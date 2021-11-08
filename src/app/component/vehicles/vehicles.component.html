@@ -29,7 +29,9 @@
 <div class="tab-content" id="myTabContent">
     <!-- all Vehicle -->
     <div class="tab-pane show active" id="all_vehicles" role="tabpanel" aria-labelledby="all_vehicles-tab">
-        <app-all-vehicles></app-all-vehicles>
+        <app-all-vehicles
+            [allVehicles]="allVehicles"
+        ></app-all-vehicles>
     </div>
     <!-- all Vehicle ends-->
 
@@ -37,12 +39,12 @@
     <div class="tab-pane fade" id="add_vehicle" role="tabpanel" aria-labelledby="add_vehicle-tab">
         <app-add-vehicle 
             (onAddVehicle)="addVehicle($event)"
-            [vehicleCompanies]="vehicleCompanies" 
-            [suggestedProducts]="allSuggestionProducts"
+            [vehicleCompanies]="allVehicleCompanies" 
+            [suggestedProducts]="allProducts"
             [addVehicleSuccess] = "addVehicleSuccess"
             [addVehicleLoading] = "addVehicleLoading"
-        >
-        </app-add-vehicle>
+            [addVehicleFailure] = "addVehicleFaliure"
+        ></app-add-vehicle>
     </div>
     <!-- add Vehicle -->
 

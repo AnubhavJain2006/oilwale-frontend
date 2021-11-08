@@ -27,12 +27,12 @@ export class GarageService {
 
   }
   getAllGarages(): Promise<any> {
-    return this.httpClient.get(environment.baseUrl + "api/getAllGarages").toPromise()
+    return this.httpClient.get(environment.baseUrl + "api/garage/active").toPromise()
   }
 
   constructor(private httpClient: HttpClient) { }
 
   getGarageById(id: string): Observable<Garage> {
-    return this.httpClient.get<Garage>(environment.baseUrl + 'api/getGarageById/' + id);
+    return this.httpClient.get<Garage>(environment.baseUrl + 'api/garage/' + id);
   }
 }

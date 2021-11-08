@@ -45,6 +45,13 @@
                 <i class="fas fa-code-branch"></i> Garage Activities
             </a>
         </li>
+        <li class="nav-item mx-1" role="presentation">
+            <a class="nav-link text-dark garage-tab" id="garage_deleted-tab" onclick="change_tab('garage-tab',3)"
+                data-bs-toggle="tab" data-bs-target="#garage_deleted" type="button" role="tab"
+                aria-controls="garage_deleted" aria-selected="false">
+                <i class="fas fa-minus-circle"></i> Deleted Garages
+            </a>
+        </li>
     </ul>
 
     <div class="tab-content" id="myTabContent">
@@ -56,58 +63,11 @@
                 <button class="btn btn-outline-primary" (click)="reload()"><i class="fas fa-sync"></i></button>
             </div> -->
             <div class="py-3">
-                <div class="py-2 text-center">
-                    <h5 class="h5">All Garages</h5>
-                    <h3 *ngIf="garages.length==0">No Data Available</h3>
-                </div>
+                <app-active-garages
+                    [garages]="garages"
+                ></app-active-garages>
+                <app-deleted-garages></app-deleted-garages>
 
-                <div class="mx-2 mt-4 rounded">
-                    <div class="table-responsive">
-                        <table datatable *ngIf="garages.length>0"
-                            class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
-                            <thead class="background-orange text-white">
-                                <tr>
-                                    <th>
-                                        <p class="my-1">Garage Name</p>
-                                    </th>
-                                    <th>
-                                        <p class="my-1">Owner Name</p>
-                                    </th>
-                                    <th>
-                                        <p class="my-1">Phone</p>
-                                    </th>
-                                    <th>
-                                        <p class="my-1">Address</p>
-                                    </th>
-                                    <th>
-                                        <p class="my-1">Pincode</p>
-                                    </th>
-                                    <th>
-                                        <p class="my-1">Referral Code</p>
-                                    </th>
-                                    <th>
-                                        <p class="my-1">Info</p>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let garage of garages">
-                                    <td>{{garage.name}}</td>
-                                    <td>{{garage.garageName}}</td>
-                                    <td>{{garage.phoneNumber}}</td>
-                                    <td>{{garage.address}}</td>
-                                    <td>{{garage.pincode}}</td>
-                                    <td>{{garage.referralCode}}</td>
-                                    <td>
-                                        <a routerLink="/garages/{{ garage.garageId }}">
-                                            <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button> 
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
             <!-- table ends -->
         </div>
@@ -340,6 +300,12 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="garage_deleted" role="tabpanel" aria-labelledby="garage_deleted-tab">
+            <div class="m-3">
+                <app-deleted-garages></app-deleted-garages>
+
             </div>
         </div>
     </div>

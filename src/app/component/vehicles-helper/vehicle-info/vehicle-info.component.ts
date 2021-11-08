@@ -14,6 +14,8 @@ export class VehicleInfoComponent implements OnInit {
   vehicleDetails!: VehicleInfo;
   dataLoadingStatus: boolean = true;
   
+  deleteLoadingFlag: boolean = false;
+  deleteSuccessFlag: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute, private vehicleService: VehicleService) { }
 
@@ -23,6 +25,16 @@ export class VehicleInfoComponent implements OnInit {
       this.vehicleDetails = vDetails;
       this.dataLoadingStatus = false;
     });
+  }
+
+  onDeleteVehicle(id: string) {
+    this.deleteLoadingFlag = true;
+    this.vehicleService.deleteVehicleById(id).subscribe(data => {
+      console.log(data);
+      this.vehicleDetails.active = false;
+
+      this.deleteLoadingFlag = false;
+    })
   }
 
 }

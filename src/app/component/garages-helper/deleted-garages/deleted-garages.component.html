@@ -1,0 +1,24 @@
+<div class="py-2 text-center">
+    <h5>Deleted Garages</h5>
+</div>
+
+<div class="mt-4 w-100">
+    <div class="my-2">
+        <button (click)="rerender()" class="btn btn-outline-primary">Refresh</button> --> Click refresh if table seems distorted
+
+    </div>
+    <div class="table-responsive">
+        <table  datatable [dtOptions]="dtOptionsDeletedGarage" [dtTrigger]="dtTriggerDeletedGarage" class="table table-bordered table-hover text-center pt-3 mb-3">
+            <thead class="background-orange text-white">
+                <tr>
+                    <td>Garage Name</td>
+                    <td>Owner Name</td>
+                    <td>Phone</td>
+                    <td>Alternate Phone</td>
+                    <td>Area</td>
+                    <td>Info</td>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>

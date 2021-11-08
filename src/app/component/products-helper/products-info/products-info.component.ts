@@ -14,6 +14,7 @@ export class ProductsInfoComponent implements OnInit {
   productDetails!: Product;
   dataLoadingStatus:boolean = true;
 
+  deleteLoadingFlag: boolean = false;
 
   constructor(private router: ActivatedRoute ,private productService: ProductService) { }
 
@@ -22,6 +23,14 @@ export class ProductsInfoComponent implements OnInit {
     this.productService.getProductById(this.id).subscribe((details) => {
       this.productDetails = details;
       this.dataLoadingStatus = false;
+    })
+  }
+
+  onDeleteProduct(id: string) {
+    this.deleteLoadingFlag = true;
+    this.productService.deleteProductById(id).subscribe(data => {
+      this.productDetails.active = false;
+      this.deleteLoadingFlag = false;
     })
   }
 

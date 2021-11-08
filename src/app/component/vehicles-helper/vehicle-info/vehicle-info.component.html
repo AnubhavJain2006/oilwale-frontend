@@ -76,9 +76,24 @@
                             <td class="p-3">Update vehicle</td>
                             <td class="p-3"> <a routerLink="/vehicles/{{ vehicleDetails._id }}/edit"> Update vehicle info </a></td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="vehicleDetails.active == false">
+                            <td class="p-3">Restore Vehicle</td>
+                            <td class="p-3"> <button class="btn text-success">Restore</button></td>
+                        </tr>
+                        <tr *ngIf="vehicleDetails.active == true">
                             <td class="p-3">Delete Vehicle</td>
-                            <td class="p-3">Delete</td>
+                            <td class="p-3">
+                                <button (click)="onDeleteVehicle(vehicleDetails._id)" [disabled]="deleteLoadingFlag" class="btn link-danger">
+                                    <span *ngIf="!deleteLoadingFlag">
+                                        Delete
+                                    </span>
+                                    <span *ngIf="deleteLoadingFlag">
+                                        <div class="spinner-border spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                          </div>
+                                    </span>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

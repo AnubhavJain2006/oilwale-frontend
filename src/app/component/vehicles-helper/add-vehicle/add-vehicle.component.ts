@@ -12,8 +12,11 @@ import { Vehicle } from 'src/app/interface/vehicle';
 export class AddVehicleComponent implements OnInit {
   @Input() vehicleCompanies!: VehicleCompany[];
   @Input() suggestedProducts !: Product[];
+
   @Input() addVehicleSuccess !: boolean;
   @Input() addVehicleLoading !: boolean;
+  @Input() addVehicleFailure !: boolean;
+
   @Output() onAddVehicle: EventEmitter<Vehicle> = new EventEmitter();
 
   formInputCompany: string = "";
@@ -59,9 +62,7 @@ export class AddVehicleComponent implements OnInit {
       updatedAt: "",
       createdAt: ""
      }
-
     
-
      this.onAddVehicle.emit(newVehicle);
 
     //  reset the form
