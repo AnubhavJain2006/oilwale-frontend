@@ -38,13 +38,21 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="p-md-3">
+            <div class="p-3">
                 <p class="fw-bold">SCHEME DATA</p>
-                <table class="table table-hover table-bordered p-md-3">
+                <table class="table table-bordered table-hover p-md-3">
                     <tbody>
                         <tr>
-                            <td class="p-3">Scheme id</td>
-                            <td class="p-3"> {{ schemeDetails.schemeId }}</td>
+                            <td class="p-3">Scheme Id</td>
+                            <td class="p-3">{{schemeDetails.schemeId}} </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Start Date</td>
+                            <td class="p-3">{{schemeDetails.startedAt | date}}</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">End Date</td>
+                            <td class="p-3">{{schemeDetails.endedAt | date}}</td>
                         </tr>
                         <tr>
                             <td class="p-3">Status</td>

@@ -67,12 +67,12 @@ export class AdminService {
   }
 
   forgotPassword(email: string): Observable<any> {
-    return this.httpClient.post(environment.baseUrl + "api/forgotPassword", email);
+    return this.httpClient.post(environment.baseUrl + "api/authenticate/forgotPassword", email);
   }
 
 
   verifyOtp() {
-    
+
   }
   constructor(private httpClient: HttpClient) { }
 
