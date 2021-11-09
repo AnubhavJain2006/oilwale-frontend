@@ -52,35 +52,7 @@
             </div>
             <div class="mx-auto mt-4">
                 <div class="table-responsive">
-                    <table datatable id="all_products_table" *ngIf="products.length > 0"
-                        class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
-                        <thead class="background-orange text-white">
-                            <tr class="">
-                                <!-- <th>#</th> -->
-                                <th>Name</th>
-                                <th>Specification</th>
-                                <th>Grade</th>
-                                <th>Packet Size</th>
-                                <th>Availability</th>
-                                <!-- <th>Image</th> -->
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let product of products">
-                                <td>{{product.productName}}</td>
-                                <td>{{product.specification}}</td>
-                                <td>{{product.grade}}</td>
-                                <td>{{product.packingSize}}</td>
-                                <td>{{product.active}}</td>
-                                <td> 
-                                    <a routerLink="/products/{{product.productId}}">
-                                    <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <app-active-products></app-active-products>
                 </div>
             </div>
         </div>
