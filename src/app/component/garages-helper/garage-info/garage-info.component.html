@@ -42,8 +42,29 @@
                             <td class="p-3">GST</td>
                             <td class="p-3">
                                 <span *ngIf="!garageDetails.gstNumber"> - </span>
-                                <span *ngIf="garageDetails.gstNumber"> {{ garageDetails.garageName }} </span>
+                                <span *ngIf="garageDetails.gstNumber"> {{ garageDetails.gstNumber }} </span>
                                 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Referral Code</td>
+                            <td class="p-3">
+                                {{ garageDetails.referralCode }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Total customers</td>
+                            <td class="p-3">
+                                <span class="badge bg-info">{{ garageDetails.totalCustomer }}</span>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Points</td>
+                            <td class="p-3">
+                                <span class="badge bg-secondary">
+                                    {{ garageDetails.totalScore }}
+                                </span>
                             </td>
                         </tr>
                         <tr>
@@ -58,10 +79,6 @@
                             <td class="p-3">Pincode</td>
                             <td class="p-3">{{ garageDetails.pincode }}</td>
                         </tr>
-                        <tr>
-                            <td class="p-3">Referral Code</td>
-                            <td class="p-3">{{ garageDetails.referralCode }}</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -75,6 +92,7 @@
                             <td class="p-3">Garage id</td>
                             <td class="p-3"> {{ garageDetails.garageId }}</td>
                         </tr>
+                        
                         <tr>
                             <td class="p-3">Added on</td>
                             <td class="p-3"> {{ garageDetails.createdAt | date:"medium" }}</td>
@@ -99,7 +117,11 @@
                     <tbody>
                         <tr>
                             <td class="p-3">Add image</td>
-                            <td class="p-3"><a href="#" class="link-success">Add</a></td>
+                            <td class="p-3"><a href="#" class="btn link-success">Add</a></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Reset Points</td>
+                            <td class="p-3"><a href="#" class="btn link-dark">Reset Garage Points</a></td>
                         </tr>
                         <tr>
                             <td class="p-3">Update garage info</td>
@@ -113,24 +135,62 @@
                                         Deactivate Garage Account
                                     </span>
                                     <span *ngIf="deleteLoadingFlag">
-                                        <div class="spinner-border spinner-border-sm" role="status">
-                                            <span class="visually-hidden">Loading...</span>
-                                          </div>
+                                        <div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div>
                                     </span>
                                 </button>
                             </td>
                         </tr>
                         <tr *ngIf="!garageDetails.active">
                             <td class="p-3">Enable Account</td>
-                            <td class="p-3"><a href="#" class="link-success">Enable Garage Account</a></td>
+                            <td class="p-3">
+                                <button (click)="restoreGarageAccount()" [disabled]="accountRestoreLoadingFlag" class="btn link-success">
+                                    <span *ngIf="!accountRestoreLoadingFlag">Enable Garage Account</span>
+                                    
+                                    <span *ngIf="accountRestoreLoadingFlag"> 
+                                        <div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div> 
+                                    </span>
+                                </button>
+                            </td>
                         </tr>
                         <tr *ngIf="!garageDetails.active">
                             <td class="p-3">Delete Account</td>
-                            <td class="p-3"><a href="#" class="link-danger">Permanently Delete Account</a></td>
+                            <td class="p-3"><a href="#" class="btn link-danger">Permanently Delete Account</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="col-lg-6" *ngIf="garageCustomerList.length > 0" >
+            <div class="p-md-3">
+                <p class="fw-bold">GARAGE CUSTOMERS ({{ garageCustomerList.length }})</p>
+                <ul>
+                    <li *ngFor="let customer of garageCustomerList">
+                        <a routerLink="/customers/{{ customer.customerId }}" class="text-decoration-none text-dark">
+                            {{ customer.customerName }} <sup> <i class="fas fa-link"></i></sup>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="p-3">
+        <p class="fw-bold">GARAGES IN SAME AREA ({{ sameAreaGarages.length }})</p>
+
+        <div class="vstack gap-3 px-md-2">
+            <div *ngFor="let garage of sameAreaGarages">
+                <div class="border-left-orange">
+                    <div class="p-2">
+                        <p class="lead fw-normal pb-0 mb-0">
+                            <a class="text-decoration-none text-dark" routerLink="/garages/{{ garage.garageId }}" target="_blank">
+                                {{ garage.garageName }} - {{ garage.area }} <sup> <i *ngIf="garageDetails.garageId != garage.garageId" class="fas fa-external-link-alt"></i></sup>
+                            </a>
+                        </p>
+                        <small class="text-secondary">Phone - {{ garage.phoneNumber }}</small> <br>
+                        <small class="text-secondary">Total customers - {{ garage.totalCustomer }}</small> <br>
+                        <small class="text-secondary">Points - {{ garage.totalScore }}</small>
+                    </div>
+                </div>
+            </div> 
         </div>
     </div>
 </div>

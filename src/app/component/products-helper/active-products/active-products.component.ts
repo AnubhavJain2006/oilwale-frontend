@@ -37,6 +37,14 @@ export class ActiveProductsComponent implements OnInit {
         {
           title: 'Packing Size',
           data: 'packingSize'
+        },
+        {
+          title: 'Status',
+          data: 'active',
+          render: (data) => {
+            if(data == true) return "<span class='badge bg-success'>Active</span>";
+            else return "<span class='badge bg-danger'>Deleted</span>";
+          }
         }
       ],
 

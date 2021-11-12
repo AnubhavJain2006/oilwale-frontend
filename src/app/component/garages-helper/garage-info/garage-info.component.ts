@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GarageService } from 'src/app/service/garage.service';
 
 import { Garage } from 'src/app/interface/garage';
+import { Customer } from 'src/app/interface/customer';
 
 @Component({
   selector: 'app-garage-info',
@@ -16,6 +17,11 @@ export class GarageInfoComponent implements OnInit {
 
   // flags
   deleteLoadingFlag: boolean = false;
+  accountRestoreLoadingFlag: boolean = false;
+
+  // other info
+  garageCustomerList:Customer[] = [];
+  sameAreaGarages:Garage[] = [];
 
   constructor(private router: ActivatedRoute, private garageService: GarageService) { }
 
@@ -24,6 +30,8 @@ export class GarageInfoComponent implements OnInit {
     this.garageService.getGarageById(this.id).subscribe(data => {
       this.garageDetails = data;
       this.dataLoadingStatus = false;
+      this.getGarageCustomers();
+      this.getSameAreaGarage();
     })
   }
 
@@ -32,6 +40,26 @@ export class GarageInfoComponent implements OnInit {
     this.garageService.deleteGarageById(id).subscribe(data => {
       this.garageDetails = data;
       this.deleteLoadingFlag = false;
+    })
+  }
+
+  restoreGarageAccount() {
+    this.accountRestoreLoadingFlag = true;
+    this.garageService.restoreGarageAccount(this.garageDetails).subscribe(data => {
+      this.garageDetails = data;
+      this.accountRestoreLoadingFlag = false;
+    });
+  }
+
+  getGarageCustomers():void {
+    this.garageService.getGarageCustomers(this.garageDetails.garageId).subscribe(data => {
+      this.garageCustomerList = data;
+    })
+  }
+
+  getSameAreaGarage(): void {
+    this.garageService.getGarageInSameArea(this.garageDetails.pincode.toString()).subscribe(data => {
+      this.sameAreaGarages = data;
     })
   }
 

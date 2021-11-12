@@ -111,7 +111,7 @@
                         <div class="row mb-3">
                             <label for="Garage_Name" class="col-sm-3 col-form-label">Garage Name</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" formControlName="garageName" name="name"
+                                <input type="text" class="form-control" formControlName="garageName" name="garageName"
                                     id="Garage_Name" placeholder="Garage name" />
                                 <div *ngIf="garage.get('garageName')?.touched">
                                     <span class="error" *ngIf="garage.get('garageName')?.hasError('required')">This

@@ -4,13 +4,15 @@ export interface Garage {
     garageName: string;
     phoneNumber: string;
     alternateNumber: string;
-    gstNumber: number;
+    gstNumber: string;
     address: string;
     pincode: number;
     area: string;
     image: string;
     referralCode: string;
     // isActive: boolean;
+    totalCustomer: number,
+    totalScore: number,
     createdAt: string;
     updatedAt: string;
     active: boolean;
