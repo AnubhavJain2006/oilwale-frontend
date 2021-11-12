@@ -17,7 +17,7 @@ export class LoginFormComponent implements OnInit {
 
   constructor(private adminService: AdminService, private loginComp: LoginComponent, private router: Router) {
     this.loginText = new FormGroup({
-      email: new FormControl('', [Validators.email, Validators.required]),
+      id: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', Validators.required)
     });
 
@@ -28,6 +28,9 @@ export class LoginFormComponent implements OnInit {
 
   login() {
     console.log(this.loginText.value)
+    this.loginText.value['role'] = 'admin'
+    console.log("After add " + this.loginText.value);
+
     console.log()
     this.adminService.authenticate(this.loginText.value).subscribe(resp => {
       console.log(resp + "Service")
