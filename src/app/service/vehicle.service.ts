@@ -35,5 +35,9 @@ export class VehicleService {
     return this.httpClient.delete<VehicleInfo>(url);
   }
 
+  updateVehicle(id:string, updatedVehicle:Vehicle): Observable<Vehicle> {
+    return this.httpClient.put<Vehicle>(environment.baseUrl + 'api/updateVehicle/'+id, updatedVehicle);
+  }
+
 } 
 
