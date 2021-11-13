@@ -1,15 +1,5 @@
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2"> <i class="fas fa-home"></i> Dashboard</h1>
-  <div class="btn-toolbar mb-2 mb-md-0">
-    <div class="btn-group me-2">
-      <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-    </div>
-    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-      <span data-feather="calendar"></span>
-      This week
-    </button>
-  </div>
+<div class="d-flex flex-wrap flex-md-nowrap pt-3">
+  <h3 class="h3"> <i class="fas fa-home"></i> Dashboard</h3>
 </div>
 
 
@@ -20,7 +10,7 @@
     <div class="p-1 m-2 border bg-white rounded  border-bottom-orange">
       <div class="d-flex align-items-center">
         <div class="p-2 ">
-          <span class="h1 text-center">159</span>
+          <span class="h1 text-center">{{ dashBoardStats.numberOfActiveGarages + dashBoardStats.numberOfDeactiveGarages }}</span>
         </div>
         <div class="p-2">
           <div class="text-center">
@@ -33,7 +23,7 @@
     <div class="p-1 m-2 border bg-white rounded border-bottom-orange">
       <div class="d-flex align-items-center">
         <div class="p-2 ">
-          <span class="h1 text-center">20,714</span>
+          <span class="h1 text-center">{{ dashBoardStats.numberOfCustomers }}</span>
         </div>
         <div class="p-2">
           <div class="text-center">
@@ -46,12 +36,12 @@
     <div class="p-1 m-2 border bg-white rounded border-bottom-orange">
       <div class="d-flex align-items-center">
         <div class="p-2 ">
-          <span class="h1 text-center">57,20,714</span>
+          <span class="h1 text-center">{{ dashBoardStats.numberOfActiveScheme + dashBoardStats.numberOfConcludeScheme + dashBoardStats.numberOfUpComingScheme}}</span>
         </div>
         <div class="p-2">
           <div class="text-center">
             <i class="fas fa-road fa-2x"></i> <br>
-            Total KM Tracked
+            Total Schemes Organised
           </div>
         </div>
       </div>

@@ -1,18 +1,3 @@
-function open_company_modal() {
-  $("#exampleModalLabel").html(`Add new comapny`);
-  $("#exampleModalBody").html(`
-        <div id="addCompanyResponse"></div>
-        <p>Provide company name you want to add:</p>
-        <input type="text" class="form-control mt-2" placeholder="New company name"  name="vehicleCompany" id="addVehicleCompany">
-        <div id="addCompanyValid" class="error"></div>
-        <br />
-    `);
-  $("#exampleModalFooter").html(`
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn background-orange text-white" id="addCompanySubmitBtn" onclick="submitAddCompany()">Add new Company</button>
-    `);
-}
-
 function submitAddCompany() {
   var vehicleCompany = $("#addVehicleCompany").val();
 
