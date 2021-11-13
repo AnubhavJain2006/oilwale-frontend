@@ -40,6 +40,7 @@ export class GarageInfoComponent implements OnInit {
     this.garageService.deleteGarageById(id).subscribe(data => {
       this.garageDetails = data;
       this.deleteLoadingFlag = false;
+      this.getSameAreaGarage();
     })
   }
 
@@ -48,6 +49,7 @@ export class GarageInfoComponent implements OnInit {
     this.garageService.restoreGarageAccount(this.garageDetails).subscribe(data => {
       this.garageDetails = data;
       this.accountRestoreLoadingFlag = false;
+      this.getSameAreaGarage();
     });
   }
 

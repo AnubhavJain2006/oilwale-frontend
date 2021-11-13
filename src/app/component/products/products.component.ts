@@ -19,7 +19,8 @@ export class ProductsComponent implements OnInit {
       specification: new FormControl('', Validators.required),
       grade: new FormControl('', Validators.required),
       packingSize: new FormControl('', Validators.required),
-      productImage: new FormControl('')
+      productImage: new FormControl(''),
+      packingSizeDimension: new FormControl('mL')
     })
     console.log("ProductList size" + this.productService.productList.length);
     if (this.productService.productList.length == 0) {
@@ -39,8 +40,15 @@ export class ProductsComponent implements OnInit {
 
   addProduct() {
     console.log(this.product.value);
+    this.product.value.packingSize = this.product.value.packingSize + " " + this.product.value.packingSizeDimension;
+    
+    
+    // setValue({
+    //   packingSize: `${this.product.value.packingSize} ${this.product.value.packingSizeDimension}`,
+    // })
     this.productService.addProduct(this.product.value).subscribe(resp => {
       console.log(resp);
+      // this.product.setValue
       this.newAddedProduct = resp;
       this.product.reset();
     }, err => {

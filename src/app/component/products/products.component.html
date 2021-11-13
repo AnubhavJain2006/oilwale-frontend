@@ -110,9 +110,16 @@
                     </div>
                     <div class="row mb-3">
                         <label for="Quantity" class="col-sm-2 col-form-label">Packet Size</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="packingSize" class="form-control" formControlName="packingSize"
-                                placeholder="10 ltr, 5 ltr, etc..." id="packingSize" />
+                        <div class="col-sm-10 ">
+                            <div class="input-group">
+
+                                <input type="text" name="packingSize" class="form-control" formControlName="packingSize"
+                                placeholder="ex - 5, 10, 15, etc" id="packingSize" />
+                                <select name="packSize" id="packSize" class="form-select" formControlName="packingSizeDimension">
+                                    <option value="mL">mL</option>
+                                    <option value="L">L</option>
+                                </select>
+                            </div>
                             <span class="error"
                                 *ngIf="product.get('packingSize')?.hasError('required') && product.get('packingSize')?.touched">
                                 This field is required.</span>
