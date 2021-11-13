@@ -15,8 +15,53 @@
         </h3>
     </div>
 
-    <div class="row my-3">
-        Jaldi hi implement kar duga :) 
+    <div class="py-2 text-center">
+        <p class="lead fw-normal">Editing <span class="font-monospace">{{ displayName | uppercase }}</span></p>
+    </div>
+
+    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+        <form>
+            <div class="row mb-3">
+                <label for="vehicleCompany" class="col-sm-2 col-form-label">Company</label>
+                <div class="col-sm-10">
+                    <select name="vehicleCompany" id="vehicleCompany" class="form-select" [(ngModel)]="vehicleUpdateObject.vehicleCompanyId">
+                        <option *ngFor="let company of companyList" value="{{ company.vehicleCompanyId}}" [selected]="company.vehicleCompanyId == vehicleDetails.vehicleCompanyId">{{company.vehicleCompany}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="model" class="col-sm-2 col-form-label">Model</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="model" [(ngModel)]="vehicleUpdateObject.vehicleModel">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="suggested" class="col-sm-2 col-form-label">Suggested product(s)</label>
+                <div class="col-sm-10">
+                    <div *ngFor="let product of productsList" class="form-check">
+                        <div class="d-flex" >
+                            <input type="checkbox" name="{{ product.productId }}" id="{{ product.productId }}" [checked]="checkIfProductSuggested(product.productId)" (click)="addSuggesstedProduct(product.productId)" class="form-check mx-2">
+                            <label for="{{ product.productId }}">{{product.productName }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="d-flex justify-content-end">
+                    <button class="btn background-orange text-white" (click)="onUpdateVehicle()">
+                       
+                        <span *ngIf="!updateVehicleLoading">
+                            Update {{ displayName }}
+                        </span>
+                        <span *ngIf="updateVehicleLoading">
+                            <div class="spinner-border spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 
 </div>

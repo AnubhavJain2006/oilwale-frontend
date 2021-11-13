@@ -177,18 +177,21 @@
         <p class="fw-bold">GARAGES IN SAME AREA ({{ sameAreaGarages.length }})</p>
 
         <div class="vstack gap-3 px-md-2">
-            <div *ngFor="let garage of sameAreaGarages">
-                <div class="border-left-orange">
-                    <div class="p-2">
-                        <p class="lead fw-normal pb-0 mb-0">
-                            <a class="text-decoration-none text-dark" routerLink="/garages/{{ garage.garageId }}" target="_blank">
-                                {{ garage.garageName }} - {{ garage.area }} <sup> <i *ngIf="garageDetails.garageId != garage.garageId" class="fas fa-external-link-alt"></i></sup>
-                            </a>
-                        </p>
-                        <p *ngIf="garage.active == false" class="badge bg-danger">Deactivated </p> 
-                        <p class="p-0 m-0 text-secondary">Phone - {{ garage.phoneNumber }}</p>
-                        <p class="p-0 m-0 text-secondary">Total customers - {{ garage.totalCustomer }}</p>
-                        <p class="p-0 m-0 text-secondary">Points - {{ garage.totalScore }}</p> 
+            <div class="row">
+
+                <div *ngFor="let garage of sameAreaGarages" class="m-2 col-lg-4 col-md-6 col-sm-12">
+                    <div class="border-left-orange">
+                        <div class="p-2">
+                            <p class="lead fw-normal pb-0 mb-0">
+                                <a class="text-decoration-none text-dark" routerLink="/garages/{{ garage.garageId }}" target="_blank">
+                                    {{ garage.garageName }} - {{ garage.area }} <sup> <i *ngIf="garageDetails.garageId != garage.garageId" class="fas fa-external-link-alt"></i></sup>
+                                </a>
+                            </p>
+                            <p *ngIf="garage.active == false" class="badge bg-danger">Deactivated </p> 
+                            <p class="p-0 m-0 text-secondary">Phone - {{ garage.phoneNumber }}</p>
+                            <p class="p-0 m-0 text-secondary">Total customers - {{ garage.totalCustomer }}</p>
+                            <p class="p-0 m-0 text-secondary">Points - {{ garage.totalScore }}</p> 
+                        </div>
                     </div>
                 </div>
             </div> 

@@ -18,5 +18,9 @@ export class VehicleCompanyService {
     return this.httpClient.get<VehicleCompany[]>(url);
   }
 
+  addVehicleCompany(newCompany: VehicleCompany):Observable<VehicleCompany> {
+    return this.httpClient.post<VehicleCompany>( environment.baseUrl + 'api/addVehicleCompany', newCompany);
+  }
+
 }
  
