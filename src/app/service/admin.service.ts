@@ -17,7 +17,7 @@ export class AdminService {
   }
 
   loadDeactivAccounts(): Promise<any> {
-    return this.httpClient.get(environment.baseUrl + "api/admins/deactived").toPromise();
+    return this.httpClient.get(environment.baseUrl + "api/admins/deactive").toPromise();
   }
 
   _deleteAccount = new Subject<void>();
@@ -76,7 +76,7 @@ export class AdminService {
   }
   constructor(private httpClient: HttpClient) { }
 
-  getAdminById(id:string):Observable<Admin> {
+  getAdminById(id: string): Observable<Admin> {
     return this.httpClient.get<Admin>(environment.baseUrl + 'api/admin/' + id);
   }
 
