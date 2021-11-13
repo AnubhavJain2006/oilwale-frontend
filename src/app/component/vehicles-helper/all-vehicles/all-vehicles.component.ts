@@ -30,7 +30,7 @@ export class AllVehiclesComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     this.dtOptions = {
       ajax: {
-        url: 'https://oilwale.herokuapp.com/api/getVehicles',
+        url: 'https://oilwale.herokuapp.com/api/vehicles',
         dataSrc: ''
       },
       info: true,

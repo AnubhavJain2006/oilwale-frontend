@@ -12,31 +12,29 @@ import { VehicleInfo } from '../interface/vehicle-info';
 
 export class VehicleService {
 
+  private apiUrl:string = environment.baseUrl + 'api/vehicle';
+
   constructor(private httpClient:HttpClient) { }
 
   getVehicles():Observable<VehicleInfo[]> {
-    let url = `${environment.baseUrl}api/getVehicles`;
-    return this.httpClient.get<VehicleInfo[]>(url);
+    return this.httpClient.get<VehicleInfo[]>(this.apiUrl + 's');
   }
 
   addVehicle(vehicle: Vehicle):Observable<Vehicle> {
-    let url = `${environment.baseUrl}api/vehicle`;
-    return this.httpClient.post<Vehicle>(url, vehicle);
+    return this.httpClient.post<Vehicle>(this.apiUrl, vehicle);
   }
 
   getVehicleById(vehicleid: string): Observable<VehicleInfo> {
-    let url = environment.baseUrl + "api/getVehicle/" + vehicleid;
-    return this.httpClient.get<VehicleInfo>(url);
+    return this.httpClient.get<VehicleInfo>(this.apiUrl + '/' + vehicleid);
   }
 
   // deactivates the vehicle
   deleteVehicleById(id: string): Observable<VehicleInfo> {
-    let url = environment.baseUrl + "api/deleteVehicle/" + id; 
-    return this.httpClient.delete<VehicleInfo>(url);
+    return this.httpClient.delete<VehicleInfo>(this.apiUrl + '/' + id);
   }
 
   updateVehicle(id:string, updatedVehicle:Vehicle): Observable<Vehicle> {
-    return this.httpClient.put<Vehicle>(environment.baseUrl + 'api/updateVehicle/'+id, updatedVehicle);
+    return this.httpClient.put<Vehicle>( this.apiUrl + '/' +id, updatedVehicle);
   }
 
 } 
