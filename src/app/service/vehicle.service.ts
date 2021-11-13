@@ -20,7 +20,7 @@ export class VehicleService {
   }
 
   addVehicle(vehicle: Vehicle):Observable<Vehicle> {
-    let url = `${environment.baseUrl}api/addVehicle`;
+    let url = `${environment.baseUrl}api/vehicle`;
     return this.httpClient.post<Vehicle>(url, vehicle);
   }
 

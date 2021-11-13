@@ -43,7 +43,7 @@
                 class="my-2 btn btn-sm link"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                onclick="open_company_modal()"
+                
               >
                 Company not listed?
               </button>
@@ -112,3 +112,41 @@
   </div>
   <!-- form ends -->
 </div>
+
+
+
+<!-- Modal for adding new company-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add new vehicle company</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="mb-3">
+          <label for="vehicleCompanyName" class="form-label">Company Name</label>
+          <input type="text" class="form-control" placeholder="New Company name (required)" [(ngModel)]="newVehicleCompanyName">
+        </div>
+        <div class="alert alert-success" role="alert" *ngIf="addVehicleCompanySuccess">
+          <strong><i class="fas fa-check-circle"></i> Success!</strong> Company {{ newVehicleCompanyName }} added successfully :)
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn background-orange text-white" [disabled]="addVehicleCompanyLoading" (click)="onAddNewCompany()">
+          <span *ngIf="!addVehicleCompanyLoading">
+            Add New Company
+          </span>
+          <span *ngIf="addVehicleCompanyLoading">
+            <div class="spinner-border spinner-border-sm" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

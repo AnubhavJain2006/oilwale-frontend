@@ -1,4 +1,4 @@
 export interface VehicleCompany {
-    vehicleCompanyId: string;
+    vehicleCompanyId?: string;
     vehicleCompany: string;
 }

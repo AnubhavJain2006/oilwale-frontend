@@ -24,14 +24,18 @@ export class VehiclesComponent implements OnInit {
   addVehicleSuccess: boolean = false;
   addVehicleFaliure: boolean = false;
 
+  addVehicleCompanySuccess: boolean = false;
+  addVehicleCompanyLoading: boolean = false;
+  addVehicleCompanyFailure: boolean = false;
+
   allVehicleRefreshFlag: boolean = false;
 
   constructor(private productService: ProductService, private vehicleCompanyService: VehicleCompanyService, private vehicleService: VehicleService) { }
 
   ngOnInit(): void {
-    this.vehicleService.getVehicles().subscribe(vehicles => this.allVehicles = vehicles);
-    this.vehicleCompanyService.getVehicleCompanies().subscribe(vehicleCompanies => this.allVehicleCompanies = vehicleCompanies)
-    this.productService.getAllProducts().subscribe(products => this.allProducts = products)
+    this.fetchVehicles();
+    this.fetchVehicleComapnies();
+    this.fetchProducts(); 
    }
 
   addVehicle(vehicle: Vehicle) {
@@ -59,5 +63,31 @@ export class VehiclesComponent implements OnInit {
       }
     )
   }   
+
+  fetchVehicles():void {
+    this.vehicleService.getVehicles().subscribe(vehicles => this.allVehicles = vehicles);
+  }
+
+  fetchVehicleComapnies():void {
+    this.vehicleCompanyService.getVehicleCompanies().subscribe(vehicleCompanies => this.allVehicleCompanies = vehicleCompanies)
+  }
+
+  fetchProducts():void {
+    this.productService.getAllProducts().subscribe(products => this.allProducts = products)
+  }
+
+  addVehicleCompany(newVehicleComapny: VehicleCompany):void {
+    this.addVehicleCompanyLoading = true;
+    this.vehicleCompanyService.addVehicleCompany(newVehicleComapny).subscribe(data => {
+      this.addVehicleCompanyLoading = false;
+      this.addVehicleCompanySuccess = true;
+      this.fetchVehicleComapnies();
+
+      setTimeout(() => {
+        this.addVehicleCompanySuccess = false;
+      }, 5000);
+    })
+
+  }
 
 }
