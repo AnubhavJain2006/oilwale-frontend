@@ -34,8 +34,9 @@ export class VehicleService {
   }
 
   updateVehicle(id:string, updatedVehicle:Vehicle): Observable<Vehicle> {
-    return this.httpClient.put<Vehicle>( this.apiUrl + '/' +id, updatedVehicle);
+    return this.httpClient.put<Vehicle>( this.apiUrl, updatedVehicle);
   }
+  
 
 } 
 

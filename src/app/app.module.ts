@@ -35,6 +35,7 @@ import { DeletedGaragesComponent } from './component/garages-helper/deleted-gara
 import { ActiveGaragesComponent } from './component/garages-helper/active-garages/active-garages.component';
 import { EditGarageComponent } from './component/garages-helper/edit-garage/edit-garage.component';
 import { ActiveProductsComponent } from './component/products-helper/active-products/active-products.component';
+import { VehicleActivitiesComponent } from './component/vehicles-helper/vehicle-activities/vehicle-activities.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { ActiveProductsComponent } from './component/products-helper/active-prod
     ActiveGaragesComponent,
     EditGarageComponent,
     ActiveProductsComponent,
+    VehicleActivitiesComponent
   ],
   imports: [
     BrowserModule,

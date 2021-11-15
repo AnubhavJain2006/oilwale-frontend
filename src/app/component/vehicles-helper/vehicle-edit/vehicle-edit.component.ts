@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { VehicleService } from 'src/app/service/vehicle.service';
 
-import { VehicleInfo } from 'src/app/interface/vehicle-info';
-import { Product } from 'src/app/interface/product';
-import { VehicleCompany } from 'src/app/interface/vehicle-company';
+import { VehicleService } from 'src/app/service/vehicle.service';
 import { VehicleCompanyService } from 'src/app/service/vehicle-company.service';
 import { ProductService } from 'src/app/service/product.service';
+import { ActivityService } from 'src/app/service/activity.service';
+
 import { Vehicle } from 'src/app/interface/vehicle';
+import { VehicleInfo } from 'src/app/interface/vehicle-info';
+import { VehicleCompany } from 'src/app/interface/vehicle-company';
+import { Product } from 'src/app/interface/product';
+import { Activity } from 'src/app/interface/activity';
+
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-vehicle-edit',
@@ -28,7 +33,7 @@ export class VehicleEditComponent implements OnInit {
   updateVehicleLoading: boolean = false;
   updateVehicleSuccess: boolean = false;
 
-  constructor(private router: ActivatedRoute, private vehicleService:VehicleService, private vehicleCompanyService: VehicleCompanyService, private productService: ProductService) { }
+  constructor(private router: ActivatedRoute, private vehicleService:VehicleService, private vehicleCompanyService: VehicleCompanyService, private productService: ProductService, private activityService: ActivityService) { }
 
   ngOnInit(): void {
     this.id = this.router.snapshot.params.id;
@@ -94,6 +99,9 @@ export class VehicleEditComponent implements OnInit {
   onUpdateVehicle() {
     this.updateVehicleLoading = true;
     this.vehicleService.updateVehicle(this.vehicleUpdateObject.vehicleId, this.vehicleUpdateObject).subscribe(data => {
+      
+      // update done - adding to activity
+      this.addUpdateActivity()
       // alert('done');
       this.updateVehicleLoading=false;
       this.updateVehicleSuccess = true;
@@ -102,6 +110,25 @@ export class VehicleEditComponent implements OnInit {
         this.updateVehicleSuccess = false;
       }, 5000);
     })
+  }
+
+  addUpdateActivity() {
+    console.log("activity logging started");
+    let authToken: string | null = localStorage.getItem('authToken');
+    let token = authToken != null ? jwt_decode(authToken) : null;
+
+    const activityObj: Activity = {
+      act: 'update',
+      user: JSON.parse(JSON.stringify(token)).sub,
+      userId: 'nathi baka',
+      subject: this.vehicleUpdateObject.vehicleModel,
+      subjectId: this.vehicleUpdateObject.vehicleId,
+      domain: 'vehicles'
+    };
+
+    this.activityService.addActivity(activityObj).subscribe((data) => {
+      console.log('activity added!');
+    });
   }
 
 }
