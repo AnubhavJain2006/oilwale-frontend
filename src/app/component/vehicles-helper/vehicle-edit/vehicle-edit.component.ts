@@ -20,20 +20,20 @@ import jwt_decode from "jwt-decode";
   styleUrls: ['./vehicle-edit.component.css']
 })
 export class VehicleEditComponent implements OnInit {
-  id!:string;
-  vehicleDetails!:VehicleInfo;
-  dataLoadingStatus:boolean = true;
+  id!: string;
+  vehicleDetails!: VehicleInfo;
+  dataLoadingStatus: boolean = true;
 
-  vehicleUpdateObject!:Vehicle;
-  displayName:string = "";
-  productsList:Product[] = [];
-  companyList:VehicleCompany[] = [];
+  vehicleUpdateObject!: Vehicle;
+  displayName: string = "";
+  productsList: Product[] = [];
+  companyList: VehicleCompany[] = [];
 
   // flags
   updateVehicleLoading: boolean = false;
   updateVehicleSuccess: boolean = false;
 
-  constructor(private router: ActivatedRoute, private vehicleService:VehicleService, private vehicleCompanyService: VehicleCompanyService, private productService: ProductService, private activityService: ActivityService) { }
+  constructor(private router: ActivatedRoute, private vehicleService: VehicleService, private vehicleCompanyService: VehicleCompanyService, private productService: ProductService, private activityService: ActivityService) { }
 
   ngOnInit(): void {
     this.id = this.router.snapshot.params.id;
@@ -53,7 +53,7 @@ export class VehicleEditComponent implements OnInit {
       for (let i = 0; i < this.vehicleDetails.suggestedProductDetails.length; i++) {
         const element = this.vehicleDetails.suggestedProductDetails[i];
         this.vehicleUpdateObject.suggestedProduct.push(element.productId);
-      }      
+      }
 
       this.displayName = this.vehicleDetails.vehicleModel;
       this.getVehicleCompanies();
@@ -62,13 +62,13 @@ export class VehicleEditComponent implements OnInit {
     })
   }
 
-  getVehicleCompanies():void {
+  getVehicleCompanies(): void {
     this.vehicleCompanyService.getVehicleCompanies().subscribe(data => {
       this.companyList = data;
     })
   }
 
-  getProductsList():void {
+  getProductsList(): void {
     this.productService.getAllProducts().subscribe(data => {
       this.productsList = data;
     })
@@ -83,15 +83,15 @@ export class VehicleEditComponent implements OnInit {
     return false;
   }
 
-  
+
   addSuggesstedProduct(productId: string) {
     let index = this.vehicleUpdateObject.suggestedProduct.indexOf(productId)
-   //  console.log(index);
+    //  console.log(index);
 
-    if(index == -1) {
+    if (index == -1) {
       this.vehicleUpdateObject.suggestedProduct.push(productId);
     }
-    else{
+    else {
       this.vehicleUpdateObject.suggestedProduct.splice(index, 1);
     }
   }
@@ -99,11 +99,11 @@ export class VehicleEditComponent implements OnInit {
   onUpdateVehicle() {
     this.updateVehicleLoading = true;
     this.vehicleService.updateVehicle(this.vehicleUpdateObject.vehicleId, this.vehicleUpdateObject).subscribe(data => {
-      
+
       // update done - adding to activity
-      this.addUpdateActivity()
+      // this.addUpdateActivity()
       // alert('done');
-      this.updateVehicleLoading=false;
+      this.updateVehicleLoading = false;
       this.updateVehicleSuccess = true;
 
       setTimeout(() => {
@@ -112,23 +112,23 @@ export class VehicleEditComponent implements OnInit {
     })
   }
 
-  addUpdateActivity() {
-    console.log("activity logging started");
-    let authToken: string | null = localStorage.getItem('authToken');
-    let token = authToken != null ? jwt_decode(authToken) : null;
+  // addUpdateActivity() {
+  //   console.log("activity logging started");
+  //   let authToken: string | null = localStorage.getItem('authToken');
+  //   let token = authToken != null ? jwt_decode(authToken) : null;
 
-    const activityObj: Activity = {
-      act: 'update',
-      user: JSON.parse(JSON.stringify(token)).sub,
-      userId: 'nathi baka',
-      subject: this.vehicleUpdateObject.vehicleModel,
-      subjectId: this.vehicleUpdateObject.vehicleId,
-      domain: 'vehicles'
-    };
+  //   const activityObj: Activity = {
+  //     act: 'update',
+  //     user: JSON.parse(JSON.stringify(token)).sub,
+  //     userId: 'nathi baka',
+  //     subject: this.vehicleUpdateObject.vehicleModel,
+  //     subjectId: this.vehicleUpdateObject.vehicleId,
+  //     domain: 'vehicles'
+  //   };
 
-    this.activityService.addActivity(activityObj).subscribe((data) => {
-      console.log('activity added!');
-    });
-  }
-
+  //     this.activityService.addActivity(activityObj).subscribe((data) => {
+  //     console.log('activity added!');
+  //   });
+  //   }
 }
+// }

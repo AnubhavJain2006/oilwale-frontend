@@ -20,8 +20,8 @@ export class JwtInterceptor implements HttpInterceptor {
       if (!request.url.includes("https://api.postalpincode.in/pincode")) {
         request = request.clone({
           setHeaders: {
-            // Authorization: 'Bearer ' + localStorage.getItem('authToken')
-            Authorization: 'Bearer ' + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbnViaGF2amFpbkBnbWFpbC5jb20iLCJleHAiOjE2MzUzOTA5NjEsImlhdCI6MTYzNTM1NDk2MX0.y_Hy_tLNN-0vE64MZdu_-M4tM8qYDJThzvNvwstrqlc"
+            Authorization: 'Bearer ' + localStorage.getItem('authToken')
+            // Authorization: 'Bearer ' + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbnViaGF2amFpbkBnbWFpbC5jb20iLCJleHAiOjE2MzUzOTA5NjEsImlhdCI6MTYzNTM1NDk2MX0.y_Hy_tLNN-0vE64MZdu_-M4tM8qYDJThzvNvwstrqlc"
           }
         })
       }
