@@ -20,7 +20,8 @@ export class ProductsComponent implements OnInit {
       grade: new FormControl('', Validators.required),
       packingSize: new FormControl('', Validators.required),
       productImage: new FormControl(''),
-      packingSizeDimension: new FormControl('mL')
+      packingSizeDimension: new FormControl('mL'),
+      vehicleType: new FormControl('')
     })
     console.log("ProductList size" + this.productService.productList.length);
     if (this.productService.productList.length == 0) {
@@ -41,8 +42,8 @@ export class ProductsComponent implements OnInit {
   addProduct() {
     console.log(this.product.value);
     this.product.value.packingSize = this.product.value.packingSize + " " + this.product.value.packingSizeDimension;
-    
-    
+
+
     // setValue({
     //   packingSize: `${this.product.value.packingSize} ${this.product.value.packingSizeDimension}`,
     // })
