@@ -10,9 +10,14 @@ import { Scheme } from 'src/app/interface/scheme';
   styleUrls: ['./scheme-info.component.css']
 })
 export class SchemeInfoComponent implements OnInit {
-  id!: string;
+  id: string = '';
   schemeDetails!: Scheme;
   dataLoadingStatus: boolean = true;
+
+  // flags
+  deleteSchemeLoading: boolean = false;
+  restoreSchemeLoading: boolean = false;
+
   constructor(private activateRoute: ActivatedRoute, private schemeService: SchemeService) { }
 
   ngOnInit(): void {
@@ -22,8 +27,34 @@ export class SchemeInfoComponent implements OnInit {
       this.dataLoadingStatus = false;
     }, error => {
       console.log(error);
-    }
-    )
+    })
   }
 
+  onDeleteScheme(id: string):void {
+    this.deleteSchemeLoading = true;
+    this.schemeService.deleteScheme(id).subscribe(data => {
+      this.deleteSchemeLoading = false;
+      this.schemeDetails = data;
+    })
+  }
+
+  onRestoreScheme(): void {
+    const restoreObj:Scheme = {
+      schemeId : this.schemeDetails.schemeId,
+      schemeName : this.schemeDetails.schemeName,
+      description : this.schemeDetails.description,
+      status : true,
+      startedAt : this.schemeDetails.startedAt,
+      endedAt : this.schemeDetails.endedAt,
+      targetGroup : this.schemeDetails.targetGroup,
+      productList : this.schemeDetails.productList,
+    }
+
+    this.restoreSchemeLoading = true;
+    this.schemeService.updateScheme(restoreObj).subscribe(data => {
+      this.schemeDetails = data;
+      this.restoreSchemeLoading = false;
+    })
+
+  }
 }

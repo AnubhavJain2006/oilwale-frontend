@@ -29,12 +29,32 @@
                         </tr>
                         <tr>
                             <td class="p-3">Start At </td>
-                            <td class="p-3">{{ schemeDetails.startedAt }}</td>
+                            <td class="p-3">{{ schemeDetails.startedAt | date: 'medium' }}</td>
                         </tr>
                         <tr>
-                            <td class="p-3">Conclud At</td>
+                            <td class="p-3">Conclude At</td>
                             <td class="p-3">
-                                {{ schemeDetails.endedAt }}
+                                {{ schemeDetails.endedAt | date: 'medium' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Offered to</td>
+                            <td class="p-3">
+                                {{ schemeDetails.targetGroup | titlecase }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Vehicle Type</td>
+                            <td class="p-3">
+                                jaldi se api bana do
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Products added to schemes</td>
+                            <td class="p-3">
+                                <span class="badge bg-primary   ">
+                                    {{ schemeDetails.productList.length}}
+                                </span>
                             </td>
                         </tr>
                     </tbody>
@@ -59,6 +79,10 @@
                             <td class="p-3">{{schemeDetails.endedAt | date}}</td>
                         </tr>
                         <tr>
+                            <td class="p-3">Accepted By</td>
+                            <td class="p-3"><span class="badge bg-danger">10</span></td>
+                        </tr>
+                        <tr>
                             <td class="p-3">Status</td>
                             <td class="p-3">
                                 <span *ngIf="schemeDetails.status == true" class="badge bg-success">Active</span> 
@@ -74,11 +98,37 @@
                     <tbody>
                         <tr>
                             <td class="p-3">Update scheme info</td>
-                            <td class="p-3"> <a href="#" class="link-primary">Update</a></td>
+                            <td class="p-3"> <a routerLink="/schemes/{{schemeDetails.schemeId}}/edit" class="btn link-primary">Update</a></td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="schemeDetails.status == false">
+                            <td class="p-3">Restore Scheme</td>
+                            <td class="p-3">
+                                <button (click)="onRestoreScheme()" class="btn text-success" [disabled]="restoreSchemeLoading">
+                                    <span *ngIf="!restoreSchemeLoading">
+                                        Restore
+                                    </span>
+                                    <span *ngIf="restoreSchemeLoading">
+                                        <div class="spinner-border spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                          </div>
+                                    </span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="schemeDetails.status == true">
                             <td class="p-3">Delete Scheme</td>
-                            <td class="p-3"><a href="#" class="link-danger">Delete Scheme</a></td>
+                            <td class="p-3">
+                                <button (click)="onDeleteScheme(id)" class=" btn text-danger" [disabled]="deleteSchemeLoading">
+                                    <span *ngIf="!deleteSchemeLoading">
+                                    Delete Scheme
+                                    </span>
+                                    <span *ngIf="deleteSchemeLoading">
+                                        <div class="spinner-border spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                          </div>
+                                    </span>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

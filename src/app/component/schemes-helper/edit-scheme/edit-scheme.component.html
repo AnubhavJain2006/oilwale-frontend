@@ -1,0 +1,68 @@
+<p class="lead" *ngIf="dataLoadingStatus">Fetching data ...</p>
+<div *ngIf="!dataLoadingStatus">
+    <div class="d-flex flex-wrap py-3">
+        <h3 class="h3">
+            <a routerLink="/schemes" class="text-decoration-none text-dark">
+                <i class="fas fa-object-ungroup"></i> Schemes 
+            </a>
+            <a routerLink="/schemes/{{ schemeDetails.schemeId }}" class="text-decoration-none text-dark">
+                <i class="fas fa-angle-right"></i> {{ displayName }}
+            </a>
+            <i class="fas fa-angle-right"></i> Edit
+        </h3>
+    </div>
+    <div class="my-3 mx-auto col-lg-8 col-md-10 col-sm-12">
+        <div class="text-center my-2 fw-normal lead">Editing - <span class="font-monospace">{{ displayName }}</span></div>
+        <h4>jaldi implement kar duga :)</h4>
+        <!-- <div class="row mb-3">
+            <label for="schemeName" class="col-sm-2 col-form-label">Scheme Name</label>
+            <div class="col-sm-10">
+                <input type="text" name="schemeName" class="form-control" id="schemeName" placeholder="Scheme name" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="schemeName" class="col-sm-2 col-form-label">Scheme Name</label>
+            <div class="col-sm-10">
+                <input type="text" name="schemeName" class="form-control" id="schemeName" placeholder="Scheme name" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="schemeName" class="col-sm-2 col-form-label">Scheme Name</label>
+            <div class="col-sm-10">
+                <input type="text" name="schemeName" class="form-control" id="schemeName" placeholder="Scheme name" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="schemeName" class="col-sm-2 col-form-label">Scheme Name</label>
+            <div class="col-sm-10">
+                <input type="text" name="schemeName" class="form-control" id="schemeName" placeholder="Scheme name" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="schemeName" class="col-sm-2 col-form-label">Scheme Name</label>
+            <div class="col-sm-10">
+                <input type="text" name="schemeName" class="form-control" id="schemeName" placeholder="Scheme name" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="schemeName" class="col-sm-2 col-form-label">Scheme Name</label>
+            <div class="col-sm-10">
+                <input type="text" name="schemeName" class="form-control" id="schemeName" placeholder="Scheme name" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="schemeName" class="col-sm-2 col-form-label">Scheme Name</label>
+            <div class="col-sm-10">
+                <input type="text" name="schemeName" class="form-control" id="schemeName" placeholder="Scheme name" />
+            </div>
+        </div> -->
+
+
+    </div>
+</div>

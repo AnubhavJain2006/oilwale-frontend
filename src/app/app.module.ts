@@ -40,6 +40,7 @@ import { MyactivitiesComponent } from './component/myactivities/myactivities.com
 import { AddSchemeComponent } from './component/schemes-helper/add-scheme/add-scheme.component';
 import { SchemeActivitiesComponent } from './component/schemes-helper/scheme-activities/scheme-activities.component';
 import { AllSchemesComponent } from './component/schemes-helper/all-schemes/all-schemes.component';
+import { EditSchemeComponent } from './component/schemes-helper/edit-scheme/edit-scheme.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { AllSchemesComponent } from './component/schemes-helper/all-schemes/all-
     MyactivitiesComponent,
     AddSchemeComponent,
     SchemeActivitiesComponent,
-    AllSchemesComponent
+    AllSchemesComponent,
+    EditSchemeComponent
   ],
   imports: [
     BrowserModule,

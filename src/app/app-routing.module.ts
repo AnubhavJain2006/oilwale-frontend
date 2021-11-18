@@ -8,6 +8,7 @@ import { VehicleInfoComponent } from './component/vehicles-helper/vehicle-info/v
 import { VehicleEditComponent } from './component/vehicles-helper/vehicle-edit/vehicle-edit.component';
 
 import { SchemesComponent } from './component/schemes/schemes.component';
+import { EditSchemeComponent } from './component/schemes-helper/edit-scheme/edit-scheme.component';
 import { SchemeInfoComponent } from './component/schemes-helper/scheme-info/scheme-info.component';
 
 import { ProductsComponent } from './component/products/products.component';
@@ -48,6 +49,7 @@ const routes: Routes = [
 
   { path: "schemes", component: SchemesComponent, canActivate: [AuthGuard] },
   { path: "schemes/:id", component: SchemeInfoComponent, canActivate: [AuthGuard] },
+  { path: "schemes/:id/edit", component: EditSchemeComponent, canActivate: [AuthGuard] },
 
   { path: "vehicles", component: VehiclesComponent, canActivate: [AuthGuard] },
   { path: "vehicles/:id", component: VehicleInfoComponent, canActivate: [AuthGuard]},
