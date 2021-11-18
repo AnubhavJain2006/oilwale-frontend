@@ -1,10 +1,10 @@
-<div class="pt-5">
+<div class="pt-3">
     <div class="py-2 border-bottom">
         <h5 class="h5"><i class="fas fa-chevron-right"></i> Recent Activity in Vehicles</h5>
     </div>
     <div class="py-2">
-        <ul class="list-group list-group-flush" *ngFor="let act of allActivities">
-            <li class="list-group-item"> 
+        <ul class="list-group list-group-flush" >
+            <li class="list-group-item border-0" *ngFor="let act of allActivities"> 
                 {{ act.createdAt | date:'medium' }} <div class="vr mx-1"></div>
                 <span class="link-primary mx-1"> {{ act.user }}</span> 
                 <span class="badge mx-1" [ngClass]="{'bg-success': act.act == 'create', 'bg-warning': act.act == 'update', 'bg-danger': act.act == 'delete'}"> {{act.act}}d </span> 

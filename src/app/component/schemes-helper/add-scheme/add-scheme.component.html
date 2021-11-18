@@ -1,0 +1,187 @@
+<div class="" id="garageAddForm">
+    <div class="pt-3">
+        <div class="py-2 text-center">
+            <h5 class="h5">New Scheme</h5>
+        </div>
+
+        <div class="mx-auto col-lg-8 com-md-10 col-sm-12">
+
+            <div class="progress" style="height: 5px;">
+                <div class="progress-bar background-orange" role="progressbar" style="width: {{ progressBarWidth }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <!-- <button class="btn my-3" (click)="progressBarOneStepForward()">Increase</button>
+            <button class="btn" (click)="progressBarOneStepBack()">Decrease</button> -->
+        </div>
+
+        <form [formGroup]="schemeInfo" class="mx-auto col-lg-8 col-md-10 col-sm-12 mb-3 mt-4" id="add_scheme_form" (ngSubmit)="addScheme()">
+            <div *ngIf="submitSuccessFlag" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong><i class="fas fa-check-circle"></i> Success!</strong> Scheme added successfully. <a routerLink="/schemes/{{addedSchemeObject.schemeId}}" class="alert-link"> Click </a> to see details.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <!-- basic info -->
+            <div  *ngIf="showFormPart(0)">
+                <p class="fw-bold">BASIC INFORMATION:</p>
+                <div class="row mb-3">
+                    <label for="Product_Name" class="col-sm-2 col-form-label">Scheme Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="schemeName" formControlName="schemeName" class="form-control"
+                            id="Product_Name" placeholder="Scheme name" />
+                        <span class="error"
+                            *ngIf="schemeInfo.get('schemeName')?.hasError('required') && schemeInfo.get('schemeName')?.touched">This
+                            field is required.</span>
+                    </div>
+                </div>
+    
+                <div class="row mb-3">
+                    <label for="Specification" class="col-sm-2 col-form-label">Description</label>
+                    <div class="col-sm-10">
+                        <textarea name="description" class="form-control" id="description"
+                            formControlName="description" cols="" rows="5"
+                            placeholder="A cool description for scheme ..."></textarea>
+                        <span class="error"
+                            *ngIf="schemeInfo.get('description')?.hasError('required') && schemeInfo.get('description')?.touched">This
+                            field is required.</span>
+    
+                    </div>
+                </div>
+    
+                <div class="row mb-3">
+                    <label for="Specification" class="col-sm-2 col-form-label">Start Date</label>
+                    <div class="col-sm-10">
+                        <input type="date" (ngModelChange)="validateDate()" name="startedAt"
+                            formControlName="startedAt" class="form-control" id="startedAt" />
+                        <span class="error"
+                            *ngIf="schemeInfo.get('startedAt')?.hasError('required') && schemeInfo.get('startedAt')?.touched">This
+                            field is required.</span>
+    
+                    </div>
+                </div>
+    
+                <div class="row mb-3">
+                    <label for="Specification" class="col-sm-2 col-form-label">End Date</label>
+                    <div class="col-sm-10">
+                        <input type="date" (ngModelChange)="validateDate()" name="endedAt" class="form-control"
+                            formControlName="endedAt" id="endedAt" />
+                        <span class="error"
+                            *ngIf="schemeInfo.get('endedAt')?.hasError('required') && schemeInfo.get('endedAt')?.touched">This
+                            field is required.</span>
+    
+                        <div *ngIf="checkStartAndEndDate==true" id="endedAtmsg" class="text-warning"><small> 
+                            <i class='fas fa-exclamation-circle'></i>
+                                End date is before Start date</small></div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="button" (click)="progressBarOneStepForward()" [disabled]=" !(isValidDates && schemeInfo.get('description')?.valid && schemeInfo.get('schemeName')?.valid)" id="scheme_submit_btn"
+                        class="btn background-orange text-white">
+                        Next <i class="fas fa-angle-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div *ngIf="showFormPart(1)">
+                <p class="fw-bold">TARGET AUDIENCE</p>
+                <div class="row mb-3">
+                    
+                    <p>Select audience for the scheme</p>
+                    <div class="col-sm-12" >
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="targetGroup" id="targetGarages" value="garages" formControlName="targetGroup">
+                            <label class="form-check-label" for="targetGarages">
+                              Garages
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="targetGroup" id="targetCustomers" value="customers" formControlName="targetGroup">
+                            <label class="form-check-label" for="targetCustomers">
+                              Customers
+                            </label>
+                          </div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-5">
+                        <button class="btn background-orange text-white" (click)="progressBarOneStepBack()">
+                            <i class="fas fa-angle-left"></i> Back
+                        </button>
+                        <button type="button" class="btn background-orange text-white" [disabled]="!schemeInfo.get('targetGroup')?.valid" (click)="progressBarOneStepForward()">
+                            Next <i class="fas fa-angle-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="showFormPart(2)">
+                <p class="fw-bold">VEHICLE TYPES</p>
+                <div class="row mb-3">
+                    <p>Select the vehicle type for the scheme</p>
+                    <div class="col-sm-12" formGroupName="vehicleType">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="vehicleType" id="2-wheeler" formControlName="twoWheeler">
+                            <label class="form-check-label" for="2-wheeler">
+                              2-wheeler
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="vehicleType" id="3-wheeler" formControlName="threeWheeler">
+                            <label class="form-check-label" for="3-wheeler">
+                              3-wheeler
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="vehicleType" id="4-wheeler" formControlName="fourWheeler">
+                            <label class="form-check-label" for="4-wheeler">
+                              4-wheeler
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="vehicleType" id="trucks" formControlName="trucks">
+                            <label class="form-check-label" for="trucks">
+                              Trucks
+                            </label>
+                          </div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-5">
+                        <button class="btn background-orange text-white" (click)="progressBarOneStepBack()">
+                            <i class="fas fa-angle-left"></i> Back
+                        </button>
+                        <button type="button" class="btn background-orange text-white" (click)="progressBarOneStepForward()">
+                            Next <i class="fas fa-angle-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="showFormPart(3)">
+                <p class="fw-bold">PRODUCTS</p>
+                <div class="row mb-3">
+                    <p>Select produt for the scheme, if any</p>
+                    <div class="col-sm-10">
+                        <div class="form-check" *ngFor="let product of productList">
+                            <input class="form-check-input" type="checkbox" name="product" id="{{ product.productId }}" (click)="addSchemeProduct(product.productId)">
+                            <label class="form-check-label" for="{{ product.productId }}">
+                                {{ product.productName }} - {{ product.grade }} - {{ product.packingSize }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mt-5">
+                    <button class="btn background-orange text-white" (click)="progressBarOneStepBack()">
+                        <i class="fas fa-angle-left"></i> Back
+                    </button>
+                    <button type="submit" class="btn background-orange text-white" (click)="progressBarOneStepForward()" [disabled]="submitLoadingFlag">
+                        <span *ngIf="!submitLoadingFlag">
+                            Submit <i class="fas fa-angle-right"></i>
+                        </span>
+                        <span *ngIf="submitLoadingFlag">
+                            <div class="spinner-border spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+    <!-- form ends -->
+</div>

@@ -1,7 +1,11 @@
 <p class="lead" *ngIf="dataLoadingStatus">Loading ...</p>
 <div *ngIf="!dataLoadingStatus">
     <div class="d-flex flex-wrap py-3">
-        <h3 class="h3"><i class="fas fa-object-ungroup"></i> Schemes <i class="fas fa-angle-right"></i> {{ schemeDetails.schemeName }}</h3>
+        <h3 class="h3">
+            <a routerLink="/schemes" class="text-decoration-none text-dark">
+                <i class="fas fa-object-ungroup"></i> Schemes 
+            </a>
+            <i class="fas fa-angle-right"></i> {{ schemeDetails.schemeName }}</h3>
     </div>
 
     <!-- <div class="w-100 text-center py-2">
@@ -16,7 +20,7 @@
                 <table class="table table-hover table-bordered p-md-3">
                     <tbody>
                         <tr>
-                            <td class="p-3">Garage Name</td>
+                            <td class="p-3">Scheme Name</td>
                             <td class="p-3">{{ schemeDetails.schemeName }}</td>
                         </tr>
                         <tr>

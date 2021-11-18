@@ -211,3 +211,7 @@ select:focus {
 .text-orange {
     color: #ff5722;
 }
+
+.pointer-cursor {
+    cursor: pointer;
+}

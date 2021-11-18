@@ -27,6 +27,7 @@ export class AddVehicleComponent implements OnInit {
 
   formInputCompany: string = "";
   formInputModel: string = "";
+  formInputType: string = "";
   formInputSuggestedProducts: string[] = [];
 
   newVehicleCompanyName:string = "";

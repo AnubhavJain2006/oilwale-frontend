@@ -13,7 +13,7 @@ export class ProductsInfoComponent implements OnInit {
   id !: string;
   productDetails!: Product;
   dataLoadingStatus:boolean = true;
-  newProduct!: Product;   // for update - restore
+  // newProduct!: Product;   // for update - restore
 
   deleteLoadingFlag: boolean = false;
   restoreLoadingFlag: boolean = false;
@@ -37,10 +37,22 @@ export class ProductsInfoComponent implements OnInit {
   }
 
   onRestoreProduct() {
-    this.newProduct = this.productDetails;
-    this.newProduct.active = !this.newProduct.active;
+    const restoreProductObj: Product = {
+      productId: this.productDetails.productId,
+      productName: this.productDetails.productName,
+      specification: this.productDetails.specification,
+      grade: this.productDetails.grade,
+      packingSize: this.productDetails.packingSize,
+      productImage: this.productDetails.productImage,
+      createdAt: this.productDetails.createdAt,
+      updatedAt: this.productDetails.updatedAt,
+      active: !this.productDetails.active,
+      vehicleType: this.productDetails.vehicleType
+    }
+    
+    // this.newProduct.active = !this.newProduct.active;
     this.restoreLoadingFlag = true;
-    this.productService.updateProduct(this.newProduct).subscribe(data => {
+    this.productService.updateProduct(restoreProductObj).subscribe(data => {
       this.restoreLoadingFlag = false;
       this.productDetails = data;
     })

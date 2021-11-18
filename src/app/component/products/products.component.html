@@ -76,6 +76,7 @@
                     </div>
                 </div>
                 <form class="py-3" id="add_products_form" (ngSubmit)="addProduct()" [formGroup]="product">
+                   
                     <div class="row mb-3">
                         <label for="Product_Name" class="col-sm-2 col-form-label">Product Name</label>
                         <div class="col-sm-10">
@@ -118,11 +119,34 @@
                                 <select name="packSize" id="packSize" class="form-select" formControlName="packingSizeDimension">
                                     <option value="mL">mL</option>
                                     <option value="L">L</option>
+                                    <option value="kg">kg</option>
+                                    <option value="g">g</option>
                                 </select>
                             </div>
                             <span class="error"
                                 *ngIf="product.get('packingSize')?.hasError('required') && product.get('packingSize')?.touched">
                                 This field is required.</span>
+                        </div>
+                    </div>
+                    <div class="row my-5">
+                        <label for="recommandedFor" class="col-sm-3 col-from-label">Recommanded For</label>
+                        <div class="col-sm-9" formGroupName="recommandedVehicleType">
+                            <div class=" input-group">
+                                <input type="checkbox" name="vehicleType" id="2-wheeler" class="form-check-input mx-1" formControlName="twoWheeler">
+                                <label class="form-check-label mx-1" for="2-wheeler">2 - Wheelers</label>
+                            </div>
+                            <div class=" input-group">
+                                <input type="checkbox" name="vehicleType" id="3-wheeler" class="form-check-input mx-1" formControlName="threeWheeler">
+                                <label class="form-check-label mx-1" for="3-wheeler">3 - Wheelers</label>
+                            </div>
+                            <div class=" input-group">
+                                <input type="checkbox" name="vehicleType" id="4-wheeler" class="form-check-input mx-1" formControlName="fourWheeler">
+                                <label class="form-check-label mx-1" for="4-wheeler">4 - Wheelers</label>
+                            </div>
+                            <div class=" input-group    ">
+                                <input type="checkbox" name="vehicleType" id="trucks" class="form-check-input mx-1" formControlName="trucks">
+                                <label class="form-check-label mx-1" for="trucks">Trucks</label>
+                            </div>
                         </div>
                     </div>
                     <!-- <div class="row mb-3">
@@ -133,7 +157,14 @@
                 </div> -->
                     <div class="d-flex justify-content-end">
                         <button type="submit" [disabled]="!product.valid" id="add_products_submit"
-                            class="btn background-orange text-white">Submit</button>
+                            class="btn background-orange text-white">
+                            <span *ngIf="!addProductLoadingFlag">Submit</span>
+                            <span *ngIf="addProductLoadingFlag">
+                                <div class="spinner-border spinner-border-sm" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </span>
+                        </button>
                     </div>
                 </form>
             </div>

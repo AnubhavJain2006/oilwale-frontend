@@ -98,7 +98,7 @@ export class VehicleEditComponent implements OnInit {
 
   onUpdateVehicle() {
     this.updateVehicleLoading = true;
-    this.vehicleService.updateVehicle(this.vehicleUpdateObject.vehicleId, this.vehicleUpdateObject).subscribe(data => {
+    this.vehicleService.updateVehicle(this.vehicleUpdateObject).subscribe(data => {
 
       // update done - adding to activity
       // this.addUpdateActivity()

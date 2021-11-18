@@ -23,7 +23,10 @@ import { EditGarageComponent } from './component/garages-helper/edit-garage/edit
 
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HeaderComponent } from './component/header/header.component';
+
 import { MyaccountComponent } from './component/myaccount/myaccount.component';
+import { MyactivitiesComponent } from './component/myactivities/myactivities.component';
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './service/AuthGaurd/auth.guard';
@@ -53,7 +56,8 @@ const routes: Routes = [
   { path: "accounts", component: AccountsComponent, canActivate: [AuthGuard] },
   { path: "accounts/:id", component: AccountInfoComponent, canActivate: [AuthGuard] },
   
-  { path: "myaccount", component: MyaccountComponent, canActivate: [AuthGuard] }
+  { path: "myaccount", component: MyaccountComponent, canActivate: [AuthGuard] },
+  { path: "myactivities", component: MyactivitiesComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

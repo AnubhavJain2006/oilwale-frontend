@@ -18,24 +18,24 @@ export class SchemeService {
   constructor(private httpClient: HttpClient) { }
 
   addNewScheme(scheme: Scheme): Observable<any> {
-    return this.httpClient.post(environment.baseUrl + "api/addScheme", scheme).pipe(tap(() => {
+    return this.httpClient.post(environment.baseUrl + "api/scheme", scheme).pipe(tap(() => {
       this._refreshNeeded.next()
     }))
   }
 
   loadAllActiveScheme(): Promise<any> {
-    return this.httpClient.get(environment.baseUrl + "api/allActiveScheme").toPromise();
+    return this.httpClient.get(environment.baseUrl + "api/scheme/active").toPromise();
   }
   loadAllConcludedScheme() {
-    return this.httpClient.get(environment.baseUrl + "api/findAllConcludedScheme").toPromise();
+    return this.httpClient.get(environment.baseUrl + "api/scheme/concluded").toPromise();
 
   }
   loadAllUpComingScheme() {
-    return this.httpClient.get(environment.baseUrl + "api/allUpcomingScheme").toPromise();
+    return this.httpClient.get(environment.baseUrl + "api/scheme/upcoming").toPromise();
   }
 
   getSchemeById(id: string): Observable<Scheme> {
-    return this.httpClient.get<Scheme>(environment.baseUrl + "api/getSchemeById/" + id);
+    return this.httpClient.get<Scheme>(environment.baseUrl + "api/scheme/" + id);
   }
 
 }

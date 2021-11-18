@@ -33,10 +33,14 @@ export class VehicleService {
     return this.httpClient.delete<VehicleInfo>(this.apiUrl + '/' + id);
   }
 
-  updateVehicle(id:string, updatedVehicle:Vehicle): Observable<Vehicle> {
+  updateVehicle(updatedVehicle:Vehicle): Observable<Vehicle> {
     return this.httpClient.put<Vehicle>( this.apiUrl, updatedVehicle);
   }
   
+  getVehiclesOfSameCompany(id: string): Observable<Vehicle[]> {
+    return this.httpClient.get<Vehicle[]>(this.apiUrl + '/company/' + id);
+  }
+
 
 } 
 
