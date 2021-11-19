@@ -144,7 +144,7 @@
                         <button class="btn background-orange text-white" (click)="progressBarOneStepBack()">
                             <i class="fas fa-angle-left"></i> Back
                         </button>
-                        <button type="button" class="btn background-orange text-white" (click)="progressBarOneStepForward()">
+                        <button type="button" class="btn background-orange text-white" (click)="progressBarOneStepForward();fetchProducts()">
                             Next <i class="fas fa-angle-right"></i>
                         </button>
                     </div>
@@ -156,6 +156,7 @@
                 <div class="row mb-3">
                     <p>Select produt for the scheme, if any</p>
                     <div class="col-sm-10">
+                        <div *ngIf="productFetchLoading" class="text-center">Loading products as per your choice ... </div>
                         <div class="form-check" *ngFor="let product of productList">
                             <input class="form-check-input" type="checkbox" name="product" id="{{ product.productId }}" (click)="addSchemeProduct(product.productId)">
                             <label class="form-check-label" for="{{ product.productId }}">

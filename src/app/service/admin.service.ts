@@ -53,9 +53,9 @@ export class AdminService {
     }));;
   }
 
-  revertAccount(adminId: string): Observable<any> {
-    return this.httpClient.put(environment.baseUrl + "api/revertAccount/" + adminId, null).pipe(tap(() => {
-      this._deleteAccount.next();
+  updateAdmin(newAdmin:Admin): Observable<Admin> {
+    return this.httpClient.put<Admin>(environment.baseUrl + 'api/admin', newAdmin).pipe(tap(() => {
+      this._refreshNeeded.next();
     }))
   }
 

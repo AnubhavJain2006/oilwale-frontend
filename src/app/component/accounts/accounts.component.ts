@@ -2,6 +2,7 @@ import { AdminService } from './../../service/admin.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Output } from '@angular/core';
 
+import { Admin } from 'src/app/interface/admin';
 
 @Component({
   selector: 'app-accounts',
@@ -109,15 +110,35 @@ export class AccountsComponent implements OnInit {
   }
 
 
-  revertAccount(adminId: string) {
-    console.log(adminId);
-    this.accountService.revertAccount(adminId).subscribe(resp => {
-      console.log(resp);
+  revertAccount(admin: Admin) {
+    console.log(admin);
 
-    }, err => {
-      console.log(err);
+    const revertObj:Admin = {
+      adminId: admin.adminId,
+      name: admin.name,
+      email: admin.email,
+      phoneNumber: admin.phoneNumber,
+      alternateNumber: admin.alternateNumber,
+      address: admin.address,
+      pincode: admin.pincode,
+      image: admin.image,
+      password: admin.password,
+      privilege: admin.privilege,
+      createdAt: admin.createdAt,
+      updateAt: admin.updateAt,
+      active: true
+    }
 
-    });
+    this.accountService.updateAdmin(revertObj).subscribe(data => {
+      console.log(data);
+    })
+    // this.accountService.revertAccount(adminId).subscribe(resp => {
+    //   console.log(resp);
+
+    // }, err => {
+    //   console.log(err);
+
+    // });
   }
 
 }

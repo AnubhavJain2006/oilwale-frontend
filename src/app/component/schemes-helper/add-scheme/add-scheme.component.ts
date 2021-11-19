@@ -33,6 +33,8 @@ export class AddSchemeComponent implements OnInit {
   submitLoadingFlag: boolean = false;
   submitSuccessFlag: boolean = false;
 
+  productFetchLoading: boolean = false;
+
   constructor(private schemeService: SchemeService, private productService: ProductService) {
 
     this.schemeInfo = new FormGroup({
@@ -51,8 +53,6 @@ export class AddSchemeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchProducts();
-    console.log(this.schemeInfo.get('startedAt'));
   }
 
   addScheme() {
@@ -112,7 +112,25 @@ export class AddSchemeComponent implements OnInit {
   }
 
   fetchProducts():void {
-    this.productService.getAllProducts().subscribe(data => {
+    let productsinventoryType:string = '';
+    this.productList = [];
+    // console.log(this.schemeInfo.value.vehicleType['twoWheeler']);
+    if (this.schemeInfo.value.vehicleType['twoWheeler']){
+      productsinventoryType = productsinventoryType + '2-wheeler,';
+      console.log('2-wheeler');
+    } 
+    if (this.schemeInfo.value.vehicleType['threeWheeler']){
+      productsinventoryType = productsinventoryType + '3-wheeler,';
+      console.log('3-wheeler');
+
+    } 
+    if (this.schemeInfo.value.vehicleType['fourWheeler']) productsinventoryType += '4-wheeler,';
+    if (this.schemeInfo.value.vehicleType['trucks']) productsinventoryType += 'trucks,';
+
+    console.log(productsinventoryType);
+    this.productFetchLoading = true;
+    this.productService.getSpecificVehicleTypeProduct(productsinventoryType).subscribe(data => {
+      this.productFetchLoading = false;
       this.productList = data;
     })
   }
