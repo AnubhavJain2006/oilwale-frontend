@@ -38,8 +38,9 @@ export class GaragesComponent implements OnInit {
       gstNumber: new FormControl('', [Validators.minLength(15), Validators.maxLength(15), Validators.pattern("\d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}")]),
       address: new FormControl('', Validators.required),
       pincode: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
-      area: new FormControl('', Validators.required)
+      area: new FormControl('', Validators.required),
       // image: new FormControl(''),
+      panCard: new FormControl('', [Validators.required, Validators.pattern("[A-Z]{5}[0-9]{4}[A-Z]{1}")])
     })
   }
 

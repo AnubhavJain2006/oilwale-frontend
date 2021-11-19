@@ -91,12 +91,15 @@ export class EditGarageComponent implements OnInit {
       // alert("Phone is required field");
       return false;
     }
-    if (this.garageDetails.alternateNumber.length == 0) {
+    if (this.garageDetails.alternateNumber.length != 0 && this.garageDetails.alternateNumber.length != 10) {
       // alert("Alternate Phone is required field");
       return false;
     }
     if (this.garageDetails.gstNumber.length != 0 && this.garageDetails.gstNumber.length != 15) {
       // alert("GST field have incorrect value");
+      return false;
+    }
+    if( this.garageDetails.panCard!= null && this.garageDetails.panCard.length != 0 && this.garageDetails.panCard.length != 10) {
       return false;
     }
     if (this.garageDetails.pincode.toString().length != 6) {

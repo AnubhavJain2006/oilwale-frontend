@@ -43,7 +43,13 @@
                             <td class="p-3">
                                 <span *ngIf="!garageDetails.gstNumber"> - </span>
                                 <span *ngIf="garageDetails.gstNumber"> {{ garageDetails.gstNumber }} </span>
-                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">PAN</td>
+                            <td class="p-3">
+                                <span *ngIf="!garageDetails.panCard"> - </span>
+                                <span *ngIf="garageDetails.panCard"> {{ garageDetails.panCard }} </span>
                             </td>
                         </tr>
                         <tr>

@@ -37,6 +37,7 @@ export class GarageService {
       referralCode: "",
       totalCustomer: 0,
       totalScore: 0,
+      panCard: "",
       // isActive: boolean,
       createdAt: "",
       updatedAt: "",

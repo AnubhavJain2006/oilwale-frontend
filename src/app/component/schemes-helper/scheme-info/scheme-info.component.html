@@ -60,6 +60,34 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="p-md-3">
+                <p class="fw-bold">ACCEPTED USERS LIST</p>
+                <table class="table table-hover table-bordered p-md-3">
+                    <tbody>
+                        <tr>
+                            <td class="p-3">Garage 1</td>
+                            <td class="p-3">Address 1 <br> phonr</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Garage 1</td>
+                            <td class="p-3">Address 1 <br> phonr</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Garage 1</td>
+                            <td class="p-3">Address 1 <br> phonr</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Garage 1</td>
+                            <td class="p-3">Address 1 <br> phonr</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Garage 1</td>
+                            <td class="p-3">Address 1 <br> phonr</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="col-lg-6">
             <div class="p-3">
@@ -97,8 +125,12 @@
                 <table class="table table-hover table-bordered p-md-3">
                     <tbody>
                         <tr>
-                            <td class="p-3">Update scheme info</td>
+                            <td class="p-3">Update info</td>
                             <td class="p-3"> <a routerLink="/schemes/{{schemeDetails.schemeId}}/edit" class="btn link-primary">Update</a></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Update Product / Vehicle type</td>
+                            <td class="p-3"> <a  class="btn link-primary">Update</a></td>
                         </tr>
                         <tr *ngIf="schemeDetails.status == false">
                             <td class="p-3">Restore Scheme</td>
@@ -116,7 +148,7 @@
                             </td>
                         </tr>
                         <tr *ngIf="schemeDetails.status == true">
-                            <td class="p-3">Delete Scheme</td>
+                            <td class="p-3">Delete</td>
                             <td class="p-3">
                                 <button (click)="onDeleteScheme(id)" class=" btn text-danger" [disabled]="deleteSchemeLoading">
                                     <span *ngIf="!deleteSchemeLoading">

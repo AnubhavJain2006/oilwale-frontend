@@ -173,13 +173,12 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="Gst_Number" class="col-sm-3 col-form-label">PAN Number </label>
+                            <label for="panCard" class="col-sm-3 col-form-label">PAN Number </label>
                             <div class="col-sm-9">
-                                <input type="text" name="PanNumber" formControlName="panNumber" class="form-control"
-                                    id="Gst_Number" placeholder="AAA-A-A-9999-A (optional)" />
+                                <input type="text" name="panCard" formControlName="panCard" class="form-control"
+                                    id="panCard" placeholder="AAA-A-A-9999-A (optional)" />
                                 <span class="error" *ngIf="garage.get('gstNumber')?.hasError('pattern')">PAN number
-                                    should be of
-                                    15 characters.</span>
+                                    should be of 15 characters.</span>
 
                             </div>
                         </div>
