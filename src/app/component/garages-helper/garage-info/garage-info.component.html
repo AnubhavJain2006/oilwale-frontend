@@ -123,15 +123,21 @@
                     <tbody>
                         <tr>
                             <td class="p-3">Add image</td>
-                            <td class="p-3"><a href="#" class="btn link-success">Add</a></td>
+                            <td class="p-3"><button disabled class="btn link-success">Add</button></td>
                         </tr>
                         <tr>
-                            <td class="p-3">Reset Points</td>
-                            <td class="p-3"><a href="#" class="btn link-dark">Reset Garage Points</a></td>
+                            <td class="p-3">Redeem Points</td>
+                            <td class="p-3">
+                                <button type="button" class="btn link-dark" data-bs-toggle="modal" data-bs-target="#redeemPointsModal">Redeem Garage Points</button>
+                            </td>
                         </tr>
                         <tr>
                             <td class="p-3">Update garage info</td>
                             <td class="p-3"> <a routerLink="/garages/{{ garageDetails.garageId }}/edit" class="btn link-primary">Update</a></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Reset password</td>
+                            <td class="p-3"> <button disabled class="btn link-danger">Reset password</button></td>
                         </tr>
                         <tr *ngIf="garageDetails.active">
                             <td class="p-3">Deactivate Account</td>
@@ -158,10 +164,7 @@
                                 </button>
                             </td>
                         </tr>
-                        <tr *ngIf="!garageDetails.active">
-                            <td class="p-3">Delete Account</td>
-                            <td class="p-3"><a href="#" class="btn link-danger">Permanently Delete Account</a></td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
@@ -203,4 +206,47 @@
             </div> 
         </div>
     </div>
+    
+    <!-- Modal for redeem points -->
+    <div class="modal fade" id="redeemPointsModal" tabindex="-1" aria-labelledby="redeemPointsLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="redeemPointsLabel"> <i class="fas fa-wrench"></i> Garage redeem points </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Redeem garage points. Redeeming the garage points will decrease that much of points from garage's account.</p>
+            <p>Current points : <span class="badge bg-secondary">{{ garageDetails.totalScore }}</span></p>
+            
+            <label for="redeemPoints" class="form-label mt-3">Enter points to redeem</label>
+            <input type="number" name="redeemPoints" class="mb-3 form-control" [(ngModel)]="redeemPointsCount">
+    
+            <p *ngIf="garageDetails.totalScore - redeemPointsCount < 0" class="text-danger">Redeeming points are greater then the available points to redeem.</p>
+            <p *ngIf="redeemPointsCount < 0" class="text-danger">Invalid entry</p>
+
+            <p *ngIf="redeemPointsSuccessFlag" class="text-success"> <i class="fas fa-check-circle"></i> Redeem points success!</p>
+
+            <small>Remaining points : {{ garageDetails.totalScore - redeemPointsCount }}</small>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" [disabled]="garageDetails.totalScore - redeemPointsCount < 0 || redeemPointsCount < 0 ||  redeemPointsLoadingFlag" (click)="redeemGaragePoints()" class="btn background-orange text-white"> 
+                <span *ngIf="!redeemPointsLoadingFlag">
+                    Redeem Points
+                </span>
+                <span *ngIf="redeemPointsLoadingFlag">
+                    <div class="spinner-border spinner-border-sm" role="status">
+                        <span class="visually-hidden">Loading ...</span>
+                    </div>
+                    Redeeming points ...
+                </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
+
+
+  

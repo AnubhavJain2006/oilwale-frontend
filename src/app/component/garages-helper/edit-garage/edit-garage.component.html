@@ -16,92 +16,157 @@
         <p class=" lead fw-normal"> Editing - <span class="font-monospace"> {{ displayName | uppercase }}</span></p>
     </div>
 
+    <!-- <form [formGroup]="garageEditForm">
+        <label for="reactiveName">Name:</label>
+        <input type="text" name="name" formControlName="name" id="reactiveName">
+    </form> -->
+
+    
+
+
     <div class="col-lg-8 col-md-10 col-sm-12 mx-auto pb-4">
-        <form (submit)="updateGarageDetails()">
-            <div class="row mb-2">
-                <label for="id" class="col-form-label col-sm-2">Garage Id</label>
-                <div class="col-sm-10">
-                    <input type="text" disabled readonly value="{{ garageDetails.garageId }}" name="id" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="ownerName" class="col-form-label col-sm-2">Owner Name</label>
-                <div class="col-sm-10">
-                    <input type="text" name="ownerName" [(ngModel)]="garageDetails.name" (change)="validateForm()" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="garageName" class="col-form-label col-sm-2">Garage Name</label>
-                <div class="col-sm-10">
-                    <input type="text" name="garageName" [(ngModel)]="garageDetails.garageName" (change)="validateForm()" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="phoneNumber" class="col-form-label col-sm-2">Phone number</label>
-                <div class="col-sm-10">
-                    <input type="text" name="phoneNumber" [(ngModel)]="garageDetails.phoneNumber" (change)="validateForm()" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="alternatePhone" class="col-form-label col-sm-2">Alternate Phone</label>
-                <div class="col-sm-10">
-                    <input type="text" name="alternatePhone" [(ngModel)]="garageDetails.alternateNumber" (change)="validateForm()" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="gstNumber" class="col-form-label col-sm-2">GST Number</label>
-                <div class="col-sm-10">
-                    <input type="text" name="gstNumber"[(ngModel)]="garageDetails.gstNumber" (change)="validateForm()" class="form-control" placeholder="OPTIONAL">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="panCard" class="col-form-label col-sm-2">PAN</label>
-                <div class="col-sm-10">
-                    <input type="text" name="panCard"[(ngModel)]="garageDetails.panCard" (change)="validateForm()" class="form-control" placeholder="OPTIONAL">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="address" class="col-form-label col-sm-2">Address</label>
-                <div class="col-sm-10">
-                    <textarea name="address" id="address" [(ngModel)]="garageDetails.address" (change)="validateForm()" rows="5" class="form-control"></textarea>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="pincode" class="col-form-label col-sm-2">Pincode</label>
-                <div class="col-sm-10">
-                    <input type="text" name="pincode" (change)="getAreaListFromPincode(garageDetails.pincode.toString())" (change)="validateForm()" [(ngModel)]="garageDetails.pincode" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="area" class="col-form-label col-sm-2">Area</label>
-                <div class="col-sm-10">
-                    <select name="area" id="area" class="form-select" [(ngModel)]="garageDetails.area" (change)="validateForm()">
-                        <option *ngFor="let place of areaByPincodeList" [selected]="place == this.garageDetails.area" value="{{place}}">{{place}}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="" class="col-form-label col-sm-2">Status</label>
-                <div class="col-sm-10">
-                    <select name="status" id="status" class="form-select" value="garageDetails.active">
-                        <option value=true [selected]="garageDetails.active == true">Active</option>
-                        <option value="false" [selected]="garageDetails.active == false">Disabled</option>
-                    </select>
-                </div>
-            </div>
+        <form class="py-3" id="garageAddForm" [formGroup]="garageEditForm" (submit)="updateGarageDetails()">
 
-            <div class="d-flex justify-content-end mt-2">
-                <button [disabled]="isValidForm == false || updateSubitLoadingFlag" class="btn background-orange text-white">
-                    <span *ngIf="!updateSubitLoadingFlag">
-                        Update {{ displayName }}
+            <div class="row mb-3">
+                <label for="Garage_Name" class="col-sm-3 col-form-label">Garage Name</label>
+                <div class="col-sm-9">
+                    <input type="text" name="garageName" formControlName="garageName" class="form-control" id="Garage_Name" placeholder="Garage name" />
+                    
+                    <div *ngIf="garageEditForm.get('garageName')?.touched">
+                        <span class="error" *ngIf="garageEditForm.get('garageName')?.hasError('required')">This field is required.</span>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="Full_Name" class="col-sm-3 col-form-label">Owner Name</label>
+                <div class="col-sm-9">
+                    <input type="text" name="name" formControlName="name" class="form-control" id="Full_Name" placeholder="Owner name" />
+    
+                    <div *ngIf="garageEditForm.get('name')?.touched">
+                        <span class="error" *ngIf="garageEditForm.get('name')?.hasError('required')">This field is required.</span>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="Phone_Number" class="col-sm-3 col-form-label">Phone Number</label>
+                <div class="col-sm-9">
+                    <input type="text" name="phoneNumber" formControlName="phoneNumber" class="form-control" id="Phone_Number" placeholder="9999999999" />
+    
+                    <div *ngIf="garageEditForm.get('phoneNumber')?.touched">
+                        <span class="error" *ngIf="garageEditForm.get('phoneNumber')?.hasError('required')">This field is required.</span>
+                        <span class="error" *ngIf="garageEditForm.get('phoneNumber')?.hasError('minlength')">Phone number should be of 10 digits.</span>
+                        <span class="error" *ngIf="garageEditForm.get('phoneNumber')?.hasError('pattern')">Please enter a valid number.</span>
+                        <span class="error" *ngIf="garageEditForm.get('phoneNumber')?.hasError('maxlength')">Phone number should be of 10 digits.</span>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="Phone_Number_alt" class="col-sm-3 col-form-label">Alternate Number</label>
+                <div class="col-sm-9">
+                    <input type="text" name="alternateNumber" formControlName="alternateNumber" class="form-control" id="Phone_Number_alt" placeholder="9999999999 (optional)" />
+                    
+                    <div *ngIf="garageEditForm.get('alternateNumber')?.touched">
+                        <span class="error" *ngIf="garageEditForm.get('alternateNumber')?.hasError('minlength')">Phone number should be of 10 digits. </span>
+                        <span class="error" *ngIf="garageEditForm.get('alternateNumber')?.hasError('maxlength')">Phone number should be of 10 digits. </span>
+                        <span class="error" *ngIf="garageEditForm.get('alternateNumber')?.hasError('pattern')">Phone number should only contain digits. </span>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="Gst_Number" class="col-sm-3 col-form-label">GST Number </label>
+                <div class="col-sm-9">
+                    <input type="text" name="gstNumber" formControlName="gstNumber" class="form-control" id="Gst_Number" placeholder="22-AAAAA0000A-1-Z-5 (optional)" />
+    
+                    <div *ngIf="garageEditForm.get('gstNumber')?.touched"> 
+                        <span class="error" *ngIf="garageEditForm.get('gstNumber')?.hasError('pattern')">Please check your GST number - format mismatch.</span>
+                    </div>   
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="panCard" class="col-sm-3 col-form-label">PAN Number </label>
+                <div class="col-sm-9">
+                    <input type="text" name="panCard" formControlName="panCard" class="form-control" id="panCard" placeholder="AAA-A-A-9999-A (optional)" />
+    
+                    <div *ngIf="garageEditForm.get('panCard')?.touched"> 
+                        <span class="error" *ngIf="garageEditForm.get('panCard')?.hasError('pattern')">Please check your PAN number - format mismatch.</span>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="Address" class="col-sm-3 col-form-label">Address</label>
+                <div class="col-sm-9">
+                    <textarea name="address" formControlName="address" class="form-control"  id="Address"
+                       rows="5" placeholder="Address of garageEditForm"></textarea>
+    
+                    <div *ngIf="garageEditForm.get('address')?.touched"> 
+                        <span class="error" *ngIf="garageEditForm.get('address')?.hasError('required')">This field is required.</span>
+                    </div>  
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="Pincode" class="col-sm-3 col-form-label">Pincode</label>
+                <div class="col-sm-9">
+                    <input type="text" name="pincode" formControlName="pincode" #pincode (blur)="getAreaListFromPincode(pincode.value)" 
+                        class="form-control"  id="Pincode" placeholder="ex - 380001"  />
+                        
+                    <span class="error" *ngIf="!isValidPincode">Pincode is not valid</span>
+    
+                    <div *ngIf="garageEditForm.get('pincode')?.touched"> 
+    
+                    </div>
+                    <span class="error" *ngIf="garageEditForm.get('pincode')?.hasError('minlength') && garageEditForm.get('pincode')?.touched ">Pincode should be of 6 digits.</span>
+                    <span class="error" *ngIf="garageEditForm.get('pincode')?.hasError('maxlength') && garageEditForm.get('pincode')?.touched">Pincode should be of 6 digits.</span>
+                    <span class="error" *ngIf="garageEditForm.get('pincode')?.hasError('required') && garageEditForm.get('pincode')?.touched">This field is required.</span>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <label for="Area" class="col-sm-3 col-form-label">Area</label>
+                <div class="col-sm-9">
+                    <select name="area" formControlName="area" id="areaOptions" class="form-select">
+                        <option *ngFor="let area of areaByPincodeList" value="{{area}}">{{area}}</option>
+                    </select>
+    
+                    <span class="error" *ngIf="garageEditForm.get('area')?.hasError('required')"></span>
+                    <span class="mt-1" *ngIf="pincodeAreaFetchLoading">
+                        <div class="spinner-border spinner-border-sm" role="status">
+                            <span class="visually-hidden">Loading</span> 
+                        </div>
+                        Loading places...
                     </span>
+                </div>
+            </div>
 
-                    <span *ngIf="updateSubitLoadingFlag">
-                        <div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div> 
+            <div class="row mb-3">
+                <label for="active" class="col-sm-3 col-form-label">Status</label>
+                <div class="col-sm-9">
+                    <select name="active" id="active" class="form-select" formControlName="active">
+                        <option [selected]="true == garageDetails.active" value=true>Active</option>
+                        <option [selected]="false == garageDetails.active" value=false>Disabled</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-end">
+                <button type="submit" [disabled]="!garageEditForm.valid || updateSubitLoadingFlag" class="btn background-orange text-white" id="add_garage_submit_btn">
+                    <span *ngIf="!updateSubitLoadingFlag">
+                        Update {{displayName}}
+                    </span>
+                    <span *ngIf="updateSubitLoadingFlag" class="mt-1" >
+                        <div class="spinner-border spinner-border-sm" role="status">
+                            <span class="visually-hidden">Loading</span> 
+                        </div>
+                        Updating {{displayName}}...
                     </span>
                 </button>
             </div>
-
         </form>
     </div>
 

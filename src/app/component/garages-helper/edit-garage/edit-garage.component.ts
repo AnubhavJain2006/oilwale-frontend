@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GarageService } from 'src/app/service/garage.service';
 
 import { Garage } from 'src/app/interface/garage';
-import { FormControl, FormGroup, SelectControlValueAccessor, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-garage',
@@ -15,15 +15,34 @@ export class EditGarageComponent implements OnInit {
   garageDetails!:Garage;
   dataLoadingStatus:boolean = true;
 
+  areaByPincodeList: any[] = [];
+
+  garageEditForm: FormGroup;
+
   // utitilities
   displayName:string = ""
-
-  areaByPincodeList: any[] = [];
+  
+  
+  // flags
   isValidPincode: boolean = true;
   isValidForm: boolean = false;
+  pincodeAreaFetchLoading: boolean = false;
   updateSubitLoadingFlag: boolean = false;
 
-  constructor(private router: ActivatedRoute, private garageService: GarageService) { }
+  constructor(private router: ActivatedRoute, private garageService: GarageService) { 
+    this.garageEditForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      garageName: new FormControl('', Validators.required),
+      phoneNumber: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+      alternateNumber: new FormControl("", [Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+      gstNumber: new FormControl('', [Validators.minLength(15), Validators.maxLength(15), Validators.pattern("[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[A-Z]{1}[0-9]{1}")]),
+      address: new FormControl('', Validators.required),
+      pincode: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
+      area: new FormControl('', Validators.required),
+      panCard: new FormControl('', [Validators.pattern("[A-Z]{5}[0-9]{4}[A-Z]{1}")]),
+      active: new FormControl('', Validators.required)
+    })
+  }
 
   ngOnInit(): void {
     this.id = this.router.snapshot.params.id;
@@ -33,11 +52,26 @@ export class EditGarageComponent implements OnInit {
       this.displayName = this.garageDetails.garageName;
       this.getAreaListFromPincode(this.garageDetails.pincode.toString())    
       this.validateForm();
+
+      this.garageEditForm.setValue({
+        name: this.garageDetails.name,
+        garageName: this.garageDetails.garageName,
+        phoneNumber: this.garageDetails.phoneNumber,
+        alternateNumber: this.garageDetails.alternateNumber,
+        gstNumber: this.garageDetails.gstNumber,
+        address: this.garageDetails.address,
+        pincode: this.garageDetails.pincode,
+        area: this.garageDetails.area,
+        panCard: this.garageDetails.panCard,
+        active: this.garageDetails.active
+      })
+
     })
   }
 
   getAreaListFromPincode(pincode: string) {
     if( pincode.length == 6) {
+      this.pincodeAreaFetchLoading = true;
       this.garageService.getAreaByPincode(pincode).then(data => {
         if (data[0]["Status"] == "Error") {
           this.isValidPincode = false;
@@ -48,22 +82,37 @@ export class EditGarageComponent implements OnInit {
           this.areaByPincodeList = data[0].PostOffice
           this.areaByPincodeList = this.areaByPincodeList.map(item => item.Name)
         }
+      this.pincodeAreaFetchLoading = false;
+
       })
     }
   }
 
   updateGarageDetails() {
-    if ( this.validationFields() == false) {
-      alert("Check all fields!");
-      console.log("invalid");
-      this.isValidForm = false;
-    }
+    const updateGarageObj:Garage = {
+      garageId: this.garageDetails.garageId,
+      name: this.garageEditForm.value.name,
+      garageName: this.garageEditForm.value.garageName,
+      phoneNumber: this.garageEditForm.value.phoneNumber,
+      alternateNumber: this.garageEditForm.value.alternateNumber,
+      gstNumber: this.garageEditForm.value.gstNumber,
+      address: this.garageEditForm.value.address,
+      pincode: this.garageEditForm.value.pincode,
+      area: this.garageEditForm.value.area,
+      panCard: this.garageEditForm.value.panCard,
+      image: this.garageDetails.image,
+      referralCode: this.garageDetails.referralCode,
+      totalCustomer: this.garageDetails.totalCustomer,
+      totalScore: this.garageDetails.totalScore,
+      createdAt: this.garageDetails.createdAt,
+      updatedAt: this.garageDetails.updatedAt,
+      active: this.garageDetails.active
+    } 
 
     this.updateSubitLoadingFlag = true;
-    this.garageService.updateGarageAccount(this.garageDetails).subscribe(data => {
+    this.garageService.updateGarageAccount(updateGarageObj).subscribe(data => {
       this.garageDetails = data;
-      this.displayName = this.garageDetails.garageName  
-      // alert("done");
+      this.displayName = this.garageDetails.garageName;
       this.updateSubitLoadingFlag = false;
     })
   }
