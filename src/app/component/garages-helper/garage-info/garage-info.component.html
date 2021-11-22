@@ -55,7 +55,9 @@
                         <tr>
                             <td class="p-3">Referral Code</td>
                             <td class="p-3">
-                                {{ garageDetails.referralCode }}
+                                <span class="badge bg-info">
+                                    {{ garageDetails.referralCode }}
+                                </span>
                             </td>
                         </tr>
                         <tr>
@@ -75,7 +77,7 @@
                         </tr>
                         <tr>
                             <td class="p-3">Address</td>
-                            <td class="p-3">{{ garageDetails.address }}</td>
+                            <td class="p-3">{{ garageDetails.address | titlecase }}</td>
                         </tr>
                         <tr>
                             <td class="p-3">Area</td>

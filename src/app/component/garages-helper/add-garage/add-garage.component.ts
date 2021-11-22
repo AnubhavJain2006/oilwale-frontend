@@ -20,6 +20,10 @@ export class AddGarageComponent implements OnInit {
   pincodeAreaFetchLoading: boolean = false;
   addGarageLoadingFlag: boolean = false;
 
+  // utilities
+  fieldTextTypePass: boolean = false;
+  fieldTextTypeConf: boolean = false;
+
   constructor(private garageService: GarageService, private router: Router) { 
     this.garage = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -85,4 +89,11 @@ export class AddGarageComponent implements OnInit {
     })
   }
 
+  toggleFieldTextTypePass() {
+    this.fieldTextTypePass = !this.fieldTextTypePass;
+  }
+
+  toggleFieldTextTypeConf() {
+    this.fieldTextTypeConf = !this.fieldTextTypeConf;
+  }
 }

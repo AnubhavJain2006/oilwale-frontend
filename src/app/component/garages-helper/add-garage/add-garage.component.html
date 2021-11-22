@@ -70,7 +70,7 @@
             <div class="row mb-3">
                 <label for="Gst_Number" class="col-sm-3 col-form-label">GST Number </label>
                 <div class="col-sm-9">
-                    <input type="text" name="gstNumber" formControlName="gstNumber" class="form-control" id="Gst_Number" placeholder="22-AAAAA0000A-1-Z-5 (optional)" />
+                    <input type="text" name="gstNumber" formControlName="gstNumber" class="form-control" id="Gst_Number" placeholder="22AAAAA0000A1Z5 (optional)" />
 
                     <div *ngIf="garage.get('gstNumber')?.touched"> 
                         <span class="error" *ngIf="garage.get('gstNumber')?.hasError('pattern')">Please check your GST number - format mismatch.</span>
@@ -81,7 +81,7 @@
             <div class="row mb-3">
                 <label for="panCard" class="col-sm-3 col-form-label">PAN Number </label>
                 <div class="col-sm-9">
-                    <input type="text" name="panCard" formControlName="panCard" class="form-control" id="panCard" placeholder="AAA-A-A-9999-A (optional)" />
+                    <input type="text" name="panCard" formControlName="panCard" class="form-control" id="panCard" placeholder="AAAAA9999A (optional)" />
 
                     <div *ngIf="garage.get('panCard')?.touched"> 
                         <span class="error" *ngIf="garage.get('panCard')?.hasError('pattern')">Please check your PAN number - format mismatch.</span>
@@ -89,11 +89,24 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
+            <div class="row mb-3 form-group">
                 <label for="password" class="col-sm-3 col-form-label">Password </label>
-                <div class="col-sm-9">
-                    <input type="password" name="password" formControlName="password" class="form-control" (change)="checkPasswordMatch()"
-                        id="password" placeholder="********" />
+                <div class="col-sm-9 ">
+                    <div class="input-group">
+
+                        <input 
+                            [type]="fieldTextTypePass ? 'text' : 'password'"
+                            name="password" 
+                            formControlName="password" 
+                            class="form-control" 
+                            (change)="checkPasswordMatch()"
+                            id="password" 
+                            placeholder="********" 
+                        />
+                        <span class="input-group-text">
+                            <i class="fas" [ngClass]="{'fa-eye': fieldTextTypePass, 'fa-eye-slash': !fieldTextTypePass}" (click)="toggleFieldTextTypePass()"></i>
+                        </span>
+                    </div>
 
                         <div *ngIf="garage.get('password')?.touched">
                             <span class="error" *ngIf="garage.get('password')?.hasError('required')">Prodive a password</span>
@@ -111,9 +124,15 @@
             <div class="row mb-3">
                 <label for="confirmPassword" class="col-sm-3 col-form-label">Confirm Password </label>
                 <div class="col-sm-9">
-                    <input type="password" name="confirmPassword" formControlName="confirmPassword" (change)="checkPasswordMatch()" class="form-control"
+                    <div class="input-group">
+                        
+                        <input [type]="fieldTextTypeConf ? 'text' : 'password'" name="confirmPassword" formControlName="confirmPassword" (change)="checkPasswordMatch()" class="form-control"
                         id="confirmPassword" placeholder="********" />
-
+                        
+                        <span class="input-group-text">
+                            <i class="fas" [ngClass]="{'fa-eye': fieldTextTypeConf, 'fa-eye-slash': !fieldTextTypeConf}" (click)="toggleFieldTextTypeConf()"></i>
+                        </span>
+                    </div>
                         <div *ngIf="garage.get('confirmPassword')?.touched">
                             <span class="error" *ngIf="garage.get('confirmPassword')?.hasError('required')">Confirm your password</span>
                         </div>

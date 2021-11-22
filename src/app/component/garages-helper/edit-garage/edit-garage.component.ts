@@ -28,6 +28,7 @@ export class EditGarageComponent implements OnInit {
   isValidForm: boolean = false;
   pincodeAreaFetchLoading: boolean = false;
   updateSubitLoadingFlag: boolean = false;
+  updateSubmitSuccessFlag: boolean = false;
 
   constructor(private router: ActivatedRoute, private garageService: GarageService) { 
     this.garageEditForm = new FormGroup({
@@ -113,7 +114,13 @@ export class EditGarageComponent implements OnInit {
     this.garageService.updateGarageAccount(updateGarageObj).subscribe(data => {
       this.garageDetails = data;
       this.displayName = this.garageDetails.garageName;
+      
       this.updateSubitLoadingFlag = false;
+      this.updateSubmitSuccessFlag = true;
+
+      setTimeout(() => {
+        this.updateSubmitSuccessFlag = false;
+      }, 5000);
     })
   }
 

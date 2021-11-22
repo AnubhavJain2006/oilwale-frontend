@@ -16,7 +16,8 @@ export class GaragesComponent implements OnInit {
   deactivatedGarages: Array<Garage> = [];
   
   // flags
-  
+  activeGaragesLoading: boolean = true;
+  deactiveGaragesLoading: boolean = true;
 
   constructor(private garageService: GarageService, private router: Router) {
     
@@ -25,6 +26,7 @@ export class GaragesComponent implements OnInit {
     }
     else {
       this.garages = this.garageService.garageList;
+      this.activeGaragesLoading = false;
     }
     
     if (this.garageService.deactivatedGarageList.length == 0) {
@@ -32,6 +34,7 @@ export class GaragesComponent implements OnInit {
     }
     else {
       this.deactivatedGarages = this.garageService.deactivatedGarageList;
+      this.deactiveGaragesLoading = false;
     }
 
   }
@@ -48,6 +51,8 @@ export class GaragesComponent implements OnInit {
     await this.garageService.getAllGarages().then(resp => {
       this.garages = resp;
       console.log(this.garages)
+
+      this.activeGaragesLoading = false;
     }, err => {
       console.log(err);
     }
@@ -57,8 +62,10 @@ export class GaragesComponent implements OnInit {
 
   async loadDeactivatedGarages() {
     await this.garageService.getDeactivatedGarages().then(resp => {
-      this.garages = resp;
+      this.deactivatedGarages = resp;
       console.log(this.garages)
+      
+      this.deactiveGaragesLoading = false;
     }, err => {
       console.log(err);
     }

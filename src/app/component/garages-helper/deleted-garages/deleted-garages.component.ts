@@ -9,6 +9,7 @@ import { Garage } from 'src/app/interface/garage';
 })
 export class DeletedGaragesComponent implements OnInit {
   @Input() deactivatedGarages!: Garage[];
+  @Input() loading!: boolean;
 
   constructor() { }
 

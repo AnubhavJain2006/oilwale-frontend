@@ -25,6 +25,12 @@
 
 
     <div class="col-lg-8 col-md-10 col-sm-12 mx-auto pb-4">
+
+        <div *ngIf="updateSubmitSuccessFlag" class="alert alert-success alert-dismissible d-flex align-items-center" role="alert">
+            <strong><i class="fas fa-check-circle"></i> Update success! </strong> <a class="alert-link mx-1" routerLink="/garages/{{ garageDetails.garageId }}"> Click here </a> to see details! 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
         <form class="py-3" id="garageAddForm" [formGroup]="garageEditForm" (submit)="updateGarageDetails()">
 
             <div class="row mb-3">

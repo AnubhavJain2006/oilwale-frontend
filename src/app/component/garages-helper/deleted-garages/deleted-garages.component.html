@@ -1,5 +1,17 @@
-<div class="text-center">
-    <h3 *ngIf="deactivatedGarages.length==0">No Data Available</h3>
+<div class="my-3 text-center">
+    <div class="py-2">
+        <h5 class="h5">DELETED GARAGES</h5>
+    </div>
+</div>
+
+<div *ngIf="loading" class="text-center">
+    <p>Fetching data ...</p>
+</div>
+
+<div *ngIf="!loading">
+
+    <div class="text-center">
+        <h3 *ngIf="deactivatedGarages.length==0">No Data Available</h3>
 </div>
 <div class="mx-2 mt-4 rounded">
     <div class="my-2">
@@ -9,6 +21,7 @@
             class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
             <thead class="background-orange text-white">
                 <tr>
+                    <th>ha</th>
                     <th>
                         <p class="my-1">Garage Name</p>
                     </th>
@@ -34,6 +47,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let garage of deactivatedGarages">
+                    <td>haha</td>
                     <td>{{garage.garageName}}</td>
                     <td>{{garage.name}}</td>
                     <td>{{garage.phoneNumber}}</td>
@@ -49,4 +63,5 @@
             </tbody>
         </table>
     </div>
+</div>
 </div>

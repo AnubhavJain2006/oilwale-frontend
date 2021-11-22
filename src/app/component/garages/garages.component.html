@@ -58,7 +58,7 @@
     <div class="tab-content" id="myTabContent">
 
         <div class="tab-pane fade show active" id="all_garages" role="tabpanel" aria-labelledby="all_garages-tab">
-            <app-active-garages [garages]="garages" ></app-active-garages>
+            <app-active-garages [garages]="garages" [loading]="activeGaragesLoading"></app-active-garages>
         </div>
 
         <!-- Add garage tab -->
@@ -72,7 +72,7 @@
         </div>
         <div class="tab-pane fade" id="deactivated_garages" role="tabpanel" aria-labelledby="deactivated_garages-tab">
             <div class="m-3">
-                <app-deleted-garages [deactivatedGarages]="deactivatedGarages"></app-deleted-garages>
+                <app-deleted-garages [deactivatedGarages]="deactivatedGarages" [loading]="deactiveGaragesLoading"></app-deleted-garages>
             </div>
         </div>
     </div>
