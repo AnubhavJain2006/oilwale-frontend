@@ -45,314 +45,34 @@
                 <i class="fas fa-code-branch"></i> Garage Activities
             </a>
         </li>
+
+        <li class="nav-item mx-1" role="presentation">
+            <a class="nav-link text-dark garage-tab" id="deactivated_garages-tab" onclick="change_tab('garage-tab',3)"
+                data-bs-toggle="tab" data-bs-target="#deactivated_garages" type="button" role="tab"
+                aria-controls="deactivated_garages" aria-selected="false">
+                <i class="fas fa-ban"></i> Deleted Garages
+            </a>
+        </li>
     </ul>
 
     <div class="tab-content" id="myTabContent">
-        <!-- All garage div -->
 
         <div class="tab-pane fade show active" id="all_garages" role="tabpanel" aria-labelledby="all_garages-tab">
-            <!-- table starts -->
-            <!-- <div *ngIf="isSubmitted" style="float: right;margin-top: 30px;">
-                <button class="btn btn-outline-primary" (click)="reload()"><i class="fas fa-sync"></i></button>
-            </div> -->
-            <div class="mt-2 pt-2 text-center lead fw-normal">
-
-                <p>{{ garageShowTableName | uppercase }} GARAGES</p>
-            </div>
-
-            <div class="d-flex justify-content-end">
-                <div class="col-lg-2 col-md-3 col-sm-12">
-                    <select name="display-type" id="display-type" class="form-select" [(ngModel)]="garageShowTableName" >
-                        <option value="active"> Active Garages</option>
-                        <option value="disabled"> Disabled Garages</option>
-                    </select>
-                </div>
-            </div>
-            <div class="py-3">
-                <div *ngIf="garageShowTableName === 'active'">
-                    <app-active-garages [garages]="garages" ></app-active-garages>
-                </div>
-                <div *ngIf="garageShowTableName === 'disabled'">
-                    <app-deleted-garages></app-deleted-garages>
-                </div>
-
-            </div>
-            <!-- table ends -->
+            <app-active-garages [garages]="garages" ></app-active-garages>
         </div>
 
         <!-- Add garage tab -->
         <div class="tab-pane fade" id="add_garage" role="tabpanel" aria-labelledby="add_garage-tab">
-            <div class="py-3">
-
-                <div class="py-2 text-center">
-                    <h5 class="h5">Add Garages</h5>
-                </div>
-
-                <div class="mx-auto col-lg-8 col-md-10 col-sm-12 mb-3">
-
-                    <!-- response -->
-                    <div *ngIf="newAddedGarage" class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong><i class="fas fa-check-circle"></i> Success!</strong> 
-                        New garage with name
-                        <strong> <a class="alert-link" routerLink="/garages/{{ newAddedGarage.garageId }}">{{newAddedGarage.name}}</a> </strong> 
-                        added successfully.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-
-
-                    <form class="py-3" id="garageAddForm" (ngSubmit)="addGarage()" [formGroup]="garage">
-
-                        <div class="row mb-3">
-                            <label for="Garage_Name" class="col-sm-3 col-form-label">Garage Name</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="garageName" formControlName="garageName" class="form-control" id="Garage_Name" placeholder="Garage name" />
-                                
-                                <div *ngIf="garage.get('garageName')?.touched">
-                                    <span class="error" *ngIf="garage.get('garageName')?.hasError('required')">This field is required.</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="Full_Name" class="col-sm-3 col-form-label">Owner Name</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="name" formControlName="name" class="form-control" id="Full_Name" placeholder="Owner name" />
-
-                                <div *ngIf="garage.get('name')?.touched">
-                                    <span class="error" *ngIf="garage.get('name')?.hasError('required')">This field is required.</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="Phone_Number" class="col-sm-3 col-form-label">Phone Number</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="phoneNumber" formControlName="phoneNumber" class="form-control" id="Phone_Number" placeholder="9999999999" />
-
-                                <div *ngIf="garage.get('phoneNumber')?.touched">
-                                    <span class="error" *ngIf="garage.get('phoneNumber')?.hasError('required')">This field is required.</span>
-                                    <span class="error" *ngIf="garage.get('phoneNumber')?.hasError('minlength')">Phone number should be of 10 digits.</span>
-                                    <span class="error" *ngIf="garage.get('phoneNumber')?.hasError('pattern')">Please enter a valid number.</span>
-                                    <span class="error" *ngIf="garage.get('phoneNumber')?.hasError('maxlength')">Phone number should be of 10 digits.</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="Phone_Number_alt" class="col-sm-3 col-form-label">Alternate Number</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="alternateNumber" formControlName="alternateNumber" class="form-control" id="Phone_Number_alt" placeholder="9999999999 (optional)" />
-                                
-                                <div *ngIf="garage.get('alternateNumber')?.touched">
-                                    <span class="error" *ngIf="garage.get('alternateNumber')?.hasError('minlength')">Phone number should be of 10 digits. </span>
-                                    <span class="error" *ngIf="garage.get('alternateNumber')?.hasError('maxlength')">Phone number should be of 10 digits. </span>
-                                    <span class="error" *ngIf="garage.get('alternateNumber')?.hasError('pattern')">Phone number should only contain digits. </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="Gst_Number" class="col-sm-3 col-form-label">GST Number </label>
-                            <div class="col-sm-9">
-                                <input type="text" name="gstNumber" formControlName="gstNumber" class="form-control" id="Gst_Number" placeholder="22-AAAAA0000A-1-Z-5 (optional)" />
-
-                                <div *ngIf="garage.get('gstNumber')?.touched"> 
-                                    <span class="error" *ngIf="garage.get('gstNumber')?.hasError('pattern')">Please check your GST number - format mismatch.</span>
-                                </div>   
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="panCard" class="col-sm-3 col-form-label">PAN Number </label>
-                            <div class="col-sm-9">
-                                <input type="text" name="panCard" formControlName="panCard" class="form-control" id="panCard" placeholder="AAA-A-A-9999-A (optional)" />
-
-                                <div *ngIf="garage.get('panCard')?.touched"> 
-                                    <span class="error" *ngIf="garage.get('panCard')?.hasError('pattern')">Please check your PAN number - format mismatch.</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-sm-3 col-form-label">Password </label>
-                            <div class="col-sm-9">
-                                <input type="password" name="password" formControlName="password" class="form-control" (change)="checkPasswordMatch()"
-                                    id="password" placeholder="********" />
-
-                                    <div *ngIf="garage.get('password')?.touched">
-                                        <span class="error" *ngIf="garage.get('password')?.hasError('required')">Prodive a password</span>
-                                        <span class="error" *ngIf="garage.get('password')?.hasError('minlength')">Password should have at least 8 characters in length</span>
-                                    </div>
-
-                                    <!-- password match error -->
-                                    <div *ngIf="garage.get('password')?.touched && garage.get('confirmPassword')?.touched">
-                                        <span class="error" *ngIf="false == checkPasswordMatch()">Password do not match!</span>
-                                    </div>
-
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="confirmPassword" class="col-sm-3 col-form-label">Confirm Password </label>
-                            <div class="col-sm-9">
-                                <input type="password" name="confirmPassword" formControlName="confirmPassword" (change)="checkPasswordMatch()" class="form-control"
-                                    id="confirmPassword" placeholder="********" />
-
-                                    <div *ngIf="garage.get('confirmPassword')?.touched">
-                                        <span class="error" *ngIf="garage.get('confirmPassword')?.hasError('required')">Confirm your password</span>
-                                    </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="Address" class="col-sm-3 col-form-label">Address</label>
-                            <div class="col-sm-9">
-                                <textarea name="address" formControlName="address" class="form-control"  id="Address"
-                                   rows="5" placeholder="Address of garage"></textarea>
-
-                                <div *ngIf="garage.get('address')?.touched"> 
-                                    <span class="error" *ngIf="garage.get('address')?.hasError('required')">This field is required.</span>
-                                </div>  
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="Pincode" class="col-sm-3 col-form-label">Pincode</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="pincode" formControlName="pincode" #pincode (blur)="getArea(pincode.value)" 
-                                    class="form-control"  id="Pincode" placeholder="ex - 380001"  />
-                                    
-                                <span class="error" *ngIf="!isValidPincode">Pincode is not valid</span>
-
-                                <div *ngIf="garage.get('pincode')?.touched"> 
-
-                                </div>
-                                <span class="error" *ngIf="garage.get('pincode')?.hasError('minlength') && garage.get('pincode')?.touched ">Pincode should be of 6 digits.</span>
-                                <span class="error" *ngIf="garage.get('pincode')?.hasError('maxlength') && garage.get('pincode')?.touched">Pincode should be of 6 digits.</span>
-                                <span class="error" *ngIf="garage.get('pincode')?.hasError('required') && garage.get('pincode')?.touched">This field is required.</span>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="Area" class="col-sm-3 col-form-label">Area</label>
-                            <div class="col-sm-9">
-                                <select name="area" formControlName="area" id="areaOptions" class="form-select">
-                                    <option value="">-- Provide pincode first --</option>
-                                    <option *ngFor="let area of areas" value="{{area}}">{{area}}</option>
-                                </select>
-
-                                <span class="error" *ngIf="garage.get('area')?.hasError('required')"></span>
-                                <span class="mt-1" *ngIf="pincodeAreaFetchLoading">
-                                    <div class="spinner-border spinner-border-sm" role="status">
-                                        <span class="visually-hidden">Loading</span> 
-                                    </div>
-                                    Loading places...
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- <div class="row mb-3">
-                            <label for="Garage_Image" class="col-sm-3 col-form-label">Garage Image</label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="file" name="image" multiple id="Garage_Image" />
-                            </div>
-                        </div> -->
-                        
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" [disabled]="!garage.valid || !checkPasswordMatch() || addGarageLoadingFlag" class="btn background-orange text-white" id="add_garage_submit_btn">
-                                <span *ngIf="!addGarageLoadingFlag">
-                                    Add Garage
-                                </span>
-                                <span class="mt-1" *ngIf="addGarageLoadingFlag">
-                                    <div class="spinner-border spinner-border-sm" role="status">
-                                        <span class="visually-hidden">Loading</span> 
-                                    </div>
-                                    Adding Garage...
-                                </span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <app-add-garage></app-add-garage>
         </div>
         
         <div class="tab-pane fade" id="garage_activities" role="tabpanel" aria-labelledby="garage_activities-tab">
             <!-- activities starts -->
-            <div class="py-3">
-                <div class="table-responsive mt-4">
-                    <table datatable
-                        class="table table-bordered table-hover text-center rounded make_datatable pt-3 mb-3">
-                        <thead class="background-orange text-white">
-                            <tr>
-                                <th>
-                                    <p class="my-1">Activity ID</p>
-                                </th>
-                                <th>
-                                    <p class="my-1">Date</p>
-                                </th>
-                                <th>
-                                    <p class="my-1">Time</p>
-                                </th>
-                                <th>
-                                    <p class="my-1">User</p>
-                                </th>
-                                <th>
-                                    <p class="my-1">Activity</p>
-                                </th>
-                                <th>
-                                    <p class="my-1">Category</p>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>ACT001235</td>
-                                <td>12/02/2021</td>
-                                <td>19:15</td>
-                                <td><a href="">@Admin21</a></td>
-                                <td>A long description of some activity</td>
-                                <td>Garage</td>
-                            </tr>
-                            <tr>
-                                <td>ACT001235</td>
-                                <td>12/02/2021</td>
-                                <td>19:15</td>
-                                <td><a href="">@Admin21</a></td>
-                                <td>A long description of some activity</td>
-                                <td>Garage</td>
-                            </tr>
-                            <tr>
-                                <td>ACT001235</td>
-                                <td>12/02/2021</td>
-                                <td>19:15</td>
-                                <td><a href="">@Admin21</a></td>
-                                <td>A long description of some activity</td>
-                                <td>Garage</td>
-                            </tr>
-                            <tr>
-                                <td>ACT001235</td>
-                                <td>12/02/2021</td>
-                                <td>19:15</td>
-                                <td><a href="">@Admin21</a></td>
-                                <td>A long description of some activity</td>
-                                <td>Garage</td>
-                            </tr>
-                            <tr>
-                                <td>ACT001235</td>
-                                <td>12/02/2021</td>
-                                <td>19:15</td>
-                                <td><a href="">@Admin21</a></td>
-                                <td>A long description of some activity</td>
-                                <td>Garage</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <app-garage-activities></app-garage-activities>
         </div>
-        <div class="tab-pane fade" id="garage_deleted" role="tabpanel" aria-labelledby="garage_deleted-tab">
+        <div class="tab-pane fade" id="deactivated_garages" role="tabpanel" aria-labelledby="deactivated_garages-tab">
             <div class="m-3">
-
+                <app-deleted-garages [deactivatedGarages]="deactivatedGarages"></app-deleted-garages>
             </div>
         </div>
     </div>

@@ -41,6 +41,8 @@ import { AddSchemeComponent } from './component/schemes-helper/add-scheme/add-sc
 import { SchemeActivitiesComponent } from './component/schemes-helper/scheme-activities/scheme-activities.component';
 import { AllSchemesComponent } from './component/schemes-helper/all-schemes/all-schemes.component';
 import { EditSchemeComponent } from './component/schemes-helper/edit-scheme/edit-scheme.component';
+import { AddGarageComponent } from './component/garages-helper/add-garage/add-garage.component';
+import { GarageActivitiesComponent } from './component/garages-helper/garage-activities/garage-activities.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,9 @@ import { EditSchemeComponent } from './component/schemes-helper/edit-scheme/edit
     AddSchemeComponent,
     SchemeActivitiesComponent,
     AllSchemesComponent,
-    EditSchemeComponent
+    EditSchemeComponent,
+    AddGarageComponent,
+    GarageActivitiesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,16 +1,52 @@
-<div class="mt-4">
+<div class="text-center">
+    <h3 *ngIf="deactivatedGarages.length==0">No Data Available</h3>
+</div>
+<div class="mx-2 mt-4 rounded">
+    <div class="my-2">
+    </div>
     <div class="table-responsive">
-        <table  datatable [dtOptions]="dtOptionsDeletedGarage" [dtTrigger]="dtTriggerDeletedGarage" class="table table-bordered table-hover text-center pt-3 mb-3 w-100">
+        <table datatable *ngIf="deactivatedGarages.length>0"
+            class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
             <thead class="background-orange text-white">
                 <tr>
-                    <td>Garage Name</td>
-                    <td>Owner Name</td>
-                    <td>Phone</td>
-                    <td>Alternate Phone</td>
-                    <td>Area</td>
-                    <td>Referral Code</td>
+                    <th>
+                        <p class="my-1">Garage Name</p>
+                    </th>
+                    <th>
+                        <p class="my-1">Owner Name</p>
+                    </th>
+                    <th>
+                        <p class="my-1">Phone</p>
+                    </th>
+                    <th>
+                        <p class="my-1">Address</p>
+                    </th>
+                    <th>
+                        <p class="my-1">Pincode</p>
+                    </th>
+                    <th>
+                        <p class="my-1">Referral Code</p>
+                    </th>
+                    <th>
+                        <p class="my-1">Info</p>
+                    </th>
                 </tr>
             </thead>
+            <tbody>
+                <tr *ngFor="let garage of deactivatedGarages">
+                    <td>{{garage.garageName}}</td>
+                    <td>{{garage.name}}</td>
+                    <td>{{garage.phoneNumber}}</td>
+                    <td>{{garage.address}}</td>
+                    <td>{{garage.pincode}}</td>
+                    <td>{{garage.referralCode}}</td>
+                    <td>
+                        <a routerLink="/garages/{{ garage.garageId }}">
+                            <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button> 
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>

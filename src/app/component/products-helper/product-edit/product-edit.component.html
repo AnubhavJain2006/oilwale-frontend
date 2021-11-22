@@ -18,8 +18,8 @@
 
         <div class="mx-auto col lg-8 col-md-8 col-sm 12">
             <div *ngIf="updateProductSuccessFlag" class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong> <i class="fas fa-check-circle"></i> Success!</strong> Product
-                updated successfully. <a routerLink="/products/{{ productDetails.productId }}" class="link-success"> Click </a> to see details
+                <strong> <i class="fas fa-check-circle"></i> Success!</strong> 
+                Product updated successfully. <a routerLink="/products/{{ productDetails.productId }}" class="alert-link"> Click </a> to see details
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
@@ -80,7 +80,7 @@
             </div>
             <div class="mg-3">
                 <div class="d-flex justify-content-end">
-                    <button (click)="updateProduct()" class="btn background-orange text-white" type="submit">
+                    <button (click)="updateProduct()" [disabled]="updateProductLoadingFlag" class="btn background-orange text-white" type="submit">
                         <span *ngIf="!updateProductLoadingFlag">
                             Update {{ productDisplayName }}
                         </span>
@@ -88,6 +88,7 @@
                             <div class="spinner-border spinner-border-sm" role="status">
                                 <span class="visually-hidden">Loading...</span>
                               </div>
+                              Updating {{ productDisplayName }} ...
                         </span>
                     </button>
                 </div>

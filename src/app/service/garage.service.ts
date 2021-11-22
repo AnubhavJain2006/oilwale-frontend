@@ -16,6 +16,7 @@ import { Garagepointsredeem } from '../interface/utilities/garagepointsredeem';
 export class GarageService {
   
   garageList: Array<Garage> = [];
+  deactivatedGarageList: Array<Garage> = [];
   _refreshNeeded = new Subject<void>();
 
   apiUrl:string = environment.baseUrl + "api/garage";
@@ -63,6 +64,10 @@ export class GarageService {
   }
   getAllGarages(): Promise<any> {
     return this.httpClient.get(environment.baseUrl + "api/garage/active").toPromise()
+  }
+
+  getDeactivatedGarages(): Promise<any> {
+    return this.httpClient.get(environment.baseUrl + "api/garage/deactivated").toPromise();
   }
 
   getGarageById(id: string): Observable<Garage> {
