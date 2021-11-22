@@ -6,7 +6,9 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { __assign } from 'tslib';
+
 import { Customer } from '../interface/customer';
+import { Garagepointsredeem } from '../interface/utilities/garagepointsredeem';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,7 @@ import { Customer } from '../interface/customer';
 export class GarageService {
   
   garageList: Array<Garage> = [];
+  deactivatedGarageList: Array<Garage> = [];
   _refreshNeeded = new Subject<void>();
 
   apiUrl:string = environment.baseUrl + "api/garage";
@@ -37,6 +40,7 @@ export class GarageService {
       referralCode: "",
       totalCustomer: 0,
       totalScore: 0,
+      panCard: "",
       // isActive: boolean,
       createdAt: "",
       updatedAt: "",
@@ -62,6 +66,10 @@ export class GarageService {
     return this.httpClient.get(environment.baseUrl + "api/garage/active").toPromise()
   }
 
+  getDeactivatedGarages(): Promise<any> {
+    return this.httpClient.get(environment.baseUrl + "api/garage/deactivated").toPromise();
+  }
+
   getGarageById(id: string): Observable<Garage> {
     return this.httpClient.get<Garage>(environment.baseUrl + 'api/garage/' + id);
   }
@@ -82,6 +90,11 @@ export class GarageService {
     return this.httpClient.delete<Garage>(environment.baseUrl + 'api/garage/' + id).pipe(tap(() => {
       this._refreshNeeded.next();
     }));
+  }
+
+  redeemGaragePoints(id: string, points: number): Observable<Garagepointsredeem> {
+    const data = {data: points};
+    return this.httpClient.post<Garagepointsredeem>( this.apiUrl + '/redeemPoints/' + id, data);
   }
 
   restoreGarageAccount(garage: Garage): Observable<Garage> {

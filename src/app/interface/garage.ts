@@ -10,7 +10,7 @@ export interface Garage {
     area: string;
     image: string;
     referralCode: string;
-    // isActive: boolean;
+    panCard: string;
     totalCustomer: number,
     totalScore: number,
     createdAt: string;

@@ -27,6 +27,7 @@ export class AddVehicleComponent implements OnInit {
 
   formInputCompany: string = "";
   formInputModel: string = "";
+  formInputType: string = "";
   formInputSuggestedProducts: string[] = [];
 
   newVehicleCompanyName:string = "";
@@ -81,6 +82,7 @@ export class AddVehicleComponent implements OnInit {
    onAddNewCompany() {
       if (this.newVehicleCompanyName.length == 0) {
         alert("Provide a company name first!");
+        return;
       }
 
       const newVehicleComapny:VehicleCompany = {

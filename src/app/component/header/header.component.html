@@ -43,19 +43,19 @@
                 <div class="col-12">
                     <ul class="list-unstyled px-0">
                         <li class="py-1">
-                            <a routerLink="#" class="text-decoration-none text-secondary">
+                            <a routerLink="/myaccount" class="text-decoration-none text-secondary">
                                 <i class="fas fa-user-circle"></i>
                                 Profile
                             </a>
                         </li>
                         <li class="py-1">
-                            <a routerLink="#" class="text-decoration-none text-secondary">
+                            <a routerLink="/myactivities" class="text-decoration-none text-secondary">
                                 <i class="fas fa-chart-line"></i>
                                 Activities
                             </a>
                         </li>
                         <li class="py-1">
-                            <a (click)="logout()" class="text-decoration-none text-secondary">
+                            <a (click)="logout()" class="text-decoration-none text-secondary pointer-cursor">
                                 <i class="fas fa-sign-out-alt"></i>
                                 Logout
                             </a>
@@ -120,20 +120,25 @@
                             class="nav-item pt-1"><a class="nav-link tab-item text-light active" routerLink="/schemes">
                                 <i class="fas fa-object-ungroup"></i> Schemes
                             </a></li>
-                        <li (click)="setActive('accounts')" [ngClass]="{'active-tab':active=='accounts'}"
-                            class="nav-item pt-1"><a class="nav-link tab-item text-light active" routerLink="/accounts">
-                                <i class="fas fa-user-circle"></i> Manage
-                                Accouts
+
+                        <li (click)="setActive('orders')" [ngClass]="{'active-tab':active=='orders'}"
+                            class="nav-item pt-1"><a class="nav-link tab-item text-light active" routerLink="/schemes">
+                                <i class="fas fa-dice-d6"></i> Orders
                             </a></li>
+                            
                     </ul>
 
                     <hr>
                     <ul class="nav flex-column mb-2">
+                        <li (click)="setActive('accounts')" [ngClass]="{'active-tab':active=='accounts'}"
+                            class="nav-item pt-1"><a class="nav-link tab-item text-light active" routerLink="/accounts">
+                                <i class="fas fa-user-circle"></i> Manage Accouts
+                            </a></li>
                         <li (click)="setActive('myaccount')" [ngClass]="{'active-tab':active=='myaccount'}"
                             class="nav-item"><a class="nav-link tab-item text-light active" routerLink="/myaccount"> <i
                                     class="fas fa-user"></i> My Account
                             </a></li>
-                        <li class="nav-item pt-1"><a class="nav-link tab-item text-light" routerLink="#"> <i
+                        <li class="nav-item pt-1"><a class="nav-link tab-item text-light" routerLink="/myactivities"> <i
                                     class="fas fa-clipboard-list"></i> My Activities
                             </a></li>
                         <li class="nav-item pt-1"><a class="nav-link tab-item text-light" (click)="logout()"> <i

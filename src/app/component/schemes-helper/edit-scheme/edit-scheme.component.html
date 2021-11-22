@@ -1,0 +1,80 @@
+<p class="lead" *ngIf="dataLoadingStatus">Fetching data ...</p>
+<div *ngIf="!dataLoadingStatus">
+    <div class="d-flex flex-wrap py-3">
+        <h3 class="h3">
+            <a routerLink="/schemes" class="text-decoration-none text-dark">
+                <i class="fas fa-object-ungroup"></i> Schemes 
+            </a>
+            <a routerLink="/schemes/{{ schemeDetails.schemeId }}" class="text-decoration-none text-dark">
+                <i class="fas fa-angle-right"></i> {{ displayName }}
+            </a>
+            <i class="fas fa-angle-right"></i> Edit
+        </h3>
+    </div>
+    <div class="my-3 mx-auto col-lg-8 col-md-10 col-sm-12">
+        <div class="text-center my-2 fw-normal lead">Editing - <span class="font-monospace">{{ displayName }}</span></div>
+        
+        <form>
+            <div class="row mb-3">
+                <label for="schemeName" class="col-sm-2 col-form-label">Scheme Name</label>
+                <div class="col-sm-10">
+                    <input type="text" name="schemeName" [(ngModel)]="schemeDetails.schemeName" class="form-control" id="schemeName" (change)="validateForm()" placeholder="Scheme name" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="description" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                    <textarea type="text" name="description" [(ngModel)]="schemeDetails.description" (change)="validateForm()" class="form-control" id="description" placeholder="Description" rows="5" ></textarea>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="startedAt" class="col-sm-2 col-form-label">Started At</label>
+                <div class="col-sm-10">
+                    <input type="date" name="startedAt" (change)="validateForm()" class="form-control" id="startedAt" [ngModel] ="schemeDetails.startedAt| date:'yyyy-MM-dd'" (ngModelChange)="schemeDetails.startedAt = $event" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="endedAt" class="col-sm-2 col-form-label">Ended At</label>
+                <div class="col-sm-10">
+                    <input type="date" name="endedAt" (change)="validateForm()" class="form-control" id="endedAt" [ngModel] = "schemeDetails.endedAt|date:'yyyy-MM-dd'" (ngModelChange)="schemeDetails.endedAt = $event" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="schemeName" class="col-sm-2 col-form-label">Offered to</label>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input"  type="radio" name="targetGroup" [(ngModel)]="schemeDetails.targetGroup" id="targetGarages" value="garages">
+                        <label class="form-check-label" for="targetGarages">
+                        Garages
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="targetGroup" [(ngModel)]="schemeDetails.targetGroup" id="targetCustomers" value="customers">
+                        <label class="form-check-label" for="targetCustomers">
+                        Customers
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3 d-flex justify-content-end">
+                <button class="btn background-orange text-white" [disabled]="!validationFlag || updateLoadingFlag" (click)="updateSchemeInfo()">
+                    <span *ngIf="!updateLoadingFlag">
+                        'Update {{ displayName }}'
+                    </span>
+                    <span *ngIf="updateLoadingFlag">
+                        <div class="spinner-border spinner-border-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </span>
+                </button>
+            </div>
+        </form>
+
+
+    </div>
+</div>

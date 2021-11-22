@@ -8,6 +8,7 @@ import { VehicleInfoComponent } from './component/vehicles-helper/vehicle-info/v
 import { VehicleEditComponent } from './component/vehicles-helper/vehicle-edit/vehicle-edit.component';
 
 import { SchemesComponent } from './component/schemes/schemes.component';
+import { EditSchemeComponent } from './component/schemes-helper/edit-scheme/edit-scheme.component';
 import { SchemeInfoComponent } from './component/schemes-helper/scheme-info/scheme-info.component';
 
 import { ProductsComponent } from './component/products/products.component';
@@ -23,7 +24,10 @@ import { EditGarageComponent } from './component/garages-helper/edit-garage/edit
 
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HeaderComponent } from './component/header/header.component';
+
 import { MyaccountComponent } from './component/myaccount/myaccount.component';
+import { MyactivitiesComponent } from './component/myactivities/myactivities.component';
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './service/AuthGaurd/auth.guard';
@@ -45,6 +49,7 @@ const routes: Routes = [
 
   { path: "schemes", component: SchemesComponent, canActivate: [AuthGuard] },
   { path: "schemes/:id", component: SchemeInfoComponent, canActivate: [AuthGuard] },
+  { path: "schemes/:id/edit", component: EditSchemeComponent, canActivate: [AuthGuard] },
 
   { path: "vehicles", component: VehiclesComponent, canActivate: [AuthGuard] },
   { path: "vehicles/:id", component: VehicleInfoComponent, canActivate: [AuthGuard]},
@@ -53,7 +58,8 @@ const routes: Routes = [
   { path: "accounts", component: AccountsComponent, canActivate: [AuthGuard] },
   { path: "accounts/:id", component: AccountInfoComponent, canActivate: [AuthGuard] },
   
-  { path: "myaccount", component: MyaccountComponent, canActivate: [AuthGuard] }
+  { path: "myaccount", component: MyaccountComponent, canActivate: [AuthGuard] },
+  { path: "myactivities", component: MyactivitiesComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

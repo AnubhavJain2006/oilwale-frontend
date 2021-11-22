@@ -50,4 +50,8 @@ export class ProductService {
     return this.httpClient.put<Product>(url, product);
   }
 
+  getSpecificVehicleTypeProduct(type: string): Observable<Product[]> {
+    return this.httpClient.get<Product[]>( environment.baseUrl + 'api/product/vehicleType/' + type);
+  }
+
 }

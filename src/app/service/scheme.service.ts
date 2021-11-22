@@ -10,6 +10,8 @@ import { tap } from 'rxjs/operators';
 })
 export class SchemeService {
 
+  apiUrl: string = environment.baseUrl + 'api/scheme';
+
   _refreshNeeded = new Subject<void>();
 
   get refreshNeeded() {
@@ -18,24 +20,32 @@ export class SchemeService {
   constructor(private httpClient: HttpClient) { }
 
   addNewScheme(scheme: Scheme): Observable<any> {
-    return this.httpClient.post(environment.baseUrl + "api/addScheme", scheme).pipe(tap(() => {
+    return this.httpClient.post(this.apiUrl, scheme).pipe(tap(() => {
       this._refreshNeeded.next()
     }))
   }
 
   loadAllActiveScheme(): Promise<any> {
-    return this.httpClient.get(environment.baseUrl + "api/allActiveScheme").toPromise();
+    return this.httpClient.get( this.apiUrl + "/active").toPromise();
   }
   loadAllConcludedScheme() {
-    return this.httpClient.get(environment.baseUrl + "api/findAllConcludedScheme").toPromise();
+    return this.httpClient.get( this.apiUrl + "/concluded").toPromise();
 
   }
   loadAllUpComingScheme() {
-    return this.httpClient.get(environment.baseUrl + "api/allUpcomingScheme").toPromise();
+    return this.httpClient.get(this.apiUrl + "/upcoming").toPromise();
   }
 
   getSchemeById(id: string): Observable<Scheme> {
-    return this.httpClient.get<Scheme>(environment.baseUrl + "api/getSchemeById/" + id);
+    return this.httpClient.get<Scheme>(this.apiUrl + '/' +id);
   }
+
+  deleteScheme(id: string): Observable<Scheme> {
+    return this.httpClient.delete<Scheme>(this.apiUrl + '/' + id);
+  }
+
+  updateScheme(schemeObj: Scheme): Observable<Scheme> {
+    return this.httpClient.put<Scheme>(this.apiUrl, schemeObj);
+  } 
 
 }

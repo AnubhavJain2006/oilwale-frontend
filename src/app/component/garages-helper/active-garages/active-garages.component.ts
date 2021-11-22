@@ -9,6 +9,7 @@ import { Garage } from 'src/app/interface/garage';
 })
 export class ActiveGaragesComponent implements OnInit {
   @Input() garages!: Garage[];
+  @Input() loading!: boolean;
 
   constructor() { }
 

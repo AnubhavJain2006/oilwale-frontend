@@ -23,7 +23,11 @@ export class ActivityService {
   }
 
   getDomainActivities(domain: string): Observable<Activity[]> {
-    return this.httpClient.get<Activity[]>(this.apiUrl + '/' + domain)
+    return this.httpClient.get<Activity[]>(this.apiUrl + '/' + domain);
+  }
+
+  getUserActivities(id: string): Observable<Activity[]> {
+    return this.httpClient.get<Activity[]>(this.apiUrl + '/users/' + id);
   }
 
 }

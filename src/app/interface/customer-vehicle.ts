@@ -1,8 +1,12 @@
 export interface CustomerVehicle {
     customerVehicleId: string;
-    brandId: string;
-    dailyKMTravelled: string;
+    vehicleCompanyId: string;
+    vehicleId: string;
+    dailyKMTravel:  number;
     currentKM: number;
-    numberPlate: string
-    
+    numberPlate: string;
+    customerId: string;
+    createdAt: Date;
+    updatedAt: Date;
+    active: boolean;
 }

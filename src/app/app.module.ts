@@ -36,6 +36,13 @@ import { ActiveGaragesComponent } from './component/garages-helper/active-garage
 import { EditGarageComponent } from './component/garages-helper/edit-garage/edit-garage.component';
 import { ActiveProductsComponent } from './component/products-helper/active-products/active-products.component';
 import { VehicleActivitiesComponent } from './component/vehicles-helper/vehicle-activities/vehicle-activities.component';
+import { MyactivitiesComponent } from './component/myactivities/myactivities.component';
+import { AddSchemeComponent } from './component/schemes-helper/add-scheme/add-scheme.component';
+import { SchemeActivitiesComponent } from './component/schemes-helper/scheme-activities/scheme-activities.component';
+import { AllSchemesComponent } from './component/schemes-helper/all-schemes/all-schemes.component';
+import { EditSchemeComponent } from './component/schemes-helper/edit-scheme/edit-scheme.component';
+import { AddGarageComponent } from './component/garages-helper/add-garage/add-garage.component';
+import { GarageActivitiesComponent } from './component/garages-helper/garage-activities/garage-activities.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +73,14 @@ import { VehicleActivitiesComponent } from './component/vehicles-helper/vehicle-
     ActiveGaragesComponent,
     EditGarageComponent,
     ActiveProductsComponent,
-    VehicleActivitiesComponent
+    VehicleActivitiesComponent,
+    MyactivitiesComponent,
+    AddSchemeComponent,
+    SchemeActivitiesComponent,
+    AllSchemesComponent,
+    EditSchemeComponent,
+    AddGarageComponent,
+    GarageActivitiesComponent
   ],
   imports: [
     BrowserModule,

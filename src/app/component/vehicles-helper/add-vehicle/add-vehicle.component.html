@@ -20,8 +20,8 @@
         <p>Vehicle added successfully!</p>
       </div>
       <div class="row mb-3">
-        <label for="Company" class="col-sm-2 col-form-label">Company</label>
-        <div class="col-sm-10">
+        <label for="Company" class="col-sm-3 col-form-label">Company</label>
+        <div class="col-sm-9">
           <select
             class="form-select"
             name="vehicleCompany"
@@ -53,8 +53,8 @@
       </div>
 
       <div class="row mb-3">
-        <label for="Model" class="col-sm-2 col-form-label">Model</label>
-        <div class="col-sm-10">
+        <label for="Model" class="col-sm-3 col-form-label">Model</label>
+        <div class="col-sm-9">
           <input
             type="text"
             name="vehicleModel"
@@ -66,32 +66,34 @@
       </div>
 
       <div class="row mb-3">
-        <label for="Product" class="col-sm-2 col-form-label"
+        <label for="type" class="col-sm-3 col-form-label">Vehicle type</label>
+        <div class="col-sm-9">
+          <select name="type" id="type" class="form-select">
+            <option value="2-wheeler">2 Wheelers</option>
+            <option value="3-wheeler">3 Wheelers</option>
+            <option value="4-wheeler">4 Wheelers</option>
+            <option value="truck">Trucks</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="Product" class="col-sm-3 col-form-label"
           >Suggested Product(s)</label
         >
-        <div class="col-sm-10">
+        <div class="col-sm-9">
           <div id="suggestionArea">
-            <div
-              *ngFor="let product of suggestedProducts"
-              class="form-check"
-              >
-              <div class="d-flex justify-content-between">
-
-                  <label
-                  class="form-check-label"
-                  for="{{ product.productId }}"
-                  >
-                  {{ product.productName }}</label
-                  >
-                  
-                  <input
-                  type="checkbox"
-                  class="form-check-input"
-                  (click)="addSuggesstedProduct(product.productId)"
-                  id="{{ product.productId }}"
-                  />
-
-            </div>
+            <div *ngFor="let product of suggestedProducts" class="rpw" >
+              <div class="form-check">
+                <input type="checkbox" (click)="addSuggesstedProduct(product.productId)" class="form-check-input mx-1" id="{{ product.productId }}"/>
+                <label class="form-check-label mx-1" for="{{ product.productId }}" >
+                  {{ product.productName }}
+                  <span *ngIf="product.vehicleType != null && product.vehicleType.length > 0">
+                      ( {{ product.vehicleType }} ) 
+                   
+                  </span>
+                </label>
+              </div>
             </div>
           </div>
         </div>

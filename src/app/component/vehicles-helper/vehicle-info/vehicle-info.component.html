@@ -37,7 +37,7 @@
                 <div class="vstack gap-2">
                     <div *ngFor="let prod of vehicleDetails.suggestedProductDetails" class="px-md-2">
 
-                        <div > - <a class="text-decoration-none" routerLink="/products/{{ prod.productId }}"> {{ prod.productName }} <i class="fas fa-link"></i></a> </div>
+                        <div > - <a class="text-decoration-none text-dark" routerLink="/products/{{ prod.productId }}"> {{ prod.productName }} <sup> <i class="fas fa-link"></i></sup></a> </div>
                     </div>
                 </div>
             </div>
@@ -78,11 +78,22 @@
                     <tbody>
                         <tr>
                             <td class="p-3">Update vehicle</td>
-                            <td class="p-3"> <a routerLink="/vehicles/{{ vehicleDetails._id }}/edit"> Update vehicle info </a></td>
+                            <td class="p-3"> <a routerLink="/vehicles/{{ vehicleDetails._id }}/edit" class="btn text-info"> Update vehicle info </a></td>
                         </tr>
                         <tr *ngIf="vehicleDetails.active == false">
                             <td class="p-3">Restore Vehicle</td>
-                            <td class="p-3"> <button class="btn text-success">Restore</button></td>
+                            <td class="p-3"> 
+                                <button (click)="onRestoreVehicle()" [disabled]="restoreLoadingFlag" class="btn text-success">
+                                    <span *ngIf="!restoreLoadingFlag">
+                                        Restore
+                                    </span>
+                                    <span *ngIf="restoreLoadingFlag">
+                                        <div class="spinner-border spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </span>
+                                </button>
+                            </td>
                         </tr>
                         <tr *ngIf="vehicleDetails.active == true">
                             <td class="p-3">Delete Vehicle</td>
@@ -105,16 +116,17 @@
         </div>
     </div>
 
-    <div class="my-3">
+    <div class="my-3" *ngIf="sameCompanyVehicles.length > 1">
         <div class="p-3">
 
-            <p class="fw-bold">VEHICLES BY THIS COMPANY</p>
-            <div class="vstack gap-3">
-                <div> - HYABUSA</div>
-                <div> - KWASKI NINJA</div>
-                <div> - PCJ 600</div>
-                <div> - Scooter </div>
-                <div> - Chetak</div>
+            <p class="fw-bold">MORE VEHICLES BY THIS COMPANY</p>
+            <div class="gap-3">
+                <div *ngFor="let v of sameCompanyVehicles">
+                    <div *ngIf="vehicleDetails._id != v.vehicleId">
+                        - <a href="/vehicles/{{ v.vehicleId }}" target="_blank" class="text-decoration-none text-dark"> {{ v.vehicleModel }} </a> <sup><i class="fas fa-link"></i></sup> 
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>

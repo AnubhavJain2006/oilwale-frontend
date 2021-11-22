@@ -8,4 +8,8 @@ export interface Product {
     active: boolean;
     createdAt: string;
     updatedAt: string;
+    vehicleType: Array<string>;
 }
+
+
+// if editing this, then also update the objects in product-info.ts and product.compnent.ts file

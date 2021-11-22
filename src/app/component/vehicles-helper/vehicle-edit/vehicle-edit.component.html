@@ -20,6 +20,11 @@
     </div>
 
     <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+
+        <div *ngIf="updateVehicleSuccess" class="alert alert-success d-flex align-items-center" role="alert">
+                <strong><i class="fas fa-check-circle"></i> Update success! </strong> <a class="alert-link mx-1" routerLink="/vehicle/{{ vehicleDetails._id }}"> Click here </a> to see details! 
+        </div>
+
         <form>
             <div class="row mb-3">
                 <label for="vehicleCompany" class="col-sm-2 col-form-label">Company</label>
@@ -48,7 +53,7 @@
             </div>
             <div class="row mb-3">
                 <div class="d-flex justify-content-end">
-                    <button class="btn background-orange text-white" (click)="onUpdateVehicle()">
+                    <button class="btn background-orange text-white" [disabled]="updateVehicleLoading" (click)="onUpdateVehicle()">
                        
                         <span *ngIf="!updateVehicleLoading">
                             Update {{ displayName }}
