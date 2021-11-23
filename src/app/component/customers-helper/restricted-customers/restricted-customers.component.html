@@ -1,0 +1,47 @@
+<div class="my-3 text-center">
+    <div class="py-2">
+        <h5 class="h5">RESTRICTED CUSTOMERS</h5>
+    </div>
+</div>
+
+<div class="text-center" *ngIf="loading">
+    <p>Loading ...</p>
+</div>
+
+<div class="">
+    <div class="mx-2 mt-4 rounded">
+        <div class="table-responsive">
+            <table datatable id="all_customer_table" *ngIf="restrictedCustomers.length>0"
+                class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
+                <thead class="background-orange text-white">
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Area</th>
+                        <th>Pincode</th>
+                        <th>Register Date</th>
+                        <!-- <th>Vehicle Number</th> -->
+                        <th>Info</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let customer of restrictedCustomers">
+                        <tr>
+                            <td>{{customer.customerName}}</td>
+                            <td>{{customer.customerPhoneNumber}}</td>
+                            <td>{{customer.customerAddress}}</td>
+                            <td>{{customer.customerPincode}}</td>
+                            <td>{{customer.createdAt | date}}</td>
+                            <td>
+                                <a routerLink="/customers/{{customer.customerId}}">
+                                    <button class="btn btn-outline-primary"> <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

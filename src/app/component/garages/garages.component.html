@@ -38,7 +38,7 @@
             </a>
         </li>
 
-        <li class="nav-item mx-1" role="presentation">
+        <li class="nav-item mx-1" role="presentation" (click)="fetchGrageActivities()">
             <a class="nav-link text-dark garage-tab" id="garage_activities-tab" onclick="change_tab('garage-tab',2)"
                 data-bs-toggle="tab" data-bs-target="#garage_activities" type="button" role="tab"
                 aria-controls="garage_activities" aria-selected="false">
@@ -68,7 +68,7 @@
         
         <div class="tab-pane fade" id="garage_activities" role="tabpanel" aria-labelledby="garage_activities-tab">
             <!-- activities starts -->
-            <app-garage-activities></app-garage-activities>
+            <app-garage-activities [activities]="garageActivities" [loading]="activitiesLoading"></app-garage-activities>
         </div>
         <div class="tab-pane fade" id="deactivated_garages" role="tabpanel" aria-labelledby="deactivated_garages-tab">
             <div class="m-3">

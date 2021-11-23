@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Activity } from 'src/app/interface/activity';
 
 @Component({
   selector: 'app-garage-activities',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./garage-activities.component.css']
 })
 export class GarageActivitiesComponent implements OnInit {
+  @Input() activities!:Activity[];
+  @Input() loading!: boolean;
 
   constructor() { }
 

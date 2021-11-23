@@ -10,7 +10,7 @@
     <div class="p-1 m-2 border bg-white rounded border-bottom-orange">
       <div class="d-flex align-items-center">
         <div class="p-2 ">
-          <span class="h1 text-center">{{ dashBoardStats.numberOfActiveGarages + dashBoardStats.numberOfDeactiveGarages }}</span>
+          <span *ngIf="!statsLoadingFlag" class="h1 text-center">{{ dashBoardStats.numberOfActiveGarages + dashBoardStats.numberOfDeactiveGarages }}</span>
         </div>
         <div class="p-2">
           <div class="text-center">
@@ -23,7 +23,7 @@
     <div class="p-1 m-2 border bg-white rounded border-bottom-orange">
       <div class="d-flex align-items-center">
         <div class="p-2 ">
-          <span class="h1 text-center">{{ dashBoardStats.numberOfCustomers }}</span>
+          <span *ngIf="!statsLoadingFlag"  class="h1 text-center">{{ dashBoardStats.numberOfCustomers }}</span>
         </div>
         <div class="p-2">
           <div class="text-center">
@@ -36,7 +36,7 @@
     <div class="p-1 m-2 border bg-white rounded border-bottom-orange">
       <div class="d-flex align-items-center">
         <div class="p-2 ">
-          <span class="h1 text-center">{{ dashBoardStats.numberOfActiveScheme + dashBoardStats.numberOfConcludeScheme + dashBoardStats.numberOfUpComingScheme}}</span>
+          <span *ngIf="!statsLoadingFlag"  class="h1 text-center">{{ dashBoardStats.numberOfActiveScheme + dashBoardStats.numberOfConcludeScheme + dashBoardStats.numberOfUpComingScheme}}</span>
         </div>
         <div class="p-2">
           <div class="text-center">

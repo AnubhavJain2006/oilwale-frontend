@@ -15,6 +15,12 @@
             type="button" role="tab" aria-controls="customer_activities" aria-selected="false">
             <i class="fas fa-code-branch"></i> Customer Activities</a>
     </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark customers-tab" id="restrictedCustomers-tab"
+            onclick="change_tab('customers-tab', 2)" data-bs-toggle="tab" data-bs-target="#restrictedCustomers"
+            type="button" role="tab" aria-controls="restrictedCustomers" aria-selected="false">
+            <i class="fas fa-ban"></i> Restricted Customers</a>
+    </li>
 </ul>
 <!-- page nav ends -->
 
@@ -22,121 +28,16 @@
     <!-- All Customer div -->
 
     <div class="tab-pane fade show active" id="all_customers" role="tabpanel" aria-labelledby="all_customers-tab">
-        <!-- table starts -->
-        <div class="py-3">
-            <div class="mx-2 mt-4 rounded">
-                <div class="table-responsive">
-                    <table datatable id="all_customer_table" *ngIf="customers.length>0"
-                        class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
-                        <thead class="background-orange text-white">
-                            <tr>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Area</th>
-                                <th>Pincode</th>
-                                <th>Register Date</th>
-                                <!-- <th>Vehicle Number</th> -->
-                                <th>Info</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <ng-container *ngFor="let customer of customers">
-                                <tr>
-                                    <td>{{customer.customerName}}</td>
-                                    <td>{{customer.customerPhoneNumber}}</td>
-                                    <td>{{customer.customerAddress}}</td>
-                                    <td>{{customer.customerPincode}}</td>
-                                    <td>{{customer.createdAt | date}}</td>
-                                    <td>
-                                        <a routerLink="/customers/{{customer.customerId}}">
-                                            <button class="btn btn-outline-primary"> <i class="fas fa-info-circle"></i>
-                                            </button>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </ng-container>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <!-- table ends -->
+        <app-all-customers [customers]="customers" [loading]="customersLoadingFlag"></app-all-customers>
     </div>
 
     <div class="tab-pane fade" id="customer_activities" role="tabpanel" aria-labelledby="customer_activities-tab">
-        <!-- activities starts -->
-        <div class="py-3">
-            <div class="table-responsive mt-4">
-                <table
-                    class="table table-bordered make_datatable table-hover text-center rounded make_datatable pt-3 mb-3">
-                    <thead class="background-orange text-white">
-                        <tr>
-                            <th>
-                                <p class="my-1">Activity ID</p>
-                            </th>
-                            <th>
-                                <p class="my-1">Date</p>
-                            </th>
-                            <th>
-                                <p class="my-1">Time</p>
-                            </th>
-                            <th>
-                                <p class="my-1">User</p>
-                            </th>
-                            <th>
-                                <p class="my-1">Activity</p>
-                            </th>
-                            <th>
-                                <p class="my-1">Category</p>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>ACT001235</td>
-                            <td>12/02/2021</td>
-                            <td>19:15</td>
-                            <td><a href="">@Admin21</a></td>
-                            <td>A long description of some activity</td>
-                            <td>Customer</td>
-                        </tr>
-                        <tr>
-                            <td>ACT001235</td>
-                            <td>12/02/2021</td>
-                            <td>19:15</td>
-                            <td><a href="">@Admin21</a></td>
-                            <td>A long description of some activity</td>
-                            <td>Customer</td>
-                        </tr>
-                        <tr>
-                            <td>ACT001235</td>
-                            <td>12/02/2021</td>
-                            <td>19:15</td>
-                            <td><a href="">@Admin21</a></td>
-                            <td>A long description of some activity</td>
-                            <td>Customer</td>
-                        </tr>
-                        <tr>
-                            <td>ACT001235</td>
-                            <td>12/02/2021</td>
-                            <td>19:15</td>
-                            <td><a href="">@Admin21</a></td>
-                            <td>A long description of some activity</td>
-                            <td>Customer</td>
-                        </tr>
-                        <tr>
-                            <td>ACT001235</td>
-                            <td>12/02/2021</td>
-                            <td>19:15</td>
-                            <td><a href="">@Admin21</a></td>
-                            <td>A long description of some activity</td>
-                            <td>Customer</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+       <app-customer-activities></app-customer-activities>
     </div>
+    
+    <div class="tab-pane fade" id="restrictedCustomers" role="tabpanel" aria-labelledby="restrictedCustomers-tab">
+        <app-restricted-customers [restrictedCustomers]="restrictedCustomers" [loading]="restrictedCustomersLoadingFlag"></app-restricted-customers>
+     </div>
 </div>
 
 

@@ -1,0 +1,107 @@
+<div class="pt-3">
+    <div class="py-2 text-center">
+        <h5 class="h5">Add Product</h5>
+    </div>
+    <div class="mx-auto col-lg-8 col-md-10 col-sm-12 mb-3" id="garageAddForm">
+        <div id="add_product_response" class="my-3">
+            <div *ngIf="newAddedProduct" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong> <i class="fas fa-check-circle"></i> Success!</strong> Product
+                {{newAddedProduct["productName"]}} added
+                successfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        <form class="py-3" id="add_products_form" (ngSubmit)="addProduct()" [formGroup]="product">
+           
+            <div class="row mb-3">
+                <label for="Product_Name" class="col-sm-2 col-form-label">Product Name</label>
+                <div class="col-sm-10">
+                    <input type="text" name="productName" class="form-control" formControlName="productName"
+                        placeholder="Name of product..." id="Product_Name" />
+                    <span class="error"
+                        *ngIf="product.get('productName')?.hasError('required') && product.get('productName')?.touched">
+                        This field is required.</span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="Specification" class="col-sm-2 col-form-label">Specification</label>
+                <div class="col-sm-10">
+                    <textarea name="specification" class="form-control" formControlName="specification"
+                        id="Specification" cols="" placeholder="Specification for product..."
+                        rows="5"></textarea>
+                    <span class="error"
+                        *ngIf="product.get('specification')?.hasError('required') && product.get('specification')?.touched">
+                        This field is required.</span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Grade" class="col-sm-2 col-form-label">Grade</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="grade" formControlName="grade"
+                        placeholder="ex - 5W-30, 10W-40, etc..." id="Grade" />
+                    <span class="error"
+                        *ngIf="product.get('grade')?.hasError('required') && product.get('grade')?.touched">
+                        This field is required.</span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Quantity" class="col-sm-2 col-form-label">Packet Size</label>
+                <div class="col-sm-10 ">
+                    <div class="input-group">
+
+                        <input type="text" name="packingSize" class="form-control" formControlName="packingSize"
+                        placeholder="ex - 5, 10, 15, etc" id="packingSize" />
+                        <select name="packSize" id="packSize" class="form-select" formControlName="packingSizeDimension">
+                            <option value="mL">mL</option>
+                            <option value="L">L</option>
+                            <option value="kg">kg</option>
+                            <option value="g">g</option>
+                        </select>
+                    </div>
+                    <span class="error"
+                        *ngIf="product.get('packingSize')?.hasError('required') && product.get('packingSize')?.touched">
+                        This field is required.</span>
+                </div>
+            </div>
+            <div class="row my-5">
+                <label for="recommandedFor" class="col-sm-3 col-from-label">Recommanded For</label>
+                <div class="col-sm-9" formGroupName="recommandedVehicleType">
+                    <div class=" input-group">
+                        <input type="checkbox" name="vehicleType" id="2-wheeler" class="form-check-input mx-1" formControlName="twoWheeler">
+                        <label class="form-check-label mx-1" for="2-wheeler">2 - Wheelers</label>
+                    </div>
+                    <div class=" input-group">
+                        <input type="checkbox" name="vehicleType" id="3-wheeler" class="form-check-input mx-1" formControlName="threeWheeler">
+                        <label class="form-check-label mx-1" for="3-wheeler">3 - Wheelers</label>
+                    </div>
+                    <div class=" input-group">
+                        <input type="checkbox" name="vehicleType" id="4-wheeler" class="form-check-input mx-1" formControlName="fourWheeler">
+                        <label class="form-check-label mx-1" for="4-wheeler">4 - Wheelers</label>
+                    </div>
+                    <div class=" input-group    ">
+                        <input type="checkbox" name="vehicleType" id="trucks" class="form-check-input mx-1" formControlName="trucks">
+                        <label class="form-check-label mx-1" for="trucks">Trucks</label>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row mb-3">
+          <label for="Product_Image" class="col-sm-2 col-form-label">Product Image</label>
+          <div class="col-sm-10">
+            <input type="file" path="productImage" id="Product_Image" />
+          </div>
+        </div> -->
+            <div class="d-flex justify-content-end">
+                <button type="submit" [disabled]="!product.valid" id="add_products_submit"
+                    class="btn background-orange text-white">
+                    <span *ngIf="!addProductLoadingFlag">Submit</span>
+                    <span *ngIf="addProductLoadingFlag">
+                        <div class="spinner-border spinner-border-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -43,6 +43,12 @@ import { AllSchemesComponent } from './component/schemes-helper/all-schemes/all-
 import { EditSchemeComponent } from './component/schemes-helper/edit-scheme/edit-scheme.component';
 import { AddGarageComponent } from './component/garages-helper/add-garage/add-garage.component';
 import { GarageActivitiesComponent } from './component/garages-helper/garage-activities/garage-activities.component';
+import { AllCustomersComponent } from './component/customers-helper/all-customers/all-customers.component';
+import { CustomerActivitiesComponent } from './component/customers-helper/customer-activities/customer-activities.component';
+import { RestrictedCustomersComponent } from './component/customers-helper/restricted-customers/restricted-customers.component';
+import { DeletedProductsComponent } from './component/products-helper/deleted-products/deleted-products.component';
+import { ProductActivitiesComponent } from './component/products-helper/product-activities/product-activities.component';
+import { AddProductComponent } from './component/products-helper/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +86,13 @@ import { GarageActivitiesComponent } from './component/garages-helper/garage-act
     AllSchemesComponent,
     EditSchemeComponent,
     AddGarageComponent,
-    GarageActivitiesComponent
+    GarageActivitiesComponent,
+    AllCustomersComponent,
+    CustomerActivitiesComponent,
+    RestrictedCustomersComponent,
+    DeletedProductsComponent,
+    ProductActivitiesComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,

@@ -22,37 +22,37 @@
             class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
             <thead class="background-orange text-white">
                 <tr>
-                    <th>
+                    <th >
                         <p class="my-1">Garage Name</p>
                     </th>
                     <th>
                         <p class="my-1">Owner Name</p>
                     </th>
                     <th>
-                        <p class="my-1">Phone</p>
-                    </th>
-                    <th>
                         <p class="my-1">Address</p>
                     </th>
-                    <th>
+                    <th style="width: 100px;">
+                        <p class="my-1">Phone</p>
+                    </th>
+                    <th style="width: 70px;">
                         <p class="my-1">Pincode</p>
                     </th>
-                    <th>
+                    <th style="width: 70px;">
                         <p class="my-1">Referral Code</p>
                     </th>
-                    <th>
+                    <th style="width: 40px;">
                         <p class="my-1">Info</p>
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let garage of garages">
-                    <td>{{garage.garageName}}</td>
-                    <td>{{garage.name}}</td>
-                    <td>{{garage.phoneNumber}}</td>
-                    <td>{{garage.address}}</td>
-                    <td>{{garage.pincode}}</td>
-                    <td>{{garage.referralCode}}</td>
+                    <td class=" p-3"> {{garage.garageName}}</td>
+                    <td class=" p-3">{{garage.name}}</td>
+                    <td class=" p-3">{{garage.address}}</td>
+                    <td class=" p-3">{{garage.phoneNumber}}</td>
+                    <td class=" p-3">{{garage.pincode}}</td>
+                    <td class=" p-3">{{garage.referralCode}}</td>
                     <td>
                         <a routerLink="/garages/{{ garage.garageId }}">
                             <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button> 
