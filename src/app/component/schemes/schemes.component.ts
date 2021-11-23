@@ -15,12 +15,42 @@ export class SchemesComponent implements OnInit {
   isValidDates: any = "";
   isDataAvailable: boolean = false;
 
+  activeSchemeList: SchemeInfo[] = [];
+  upcomingSchemeList: SchemeInfo[] = [];
+  pastSchemeList: SchemeInfo[] = [];
+
   constructor(private schemeService: SchemeService) {
     
     this.loadSchemes("Active")
+
+    if (this.activeSchemeList.length == 0) {
+      this.fetchActiveSchemes();
+    }
+    else {
+      this.activeSchemeList = this.schemeService.activeSchemeList;
+    }
+
+    if (this.upcomingSchemeList.length == 0) {
+      this.fetchUpcomingSchemes();
+    }
+    else {
+      this.upcomingSchemeList = this.schemeService.upcomingSchemeList;
+    }
+
+    if (this.pastSchemeList.length == 0) {
+      this.fetchPastSchemes();
+    }
+    else {
+      this.pastSchemeList = this.schemeService.pastSchemeList;
+    }
   }
 
   ngOnInit(): void {
+    this.schemeService.refreshNeeded.subscribe(() => {
+      this.fetchActiveSchemes();
+      this.fetchUpcomingSchemes();
+      this.fetchPastSchemes();
+    })
   }
 
   async loadSchemes(str: string) {
@@ -73,7 +103,36 @@ export class SchemesComponent implements OnInit {
     this.loadSchemes(str);
   }
 
+  async fetchActiveSchemes() {
+    await this.schemeService.loadAllActiveScheme().then(data => {
+      this.activeSchemeList = data;
+      console.log(data);
+      
+    }, err => {
+      console.log(err);
+    })
+    this.schemeService.activeSchemeList = this.activeSchemeList;
+  }
+
+  async fetchUpcomingSchemes() {
+    await this.schemeService.loadAllUpComingScheme().then(data => {
+      this.upcomingSchemeList = data;
+      console.log(data);
+    }, err => {
+      console.log(err);
+    })
+    this.schemeService.upcomingSchemeList = this.upcomingSchemeList;
+  }
   
+  async fetchPastSchemes() {
+    await this.schemeService.loadAllConcludedScheme().then(data => {
+      this.pastSchemeList = data;
+      console.log(data);
+    }, err => {
+      console.log(err);
+    })
+    this.schemeService.pastSchemeList = this.pastSchemeList;
+  }
 
 
 }

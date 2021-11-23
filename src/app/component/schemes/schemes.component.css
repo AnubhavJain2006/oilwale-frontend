@@ -1,0 +1,7 @@
+.display-on-hover {
+    visibility: hidden;
+}
+
+.scheme-card:hover .display-on-hover {
+    visibility: visible;
+}

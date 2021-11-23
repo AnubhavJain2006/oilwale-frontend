@@ -11,7 +11,11 @@ import { SchemeInfo } from '../interface/scheme-info';
 })
 export class SchemeService {
 
-  apiUrl: string = environment.baseUrl + 'api/scheme';
+  private apiUrl: string = environment.baseUrl + 'api/scheme';
+
+  activeSchemeList: SchemeInfo[] = [];
+  upcomingSchemeList: SchemeInfo[] = [];
+  pastSchemeList: SchemeInfo[] = [];
 
   _refreshNeeded = new Subject<void>();
 
@@ -26,15 +30,15 @@ export class SchemeService {
     }))
   }
 
-  loadAllActiveScheme(): Promise<any> {
-    return this.httpClient.get( this.apiUrl + "/active").toPromise();
+  loadAllActiveScheme(): Promise<SchemeInfo[]> {
+    return this.httpClient.get<SchemeInfo[]>( this.apiUrl + "/active").toPromise();
   }
-  loadAllConcludedScheme() {
-    return this.httpClient.get( this.apiUrl + "/concluded").toPromise();
+  loadAllConcludedScheme(): Promise<SchemeInfo[]> {
+    return this.httpClient.get<SchemeInfo[]>( this.apiUrl + "/concluded").toPromise();
 
   }
-  loadAllUpComingScheme() {
-    return this.httpClient.get(this.apiUrl + "/upcoming").toPromise();
+  loadAllUpComingScheme(): Promise<SchemeInfo[]> {
+    return this.httpClient.get<SchemeInfo[]>(this.apiUrl + "/upcoming").toPromise();
   }
 
   getSchemeById(id: string): Observable<Scheme> {

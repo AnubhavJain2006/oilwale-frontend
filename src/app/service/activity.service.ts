@@ -27,7 +27,7 @@ export class ActivityService {
   }
 
   getUserActivities(id: string): Observable<Activity[]> {
-    return this.httpClient.get<Activity[]>(this.apiUrl + '/users/' + id);
+    return this.httpClient.get<Activity[]>(this.apiUrl + '/admin');
   }
 
 }
