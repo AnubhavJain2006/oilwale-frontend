@@ -19,6 +19,8 @@ export class VehiclesComponent implements OnInit {
   allVehicleCompanies: VehicleCompany[] = [];    // for showing companies in add form
   allProducts: Product[] = [];    // for show product list in add form
 
+  allVehicleList: VehicleInfo[] = []; // promise one
+
   // helper variables
   addVehicleLoading: boolean = false;
   addVehicleSuccess: boolean = false;
@@ -30,12 +32,27 @@ export class VehiclesComponent implements OnInit {
 
   allVehicleRefreshFlag: boolean = false;
 
-  constructor(private productService: ProductService, private vehicleCompanyService: VehicleCompanyService, private vehicleService: VehicleService) { }
+  allVehicleListLoading: boolean = true;
+
+  constructor(private productService: ProductService, private vehicleCompanyService: VehicleCompanyService, private vehicleService: VehicleService) { 
+    if (this.vehicleService.vehicleList.length == 0) {
+      this.fetchVehiclesFromPromise();
+    }
+    else {
+      this.allVehicleList = this.vehicleService.vehicleList;
+      this.allVehicleListLoading = false;
+    }
+  }
 
   ngOnInit(): void {
     this.fetchVehicles();
     this.fetchVehicleComapnies();
     this.fetchProducts(); 
+
+    this.vehicleService.vehicleListSubject.subscribe(() => {
+      this.fetchVehiclesFromPromise();
+    })
+
    }
 
   addVehicle(vehicle: Vehicle) {
@@ -64,8 +81,20 @@ export class VehiclesComponent implements OnInit {
     )
   }   
 
-  fetchVehicles():void {
-    this.vehicleService.getVehicles().subscribe(vehicles => this.allVehicles = vehicles);
+  async fetchVehiclesFromPromise() {
+    await this.vehicleService.getVehiclesPromise().then(data => {
+      this.allVehicleList = data;
+      
+      this.allVehicleListLoading = false;
+      console.log(this.allVehicleList);
+    }, err => {
+      console.log(err);
+    });
+    this.vehicleService.vehicleList = this.allVehicleList;
+  }
+
+   fetchVehicles() {
+     this.vehicleService.getVehicles().subscribe(vehicles => this.allVehicles = vehicles);
   }
 
   fetchVehicleComapnies():void {

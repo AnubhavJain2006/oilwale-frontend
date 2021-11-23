@@ -11,31 +11,35 @@
             <i class="fas fa-border-all"></i> All vehicles</a>
     </li>
     <li class="nav-item mx-1" role="presentation">
-        <a class="nav-link text-dark vehicles-tab" onclick="change_tab('vehicles-tab', 1)" id="add_products-tab"
+        <a class="nav-link text-dark vehicles-tab" onclick="change_tab('vehicles-tab', 1)" id="add_vehicle-tab"
             data-bs-toggle="tab" data-bs-target="#add_vehicle" type="button" role="tab" aria-controls="add_vehicle"
             aria-selected="false">
             <i class="fas fa-plus"></i> Add Vehicle</a>
     </li>
     <li class="nav-item mx-1" role="presentation">
-        <a class="nav-link text-dark vehicles-tab" onclick="change_tab('vehicles-tab', 2)" id="product_activities-tab"
+        <a class="nav-link text-dark vehicles-tab" onclick="change_tab('vehicles-tab', 2)" id="vehicles_activities-tab"
             data-bs-toggle="tab" data-bs-target="#vehicles_activities" type="button" role="tab"
             aria-controls="vehicles_activities" aria-selected="false">
             <i class="fas fa-code-branch"></i> Vehicle Activities</a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark vehicles-tab" onclick="change_tab('vehicles-tab', 3)" id="deletedVehicles-tab"
+            data-bs-toggle="tab" data-bs-target="#deletedVehicles" type="button" role="tab"
+            aria-controls="vehicles_activities" aria-selected="false">
+            <i class="fas fa-ban"></i> Deleted Vehicles</a>
     </li>
 </ul>
 <!-- page nav ends -->
 
 <!-- wrapper -->
 <div class="tab-content" id="myTabContent">
-    <!-- all Vehicle -->
+
     <div class="tab-pane show active" id="all_vehicles" role="tabpanel" aria-labelledby="all_vehicles-tab">
         <app-all-vehicles
-            [allVehicles]="allVehicles"
+            [allVehicles]="allVehicleList" [loading]="allVehicleListLoading"
         ></app-all-vehicles>
     </div>
-    <!-- all Vehicle ends-->
 
-    <!-- add Vehicle -->
     <div class="tab-pane fade" id="add_vehicle" role="tabpanel" aria-labelledby="add_vehicle-tab">
         <app-add-vehicle 
             (onAddVehicle)="addVehicle($event)"
@@ -50,22 +54,13 @@
             [addVehicleCompanyFailure]="addVehicleCompanyFailure"
         ></app-add-vehicle>
     </div>
-    <!-- add Vehicle -->
 
-    <!-- add Vehicle  company-->
-    <div class="tab-pane fade" id="add_vehicle_company" role="tabpanel" aria-labelledby="add_vehicle_company-tab">
-        <div class="py-3">
-            <div class="py-2 text-center">Add Company</div>
-        </div>
-    </div>
-    <!-- add Vehicle company -->
-
-    <!-- Vehicle activitites -->
     <div class="tab-pane fade" id="vehicles_activities" role="tabpanel" aria-labelledby="vehicles_activities-tab">
-        <!-- activities starts -->
         <app-vehicle-activities></app-vehicle-activities>
-        <!-- activities end -->
     </div>
-    <!-- Vehicle activitites -->
+
+    <div class="tab-pane fade" id="deletedVehicles" role="tabpanel" aria-labelledby="deletedVehicles-tab">
+        api banao be
+    </div>
 </div>
 <!-- wrapper ends -->

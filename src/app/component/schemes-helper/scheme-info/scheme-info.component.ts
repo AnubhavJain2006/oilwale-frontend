@@ -48,6 +48,8 @@ export class SchemeInfoComponent implements OnInit {
       endedAt : this.schemeDetails.endedAt,
       targetGroup : this.schemeDetails.targetGroup,
       productList : this.schemeDetails.productList,
+      createdAt: this.schemeDetails.createdAt,
+      updatedAt: this.schemeDetails.updatedAt
     }
 
     this.restoreSchemeLoading = true;

@@ -49,6 +49,7 @@ import { RestrictedCustomersComponent } from './component/customers-helper/restr
 import { DeletedProductsComponent } from './component/products-helper/deleted-products/deleted-products.component';
 import { ProductActivitiesComponent } from './component/products-helper/product-activities/product-activities.component';
 import { AddProductComponent } from './component/products-helper/add-product/add-product.component';
+import { PastSchemesComponent } from './component/schemes-helper/past-schemes/past-schemes.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { AddProductComponent } from './component/products-helper/add-product/add
     RestrictedCustomersComponent,
     DeletedProductsComponent,
     ProductActivitiesComponent,
-    AddProductComponent
+    AddProductComponent,
+    PastSchemesComponent
   ],
   imports: [
     BrowserModule,

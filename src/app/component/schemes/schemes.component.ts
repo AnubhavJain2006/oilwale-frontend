@@ -2,6 +2,7 @@ import { Scheme } from './../../interface/scheme';
 import { SchemeService } from './../../service/scheme.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { SchemeInfo } from 'src/app/interface/scheme-info';
 
 @Component({
   selector: 'app-schemes',
@@ -10,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SchemesComponent implements OnInit {
   // scheme: FormGroup;
-  schemeList: any = "";
+  schemeList: SchemeInfo[] = [];
   isValidDates: any = "";
   isDataAvailable: boolean = false;
 
@@ -29,7 +30,7 @@ export class SchemesComponent implements OnInit {
         this.schemeList = resp;
         this.isDataAvailable = false;
       }, err => {
-        this.schemeList = "";
+        this.schemeList = [];
         //console.log(err);
         if (err.error.text != "") {
           this.isDataAvailable = true;
@@ -43,7 +44,7 @@ export class SchemesComponent implements OnInit {
         // ////console.log(resp["error"])
         this.isDataAvailable = false;
       }, err => {
-        this.schemeList = "";
+        this.schemeList = [];
         // console.log(err);
         if (err.error.text != "") {
           this.isDataAvailable = true;
@@ -56,7 +57,7 @@ export class SchemesComponent implements OnInit {
         this.schemeList = resp;
         this.isDataAvailable = false;
       }, err => {
-        this.schemeList = "";
+        this.schemeList = [];
         //console.log(err);
         //console.log("Error of err " + err.error.text)
         if (err.error.text != "") {

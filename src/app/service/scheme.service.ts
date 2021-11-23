@@ -4,6 +4,7 @@ import { Scheme } from './../interface/scheme';
 import { Subject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
+import { SchemeInfo } from '../interface/scheme-info';
 
 @Injectable({
   providedIn: 'root'
