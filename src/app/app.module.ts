@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ChartModule } from 'angular2-chartjs';
 import { HeaderComponent } from './component/header/header.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { GaragesComponent } from './component/garages/garages.component';
@@ -103,7 +104,8 @@ import { PastSchemesComponent } from './component/schemes-helper/past-schemes/pa
     ReactiveFormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ChartModule
   ],
   providers: [
     AuthGuard,

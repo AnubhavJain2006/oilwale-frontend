@@ -92,7 +92,8 @@
                                         <p class="lead fw-bolder mt-2">{{ scheme.scheme.schemeName }} </p>    
                                     </div>
                                     <div>
-                                        <span class="btn btn-sm text-warning mr-2 mb-2"> {{ scheme.scheme.targetGroup | titlecase }}</span>
+                                        <span *ngIf="scheme.scheme.targetGroup == 'garages'" class="btn btn-sm text-info mr-2 mb-2"> {{ scheme.scheme.targetGroup | titlecase }}</span>
+                                        <span *ngIf="scheme.scheme.targetGroup == 'customers'" class="btn btn-sm text-warning mr-2 mb-2"> {{ scheme.scheme.targetGroup | titlecase }}</span>
                                     </div>
                                     
                                 </div>

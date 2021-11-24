@@ -18,6 +18,29 @@ export class SchemeInfoComponent implements OnInit {
   deleteSchemeLoading: boolean = false;
   restoreSchemeLoading: boolean = false;
 
+  type = 'pie';
+  data = {
+    datasets: [
+      {
+        // label: "My First dataset",
+        data: [34,50],
+        backgroundColor: [
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 99, 132, 0.6)',
+          // 'rgba(255, 206, 86, 0.2)',
+          // 'rgba(75, 192, 192, 0.2)',
+          // 'rgba(153, 102, 255, 0.2)',
+          // 'rgba(255, 159, 64, 0.2)'
+      ],
+      }
+    ],
+    labels: ["Accepted", "Not Accepted"],
+  };
+  options = {
+    responsive: true,
+    maintainAspectRatio: false
+  };
+
   constructor(private activateRoute: ActivatedRoute, private schemeService: SchemeService) { }
 
   ngOnInit(): void {

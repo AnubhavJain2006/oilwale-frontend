@@ -7,7 +7,7 @@
         <div class="mx-auto col-lg-8 com-md-10 col-sm-12">
 
             <div class="progress" style="height: 5px;">
-                <div class="progress-bar background-orange" role="progressbar" style="width: {{ progressBarWidth }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar background-orange" role="progressbar" [ngStyle]="{'width': progressBarWidth + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <!-- <button class="btn my-3" (click)="progressBarOneStepForward()">Increase</button>
             <button class="btn" (click)="progressBarOneStepBack()">Decrease</button> -->
