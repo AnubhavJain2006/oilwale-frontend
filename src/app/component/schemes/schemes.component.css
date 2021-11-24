@@ -1,7 +1,11 @@
 .display-on-hover {
-    visibility: hidden;
+    display: none;
 }
 
 .scheme-card:hover .display-on-hover {
-    visibility: visible;
+    display: block;
+}
+
+.overflow-card {
+    z-index: 10;
 }

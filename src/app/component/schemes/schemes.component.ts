@@ -19,6 +19,9 @@ export class SchemesComponent implements OnInit {
   upcomingSchemeList: SchemeInfo[] = [];
   pastSchemeList: SchemeInfo[] = [];
 
+  // flags
+  activeSchemesLoading: boolean = true;
+
   constructor(private schemeService: SchemeService) {
     
     this.loadSchemes("Active")
@@ -27,6 +30,7 @@ export class SchemesComponent implements OnInit {
       this.fetchActiveSchemes();
     }
     else {
+      this.activeSchemesLoading = false;
       this.activeSchemeList = this.schemeService.activeSchemeList;
     }
 
@@ -107,6 +111,7 @@ export class SchemesComponent implements OnInit {
     await this.schemeService.loadAllActiveScheme().then(data => {
       this.activeSchemeList = data;
       console.log(data);
+      this.activeSchemesLoading = false;
       
     }, err => {
       console.log(err);
@@ -134,5 +139,27 @@ export class SchemesComponent implements OnInit {
     this.schemeService.pastSchemeList = this.pastSchemeList;
   }
 
+  getProgreebarPercent(start: Date, end: Date): Number {
+    // let duration = end.valueOf() - start.valueOf();
+    // let passed = Number(new Date()) - Number(start);
+    // console.log("hehe")
+    // console.log(duration.valueOf());
+    // console.log(start.getTime());
+    // // var diffDays:any = Math.floor((end - start) / (1000 * 60 * 60 * 24));
+    // return passed/duration;
+    
+    var date1:any = new Date(start);
+    var date2:any = new Date(end);
+    var date3:any = new Date();
+    var diffDays:any = Math.floor((Number(date2) - Number(date1)) / (1000 * 60 * 60 * 24));
+    var diffToday:any = Math.floor((Number(date3) - Number(date1))/ (1000*60*60*24));
+    console.log(date1);
+    console.log(diffDays);
+    console.log(diffToday)
+    
+    
+    return (diffToday/diffDays)*100;
+  
+  }
 
 }
