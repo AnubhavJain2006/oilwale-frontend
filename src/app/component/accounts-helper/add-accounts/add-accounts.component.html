@@ -1,1 +1,139 @@
-<p>add-accounts works!</p>
+<div class="pt-3">
+    <div class="py-2 text-center">
+        <h5 class="h5">Add Account</h5>
+    </div>
+    
+    <div class="mx-auto col-lg-8 col-md-10 col-sm-12 border-bottom mb-3">
+        <div *ngIf="newAddedAccount" class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong><i class="fas fa-check-circle"></i> Success!</strong> New Account with name
+            <strong>{{newAddedAccount.name}}</strong> added successfully.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div id="add_account_response" class="my-3"></div>
+        <form class="py-3" id="add_accounts_form" method="POST" [formGroup]=" account"
+            (ngSubmit)="addAccount()">
+            <div class="row mb-3">
+                <label for="Full_Name" class="col-sm-3 col-form-label">Full Name</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" formControlName="name" name="name" id="Full_Name" />
+                    <span class="error"
+                        *ngIf="account.get('name')?.hasError('required') && account.get('name')?.touched">This
+                        field is
+                        required.</span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Email_Id" class="col-sm-3 col-form-label">Email Address</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control" formControlName="email" name="email"
+                        id="Email_Id" />
+                    <span class="error"
+                        *ngIf="account.get('email')?.hasError('required') && account.get('email')?.touched">This
+                        field is
+                        required.</span>
+                    <span class="error" *ngIf="account.get('email')?.hasError('email')">Invalid Email</span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Email_Id" class="col-sm-3 col-form-label">Privilege</label>
+                <div class="col-sm-9">
+                    <select class="form-select" formControlName="privilege" name="privilege" id="Privilege"
+                        required>
+                        <option value="">-- SELECT --</option>
+                        <option value="moderator">Moderator</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <span class="error"
+                        *ngIf="account.get('privilege')?.hasError('required') && account.get('privilege')?.touched">This
+                        field is
+                        required.</span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Phone_Number" class="col-sm-3 col-form-label">Phone Number</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" formControlName="phoneNumber" name="phoneNumber"
+                        id="Phone_Number" />
+                    <span class="error"
+                        *ngIf="account.get('phoneNumber')?.hasError('required') && account.get('phoneNumber')?.touched">This
+                        field is
+                        required.</span>
+                    <span class="error"
+                        *ngIf=" account.get('phoneNumber')?.hasError('maxlength') && account.get('phoneNumber')?.hasError('maxlength')">Phone
+                        Must contain 10 digits.</span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Alternative_Number" class="col-sm-3 col-form-label">Alternative Number</label>
+                <div class="col-sm-9">
+                    <input type="text" name="alternateNumber" class="form-control"
+                        formControlName="alternateNumber" id="Alternative_Number" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Password" class="col-sm-3 col-form-label">Password</label>
+                <div class="col-sm-9">
+                    <input type="password" name="password" formControlName="password" class="form-control"
+                        id="Password" />
+
+                    <span class="d-block error">*Password should be minimum of 8 Character.</span>
+                    <span class="error d-block">*Password must contain atleast one special character one upper
+                        character and one lower
+                        character.</span>
+                    <span class="error d-block" *ngIf=" account.get('password')?.hasError('required') &&
+                        account.get('password')?.touched">This
+                        field is
+                        required.</span>
+                    <span class="error d-block" *ngIf=" account.get('password')?.hasError('pattern') ">Invalid
+                        Password</span>
+
+                    <!-- <span class="error d-block" *ngIf="account.get('password')?.hasError('pattern')">
+                        *Password should be minimum of 8 Character.*Password must contain atleast one special
+                        character one upper
+                        character and one lower
+                        character.
+                    </span> -->
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Address" class="col-sm-3 col-form-label">Address</label>
+                <div class="col-sm-9">
+                    <textarea name="address" class="form-control" formControlName="address" id="Address" cols=""
+                        rows="5"></textarea>
+                    <span class="error"
+                        *ngIf="account.get('address')?.hasError('required') && account.get('address')?.touched">This
+                        field is
+                        required.</span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Pincode" class="col-sm-3 col-form-label">Pincode</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" formControlName="pincode" name="pincode"
+                        id="Pincode" />
+                    <span class="error"
+                        *ngIf="account.get('pincode')?.hasError('required') && account.get('pincode')?.touched">This
+                        field is
+                        required.</span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn background-orange text-white" [disabled]="!account.valid || addAccountLoading"
+                    id="add_account_submit">
+                    <span *ngIf="!addAccountLoading">
+                        Add Account
+                    </span>
+                    <span *ngIf="addAccountLoading">
+                        <div class="spinner-border spinner-border-sm">
+                            <span class="visually-hidden" role="status">
+                                Loading ...
+                            </span>
+                        </div>
+                        Adding Account
+                    </span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

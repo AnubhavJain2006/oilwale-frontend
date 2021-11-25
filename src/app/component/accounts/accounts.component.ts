@@ -10,39 +10,28 @@ import { Admin } from 'src/app/interface/admin';
   styleUrls: ['./accounts.component.css']
 })
 export class AccountsComponent implements OnInit {
-  newAddedAccount: any = "";
-
-  modalAdminId: string = "";
-  modalName: string = "";
-  modalEmail: string = "";
 
   activeAccountList: Array<any> = [];
   deactiveAccountList: Array<any> = [];
-  account: FormGroup;
 
+  // flags 
+  activeAccountsLoading: boolean = true;
+  deactiveAccountLoading: boolean = true;
 
   constructor(private accountService: AdminService) {
-    this.account = new FormGroup({
-      name: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-      phoneNumber: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
-      alternateNumber: new FormControl('', [Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
-      address: new FormControl('', Validators.required),
-      pincode: new FormControl('', Validators.required),
-      password: new FormControl('', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]),
-      privilege: new FormControl('', Validators.required)
-    })
+    
     if (this.accountService.activeAccountList.length == 0) {
       this.loadAccounts();
     }
     else {
-
+      this.activeAccountsLoading = false;
       this.activeAccountList = this.accountService.activeAccountList;
     }
     if (this.accountService.deactiveAccountList.length == 0) {
       this.loadDeativeAccount();
     }
     else {
+      this.deactiveAccountLoading = false;
       this.deactiveAccountList = this.accountService.deactiveAccountList;
     }
   }
@@ -62,6 +51,8 @@ export class AccountsComponent implements OnInit {
       console.log(resp);
       this.deactiveAccountList = resp;
       this.accountService.deactiveAccountList = this.deactiveAccountList;
+
+      this.deactiveAccountLoading = false;
     }, err => {
       console.log(err);
     })
@@ -72,73 +63,17 @@ export class AccountsComponent implements OnInit {
       console.log(resp);
       this.activeAccountList = resp;
       this.accountService.activeAccountList = this.activeAccountList;
+
+      this.activeAccountsLoading = false;
     }, err => {
       console.log(err);
     })
   }
 
-  addAccount() {
-    // console.log(this.account.value);
-    this.accountService.addAccount(this.account.value).subscribe(resp => {
-      console.log(resp);
-      this.newAddedAccount = resp;
-      this.account.reset();
-    }, err => {
-      console.log(err);
-    });
-
-  }
-
-  setModal(adminId: string, name: string, email: string) {
-    // console.log(adminId);
-    this.modalAdminId = adminId;
-    // console.log(name);
-    this.modalName = name;
-    // console.log(email);
-    this.modalEmail = email;
-  }
-
-  confirmDelete(adminId: string) {
-    console.log(adminId);
-    this.accountService.deleteAccount(adminId).subscribe(resp => {
-      console.log(resp);
-    }, err => {
-      console.log(err)
-    });
-    let index = this.activeAccountList.findIndex(account => account.adminId == adminId);
-    this.activeAccountList.splice(index, 1);
-  }
 
 
-  revertAccount(admin: Admin) {
-    console.log(admin);
 
-    const revertObj:Admin = {
-      adminId: admin.adminId,
-      name: admin.name,
-      email: admin.email,
-      phoneNumber: admin.phoneNumber,
-      alternateNumber: admin.alternateNumber,
-      address: admin.address,
-      pincode: admin.pincode,
-      image: admin.image,
-      password: admin.password,
-      privilege: admin.privilege,
-      createdAt: admin.createdAt,
-      updateAt: admin.updateAt,
-      active: true
-    }
 
-    this.accountService.updateAdmin(revertObj).subscribe(data => {
-      console.log(data);
-    })
-    // this.accountService.revertAccount(adminId).subscribe(resp => {
-    //   console.log(resp);
 
-    // }, err => {
-    //   console.log(err);
-
-    // });
-  }
 
 }

@@ -56,6 +56,7 @@ export class AdminService {
   updateAdmin(newAdmin:Admin): Observable<Admin> {
     return this.httpClient.put<Admin>(environment.baseUrl + 'api/admin', newAdmin).pipe(tap(() => {
       this._refreshNeeded.next();
+      this._deleteAccount.next();
     }))
   }
 
