@@ -6,6 +6,7 @@ import { Scheme } from 'src/app/interface/scheme';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product } from 'src/app/interface/product';
 import { ProductService } from 'src/app/service/product.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-edit-scheme',
@@ -37,10 +38,11 @@ export class EditSchemeComponent implements OnInit {
   submitLoadingFlag: boolean = false;
   submitSuccessFlag: boolean = false;
 
-  isValidDates: boolean = false;
+  isValidDates: boolean = true;
   checkStartAndEndDate: boolean = false;
 
-  constructor(private activateRoute: ActivatedRoute, private schemeService: SchemeService, private productService: ProductService) { 
+
+  constructor(private activateRoute: ActivatedRoute, private schemeService: SchemeService, private productService: ProductService, private datePipe: DatePipe) { 
     this.schemeInfo = new FormGroup({
       schemeName: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
@@ -67,8 +69,24 @@ export class EditSchemeComponent implements OnInit {
       // this.schemeDetails.startedAt = this.schemeDetails.startedAt.substring(0,9);
       // this.schemeDetails.endedAt = this.schemeDetails.endedAt.substring(0,9);
 
-      console.log(this.schemeDetails.startedAt)
-      console.log(this.schemeDetails.endedAt)
+      // console.log(this.schemeDetails.startedAt)
+      // console.log(this.schemeDetails.endedAt)
+
+      this.schemeInfo.setValue({
+        schemeName: this.schemeDetails.schemeName,
+        description: this.schemeDetails.description,
+        startedAt: this.datePipe.transform(this.schemeDetails.startedAt, 'yyyy-MM-dd'),
+        endedAt: this.datePipe.transform(this.schemeDetails.endedAt, 'yyyy-MM-dd'),
+        targetGroup: this.schemeDetails.targetGroup,
+        vehicleType: {
+          twoWheeler: false,  
+          threeWheeler: false,  
+          fourWheeler: false,  
+          trucks: false
+        } 
+      })
+      console.log(this.schemeInfo.value.startedAt);
+
 
     }, error => {
       console.log(error);
@@ -94,7 +112,10 @@ export class EditSchemeComponent implements OnInit {
     // if (this.schemeInfo.value.startedAt == '' || this.schemeInfo.value.endedAt == '')
     // if (isDa)
 
+    
+    
     if (this.schemeInfo.value.startedAt != '' && this.schemeInfo.value.endedAt != '') {
+      console.log('validate date');
       let sd: Date = this.schemeInfo.value.startedAt;
       let ed: Date = this.schemeInfo.value.endedAt;
       if (sd <= ed) {
@@ -103,6 +124,7 @@ export class EditSchemeComponent implements OnInit {
       }
       else {
         this.checkStartAndEndDate = true;
+        this.isValidDates = false;
       }
     }
   }

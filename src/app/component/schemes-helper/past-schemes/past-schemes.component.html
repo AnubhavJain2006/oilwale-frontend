@@ -1,1 +1,63 @@
-<p>past-schemes works!</p>
+<div class="my-3 text-center">
+    <div class="py-2">
+
+        <h5 class="h5">PAST SCHEMES</h5>
+    </div>
+</div>
+
+<div *ngIf="loading" class="text-center">
+    <p>Fetching data ...</p>
+</div>
+
+
+<div *ngIf="!loading">
+
+    <div class="text-center">
+        <p *ngIf="schemes.length==0">No Data Available</p>
+    </div>
+<div class="mx-2 mt-4 rounded">
+    <div class="my-2">
+    </div>
+    <div class="table-responsive">
+        <table datatable *ngIf="schemes.length>0"
+            class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
+            <thead class="background-orange text-white">
+                <tr>
+                    <th >
+                        <p class="my-1">Schemes Name</p>
+                    </th>
+                    <th>
+                        <p class="my-1">Description</p>
+                    </th>
+                    <th>
+                        <p class="my-1">Accepted by</p>
+                    </th>
+                    <th style="width: 100px;">
+                        <p class="my-1">Started At</p>
+                    </th>
+                    <th style="width: 100px;">
+                        <p class="my-1">Ended At</p>
+                    </th>
+                    <th style="width: 40px;">
+                        <p class="my-1">Info</p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let s of schemes">
+                    <td class=" p-3"> {{s.scheme.schemeName}}</td>
+                    <td class=" p-3">{{s.scheme.description}}</td>
+                    <td class=" p-3">[Kya karu mai iska]</td>
+                    <td class=" p-3">{{s.scheme.startedAt | date:'MMM dd, yyyy'}}</td>
+                    <td class=" p-3">{{s.scheme.endedAt | date: 'MMM dd, yyyy'}}</td>
+                    <td>
+                        <a routerLink="/schemes{{ s.scheme.schemeId }}">
+                            <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button> 
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>

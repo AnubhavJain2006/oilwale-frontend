@@ -21,6 +21,7 @@ export class SchemesComponent implements OnInit {
 
   // flags
   activeSchemesLoading: boolean = true;
+  pastSchemesLoading: boolean = true;
 
   constructor(private schemeService: SchemeService) {
     
@@ -46,6 +47,7 @@ export class SchemesComponent implements OnInit {
     }
     else {
       this.pastSchemeList = this.schemeService.pastSchemeList;
+      this.pastSchemesLoading = false;
     }
   }
 
@@ -110,7 +112,7 @@ export class SchemesComponent implements OnInit {
   async fetchActiveSchemes() {
     await this.schemeService.loadAllActiveScheme().then(data => {
       this.activeSchemeList = data;
-      console.log(data);
+      // console.log(data);
       this.activeSchemesLoading = false;
       
     }, err => {
@@ -122,7 +124,7 @@ export class SchemesComponent implements OnInit {
   async fetchUpcomingSchemes() {
     await this.schemeService.loadAllUpComingScheme().then(data => {
       this.upcomingSchemeList = data;
-      console.log(data);
+      // console.log(data);
     }, err => {
       console.log(err);
     })
@@ -132,6 +134,8 @@ export class SchemesComponent implements OnInit {
   async fetchPastSchemes() {
     await this.schemeService.loadAllConcludedScheme().then(data => {
       this.pastSchemeList = data;
+      console.log('past');
+      this.pastSchemesLoading = false;
       console.log(data);
     }, err => {
       console.log(err);
@@ -153,9 +157,9 @@ export class SchemesComponent implements OnInit {
     var date3:any = new Date();
     var diffDays:any = Math.floor((Number(date2) - Number(date1)) / (1000 * 60 * 60 * 24));
     var diffToday:any = Math.floor((Number(date3) - Number(date1))/ (1000*60*60*24));
-    console.log(date1);
-    console.log(diffDays);
-    console.log(diffToday)
+    // console.log(date1);
+    // console.log(diffDays);
+    // console.log(diffToday);
     
     
     return (diffToday/diffDays)*100;

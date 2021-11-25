@@ -12,7 +12,6 @@
         </h3>
     </div>
     <div class="text-center my-2 fw-normal lead">Editing - <span class="font-monospace">{{ displayName }}</span></div>
-    <div class="my-3 mx-auto col-lg-8 col-md-10 col-sm-12">
         <div class="mx-auto col-lg-8 com-md-10 col-sm-12">
 
             <div class="progress" style="height: 5px;">
@@ -58,7 +57,7 @@
                 <div class="row mb-3">
                     <label for="Specification" class="col-sm-2 col-form-label">Start Date</label>
                     <div class="col-sm-10">
-                        <input type="date" (ngModelChange)="validateDate()" name="startedAt"
+                        <input type="date" (ngModelChange)="validateDate()" name="startedAt" 
                             formControlName="startedAt" class="form-control" id="startedAt" />
                         <span class="error"
                             *ngIf="schemeInfo.get('startedAt')?.hasError('required') && schemeInfo.get('startedAt')?.touched">This
@@ -153,7 +152,7 @@
                         <button class="btn background-orange text-white" (click)="progressBarOneStepBack()">
                             <i class="fas fa-angle-left"></i> Back
                         </button>
-                        <button type="button" class="btn background-orange text-white" [disabled]="!(this.schemeInfo.value.vehicleType.twoWheeler || this.schemeInfo.value.vehicleType.threeWheeler || this.schemeInfo.value.vehicleType.value || this.schemeInfo.value.vehicleType.trucks)" (click)="progressBarOneStepForward();fetchProducts()">
+                        <button type="button" class="btn background-orange text-white" [disabled]="!(this.schemeInfo.value.vehicleType.twoWheeler || this.schemeInfo.value.vehicleType.threeWheeler || this.schemeInfo.value.vehicleType.fourWheeler || this.schemeInfo.value.vehicleType.trucks)" (click)="progressBarOneStepForward();fetchProducts()">
                             Next <i class="fas fa-angle-right"></i>
                         </button>
                     </div>
@@ -195,4 +194,3 @@
        
 
     </div>
-</div>

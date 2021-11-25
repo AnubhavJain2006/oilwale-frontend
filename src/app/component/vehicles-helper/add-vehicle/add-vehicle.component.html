@@ -100,7 +100,7 @@
       </div>
 
       <div class="d-flex justify-content-end mt-3">
-        <button type="submit" class="btn background-orange text-white">
+        <button type="submit" class="btn background-orange text-white" [disabled]="addVehicleCompanyLoading">
             <div *ngIf="addVehicleLoading == false">
                 Submit
             </div>

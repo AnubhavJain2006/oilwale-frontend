@@ -166,10 +166,7 @@
                                     <div class="display-on-hover">
                                         <small>
                                             <a routerLink="/schemes/{{ scheme.scheme.schemeId}}" class="btn"><i class="fas fa-info"></i></a>
-                                        
                                             <a routerLink="/schemes/{{ scheme.scheme.schemeId}}/edit" class="btn"><i class="fas fa-pen"></i></a>
-                                       
-                                            <a class="btn"><i class="fas fa-trash"></i></a>
                                         </small>
                                     </div>
                                    
@@ -211,7 +208,7 @@
     </div>
 
     <div class="tab-pane fade" id="pastSchemes" role="tabpanel" aria-labelledby="pastSchemes-tab">
-        <app-past-schemes></app-past-schemes>
+        <app-past-schemes [schemes]="pastSchemeList" [loading]="pastSchemesLoading"></app-past-schemes>
     </div>
 
 </div>

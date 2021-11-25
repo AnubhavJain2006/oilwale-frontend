@@ -22,6 +22,7 @@ export class SchemeService {
   get refreshNeeded() {
     return this._refreshNeeded;
   }
+
   constructor(private httpClient: HttpClient) { }
 
   addNewScheme(scheme: Scheme): Observable<any> {
@@ -46,11 +47,15 @@ export class SchemeService {
   }
 
   deleteScheme(id: string): Observable<Scheme> {
-    return this.httpClient.delete<Scheme>(this.apiUrl + '/' + id);
+    return this.httpClient.delete<Scheme>(this.apiUrl + '/' + id).pipe(tap(() => {
+      this.refreshNeeded.next();
+    }));
   }
 
   updateScheme(schemeObj: Scheme): Observable<Scheme> {
-    return this.httpClient.put<Scheme>(this.apiUrl, schemeObj);
+    return this.httpClient.put<Scheme>(this.apiUrl, schemeObj).pipe(tap(() => {
+      this.refreshNeeded.next();
+    }));
   } 
 
 }

@@ -50,8 +50,8 @@ export class VehicleEditComponent implements OnInit {
         updatedAt: this.vehicleDetails.updatedAt
       }
 
-      for (let i = 0; i < this.vehicleDetails.suggestedProductDetails.length; i++) {
-        const element = this.vehicleDetails.suggestedProductDetails[i];
+      for (let i = 0; i < this.vehicleDetails.suggestedProduct.length; i++) {
+        const element = this.vehicleDetails.suggestedProduct[i];
         this.vehicleUpdateObject.suggestedProduct.push(element.productId);
       }
 
@@ -75,8 +75,8 @@ export class VehicleEditComponent implements OnInit {
   }
 
   checkIfProductSuggested(product: string): boolean {
-    for (let i = 0; i < this.vehicleDetails.suggestedProductDetails.length; i++) {
-      const element = this.vehicleDetails.suggestedProductDetails[i].productId;
+    for (let i = 0; i < this.vehicleDetails.suggestedProduct.length; i++) {
+      const element = this.vehicleDetails.suggestedProduct[i].productId;
       if (element == product)
         return true;
     }

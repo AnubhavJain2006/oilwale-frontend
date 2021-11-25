@@ -6,7 +6,7 @@ export interface VehicleInfo {
     "_id": string,
     "vehicleCompany": VehicleCompany,
     "vehicleModel": string,
-    "suggestedProductDetails": Array<Product>
+    "suggestedProduct": Array<Product>
     "createdAt": string,
     "updatedAt": string,
     "active": boolean

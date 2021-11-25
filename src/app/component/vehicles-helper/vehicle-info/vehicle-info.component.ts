@@ -50,7 +50,7 @@ export class VehicleInfoComponent implements OnInit {
       vehicleId: this.vehicleDetails._id,
       vehicleCompanyId: this.vehicleDetails.vehicleCompanyId,
       vehicleModel: this.vehicleDetails.vehicleModel,
-      suggestedProduct: this.vehicleDetails.suggestedProductDetails.map((v) => {
+      suggestedProduct: this.vehicleDetails.suggestedProduct.map((v) => {
         return v.productId
       }),
       createdAt: this.vehicleDetails.createdAt,
