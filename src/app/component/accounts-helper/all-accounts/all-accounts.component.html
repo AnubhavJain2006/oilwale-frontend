@@ -26,8 +26,8 @@
                             <i class="fas fa-info-circle"></i>
                         </button>
                     </a>
-                    <button class="btn btn-sm bg-danger text-white m-1" data-bs-toggle="modal"
-                        data-bs-target="#AccountModal"
+
+                    <button *ngIf="account.email != currentUserEmail" class="btn btn-sm bg-danger text-white m-1" data-bs-toggle="modal" data-bs-target="#AccountModal"
                         (click)="setModal(account.adminId,account.name,account.email)">
                         <i class="fas fa-trash"></i>
                     </button>

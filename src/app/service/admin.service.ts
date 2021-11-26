@@ -81,5 +81,10 @@ export class AdminService {
     return this.httpClient.get<Admin>(environment.baseUrl + 'api/admin/' + id);
   }
 
+  getAdminNameFromToken():string {
+    let authToken: string | null = localStorage.getItem('authToken');
+    let token = authToken != null ? jwt_decode(authToken) : null;
+    return JSON.parse(JSON.stringify(token)).sub;
+  }
 
 }

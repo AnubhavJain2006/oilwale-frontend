@@ -2,6 +2,7 @@ import { LoginComponent } from './component/login/login.component';
 
 import { AccountsComponent } from './component/accounts/accounts.component';
 import { AccountInfoComponent } from './component/accounts-helper/account-info/account-info.component';
+import { AccountEditComponent } from './component/accounts-helper/account-edit/account-edit.component';
 
 import { VehiclesComponent } from './component/vehicles/vehicles.component';
 import { VehicleInfoComponent } from './component/vehicles-helper/vehicle-info/vehicle-info.component';
@@ -57,6 +58,7 @@ const routes: Routes = [
 
   { path: "accounts", component: AccountsComponent, canActivate: [AuthGuard] },
   { path: "accounts/:id", component: AccountInfoComponent, canActivate: [AuthGuard] },
+  { path: "accounts/:id/edit", component: AccountEditComponent, canActivate: [AuthGuard] },
   
   { path: "myaccount", component: MyaccountComponent, canActivate: [AuthGuard] },
   { path: "myactivities", component: MyactivitiesComponent, canActivate: [AuthGuard] }

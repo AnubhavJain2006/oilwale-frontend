@@ -56,6 +56,14 @@ import { AccountActivitiesComponent } from './component/accounts-helper/account-
 import { AllAccountsComponent } from './component/accounts-helper/all-accounts/all-accounts.component';
 import { AddAccountsComponent } from './component/accounts-helper/add-accounts/add-accounts.component';
 import { DeletedAccountsComponent } from './component/accounts-helper/deleted-accounts/deleted-accounts.component';
+import { AccountEditComponent } from './component/accounts-helper/account-edit/account-edit.component';
+import { OrdersComponent } from './component/orders/orders.component';
+import { NewOrdersComponent } from './component/orders-helper/new-orders/new-orders.component';
+import { AcceptedOrdersComponent } from './component/orders-helper/accepted-orders/accepted-orders.component';
+import { CompletedOrdersComponent } from './component/orders-helper/completed-orders/completed-orders.component';
+import { NotAcceptedOrdersComponent } from './component/orders-helper/not-accepted-orders/not-accepted-orders.component';
+import { PastOrdersComponent } from './component/orders-helper/past-orders/past-orders.component';
+import { OrderActivitiesComponent } from './component/orders-helper/order-activities/order-activities.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +112,15 @@ import { DeletedAccountsComponent } from './component/accounts-helper/deleted-ac
     AccountActivitiesComponent,
     AllAccountsComponent,
     AddAccountsComponent,
-    DeletedAccountsComponent
+    DeletedAccountsComponent,
+    AccountEditComponent,
+    OrdersComponent,
+    NewOrdersComponent,
+    AcceptedOrdersComponent,
+    CompletedOrdersComponent,
+    NotAcceptedOrdersComponent,
+    PastOrdersComponent,
+    OrderActivitiesComponent
   ],
   imports: [
     BrowserModule,

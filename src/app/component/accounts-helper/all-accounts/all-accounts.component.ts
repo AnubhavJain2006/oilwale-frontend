@@ -12,6 +12,9 @@ export class AllAccountsComponent implements OnInit {
   @Input() accounts!: Admin[];
   @Input() loading!: boolean;
 
+  // @Input() currentUser!: Admin;
+
+  currentUserEmail:string = this.accountService.getAdminNameFromToken();
   
   modalAdminId: string = "";
   modalName: string = "";
@@ -20,7 +23,11 @@ export class AllAccountsComponent implements OnInit {
   constructor(private accountService: AdminService) { }
 
   ngOnInit(): void {
+    console.log(this.currentUserEmail + "this");
+    
   }
+
+  //     console.log(JSON.parse(JSON.stringify(token)).sub)
 
   setModal(adminId: string, name: string, email: string) {
     // console.log(adminId);

@@ -88,7 +88,7 @@
                     <tbody>
                         <tr>
                             <td class="p-3">Update garage info</td>
-                            <td class="p-3"> <a href="#">Update</a></td>
+                            <td class="p-3"> <a routerLink="/accounts/{{ adminDetails.adminId }}/edit" class="btn text-decoration-none text-dark">Update</a></td>
                         </tr>
                         <tr *ngIf="adminDetails.active">
                             <td class="p-3">Deactivate Account</td>

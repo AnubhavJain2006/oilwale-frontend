@@ -1,0 +1,127 @@
+<p class="lead" *ngIf="dataLoadingStatus">Fetching data ...</p>
+<div *ngIf="!dataLoadingStatus && !sameUserEdit">
+    <div class="d-flex flex-wrap py-3">
+        <h3 class="h3">
+            <a routerLink="/accounts" class="text-decoration-none text-dark">
+                <i class="fas fa-user-circle"></i> Accounts 
+            </a>
+            <a routerLink="/accounts/{{ adminDetails.adminId }}" class="text-decoration-none text-dark">
+                <i class="fas fa-angle-right"></i> {{ displayName }}
+            </a>
+            <i class="fas fa-angle-right"></i> Edit
+        </h3>        
+    </div>
+
+    <div class="py-2 text-center">
+        <p class=" lead fw-normal"> Editing - <span class="font-monospace"> {{ displayName | uppercase }}</span></p>
+    </div>
+    
+    <div class="mx-auto col-lg-8 col-md-10 col-sm-12 border-bottom mb-3">
+        <div id="add_account_response" class="my-3"></div>
+        <form class="py-3" id="add_accounts_form" method="POST" [formGroup]=" accountForm"
+            (ngSubmit)="updateUser()">
+            <div class="row mb-3">
+                <label for="Full_Name" class="col-sm-3 col-form-label">Full Name</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" formControlName="name" name="name" id="Full_Name" />
+                    <span class="error"
+                        *ngIf="accountForm.get('name')?.hasError('required') && accountForm.get('name')?.touched">This
+                        field is
+                        required.</span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Email_Id" class="col-sm-3 col-form-label">Email Address</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control" formControlName="email" name="email"
+                        id="Email_Id" />
+                    <span class="error"
+                        *ngIf="accountForm.get('email')?.hasError('required') && accountForm.get('email')?.touched">This
+                        field is
+                        required.</span>
+                    <span class="error" *ngIf="accountForm.get('email')?.hasError('email')">Invalid Email</span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Email_Id" class="col-sm-3 col-form-label">Privilege</label>
+                <div class="col-sm-9">
+                    <select class="form-select" formControlName="privilege" name="privilege" id="Privilege"
+                        required>
+                        <option value="">-- SELECT --</option>
+                        <option value="moderator">Moderator</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <span class="error"
+                        *ngIf="accountForm.get('privilege')?.hasError('required') && accountForm.get('privilege')?.touched">This
+                        field is
+                        required.</span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Phone_Number" class="col-sm-3 col-form-label">Phone Number</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" formControlName="phoneNumber" name="phoneNumber"
+                        id="Phone_Number" />
+                    <span class="error"
+                        *ngIf="accountForm.get('phoneNumber')?.hasError('required') && accountForm.get('phoneNumber')?.touched">This
+                        field is
+                        required.</span>
+                    <span class="error"
+                        *ngIf=" accountForm.get('phoneNumber')?.hasError('maxlength') && accountForm.get('phoneNumber')?.hasError('maxlength')">Phone
+                        Must contain 10 digits.</span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Alternative_Number" class="col-sm-3 col-form-label">Alternative Number</label>
+                <div class="col-sm-9">
+                    <input type="text" name="alternateNumber" class="form-control"
+                        formControlName="alternateNumber" id="Alternative_Number" />
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <label for="Address" class="col-sm-3 col-form-label">Address</label>
+                <div class="col-sm-9">
+                    <textarea name="address" class="form-control" formControlName="address" id="Address" cols=""
+                        rows="5"></textarea>
+                    <span class="error"
+                        *ngIf="accountForm.get('address')?.hasError('required') && accountForm.get('address')?.touched">This
+                        field is
+                        required.</span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Pincode" class="col-sm-3 col-form-label">Pincode</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" formControlName="pincode" name="pincode"
+                        id="Pincode" />
+                    <span class="error"
+                        *ngIf="accountForm.get('pincode')?.hasError('required') && accountForm.get('pincode')?.touched">This
+                        field is
+                        required.</span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn background-orange text-white" [disabled]="!accountForm.valid || updateAccountLoading"
+                    id="add_account_submit">
+                    <span *ngIf="!updateAccountLoading">
+                        Add Account
+                    </span>
+                    <span *ngIf="updateAccountLoading">
+                        <div class="spinner-border spinner-border-sm">
+                            <span class="visually-hidden" role="status">
+                                Loading ...
+                            </span>
+                        </div>
+                        Adding Account
+                    </span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="sameUserEdit">
+    <div class="text-center"><p>You cannot edit yourself!</p></div>
+</div>
