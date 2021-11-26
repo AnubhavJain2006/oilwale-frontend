@@ -1,1 +1,72 @@
-<p>orders works!</p>
+<div class="d-flex flex-wrap pt-3">
+    <h3 class="h3"><i class="fas fa-dice-d6"></i> Orders</h3>
+</div>
+<!-- Page nav startes -->
+<ul class="nav border-bottom" id="myTab" role="tablist">
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark active border-bottom-orange customers-tab" onclick="change_tab('customers-tab', 0)"
+            id="newOrders-tab" data-bs-toggle="tab" data-bs-target="#newOrders" type="button" role="tab"
+            aria-controls="newOrders" aria-selected="true">
+            <i class="fas fa-dice-d6"></i> New Orders </a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark customers-tab" id="acceptedOrders-tab"
+            onclick="change_tab('customers-tab', 1)" data-bs-toggle="tab" data-bs-target="#acceptedOrders"
+            type="button" role="tab" aria-controls="acceptedOrders" aria-selected="false">
+            <i class="fas fa-cube"></i> Accepted Orders</a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark customers-tab" id="completedOrders-tab"
+            onclick="change_tab('customers-tab', 2)" data-bs-toggle="tab" data-bs-target="#completedOrders"
+            type="button" role="tab" aria-controls="completedOrders" aria-selected="false">
+            <i class="fas fa-cubes"></i> Completed Orders </a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark customers-tab" id="notAcceptedOrders-tab"
+            onclick="change_tab('customers-tab', 3)" data-bs-toggle="tab" data-bs-target="#notAcceptedOrders"
+            type="button" role="tab" aria-controls="notAcceptedOrders" aria-selected="false">
+            <i class="fas fa-sign"></i> Not Accepted Orders </a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark customers-tab" id="pastOrders-tab"
+            onclick="change_tab('customers-tab', 4)" data-bs-toggle="tab" data-bs-target="#pastOrders"
+            type="button" role="tab" aria-controls="pastOrders" aria-selected="false">
+            <i class="fas fa-coins"></i> Past Orders </a>
+    </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark customers-tab" id="orderActivities-tab"
+            onclick="change_tab('customers-tab', 5)" data-bs-toggle="tab" data-bs-target="#orderActivities"
+            type="button" role="tab" aria-controls="orderActivities" aria-selected="false">
+            <i class="fas fa-code-branch"></i> Activities </a>
+    </li>
+</ul>
+<!-- page nav ends -->
+
+<div class="tab-content" id="myTabContent">
+    <!-- All Customer div -->
+
+    <div class="tab-pane fade show active" id="newOrders" role="tabpanel" aria-labelledby="newOrders-tab">
+        <app-new-orders></app-new-orders>
+    </div>
+
+    <div class="tab-pane fade" id="acceptedOrders" role="tabpanel" aria-labelledby="acceptedOrders-tab">
+       <app-accepted-orders></app-accepted-orders>
+    </div>
+    
+    <div class="tab-pane fade" id="completedOrders" role="tabpanel" aria-labelledby="completedOrders-tab">
+        <app-completed-orders></app-completed-orders>
+    </div>
+
+    <div class="tab-pane fade" id="notAcceptedOrders" role="tabpanel" aria-labelledby="notAcceptedOrders-tab">
+        <app-not-accepted-orders></app-not-accepted-orders>
+    </div>
+
+    <div class="tab-pane fade" id="pastOrders" role="tabpanel" aria-labelledby="pastOrders-tab">
+        <app-past-orders></app-past-orders>
+    </div>
+
+    <div class="tab-pane fade" id="orderActivities" role="tabpanel" aria-labelledby="orderActivities-tab">
+        <app-order-activities></app-order-activities>
+    </div>
+
+</div>
