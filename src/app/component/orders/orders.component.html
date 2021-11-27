@@ -46,19 +46,19 @@
     <!-- All Customer div -->
 
     <div class="tab-pane fade show active" id="newOrders" role="tabpanel" aria-labelledby="newOrders-tab">
-        <app-new-orders></app-new-orders>
+        <app-new-orders [orders]="newOrders" [loading]="newOrdersLoading"></app-new-orders>
     </div>
 
     <div class="tab-pane fade" id="acceptedOrders" role="tabpanel" aria-labelledby="acceptedOrders-tab">
-       <app-accepted-orders></app-accepted-orders>
+       <app-accepted-orders [orders]="acceptedOrders" [loading]="acceptedOrdersLoading"></app-accepted-orders>
     </div>
     
     <div class="tab-pane fade" id="completedOrders" role="tabpanel" aria-labelledby="completedOrders-tab">
-        <app-completed-orders></app-completed-orders>
+        <app-completed-orders [orders]="completedOrders" [loading]="completedOrdersLoading"></app-completed-orders>
     </div>
 
     <div class="tab-pane fade" id="notAcceptedOrders" role="tabpanel" aria-labelledby="notAcceptedOrders-tab">
-        <app-not-accepted-orders></app-not-accepted-orders>
+        <app-not-accepted-orders [orders]="notAcceptedOrders" [loading]="notAcceptedOrdersLoading"></app-not-accepted-orders>
     </div>
 
     <div class="tab-pane fade" id="pastOrders" role="tabpanel" aria-labelledby="pastOrders-tab">

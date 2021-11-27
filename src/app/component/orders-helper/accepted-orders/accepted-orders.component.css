@@ -1,0 +1,11 @@
+.display-on-hover {
+    display: none;
+}
+
+.order-garage-name:hover .display-on-hover {
+    display: block;
+}
+
+.overflow-card {
+    z-index: 10;
+}

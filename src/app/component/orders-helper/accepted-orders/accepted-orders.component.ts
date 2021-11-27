@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Order } from 'src/app/interface/order';
+import { OrderGet } from 'src/app/interface/order-get';
 
 @Component({
   selector: 'app-accepted-orders',
@@ -6,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accepted-orders.component.css']
 })
 export class AcceptedOrdersComponent implements OnInit {
+
+  @Input() orders!: OrderGet[];
+  @Input() loading!: boolean;
 
   constructor() { }
 

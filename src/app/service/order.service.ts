@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Order } from '../interface/order';
+import { OrderGet } from '../interface/order-get';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -13,16 +14,24 @@ export class OrderService {
 
   constructor(private httpClient: HttpClient) { }
 
-  fetchNewOrders():Observable<Order[]> {
-    return this.httpClient.get<Order[]>(this.apiUrl + 's/0');
+  fetchNewOrders():Observable<OrderGet[]> {
+    return this.httpClient.get<OrderGet[]>(this.apiUrl + 's/0');
   }
 
-  fetchAcceptedOrders():Observable<Order[]> {
-    return this.httpClient.get<Order[]>(this.apiUrl + 's/1');
+  fetchAcceptedOrders():Observable<OrderGet[]> {
+    return this.httpClient.get<OrderGet[]>(this.apiUrl + 's/1');
   }
 
-  fetchCompletedOrders():Observable<Order[]> {
-    return this.httpClient.get<Order[]>(this.apiUrl + 's/2');
+  fetchCompletedOrders():Observable<OrderGet[]> {
+    return this.httpClient.get<OrderGet[]>(this.apiUrl + 's/2');
+  }
+
+  fetchPastOrders():Observable<OrderGet[]> {
+    return this.httpClient.get<OrderGet[]>(this.apiUrl + 's/3');
+  }
+
+  fetchNotAcceptedOrders():Observable<OrderGet[]> {
+    return this.httpClient.get<OrderGet[]>(this.apiUrl + 's/4');
   }
 
   getOrderById(id: string): Observable<Order> {

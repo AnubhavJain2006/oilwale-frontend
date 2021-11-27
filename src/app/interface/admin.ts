@@ -7,7 +7,7 @@ export interface Admin {
     address: string;
     pincode: string;
     image: string;
-    password: string;
+    password?: string;
     privilege: string;
     createdAt: string;
     updateAt: string;

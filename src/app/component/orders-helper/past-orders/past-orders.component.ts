@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Order } from 'src/app/interface/order';
 
 @Component({
   selector: 'app-past-orders',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./past-orders.component.css']
 })
 export class PastOrdersComponent implements OnInit {
+
+  @Input() orders!: Order[];
+  @Input() loading!: boolean;
 
   constructor() { }
 
