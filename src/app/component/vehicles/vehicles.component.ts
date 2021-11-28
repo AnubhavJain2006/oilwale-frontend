@@ -18,8 +18,9 @@ export class VehiclesComponent implements OnInit {
   allVehicles: VehicleInfo[] = [];
   allVehicleCompanies: VehicleCompany[] = [];    // for showing companies in add form
   allProducts: Product[] = [];    // for show product list in add form
-
+  
   allVehicleList: VehicleInfo[] = []; // promise one
+  allDeletedVehicles: VehicleInfo[] = [];
 
   // helper variables
   addVehicleLoading: boolean = false;
@@ -33,6 +34,7 @@ export class VehiclesComponent implements OnInit {
   allVehicleRefreshFlag: boolean = false;
 
   allVehicleListLoading: boolean = true;
+  allDeletedVehicleLoading: boolean = true;
 
   constructor(private productService: ProductService, private vehicleCompanyService: VehicleCompanyService, private vehicleService: VehicleService) { 
     if (this.vehicleService.vehicleList.length == 0) {
@@ -41,6 +43,14 @@ export class VehiclesComponent implements OnInit {
     else {
       this.allVehicleList = this.vehicleService.vehicleList;
       this.allVehicleListLoading = false;
+    }
+
+    if( this.vehicleService.deletedVehiclesList.length == 0) {
+      this.fetchDeletedVehiclesFromPromise();
+    }
+    else {
+      this.allDeletedVehicles = this.vehicleService.deletedVehiclesList;
+      this.allDeletedVehicleLoading = false;
     }
   }
 
@@ -51,7 +61,8 @@ export class VehiclesComponent implements OnInit {
 
     this.vehicleService.vehicleListSubject.subscribe(() => {
       this.fetchVehiclesFromPromise();
-    })
+      this.fetchDeletedVehiclesFromPromise();
+    });
 
    }
 
@@ -93,7 +104,17 @@ export class VehiclesComponent implements OnInit {
     this.vehicleService.vehicleList = this.allVehicleList;
   }
 
-   fetchVehicles() {
+  async fetchDeletedVehiclesFromPromise() {
+    await this.vehicleService.getDeletedVehiclesPromise().then(data => {
+      this.allDeletedVehicles = data;
+
+      this.allDeletedVehicleLoading = false;
+      console.log(this.allDeletedVehicles);
+    });
+    this.vehicleService.deletedVehiclesList = this.allDeletedVehicles;
+  }
+
+  fetchVehicles() {
      this.vehicleService.getVehicles().subscribe(vehicles => this.allVehicles = vehicles);
   }
 

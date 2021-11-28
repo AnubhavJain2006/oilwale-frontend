@@ -34,40 +34,63 @@ export class OrdersComponent implements OnInit {
     this.orderService.fetchNewOrders().subscribe((data) => {
       this.newOrders = data;
       console.log("haha");
-      this.newOrdersLoading = false;
       console.log(this.newOrders);
     }, 
     (error) => {
-      this.newOrdersLoading = false;
+      this.acceptedOrdersLoading = false;
       console.log(error.message);
+    },
+    () => {
+      this.newOrdersLoading = false;
     })
   }
 
   fetchAcceptedOrders() {
     this.orderService.fetchAcceptedOrders().subscribe((data) => {
       this.acceptedOrders = data;
-      this.acceptedOrdersLoading = false;
     }, 
     (error) => {
       this.acceptedOrdersLoading = false;
       console.log(error.message);
+    },
+    () => {
+      this.acceptedOrdersLoading = false;
     })
   }
   
-  // fetchPastOrders() {
-  //   this.orderService.fe().subscribe((data) => {
-  //     this.newOrders = data;
-  //   })
-  // }
+  fetchPastOrders() {
+    this.orderService.fetchPastOrders().subscribe((data) => {
+      this.pastOrders = data;
+    }, 
+    (error) => {
+      console.log(error.message);
+    },
+    () => {
+      this.pastOrderLoading = false;
+    })
+  }
 
   fetchCompletedOrders() {
     this.orderService.fetchCompletedOrders().subscribe((data) => {
       this.completedOrders = data;
-      this.completedOrdersLoading = false;
     }, 
     (error) => {
-      this.completedOrdersLoading = false;
       console.log(error.message);
+    },
+    () => {
+      this.completedOrdersLoading = false;
+    })
+  }
+
+  fetchNotAcceptedOrders() {
+    this.orderService.fetchNotAcceptedOrders().subscribe((data) => {
+      this.notAcceptedOrders = data;
+    }, 
+    (error) => {
+      console.log(error.message);
+    },
+    () => {
+      this.notAcceptedOrdersLoading = false;
     })
   }
 

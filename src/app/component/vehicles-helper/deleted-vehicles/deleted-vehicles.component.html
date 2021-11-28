@@ -1,0 +1,58 @@
+<div class="my-3 text-center">
+    <div class="py-2">
+
+        <h5 class="h5">Deleted Vehicles</h5>
+    </div>
+</div>
+
+<div *ngIf="loading" class="text-center">
+    <p>Fetching data ...</p>
+</div>
+
+<div *ngIf="!loading">
+
+    <div class="text-center">
+        <p *ngIf="vehicles.length==0">No Data Available</p>
+    </div>
+<div class="mx-2 mt-4 rounded">
+    <div class="my-2">
+    </div>
+    <div class="table-responsive mb-5">
+        <table datatable *ngIf="vehicles.length>0"
+            class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
+            <thead class="background-orange text-white">
+                <tr>
+                    <th >
+                        <p class="my-1">Model</p>
+                    </th>
+                    <th>
+                        <p class="my-1">Company</p>
+                    </th>
+                    <th>
+                        <p class="my-1">Suggested Products</p>
+                    </th>
+                    <th>
+                        <p class="my-1">Vehicle type</p>
+                    </th>
+                    <th style="width: 40px;">
+                        <p class="my-1">Info</p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let vehicle of vehicles">
+                    <td class=" p-3"> {{vehicle.vehicleModel }}</td>
+                    <td class=" p-3">{{vehicle.vehicleCompany}}</td>
+                    <td class="p-3">x</td>
+                    <td class="p-3"> [ pending ]</td>
+                    <td>
+                        <a routerLink="/vehicles/{{ vehicle._id }}">
+                            <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button> 
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>

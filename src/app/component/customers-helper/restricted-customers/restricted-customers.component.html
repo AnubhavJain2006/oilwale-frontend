@@ -8,6 +8,9 @@
     <p>Loading ...</p>
 </div>
 
+<div class="text-center" *ngIf="!loading && restrictedCustomers.length == 0">
+    <p>No data</p>
+</div>
 <div class="">
     <div class="mx-2 mt-4 rounded">
         <div class="table-responsive">

@@ -83,7 +83,9 @@ export class GarageService {
   }
 
   updateGarageAccount(garage:Garage): Observable<Garage> {
-    return this.httpClient.put<Garage>(this.apiUrl, garage);
+    return this.httpClient.put<Garage>(this.apiUrl, garage).pipe(tap(() => {
+      this._refreshNeeded.next();
+    }));
   }
 
   deleteGarageById(id: string): Observable<Garage> {
@@ -100,6 +102,8 @@ export class GarageService {
   restoreGarageAccount(garage: Garage): Observable<Garage> {
     __assign(this.tempGarage, garage);
     this.tempGarage.active = !this.tempGarage.active;
-    return this.httpClient.put<Garage>(this.apiUrl, this.tempGarage);
+    return this.httpClient.put<Garage>(this.apiUrl, this.tempGarage).pipe(tap(() => {
+      this._refreshNeeded.next();
+    }));
   }
 }

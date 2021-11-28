@@ -1,6 +1,8 @@
 import { CustomerService } from './../../service/customer.service';
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/interface/customer';
+import { ActivityService } from 'src/app/service/activity.service';
+import { Activity } from 'src/app/interface/activity';
 
 @Component({
   selector: 'app-customers',
@@ -10,12 +12,14 @@ import { Customer } from 'src/app/interface/customer';
 export class CustomersComponent implements OnInit {
   customers: Array<Customer> = [];
   restrictedCustomers: Customer[] = [];
+  customerActivities: Activity[] = [];
 
   // flags
   customersLoadingFlag: boolean = true;
   restrictedCustomersLoadingFlag: boolean = true;
+  activitiesLoading: boolean = false;;
 
-  constructor(private customerService: CustomerService) {
+  constructor(private customerService: CustomerService, private activityService: ActivityService) {
     if (this.customerService.customerList.length == 0) {
       this.loadAllCustomers();
     }
@@ -49,7 +53,7 @@ export class CustomersComponent implements OnInit {
     await this.customerService.getAllCustomer().then(resp => {
       this.customers = resp;
       this.customerService.customerList = this.customers;
-
+    }).finally(() => {
       this.customersLoadingFlag = false;
     })
   }
@@ -58,9 +62,24 @@ export class CustomersComponent implements OnInit {
     await this.customerService.getRestrictedCustomers().then (data => {
       this.restrictedCustomers = data;
       this.customerService.restrictedCustomerList = this.restrictedCustomers;
-
+    }).finally(() => {
       this.restrictedCustomersLoadingFlag = false;
     })
+  }
+
+  fetchCustomerActivities() {
+    this.activitiesLoading = true;
+    this.activityService.getDomainActivities('customers').subscribe(data => {
+      this.customerActivities = data;
+      console.log(data);
+    },
+    (err) => {
+      console.log(err);
+    },
+    () => {
+      this.activitiesLoading = false;
+    }
+    )
   }
 
 }

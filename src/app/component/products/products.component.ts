@@ -13,30 +13,40 @@ import { ActivityService } from 'src/app/service/activity.service';
 export class ProductsComponent implements OnInit {
 
   products: Array<Product> = [];
+  deletedProducts: Product[] = [];
   productsActivities: Activity[] = [];
 
   // flag
   addProductLoadingFlag:boolean = false;
   productFetchLoadingFlag: boolean = true;
   activitiesLoading: boolean = false;
+  deletedProductsFetchLoading: boolean = true;
 
   constructor(private productService: ProductService, private activityService: ActivityService) {
     
     console.log("ProductList size" + this.productService.productList.length);
+
     if (this.productService.productList.length == 0) {
       this.loadAllProduct()
-
     }
     else {
       this.products = this.productService.productList;
       this.productFetchLoadingFlag = false;
+    }
 
+    if (this.productService.deletedProductsList.length == 0) {
+      this.getDeletedProducts();
+    }
+    else {
+      this.deletedProducts = this.productService.deletedProductsList;
+      this.deletedProductsFetchLoading = false;
     }
   }
 
   ngOnInit(): void {
     this.productService.refreshNeeded.subscribe(() => {
       this.loadAllProduct();
+      this.getDeletedProducts();
     })
   }
 
@@ -51,6 +61,17 @@ export class ProductsComponent implements OnInit {
     }, err => {
       console.log(err)
     });
+  }
+
+  async getDeletedProducts() {
+    await this.productService.getDeletedProducts().then(data => {
+      console.log(data);
+      this.deletedProducts = data;
+      this.productService.deletedProductsList = this.deletedProducts;
+
+      this.deletedProductsFetchLoading = false;
+      
+    })
   }
 
   fetchProductActivities() {

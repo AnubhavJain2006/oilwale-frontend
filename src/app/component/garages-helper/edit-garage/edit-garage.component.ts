@@ -107,7 +107,7 @@ export class EditGarageComponent implements OnInit {
       totalScore: this.garageDetails.totalScore,
       createdAt: this.garageDetails.createdAt,
       updatedAt: this.garageDetails.updatedAt,
-      active: this.garageDetails.active
+      active: this.garageEditForm.value.active
     } 
 
     this.updateSubitLoadingFlag = true;

@@ -9,7 +9,8 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ProductService {
   productList: Array<Product> = [];
-  _refreshNeeded = new Subject<void>();
+  deletedProductsList: Product[] = [];
+  private _refreshNeeded = new Subject<void>();
 
   get refreshNeeded() {
     return this._refreshNeeded;
@@ -30,6 +31,10 @@ export class ProductService {
     return this.httpClient.get(environment.baseUrl + "api/products").toPromise();
   }
 
+  getDeletedProducts(): Promise<any> {
+    return this.httpClient.get(environment.baseUrl + "api/products/deactive").toPromise();
+  }
+
   getAllProducts(): Observable<Product[]> {
     return this.httpClient.get<Product[]>(environment.baseUrl + "api/products");
   }
@@ -41,13 +46,17 @@ export class ProductService {
   // deactivates a product
   deleteProductById(id: string): Observable<Product> {
     let url = environment.baseUrl + "api/product/" + id;
-    return this.httpClient.delete<Product>(url);
+    return this.httpClient.delete<Product>(url).pipe(tap(() => {
+      this._refreshNeeded.next();
+    }));
   }
 
   // updates the product
   updateProduct(product: Product): Observable<Product> {
     let url = environment.baseUrl + "api/product";
-    return this.httpClient.put<Product>(url, product);
+    return this.httpClient.put<Product>(url, product).pipe(tap(() => {
+      this._refreshNeeded.next();
+    }));
   }
 
   getSpecificVehicleTypeProduct(type: string): Observable<Product[]> {

@@ -53,7 +53,7 @@
     </div>
 
     <div class="tab-pane fade" id="deletedProducts" role="tabpanel" aria-labelledby="deletedProducts-tab">
-        <app-deleted-products></app-deleted-products>
+        <app-deleted-products [products]="deletedProducts" [loading]="deletedProductsFetchLoading"></app-deleted-products>
     </div>
 
 </div>

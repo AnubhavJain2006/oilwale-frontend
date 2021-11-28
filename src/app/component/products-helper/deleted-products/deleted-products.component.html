@@ -1,1 +1,62 @@
-api banao bhai
+<div class="my-3 text-center">
+    <div class="py-2">
+
+        <h5 class="h5">Deleted Products</h5>
+    </div>
+</div>
+
+<div *ngIf="loading" class="text-center">
+    <p>Fetching data ...</p>
+</div>
+
+<div *ngIf="!loading">
+
+    <div class="text-center">
+        <p *ngIf="products.length==0">No Data Available</p>
+    </div>
+<div class="mx-2 mt-4 rounded mb-4">
+    <div class="my-2">
+    </div>
+    <div class="table-responsive">
+        <table datatable *ngIf="products.length>0"
+            class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
+            <thead class="background-orange text-white">
+                <tr>
+                    <th >
+                        <p class="my-1">Product Name</p>
+                    </th>
+                    <th>
+                        <p class="my-1">Specification</p>
+                    </th>
+                    <th>
+                        <p class="my-1">Grade</p>
+                    </th>
+                    <th >
+                        <p class="my-1">Packing Size</p>
+                    </th>
+                    <th >
+                        <p class="my-1">Recomm. Vehicles</p>
+                    </th>
+                    <th style="width: 40px;">
+                        <p class="my-1">Info</p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products">
+                    <td class=" p-3">{{product.productName}}</td>
+                    <td class=" p-3">{{product.specification}}</td>
+                    <td class=" p-3">{{product.grade}}</td>
+                    <td class=" p-3">{{product.packingSize}}</td>
+                    <td class=" p-3">{{product.vehicleType}}</td>
+                    <td>
+                        <a routerLink="/products/{{ product.productId }}">
+                            <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button> 
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>

@@ -30,7 +30,7 @@ export class OrderService {
   }
 
   fetchPastOrders():Observable<OrderGet[]> {
-    return this.httpClient.get<OrderGet[]>(this.apiUrl + 's/3');
+    return this.httpClient.get<OrderGet[]>(this.apiUrl + 'pastOrders');
   }
 
   fetchNotAcceptedOrders():Observable<OrderGet[]> {
