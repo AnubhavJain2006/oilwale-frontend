@@ -70,7 +70,7 @@ export class SchemeInfoComponent implements OnInit {
       startedAt : this.schemeDetails.startedAt,
       endedAt : this.schemeDetails.endedAt,
       targetGroup : this.schemeDetails.targetGroup,
-      productList : this.schemeDetails.productList,
+      products : this.schemeDetails.products,
       createdAt: this.schemeDetails.createdAt,
       updatedAt: this.schemeDetails.updatedAt
     }

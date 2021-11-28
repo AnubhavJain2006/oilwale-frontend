@@ -43,7 +43,7 @@
                 <tr *ngFor="let vehicle of vehicles">
                     <td class=" p-3"> {{vehicle.vehicleModel }}</td>
                     <td class=" p-3">{{vehicle.vehicleCompany}}</td>
-                    <td class="p-3">x</td>
+                    <td class="p-3">{{ vehicle.suggestedProduct.length }}</td>
                     <td class="p-3"> [ pending ]</td>
                     <td>
                         <a routerLink="/vehicles/{{ vehicle._id }}">
