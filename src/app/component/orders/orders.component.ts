@@ -49,7 +49,7 @@ export class OrdersComponent implements OnInit {
       this.acceptedOrdersLoading = false;
     }, 
     (error) => {
-      this.newOrdersLoading = false;
+      this.acceptedOrdersLoading = false;
       console.log(error.message);
     })
   }
@@ -66,7 +66,7 @@ export class OrdersComponent implements OnInit {
       this.completedOrdersLoading = false;
     }, 
     (error) => {
-      this.newOrdersLoading = false;
+      this.completedOrdersLoading = false;
       console.log(error.message);
     })
   }
@@ -74,6 +74,11 @@ export class OrdersComponent implements OnInit {
   onOrderAccepted() {
     this.fetchNewOrders();
     this.fetchAcceptedOrders();
+  }
+
+  onOrderComplete() {
+    this.fetchAcceptedOrders();
+    this.fetchCompletedOrders();
   }
 
 }

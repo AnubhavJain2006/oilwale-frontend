@@ -51,7 +51,7 @@
     </div>
 
     <div class="tab-pane fade" id="acceptedOrders" role="tabpanel" aria-labelledby="acceptedOrders-tab">
-       <app-accepted-orders [orders]="acceptedOrders" [loading]="acceptedOrdersLoading"></app-accepted-orders>
+       <app-accepted-orders [orders]="acceptedOrders" [loading]="acceptedOrdersLoading" (completeEvent)="onOrderComplete()"></app-accepted-orders>
     </div>
     
     <div class="tab-pane fade" id="completedOrders" role="tabpanel" aria-labelledby="completedOrders-tab">

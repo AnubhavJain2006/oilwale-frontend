@@ -53,10 +53,16 @@ export class OrderService {
     return this.httpClient.put<OrderUpdate>(this.apiUrl, acceptOrder);
   }
 
-  markOrderAsComplete(order: Order): Observable<Order> {
-    order.completedAt = new Date();
-    order.status = 2;
-    return this.httpClient.put<Order>(this.apiUrl, order);
+  completeOrder(id: string):Observable<OrderUpdate> {
+    let authToken: string | null = localStorage.getItem('authToken');
+    let token = authToken != null ? jwt_decode(authToken) : null;
+    
+    const completeOrder = {
+      adminEmailId: JSON.parse(JSON.stringify(token)).sub,
+      id: id,
+      status: 2
+    };
+    return this.httpClient.put<OrderUpdate>(this.apiUrl, completeOrder);
   }
 
 }
