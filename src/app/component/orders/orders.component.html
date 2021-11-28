@@ -1,5 +1,6 @@
 <div class="d-flex flex-wrap pt-3">
     <h3 class="h3"><i class="fas fa-dice-d6"></i> Orders</h3>
+    
 </div>
 <!-- Page nav startes -->
 <ul class="nav border-bottom" id="myTab" role="tablist">
@@ -46,7 +47,7 @@
     <!-- All Customer div -->
 
     <div class="tab-pane fade show active" id="newOrders" role="tabpanel" aria-labelledby="newOrders-tab">
-        <app-new-orders [orders]="newOrders" [loading]="newOrdersLoading"></app-new-orders>
+        <app-new-orders [orders]="newOrders" [loading]="newOrdersLoading" (acceptEvent)="onOrderAccepted()"></app-new-orders>
     </div>
 
     <div class="tab-pane fade" id="acceptedOrders" role="tabpanel" aria-labelledby="acceptedOrders-tab">

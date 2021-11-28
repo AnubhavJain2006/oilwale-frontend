@@ -4,7 +4,10 @@ import { Observable } from 'rxjs';
 
 import { Order } from '../interface/order';
 import { OrderGet } from '../interface/order-get';
+import { OrderUpdate } from '../interface/utilities/order-update';
 import { environment } from 'src/environments/environment';
+
+import jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -38,11 +41,16 @@ export class OrderService {
     return this.httpClient.get<Order>(this.apiUrl + '/' + id);
   }
 
-  acceptOrder(order: Order):Observable<Order> {
-    order.acceptedBy = "user ka name le kar aao frontend se";
-    order.acceptedAt = new Date();
-    order.status = 1;
-    return this.httpClient.put<Order>(this.apiUrl, order);
+  acceptOrder(id: string):Observable<OrderUpdate> {
+    let authToken: string | null = localStorage.getItem('authToken');
+    let token = authToken != null ? jwt_decode(authToken) : null;
+    
+    const acceptOrder = {
+      adminEmailId: JSON.parse(JSON.stringify(token)).sub,
+      id: id,
+      status: 1
+    };
+    return this.httpClient.put<OrderUpdate>(this.apiUrl, acceptOrder);
   }
 
   markOrderAsComplete(order: Order): Observable<Order> {

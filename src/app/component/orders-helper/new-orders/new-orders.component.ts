@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Order } from 'src/app/interface/order';
 import { OrderGet } from 'src/app/interface/order-get';
+import { OrderUpdate } from 'src/app/interface/utilities/order-update';
+import { OrderService } from 'src/app/service/order.service';
 
 @Component({
   selector: 'app-new-orders',
@@ -11,12 +13,29 @@ export class NewOrdersComponent implements OnInit {
 
   @Input() orders!: OrderGet[];
   @Input() loading!: boolean;
+  @Output() acceptEvent: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() { }
+  acceptOrderResponse!: OrderUpdate;
+  // auxAcceptanceArray: boolean[]
+
+  // flag
+  acceptOrderFlag: boolean = false;
+
+  constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
     console.log( "new" + this.orders);
+  }
 
+  acceptOrder(order: OrderGet) {
+    order.status = -999;
+    this.acceptOrderFlag = true;
+    this.orderService.acceptOrder(order.orderId).subscribe((data) => {
+      this.acceptOrderResponse = data;
+      console.log(this.acceptOrderResponse);
+      this.acceptOrderFlag = false;
+      this.acceptEvent.emit();
+    })
   }
 
 }

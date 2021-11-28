@@ -70,4 +70,10 @@ export class OrdersComponent implements OnInit {
       console.log(error.message);
     })
   }
+
+  onOrderAccepted() {
+    this.fetchNewOrders();
+    this.fetchAcceptedOrders();
+  }
+
 }
