@@ -15,6 +15,7 @@ export class CompletedOrdersComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log( "completed" + this.orders);
   }
 
 }

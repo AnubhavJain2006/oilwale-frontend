@@ -33,7 +33,13 @@ export class OrdersComponent implements OnInit {
   fetchNewOrders() {
     this.orderService.fetchNewOrders().subscribe((data) => {
       this.newOrders = data;
+      console.log("haha");
       this.newOrdersLoading = false;
+      console.log(this.newOrders);
+    }, 
+    (error) => {
+      this.newOrdersLoading = false;
+      console.log(error.message);
     })
   }
 
@@ -41,6 +47,10 @@ export class OrdersComponent implements OnInit {
     this.orderService.fetchAcceptedOrders().subscribe((data) => {
       this.acceptedOrders = data;
       this.acceptedOrdersLoading = false;
+    }, 
+    (error) => {
+      this.newOrdersLoading = false;
+      console.log(error.message);
     })
   }
   
@@ -54,6 +64,10 @@ export class OrdersComponent implements OnInit {
     this.orderService.fetchCompletedOrders().subscribe((data) => {
       this.completedOrders = data;
       this.completedOrdersLoading = false;
+    }, 
+    (error) => {
+      this.newOrdersLoading = false;
+      console.log(error.message);
     })
   }
 }

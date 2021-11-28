@@ -72,6 +72,7 @@
                         <hr>
                         <div class="text-start">
                             <div>
+                                <small class="text-secondary"><p class="m-0"> {{ orderinfo.createdAt | date:'medium' }} - Order placed</p> </small>
                                 <small class="text-secondary"><p class="m-0"> {{ orderinfo.acceptedAt | date:'medium' }} - Accepted by - {{ orderinfo.admin.name}}</p> </small>
                             </div>
                         </div>

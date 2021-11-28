@@ -15,6 +15,8 @@ export class NewOrdersComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log( "new" + this.orders);
+
   }
 
 }
