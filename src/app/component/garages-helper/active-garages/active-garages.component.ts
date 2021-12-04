@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Garage } from 'src/app/interface/garage';
 
@@ -11,9 +12,13 @@ export class ActiveGaragesComponent implements OnInit {
   @Input() garages!: Garage[];
   @Input() loading!: boolean;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
+  onClick(id: string) {
+    this.router.navigate(['/garages/' + id]);
+  }
+
 
 }

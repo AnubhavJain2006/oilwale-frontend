@@ -19,42 +19,60 @@
     </div>
     <div class="table-responsive">
         <table datatable *ngIf="productList.length>0"
-            class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
-            <thead class="background-orange text-white">
+            class="table table-borderless  table-hover  spacetr">
+            <thead class="text-secondary">
                 <tr>
+                    <th ><small class="text-secondary">PRODUCT</small></th>
+                    <th><small class="text-secondary">SPECIFICATION</small></th>
+                    <th><small class="text-secondary">GRADE</small></th>
+                    <th ><small class="text-secondary">PACKET SIZE</small></th>
                     <th >
-                        <p class="my-1">Product Name</p>
-                    </th>
-                    <th>
-                        <p class="my-1">Specification</p>
-                    </th>
-                    <th>
-                        <p class="my-1">Grade</p>
+                        <span class="text-secondary"><i class="fas fa-motorcycle"></i></span>
                     </th>
                     <th >
-                        <p class="my-1">Packing Size</p>
+                        <img src="/assets/img/auto-icon.svg" alt="3 Wheeler" width="25 px">
                     </th>
                     <th >
-                        <p class="my-1">Recomm. Vehicles</p>
+                        <span class="text-secondary"><i class="fas fa-car"></i></span>
                     </th>
-                    <th style="width: 40px;">
-                        <p class="my-1">Info</p>
+                    <th >
+                        <span class="text-secondary"><i class="fas fa-truck"></i></span>
                     </th>
+                    
                 </tr>
             </thead>
-            <tbody>
-                <tr *ngFor="let product of productList">
+            <tbody class="border-0"> 
+                <ng-container *ngFor="let product of productList">
+
+                <tr class="shadow shadow-sm rounded-3" (click)="onClick(product.productId)" >
                     <td class=" p-3">{{product.productName}}</td>
                     <td class=" p-3">{{product.specification}}</td>
                     <td class=" p-3">{{product.grade}}</td>
                     <td class=" p-3">{{product.packingSize}}</td>
-                    <td class=" p-3">{{product.vehicleType}}</td>
-                    <td>
-                        <a routerLink="/products/{{ product.productId }}">
-                            <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button> 
-                        </a>
+                    <td class=" p-3">
+                        <span *ngFor="let type of product.vehicleType">
+                            <span *ngIf="type == '2-wheeler'"> <i class="fas fa-check"></i> </span>
+                        </span>
                     </td>
+                    <td class=" p-3">
+                        <span *ngFor="let type of product.vehicleType">
+                            <span *ngIf="type == '3-wheeler'"> <i class="fas fa-check"></i> </span>
+                        </span>
+                    </td>
+                    <td class=" p-3">
+                        <span *ngFor="let type of product.vehicleType">
+                            <span *ngIf="type == '4-wheeler'"> <i class="fas fa-check"></i> </span>
+                        </span>
+                    </td>
+                    <td class=" p-3">
+                        <span *ngFor="let type of product.vehicleType"  >
+                            <span *ngIf="type == 'trucks'"> <i class="fas fa-check"></i> </span>
+                        </span>
+                    </td>
+                    
                 </tr>
+            </ng-container>
+
             </tbody>
         </table>
     </div>

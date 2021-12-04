@@ -7,19 +7,19 @@
         <a class="nav-link text-dark active border-bottom-orange customers-tab" onclick="change_tab('customers-tab', 0)"
             id="all_customers-tab" data-bs-toggle="tab" data-bs-target="#all_customers" type="button" role="tab"
             aria-controls="all_customers" aria-selected="true">
-            <i class="fas fa-border-all"></i> All Customers</a>
+            <i class="fas fa-border-all"></i> <span class="d-none d-md-inline "> Active </span></a>
     </li>
     <li class="nav-item mx-1" role="presentation">
         <a class="nav-link text-dark customers-tab" id="customer_activities-tab"
             onclick="change_tab('customers-tab', 1)" data-bs-toggle="tab" data-bs-target="#customer_activities" (click)="fetchCustomerActivities()"
             type="button" role="tab" aria-controls="customer_activities" aria-selected="false">
-            <i class="fas fa-code-branch"></i> Customer Activities</a>
+            <i class="fas fa-code-branch"></i> <span class="d-none d-md-inline ">  Activities</span></a>
     </li>
     <li class="nav-item mx-1" role="presentation">
         <a class="nav-link text-dark customers-tab" id="restrictedCustomers-tab"
             onclick="change_tab('customers-tab', 2)" data-bs-toggle="tab" data-bs-target="#restrictedCustomers"
             type="button" role="tab" aria-controls="restrictedCustomers" aria-selected="false">
-            <i class="fas fa-ban"></i> Restricted Customers</a>
+            <i class="fas fa-ban"></i> <span class="d-none d-md-inline "> Restricted </span> </a>
     </li>
 </ul>
 <!-- page nav ends -->

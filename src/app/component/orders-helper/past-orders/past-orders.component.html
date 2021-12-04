@@ -12,13 +12,13 @@
 <div *ngIf="!loading">
 
     <div class="text-center">
-        <p *ngIf="orders.length==0">No Data Available</p>
+        <!-- <p *ngIf="orders.length==0">No Data Available</p> -->
     </div>
 <div class="mx-2 mt-4 rounded">
     <div class="my-2">
     </div>
     <div class="table-responsive">
-        <table datatable *ngIf="orders.length>0"
+        <table datatable
             class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
             <thead class="background-orange text-white">
                 <tr>
@@ -42,7 +42,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <!-- <tbody>
                 <tr *ngFor="let o of orders">
                     <td class=" p-3"> {{o.garage.garageName}}</td>
                     <td class=" p-3">{{o.garage.name}}</td>
@@ -57,7 +57,7 @@
                         </a>
                     </td>
                 </tr>
-            </tbody>
+            </tbody> -->
         </table>
     </div>
 </div>

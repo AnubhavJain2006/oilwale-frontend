@@ -18,49 +18,33 @@
     </div>
     <div class="table-responsive">
         <table datatable *ngIf="deactivatedGarages.length>0"
-            class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
-            <thead class="background-orange text-white">
+            class="table table-borderless spacetr">
+            <thead class="text-secondary">
                 <tr>
-                    <th>ha</th>
-                    <th>
-                        <p class="my-1">Garage Name</p>
-                    </th>
-                    <th>
-                        <p class="my-1">Owner Name</p>
-                    </th>
-                    <th>
-                        <p class="my-1">Phone</p>
-                    </th>
-                    <th>
-                        <p class="my-1">Address</p>
-                    </th>
-                    <th>
-                        <p class="my-1">Pincode</p>
-                    </th>
-                    <th>
-                        <p class="my-1">Referral Code</p>
-                    </th>
-                    <th>
-                        <p class="my-1">Info</p>
-                    </th>
+                    <th><small class="text-secondary">GARAGE</small></th>
+                    <th><small class="text-secondary">OWNER</small></th>
+                    <th><small class="text-secondary">PHONE</small></th>
+                    <th><small class="text-secondary">ADDRESS</small></th>
+                    <th><small class="text-secondary">PINCODE</small></th>
+                    <th><small class="text-secondary">REFERRAL</small></th>
+                    <th><small class="text-secondary">JOINED ON</small></th>
+                    
                 </tr>
             </thead>
-            <tbody>
-                <tr *ngFor="let garage of deactivatedGarages">
-                    <td>haha</td>
-                    <td>{{garage.garageName}}</td>
-                    <td>{{garage.name}}</td>
-                    <td>{{garage.phoneNumber}}</td>
-                    <td>{{garage.address}}</td>
-                    <td>{{garage.pincode}}</td>
-                    <td>{{garage.referralCode}}</td>
-                    <td>
-                        <a routerLink="/garages/{{ garage.garageId }}">
-                            <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button> 
-                        </a>
-                    </td>
+            <tbody class="border-0">
+                <ng-container *ngFor="let garage of deactivatedGarages" >
+
+                <tr class="shadow shadow-sm rounded-3" (click)="onClick(garage.garageId)">
+                    <td class=" p-3"> {{garage.garageName}}</td>
+                    <td class=" p-3">{{garage.name}}</td>
+                    <td class=" p-3">{{garage.phoneNumber}}</td>
+                    <td class=" p-3">{{garage.address}}</td>
+                    <td class=" p-3">{{garage.pincode}}</td>
+                    <td class=" p-3">{{garage.referralCode}}</td>
+                    <td class=" p-3">{{garage.createdAt | date}}</td>
                 </tr>
-            </tbody>
+            </ng-container>
+        </tbody>
         </table>
     </div>
 </div>

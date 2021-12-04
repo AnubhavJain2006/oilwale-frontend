@@ -2,6 +2,10 @@
 /* font-size: .875rem; */
 /* } */
 
+h1, h2, h3 ,h4, h5, h6, p, span {
+  font-family: 'Assistant', sans-serif !important;
+}
+
 .feather {
   width: 16px;
   height: 16px;
@@ -53,6 +57,10 @@ select:focus {
   background-color:  #fcbdaa !important;
   background-color:  #e64a19 !important;
 } */
+
+.text-orange {
+  color: #ff5722;
+}
 
 .border-bottom-orange {
   border-bottom: solid #ff5722 3px !important;

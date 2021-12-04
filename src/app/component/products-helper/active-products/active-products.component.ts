@@ -21,4 +21,8 @@ export class ActiveProductsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onClick(id: string) {
+    this.router.navigate(['/products/' + id]);
+  }
+
 }

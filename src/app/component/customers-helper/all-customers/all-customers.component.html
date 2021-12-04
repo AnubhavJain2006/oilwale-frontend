@@ -11,33 +11,26 @@
 <div class="">
     <div class="mx-2 mt-4 rounded">
         <div class="table-responsive">
-            <table datatable id="all_customer_table" *ngIf="customers.length>0"
-                class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
-                <thead class="background-orange text-white">
-                    <tr>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Area</th>
-                        <th>Pincode</th>
-                        <th>Register Date</th>
+            <table datatable *ngIf="customers.length>0" class="table table-borderless  table-hover  spacetr">
+                <thead class="text-secondary">
+                    <tr class="">
+                        <th><small class="text-secondary">NAME</small></th>
+                        <th><small class="text-secondary">PHONE</small></th>
+                        <th><small class="text-secondary">AREA</small></th>
+                        <th><small class="text-secondary">PINCODE</small></th>
+                        <th><small class="text-secondary">JOINED ON</small></th>
                         <!-- <th>Vehicle Number</th> -->
-                        <th>Info</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="border-0">
                     <ng-container *ngFor="let customer of customers">
-                        <tr>
-                            <td>{{customer.customerName}}</td>
-                            <td>{{customer.customerPhoneNumber}}</td>
-                            <td>{{customer.customerAddress}}</td>
-                            <td>{{customer.customerPincode}}</td>
-                            <td>{{customer.createdAt | date}}</td>
-                            <td>
-                                <a routerLink="/customers/{{customer.customerId}}">
-                                    <button class="btn btn-outline-primary"> <i class="fas fa-info-circle"></i>
-                                    </button>
-                                </a>
-                            </td>
+                        <tr class="shadow shadow-sm rounded-3" (click)="onClick(customer.customerId)">
+                            <td class=" p-3">{{customer.customerName}}</td>
+                            <td class=" p-3">{{customer.customerPhoneNumber}}</td>
+                            <td class=" p-3">{{customer.customerAddress}}</td>
+                            <td class=" p-3">{{customer.customerPincode}}</td>
+                            <td class=" p-3">{{customer.createdAt | date}}</td>
+                            
                         </tr>
                     </ng-container>
                 </tbody>
