@@ -24,6 +24,7 @@ export class GarageInfoComponent implements OnInit {
   accountRestoreLoadingFlag: boolean = false;
   redeemPointsLoadingFlag: boolean = false;
   redeemPointsSuccessFlag: boolean = false;
+  redeenPointsValidationFlag: boolean = true;
 
   // other info
   garageCustomerList:Customer[] = [];
@@ -89,6 +90,11 @@ export class GarageInfoComponent implements OnInit {
         console.log('Error while redeem');
       }
     })
+  }
+
+  redeenPointsValidation() {
+    console.log("points check")
+    if( this.redeemPointsCount == null) this.redeenPointsValidationFlag = true;
   }
 
 }

@@ -39,8 +39,24 @@
 
                     <img class="user-img mr-1" src="/assets/img/user.png" alt="User" height="90px" width="90px">
 
-                    <div class="col-12 pt-2 ">
-                        <small class="text-muted">{{userName}} - {{userPriviledge | titlecase}} </small>
+                    <div class="col-12 pt-2 text-wrap">
+                        <p class="m-0">
+                            <small class="text-muted">{{userName | uppercase}} </small>
+                        </p>
+                        <p class="m-0">
+                            <small class="text-secondary">{{userPriviledge | titlecase}}</small>
+                        </p>
+                        <hr>
+
+                        <div class="text-start">
+
+                            <p class="m-0">
+                                <small class="text-secondary"> <i class="fas fa-envelope"></i> - {{ userEmail }}</small>
+                            </p>
+                            <p class="m-0">
+                                <small class="text-secondary"> <i class="fas fa-mobile"></i> - {{ userPhoneNumber }}</small>
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <hr class="">
@@ -84,15 +100,19 @@
 
                             <div class="m-1">
                                 <div class="col-12 text-muted ">
-                                    <small class="mb-1 text-light"> {{ userName }}
+                                    <small class="mb-1 text-light"> {{ userName }} 
                                     </small>
                                 </div>
                                 <div class="col-12 text-muted ">
-                                    <small class="mb-1 text-light"> <i class="fas fa-envelope"></i>
+                                    <small class="mb-1 text-light"> {{userPriviledge | titlecase}}
+                                    </small>
+                                </div>
+                                <div class="col-12 text-muted ">
+                                    <small class="mb-1 text-light"> {{userEmail}}
                                     </small>
                                 </div>
                                 <div class=" col-12  text-muted">
-                                    <small class="mb-1 text-light"> <i class="fas fa-mobile"></i>
+                                    <small class="mb-1 text-light"> {{userPhoneNumber}}
                                     </small>
                                 </div>
                             </div>
@@ -146,7 +166,8 @@
                             class="nav-item"><a class="nav-link tab-item text-light active" routerLink="/myaccount"> <i
                                     class="fas fa-user"></i> My Account
                             </a></li>
-                        <li class="nav-item pt-1"><a class="nav-link tab-item text-light" routerLink="/myactivities"> <i
+                        <li (click)="setActive('myactivities')" [ngClass]="{'active-tab':active=='myactivities'}"
+                            class="nav-item pt-1"><a class="nav-link tab-item text-light" routerLink="/myactivities"> <i
                                     class="fas fa-clipboard-list"></i> My Activities
                             </a></li>
                         <li class="nav-item pt-1"><a class="btn text-start nav-link tab-item text-light" (click)="logout()"> <i

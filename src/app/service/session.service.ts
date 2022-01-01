@@ -13,6 +13,11 @@ export class SessionService {
   private _userName: string = "";
   private _userPhoneNumber: string = "";
   private _userPriviledge: string = "";
+  private _id: string = "";
+
+  public get id(): string {
+    return this._id;
+  }
 
   public get userName(): string {
     return this._userName;
@@ -46,6 +51,8 @@ export class SessionService {
   setCredentials(resp: any) {
     this._userName = resp.userName;
     this._userPriviledge = resp.role;
+    this._userPhoneNumber = resp.phoneNumber;
+    this._id = resp.id;
 
     console.log("credentials le kar aaya");
     console.log( this._userName);

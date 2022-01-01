@@ -3,6 +3,8 @@ import { AdminService } from 'src/app/service/admin.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { HeaderService } from 'src/app/service/header.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -12,21 +14,26 @@ export class HeaderComponent implements OnInit {
 
   userName: string = "";
   userPriviledge: string = "";
+  userPhoneNumber: string = "";
+  userEmail: string = "";
 
-  constructor(private sessionService: SessionService, private adminService: AdminService, private router: Router) { }
+  active: string = this.headerService.activeTab;
 
-  active: string = "dashboard";
+  constructor(private sessionService: SessionService, private adminService: AdminService, private router: Router, private headerService: HeaderService) { }
 
 
   ngOnInit(): void {
     this.userName = this.sessionService.userName;
     this.userPriviledge = this.sessionService.userPriviledge;
+    this.userPhoneNumber = this.sessionService.userPhoneNumber;
+    this.userEmail = this.sessionService.id;
 
     if(this.userName == "" || this.userName == null) {
       this.fetchCredentials();
     }
 
-    this.setInitialUrl();
+    this.headerService.setInitialUrl();
+    this.active = this.headerService.activeTab;
   }
   
   setActive(activeLink: string) {
@@ -43,30 +50,11 @@ export class HeaderComponent implements OnInit {
       console.log("Side se data le kar aaya");
       this.userName = data.name;
       this.userPriviledge = data.privilege;
+      this.userPhoneNumber = data.phoneNumber;
+      this.userEmail = data.email;
     })
   }
 
-  setInitialUrl() {
-    const tempUrl = this.router.url;
-
-    console.log("ye hum url laaye h")
-    console.log(tempUrl)
-
-    if( tempUrl == "/dashboard") this.setActive("dashboard")
-    else if ( tempUrl == "/garages") this.setActive("garages")
-    else if ( tempUrl == "/customers") this.setActive("customers")
-    else if ( tempUrl == "/vehicles") this.setActive("vehicles")
-    else if ( tempUrl == "/products") this.setActive("products")
-    else if ( tempUrl == "/schemes") this.setActive("schemes")
-    else if ( tempUrl == "/orders") this.setActive("orders")
-    else if ( tempUrl == "/accounts") this.setActive("accounts")
-    else if( tempUrl == "/myactivities") this.setActive("myactivities")
-    else if( tempUrl == "/myaccount") this.setActive("myaccount")
-    else this.setActive("dashboard")
-
-
-
-  }
 
 }
 

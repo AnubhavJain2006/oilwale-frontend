@@ -1,3 +1,28 @@
-tr:hover {
+.spacetr {
+    border-spacing: 0 0.75em !important;
+    border-collapse: separate;
+  }
+  
+  td:first-child {
+    border-left-style: solid;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  
+  td:last-child {
+    border-right-style: solid;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  tr:hover td {
+    color: white;
+    transition: all ease-out 200ms;
+    background-color: #ff6a3c !important;
     cursor: pointer;
-}
+  }
+
+  tr:hover tr>span>span>i {
+      color: white !important;
+  }
+  

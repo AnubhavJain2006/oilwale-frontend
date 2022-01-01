@@ -137,10 +137,6 @@
                             <td class="p-3">Update garage info</td>
                             <td class="p-3"> <a routerLink="/garages/{{ garageDetails.garageId }}/edit" class="btn link-primary">Update</a></td>
                         </tr>
-                        <tr>
-                            <td class="p-3">Reset password</td>
-                            <td class="p-3"> <button disabled class="btn link-danger">Reset password</button></td>
-                        </tr>
                         <tr *ngIf="garageDetails.active">
                             <td class="p-3">Deactivate Account</td>
                             <td class="p-3">
@@ -222,7 +218,7 @@
             <p>Current points : <span class="badge bg-secondary">{{ garageDetails.totalScore }}</span></p>
             
             <label for="redeemPoints" class="form-label mt-3">Enter points to redeem</label>
-            <input type="number" name="redeemPoints" class="mb-3 form-control" [(ngModel)]="redeemPointsCount">
+            <input type="number" name="redeemPoints" class="mb-3 form-control" [(ngModel)]="redeemPointsCount" onchange="redeenPointsValidation()">
     
             <p *ngIf="garageDetails.totalScore - redeemPointsCount < 0" class="text-danger">Redeeming points are greater then the available points to redeem.</p>
             <p *ngIf="redeemPointsCount < 0" class="text-danger">Invalid entry</p>
@@ -233,7 +229,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" [disabled]="garageDetails.totalScore - redeemPointsCount < 0 || redeemPointsCount < 0 ||  redeemPointsLoadingFlag" (click)="redeemGaragePoints()" class="btn background-orange text-white"> 
+            <button type="button" [disabled]="garageDetails.totalScore - redeemPointsCount < 0 || redeemPointsCount < 0 ||  redeemPointsLoadingFlag || redeenPointsValidationFlag" (click)="redeemGaragePoints()" class="btn background-orange text-white"> 
                 <span *ngIf="!redeemPointsLoadingFlag">
                     Redeem Points
                 </span>

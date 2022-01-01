@@ -22,5 +22,8 @@ export class AllVehiclesComponent implements OnInit{
 
   }
 
-  
+  onClick(id: string) {
+    this.router.navigate(['/vehicles/' + id]);
+  }
+
 }

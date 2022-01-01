@@ -5,6 +5,7 @@ import { ActivityService } from 'src/app/service/activity.service';
 
 import { Activity } from 'src/app/interface/activity';
 import { Admin } from 'src/app/interface/admin';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-myactivities',
@@ -19,9 +20,14 @@ export class MyactivitiesComponent implements OnInit {
   detailsLoadingFlag: boolean = false;
   activityLoadingFlag: boolean = false;
 
-  constructor(private accountService: AdminService, private activityService: ActivityService) { }
+  constructor(private accountService: AdminService, private activityService: ActivityService, private headerComponent: HeaderComponent ) { }
 
   ngOnInit(): void {
+
+    // changing sidebar active tab
+    this.headerComponent.active = "myactivities"; 
+
+
     this.detailsLoadingFlag = true;
     this.accountService.getAdminByEmail().subscribe(data => {
       this.detailsLoadingFlag = false;
