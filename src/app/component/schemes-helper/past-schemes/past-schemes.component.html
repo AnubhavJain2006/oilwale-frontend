@@ -1,63 +1,60 @@
 <div class="my-3 text-center">
-    <div class="py-2">
-
-        <h5 class="h5">PAST SCHEMES</h5>
-    </div>
+  <div class="py-2">
+    <h5 class="h5">PAST SCHEMES</h5>
+  </div>
 </div>
 
 <div *ngIf="loading" class="text-center">
-    <p>Fetching data ...</p>
+  <p>Fetching data ...</p>
 </div>
 
+<div *ngIf="!loading && schemes.length == 0">
+  <div class="text-center">
+    <p>No past schemes.</p>
+  </div>
+</div>
 
-<div *ngIf="!loading">
-
-    <div class="text-center">
-        <p *ngIf="schemes.length==0">No Data Available</p>
-    </div>
-<div class="mx-2 mt-4 rounded">
-    <div class="my-2">
-    </div>
+<div *ngIf="!loading && schemes.length != 0">
+  <div class="mx-2 mt-4 rounded">
     <div class="table-responsive">
-        <table datatable *ngIf="schemes.length>0"
-            class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
-            <thead class="background-orange text-white">
-                <tr>
-                    <th >
-                        <p class="my-1">Schemes Name</p>
-                    </th>
-                    <th>
-                        <p class="my-1">Description</p>
-                    </th>
-                    <th>
-                        <p class="my-1">Accepted by</p>
-                    </th>
-                    <th style="width: 100px;">
-                        <p class="my-1">Started At</p>
-                    </th>
-                    <th style="width: 100px;">
-                        <p class="my-1">Ended At</p>
-                    </th>
-                    <th style="width: 40px;">
-                        <p class="my-1">Info</p>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let s of schemes">
-                    <td class=" p-3"> {{s.scheme.schemeName}}</td>
-                    <td class=" p-3">{{s.scheme.description}}</td>
-                    <td class=" p-3">[Kya karu mai iska]</td>
-                    <td class=" p-3">{{s.scheme.startedAt | date:'MMM dd, yyyy'}}</td>
-                    <td class=" p-3">{{s.scheme.endedAt | date: 'MMM dd, yyyy'}}</td>
-                    <td>
-                        <a routerLink="/schemes{{ s.scheme.schemeId }}">
-                            <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button> 
-                        </a>
+      <table datatable class="table table-borderless table-hover spacetr">
+        <thead class="text-secondary">
+          <tr>
+            <th><small class="text-secondary">SCHEME NAME</small></th>
+            <th>
+              <small class="text-secondary">DESCRIPTION</small>
+            </th>
+            <th>
+              <small class="text-secondary">ACCEPTED BY </small>
+            </th>
+            <th>
+              <small class="text-secondary">STARTED AT</small>
+            </th>
+            <th>
+              <small class="text-secondary">ENDED AT</small>
+            </th>
+            
+          </tr>
+        </thead>
+        <tbody class="border-0">
+            <ng-container  *ngFor="let s of schemes" >
+
+                <tr class="shadow shadow-sm rounded-3" (click)="onClick(s.scheme.schemeId)">
+                    <td class="p-2">{{ s.scheme.schemeName }}</td>
+                    <td class="p-2">{{ s.scheme.description }}</td>
+                    <td class="p-2"><strong>26</strong> / <span class="">50</span> 
+                        <div class="progress m-0" style="height: 3px;">
+                            <div class="progress-bar " role="progressbar" [ngStyle]="{'width': '20%' }" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
                     </td>
-                </tr>
-            </tbody>
-        </table>
+                    <td class="p-2">{{ s.scheme.startedAt | date: "MMM dd, yyyy" }}</td>
+                    <td class="p-2">{{ s.scheme.endedAt | date: "MMM dd, yyyy" }}</td>
+                    
+            </tr>
+        </ng-container>
+        </tbody>
+      </table>
     </div>
-</div>
+  </div>
 </div>

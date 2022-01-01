@@ -47,6 +47,7 @@ export class VehicleInfoComponent implements OnInit {
   onRestoreVehicle() {
     const restoreVehicleObj: Vehicle = {
       active: !this.vehicleDetails.active,
+      vehicleType: this.vehicleDetails.vehicleType,
       vehicleId: this.vehicleDetails._id,
       vehicleCompanyId: this.vehicleDetails.vehicleCompanyId,
       vehicleModel: this.vehicleDetails.vehicleModel,

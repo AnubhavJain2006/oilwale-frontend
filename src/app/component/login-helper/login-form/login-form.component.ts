@@ -15,6 +15,10 @@ export class LoginFormComponent implements OnInit {
 
   loginText: FormGroup;
 
+  // utilities
+  loginRequestProcess: boolean = false;
+  invalidCredentialsFlag: boolean = false;
+
   constructor(private adminService: AdminService, private loginComp: LoginComponent, private router: Router) {
     this.loginText = new FormGroup({
       id: new FormControl('', [Validators.email, Validators.required]),
@@ -27,18 +31,28 @@ export class LoginFormComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginText.value)
+    // console.log(this.loginText.value)
+
+    this.loginRequestProcess = true;
+    this.invalidCredentialsFlag = false;
+
     this.loginText.value['role'] = 'admin'
+
     this.adminService.authenticate(this.loginText.value).subscribe(resp => {
-      console.log(resp + "Service")
+      console.log(resp)
+
       if (resp.token != null) {
         localStorage.setItem('authToken', resp.token);
         localStorage.setItem('isLoggedIn', "true");
         this.router.navigateByUrl("/dashboard");
       }
-      console.log(resp)
+
+      // console.log(resp)
     }, err => {
-      console.log(err);
+      // console.log(err);
+      // console.log("this is the error  ")
+      this.invalidCredentialsFlag = true;
+      this.loginRequestProcess = false;
     });
   }
 

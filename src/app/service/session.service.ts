@@ -7,6 +7,9 @@ import { Injectable } from '@angular/core';
 export class SessionService {
 
   authToken: any = null;
+  userName: string = "";
+  userPriviledge: string = "";
+  
 
   constructor(private router: Router) { }
 

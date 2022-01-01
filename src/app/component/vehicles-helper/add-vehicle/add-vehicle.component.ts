@@ -61,9 +61,11 @@ export class AddVehicleComponent implements OnInit {
        return;
      }
 
+     
      const newVehicle = {
       vehicleId: "",
       vehicleCompanyId: this.formInputCompany,
+      vehicleType: this.formInputType,
       vehicleModel: this.formInputModel,
       suggestedProduct: this.formInputSuggestedProducts,
       active: true,

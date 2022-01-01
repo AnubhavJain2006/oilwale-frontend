@@ -60,6 +60,7 @@ export class AddSchemeComponent implements OnInit {
     console.log(this.schemeProducts);
 
     const schemeSubmitObj:Scheme = {
+      schemeId: "",
       schemeName: this.schemeInfo.value.schemeName,
       description: this.schemeInfo.value.description,
       status: true,

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Scheme } from 'src/app/interface/scheme';
 import { SchemeInfo } from 'src/app/interface/scheme-info';
 
@@ -12,9 +13,13 @@ export class PastSchemesComponent implements OnInit {
   @Input() schemes!:SchemeInfo[];
   @Input() loading!: boolean;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  onClick(id: string) {
+    this.router.navigate(['/schemes/' + id]);
   }
 
 }

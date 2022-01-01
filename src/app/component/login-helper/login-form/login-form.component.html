@@ -15,9 +15,19 @@
                 class="form-control my-3 py-3">
         </div>
     </div>
+
+    <p *ngIf="invalidCredentialsFlag" class="text-danger">Invalid creadentials!</p>
+
     <div class="form-row">
         <div class="col-md-11">
-            <button class="btn1 mt-3 ">Login</button>
+            <button [disabled]="loginRequestProcess" class="btn1 mt-3" >
+                <div *ngIf="!loginRequestProcess">
+                    Login
+                </div>
+                <div *ngIf="loginRequestProcess" class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+            </button>
         </div>
     </div>
 </form>

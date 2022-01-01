@@ -44,6 +44,7 @@ export class VehicleEditComponent implements OnInit {
         vehicleId: this.vehicleDetails._id,
         vehicleCompanyId: this.vehicleDetails.vehicleCompanyId,
         vehicleModel: this.vehicleDetails.vehicleModel,
+        vehicleType: this.vehicleDetails.vehicleType,
         suggestedProduct: [],
         active: this.vehicleDetails.active,
         createdAt: this.vehicleDetails.createdAt,
