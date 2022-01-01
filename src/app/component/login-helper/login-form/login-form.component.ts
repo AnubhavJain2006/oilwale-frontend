@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from './../../../service/admin.service';
+import { SessionService } from 'src/app/service/session.service';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginComponent } from '../../login/login.component';
@@ -19,7 +20,7 @@ export class LoginFormComponent implements OnInit {
   loginRequestProcess: boolean = false;
   invalidCredentialsFlag: boolean = false;
 
-  constructor(private adminService: AdminService, private loginComp: LoginComponent, private router: Router) {
+  constructor(private adminService: AdminService, private loginComp: LoginComponent, private router: Router, private sessionService: SessionService) {
     this.loginText = new FormGroup({
       id: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', Validators.required)
@@ -44,6 +45,9 @@ export class LoginFormComponent implements OnInit {
       if (resp.token != null) {
         localStorage.setItem('authToken', resp.token);
         localStorage.setItem('isLoggedIn', "true");
+
+        this.sessionService.setCredentials(resp);
+
         this.router.navigateByUrl("/dashboard");
       }
 

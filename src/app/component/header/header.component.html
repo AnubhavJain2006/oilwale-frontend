@@ -40,7 +40,7 @@
                     <img class="user-img mr-1" src="/assets/img/user.png" alt="User" height="90px" width="90px">
 
                     <div class="col-12 pt-2 ">
-                        <small class="text-muted">ADMIN - HEADER </small>
+                        <small class="text-muted">{{userName}} - {{userPriviledge | titlecase}} </small>
                     </div>
                 </div>
                 <hr class="">
@@ -83,6 +83,10 @@
                             </div>
 
                             <div class="m-1">
+                                <div class="col-12 text-muted ">
+                                    <small class="mb-1 text-light"> {{ userName }}
+                                    </small>
+                                </div>
                                 <div class="col-12 text-muted ">
                                     <small class="mb-1 text-light"> <i class="fas fa-envelope"></i>
                                     </small>
@@ -145,7 +149,7 @@
                         <li class="nav-item pt-1"><a class="nav-link tab-item text-light" routerLink="/myactivities"> <i
                                     class="fas fa-clipboard-list"></i> My Activities
                             </a></li>
-                        <li class="nav-item pt-1"><a class="nav-link tab-item text-light" (click)="logout()"> <i
+                        <li class="nav-item pt-1"><a class="btn text-start nav-link tab-item text-light" (click)="logout()"> <i
                                     class="fas fa-sign-out-alt"></i> Logout
                             </a></li>
                     </ul>
