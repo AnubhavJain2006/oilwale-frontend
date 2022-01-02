@@ -42,8 +42,8 @@ export class SchemeService {
     return this.httpClient.get<SchemeInfo[]>(this.apiUrl + "/upcoming").toPromise();
   }
 
-  getSchemeById(id: string): Observable<Scheme> {
-    return this.httpClient.get<Scheme>(this.apiUrl + '/' +id);
+  getSchemeById(id: string): Observable<SchemeInfo> {
+    return this.httpClient.get<SchemeInfo >(this.apiUrl + '/' +id);
   }
 
   deleteScheme(id: string): Observable<Scheme> {

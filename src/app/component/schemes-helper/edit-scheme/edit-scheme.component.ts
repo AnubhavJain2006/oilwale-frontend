@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product } from 'src/app/interface/product';
 import { ProductService } from 'src/app/service/product.service';
 import { DatePipe } from '@angular/common';
+import { SchemeInfo } from 'src/app/interface/scheme-info';
 
 @Component({
   selector: 'app-edit-scheme',
@@ -15,7 +16,7 @@ import { DatePipe } from '@angular/common';
 })
 export class EditSchemeComponent implements OnInit {
   id: string = '';
-  schemeDetails!: Scheme;
+  schemeDetails!: SchemeInfo;
   dataLoadingStatus: boolean = true;
 
   displayName: string = "";
@@ -62,7 +63,7 @@ export class EditSchemeComponent implements OnInit {
     this.id = this.activateRoute.snapshot.params.id;
     this.schemeService.getSchemeById(this.id).subscribe(resp => {
       this.schemeDetails = resp;
-      this.displayName = this.schemeDetails.schemeName;
+      this.displayName = this.schemeDetails.scheme.schemeName;
       this.dataLoadingStatus = false;
 
       // slight modifications
@@ -73,11 +74,11 @@ export class EditSchemeComponent implements OnInit {
       // console.log(this.schemeDetails.endedAt)
 
       this.schemeInfo.setValue({
-        schemeName: this.schemeDetails.schemeName,
-        description: this.schemeDetails.description,
-        startedAt: this.datePipe.transform(this.schemeDetails.startedAt, 'yyyy-MM-dd'),
-        endedAt: this.datePipe.transform(this.schemeDetails.endedAt, 'yyyy-MM-dd'),
-        targetGroup: this.schemeDetails.targetGroup,
+        schemeName: this.schemeDetails.scheme.schemeName,
+        description: this.schemeDetails.scheme.description,
+        startedAt: this.datePipe.transform(this.schemeDetails.scheme.startedAt, 'yyyy-MM-dd'),
+        endedAt: this.datePipe.transform(this.schemeDetails.scheme.endedAt, 'yyyy-MM-dd'),
+        targetGroup: this.schemeDetails.scheme.targetGroup,
         vehicleType: {
           twoWheeler: false,  
           threeWheeler: false,  

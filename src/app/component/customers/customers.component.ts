@@ -71,7 +71,7 @@ export class CustomersComponent implements OnInit {
     this.activitiesLoading = true;
     this.activityService.getDomainActivities('customers').subscribe(data => {
       this.customerActivities = data;
-      console.log(data);
+      // console.log(data);
     },
     (err) => {
       console.log(err);

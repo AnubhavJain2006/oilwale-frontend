@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
 
   fetchCredentials() {
     this.adminService.getAdminByEmail().subscribe(data => {
-      console.log("Side se data le kar aaya");
+      // console.log("Side se data le kar aaya");
       this.userName = data.name;
       this.userPriviledge = data.privilege;
       this.userPhoneNumber = data.phoneNumber;

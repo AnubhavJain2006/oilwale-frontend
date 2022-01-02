@@ -48,7 +48,7 @@ export class DeletedAccountsComponent implements OnInit {
     this.tempAdmin.active = true;
     this.revertAccountFlagLoading = true;
     this.accountService.updateAdmin(this.tempAdmin).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.revertAccountFlagLoading = false;
       this.revertAccountFlagSuccess = true;
 

@@ -66,7 +66,7 @@ export class AccountEditComponent implements OnInit {
   }
 
   updateUser() {
-    console.log("update run");
+    console.log("pending implementation");
     
   }
 

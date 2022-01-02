@@ -11,6 +11,6 @@ export class AppComponent {
 
   constructor(public router: Router) {
     // console.log(this.router.url + " Router")
-    console.log("App Component")
+    // console.log("App Component")
   }
 }

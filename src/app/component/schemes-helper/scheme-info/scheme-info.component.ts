@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SchemeService } from 'src/app/service/scheme.service';
 
 import { Scheme } from 'src/app/interface/scheme';
+import { SchemeInfo } from 'src/app/interface/scheme-info';
 
 @Component({
   selector: 'app-scheme-info',
@@ -11,7 +12,7 @@ import { Scheme } from 'src/app/interface/scheme';
 })
 export class SchemeInfoComponent implements OnInit {
   id: string = '';
-  schemeDetails!: Scheme;
+  schemeDetails!: SchemeInfo;
   dataLoadingStatus: boolean = true;
 
   // flags
@@ -48,6 +49,9 @@ export class SchemeInfoComponent implements OnInit {
     this.schemeService.getSchemeById(this.id).subscribe(resp => {
       this.schemeDetails = resp;
       this.dataLoadingStatus = false;
+
+      console.log(resp);
+
     }, error => {
       console.log(error);
     })
@@ -57,27 +61,27 @@ export class SchemeInfoComponent implements OnInit {
     this.deleteSchemeLoading = true;
     this.schemeService.deleteScheme(id).subscribe(data => {
       this.deleteSchemeLoading = false;
-      this.schemeDetails = data;
+      this.schemeDetails.scheme.status = data.status;
     })
   }
 
   onRestoreScheme(): void {
     const restoreObj:Scheme = {
-      schemeId : this.schemeDetails.schemeId,
-      schemeName : this.schemeDetails.schemeName,
-      description : this.schemeDetails.description,
+      schemeId : this.schemeDetails.scheme.schemeId,
+      schemeName : this.schemeDetails.scheme.schemeName,
+      description : this.schemeDetails.scheme.description,
       status : true,
-      startedAt : this.schemeDetails.startedAt,
-      endedAt : this.schemeDetails.endedAt,
-      targetGroup : this.schemeDetails.targetGroup,
-      products : this.schemeDetails.products,
-      createdAt: this.schemeDetails.createdAt,
-      updatedAt: this.schemeDetails.updatedAt
+      startedAt : this.schemeDetails.scheme.startedAt,
+      endedAt : this.schemeDetails.scheme.endedAt,
+      targetGroup : this.schemeDetails.scheme.targetGroup,
+      products : this.schemeDetails.products.map(x => x.productId),
+      createdAt: this.schemeDetails.scheme.createdAt,
+      updatedAt: this.schemeDetails.scheme.updatedAt
     }
 
     this.restoreSchemeLoading = true;
     this.schemeService.updateScheme(restoreObj).subscribe(data => {
-      this.schemeDetails = data;
+      this.schemeDetails.scheme.status = data.status;
       this.restoreSchemeLoading = false;
     })
 

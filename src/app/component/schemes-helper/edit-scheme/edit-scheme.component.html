@@ -5,7 +5,7 @@
             <a routerLink="/schemes" class="text-decoration-none text-dark">
                 <i class="fas fa-object-ungroup"></i> Schemes 
             </a>
-            <a routerLink="/schemes/{{ schemeDetails.schemeId }}" class="text-decoration-none text-dark">
+            <a routerLink="/schemes/{{ schemeDetails.scheme.schemeId }}" class="text-decoration-none text-dark">
                 <i class="fas fa-angle-right"></i> {{ displayName }}
             </a>
             <i class="fas fa-angle-right"></i> Edit
@@ -23,7 +23,7 @@
 
         <form [formGroup]="schemeInfo" class="mx-auto col-lg-8 col-md-10 col-sm-12 mb-3 mt-4" id="add_scheme_form" (ngSubmit)="updateSchemeInfo()">
             <div *ngIf="submitSuccessFlag" class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong><i class="fas fa-check-circle"></i> Success!</strong> Scheme added successfully. <a routerLink="/schemes/{{schemeDetails.schemeId}}" class="alert-link"> Click </a> to see details.
+                <strong><i class="fas fa-check-circle"></i> Success!</strong> Scheme added successfully. <a routerLink="/schemes/{{schemeDetails.scheme}}" class="alert-link"> Click </a> to see details.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 

@@ -54,7 +54,7 @@ export class GaragesComponent implements OnInit {
   async loadAllGarages() {
     await this.garageService.getAllGarages().then(resp => {
       this.garages = resp;
-      console.log(this.garages)
+      // console.log(this.garages)
 
       this.activeGaragesLoading = false;
     }, err => {
@@ -67,7 +67,7 @@ export class GaragesComponent implements OnInit {
   async loadDeactivatedGarages() {
     await this.garageService.getDeactivatedGarages().then(resp => {
       this.deactivatedGarages = resp;
-      console.log(this.garages)
+      // console.log(this.garages)
       
       this.deactiveGaragesLoading = false;
     }, err => {
@@ -82,11 +82,11 @@ export class GaragesComponent implements OnInit {
     this.activityService.getDomainActivities('garages').subscribe(data => {
       this.activitiesLoading = false;
       this.garageActivities = data;
-      console.log(data);
+      // console.log(data);
     })
   }
 
   getGarageDetail(garageId: string) {
-    console.log(garageId);
+    // console.log(garageId);
   }
 }

@@ -5,7 +5,7 @@
             <a routerLink="/schemes" class="text-decoration-none text-dark">
                 <i class="fas fa-object-ungroup"></i> Schemes 
             </a>
-            <i class="fas fa-angle-right"></i> {{ schemeDetails.schemeName }}</h3>
+            <i class="fas fa-angle-right"></i> {{ schemeDetails.scheme.schemeName }}</h3>
     </div>
 
     <!-- <div class="w-100 text-center py-2">
@@ -21,26 +21,26 @@
                     <tbody>
                         <tr>
                             <td class="p-3">Scheme Name</td>
-                            <td class="p-3">{{ schemeDetails.schemeName }}</td>
+                            <td class="p-3">{{ schemeDetails.scheme.schemeName }}</td>
                         </tr>
                         <tr>
                             <td class="p-3">Description</td>
-                            <td class="p-3">{{ schemeDetails.description }}</td>
+                            <td class="p-3">{{ schemeDetails.scheme.description }}</td>
                         </tr>
                         <tr>
                             <td class="p-3">Start At </td>
-                            <td class="p-3">{{ schemeDetails.startedAt | date: 'medium' }}</td>
+                            <td class="p-3">{{ schemeDetails.scheme.startedAt | date: 'medium' }}</td>
                         </tr>
                         <tr>
                             <td class="p-3">Conclude At</td>
                             <td class="p-3">
-                                {{ schemeDetails.endedAt | date: 'medium' }}
+                                {{ schemeDetails.scheme.endedAt | date: 'medium' }}
                             </td>
                         </tr>
                         <tr>
                             <td class="p-3">Offered to</td>
                             <td class="p-3">
-                                {{ schemeDetails.targetGroup | titlecase }}
+                                {{ schemeDetails.scheme.targetGroup | titlecase }}
                             </td>
                         </tr>
                         <tr>
@@ -61,29 +61,13 @@
                 </table>
             </div>
 
-            <div class="p-md-3">
+            <div class="p-md-3" *ngIf="schemeDetails.garages != null && schemeDetails.garages.length > 0" >
                 <p class="fw-bold">ACCEPTED USERS LIST</p>
                 <table class="table table-hover table-bordered p-md-3">
                     <tbody>
-                        <tr>
-                            <td class="p-3">Garage 1</td>
-                            <td class="p-3">Address 1 <br> phonr</td>
-                        </tr>
-                        <tr>
-                            <td class="p-3">Garage 1</td>
-                            <td class="p-3">Address 1 <br> phonr</td>
-                        </tr>
-                        <tr>
-                            <td class="p-3">Garage 1</td>
-                            <td class="p-3">Address 1 <br> phonr</td>
-                        </tr>
-                        <tr>
-                            <td class="p-3">Garage 1</td>
-                            <td class="p-3">Address 1 <br> phonr</td>
-                        </tr>
-                        <tr>
-                            <td class="p-3">Garage 1</td>
-                            <td class="p-3">Address 1 <br> phonr</td>
+                        <tr *ngFor="let g of schemeDetails.garages">
+                            <td class="p-3">{{g.garageName}}</td>
+                            <td class="p-3">{{g.address}} <br> {{ g.phoneNumber }} </td>
                         </tr>
                     </tbody>
                 </table>
@@ -96,15 +80,15 @@
                     <tbody>
                         <tr>
                             <td class="p-3">Scheme Id</td>
-                            <td class="p-3">{{schemeDetails.schemeId}} </td>
+                            <td class="p-3">{{schemeDetails.scheme.schemeId}} </td>
                         </tr>
                         <tr>
                             <td class="p-3">Start Date</td>
-                            <td class="p-3">{{schemeDetails.startedAt | date}}</td>
+                            <td class="p-3">{{schemeDetails.scheme.startedAt | date}}</td>
                         </tr>
                         <tr>
                             <td class="p-3">End Date</td>
-                            <td class="p-3">{{schemeDetails.endedAt | date}}</td>
+                            <td class="p-3">{{schemeDetails.scheme.endedAt | date}}</td>
                         </tr>
                         <tr>
                             <td class="p-3">Accepted By</td>
@@ -113,8 +97,8 @@
                         <tr>
                             <td class="p-3">Status</td>
                             <td class="p-3">
-                                <span *ngIf="schemeDetails.status == true" class="badge bg-success">Active</span> 
-                                <span *ngIf="schemeDetails.status == false" class="badge bg-danger">Deactivated</span> 
+                                <span *ngIf="schemeDetails.scheme.status == true" class="badge bg-success">Active</span> 
+                                <span *ngIf="schemeDetails.scheme.status == false" class="badge bg-danger">Deactivated</span> 
 
                             </td>
                     </tbody>
@@ -126,13 +110,13 @@
                     <tbody>
                         <tr>
                             <td class="p-3">Update info</td>
-                            <td class="p-3"> <a routerLink="/schemes/{{schemeDetails.schemeId}}/edit" class="btn link-primary">Update</a></td>
+                            <td class="p-3"> <a routerLink="/schemes/{{schemeDetails.scheme.schemeId}}/edit" class="btn link-primary">Update</a></td>
                         </tr>
                         <tr>
                             <td class="p-3">Update Product / Vehicle type</td>
                             <td class="p-3"> <a  class="btn link-primary">Update</a></td>
                         </tr>
-                        <tr *ngIf="schemeDetails.status == false">
+                        <tr *ngIf="schemeDetails.scheme.status == false">
                             <td class="p-3">Restore Scheme</td>
                             <td class="p-3">
                                 <button (click)="onRestoreScheme()" class="btn text-success" [disabled]="restoreSchemeLoading">
@@ -147,7 +131,7 @@
                                 </button>
                             </td>
                         </tr>
-                        <tr *ngIf="schemeDetails.status == true">
+                        <tr *ngIf="schemeDetails.scheme.status == true">
                             <td class="p-3">Delete</td>
                             <td class="p-3">
                                 <button (click)="onDeleteScheme(id)" class=" btn text-danger" [disabled]="deleteSchemeLoading">

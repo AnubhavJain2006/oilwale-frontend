@@ -48,7 +48,7 @@ export class AccountsComponent implements OnInit {
   }
   async loadDeativeAccount() {
     await this.accountService.loadDeactivAccounts().then(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.deactiveAccountList = resp;
       this.accountService.deactiveAccountList = this.deactiveAccountList;
 
@@ -60,7 +60,7 @@ export class AccountsComponent implements OnInit {
 
   async loadAccounts() {
     await this.accountService.loadActiveAccounts().then(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.activeAccountList = resp;
       this.accountService.activeAccountList = this.activeAccountList;
 

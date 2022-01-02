@@ -40,9 +40,9 @@ export class AllAccountsComponent implements OnInit {
 
   
   confirmDelete(adminId: string) {
-    console.log(adminId);
+    // console.log(adminId);
     this.accountService.deleteAccount(adminId).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
     }, err => {
       console.log(err)
     });
