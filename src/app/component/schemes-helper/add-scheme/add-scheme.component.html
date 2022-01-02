@@ -144,7 +144,7 @@
                         <button class="btn background-orange text-white" (click)="progressBarOneStepBack()">
                             <i class="fas fa-angle-left"></i> Back
                         </button>
-                        <button type="button" class="btn background-orange text-white" [disabled]="!(this.schemeInfo.value.vehicleType.twoWheeler || this.schemeInfo.value.vehicleType.threeWheeler || this.schemeInfo.value.vehicleType.value || this.schemeInfo.value.vehicleType.trucks)" (click)="progressBarOneStepForward();fetchProducts()">
+                        <button type="button" class="btn background-orange text-white" [disabled]="!(this.schemeInfo.value.vehicleType.twoWheeler || this.schemeInfo.value.vehicleType.threeWheeler || this.schemeInfo.value.vehicleType.fourWheeler || this.schemeInfo.value.vehicleType.trucks)" (click)="progressBarOneStepForward();fetchProducts()">
                             Next <i class="fas fa-angle-right"></i>
                         </button>
                     </div>
