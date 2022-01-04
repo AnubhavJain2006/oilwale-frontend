@@ -166,4 +166,12 @@ export class SchemesComponent implements OnInit {
   
   }
 
+  calculateDiff(data: any){
+    let date = new Date(data);
+    let currentDate = new Date();
+
+    let days = Math.floor((date.getTime() - currentDate.getTime() ) / 1000 / 60 / 60 / 24);
+    return days;
+  }
+
 }

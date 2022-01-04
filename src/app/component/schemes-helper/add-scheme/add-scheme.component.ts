@@ -67,7 +67,7 @@ export class AddSchemeComponent implements OnInit {
       startedAt: this.schemeInfo.value.startedAt,
       endedAt: this.schemeInfo.value.endedAt,
       targetGroup: this.schemeInfo.value.targetGroup,
-      products: this.schemeProducts,
+      productList: this.schemeProducts,
       createdAt: new Date(),
       updatedAt: new Date(),
     }

@@ -74,7 +74,7 @@ export class SchemeInfoComponent implements OnInit {
       startedAt : this.schemeDetails.scheme.startedAt,
       endedAt : this.schemeDetails.scheme.endedAt,
       targetGroup : this.schemeDetails.scheme.targetGroup,
-      products : this.schemeDetails.products.map(x => x.productId),
+      productList : this.schemeDetails.products.map(x => x.productId),
       createdAt: this.schemeDetails.scheme.createdAt,
       updatedAt: this.schemeDetails.scheme.updatedAt
     }
