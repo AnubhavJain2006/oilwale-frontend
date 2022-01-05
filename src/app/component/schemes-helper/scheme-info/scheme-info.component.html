@@ -29,12 +29,12 @@
                         </tr>
                         <tr>
                             <td class="p-3">Start At </td>
-                            <td class="p-3">{{ schemeDetails.scheme.startedAt | date: 'medium' }}</td>
+                            <td class="p-3">{{ schemeDetails.scheme.startedAt | date:'MMM dd, yyyy'}}</td>
                         </tr>
                         <tr>
                             <td class="p-3">Conclude At</td>
                             <td class="p-3">
-                                {{ schemeDetails.scheme.endedAt | date: 'medium' }}
+                                {{ schemeDetails.scheme.endedAt | date: 'MMM dd, yyyy' }}
                             </td>
                         </tr>
                         <tr>
@@ -46,7 +46,14 @@
                         <tr>
                             <td class="p-3">Vehicle Type</td>
                             <td class="p-3">
-                                jaldi se api bana do
+                                <span *ngFor="let type of schemeDetails.scheme.vehicleType">
+
+                                    <i *ngIf="type == '2-wheelers'" class="fas fa-motorcycle mx-1 text-secondary"></i>
+                                    <img  *ngIf="type == '3-wheelers'" src="/assets/img/auto-icon.svg" alt="3 Wheeler" width="25 px">
+                                    <i *ngIf="type == '4-wheelers'" class="fas fa-car mx-1 text-secondary"></i>
+                                    <i *ngIf="type == 'trucks'" class="fas fa-truck mx-1 text-secondary"></i>
+
+                                </span>
                             </td>
                         </tr>
                         <tr>
@@ -57,8 +64,21 @@
                                 </span>
                             </td>
                         </tr>
+                        <tr>
+                            <td class="p-3">Accepted By</td>
+                            <td class="p-3"><span class="badge bg-danger">10</span></td>
+                        </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <div class="p-md-3" *ngIf="schemeDetails.products != null && schemeDetails.products.length > 0" >
+                <p class="fw-bold">PRODUCTS LIST</p>
+                <ol class="list-group list-group-numbered p-md-3">
+                    <li *ngFor="let g of schemeDetails.products" class="list-group-item">
+                        <a href="/products/{{ g.productId }}" class="text-black text-decoration-none"> <small> <i class="fas fa-link"></i> </small>  {{g.productName}} </a> <small class="text-secondary"> - {{ g.grade }} - {{ g.packingSize }}</small> <span><small></small></span>
+                    </li>
+                  </ol>
             </div>
 
             <div class="p-md-3" *ngIf="schemeDetails.garages != null && schemeDetails.garages.length > 0" >
@@ -83,16 +103,12 @@
                             <td class="p-3">{{schemeDetails.scheme.schemeId}} </td>
                         </tr>
                         <tr>
-                            <td class="p-3">Start Date</td>
-                            <td class="p-3">{{schemeDetails.scheme.startedAt | date}}</td>
+                            <td class="p-3">Created on</td>
+                            <td class="p-3">{{schemeDetails.scheme.createdAt | date}}</td>
                         </tr>
                         <tr>
-                            <td class="p-3">End Date</td>
-                            <td class="p-3">{{schemeDetails.scheme.endedAt | date}}</td>
-                        </tr>
-                        <tr>
-                            <td class="p-3">Accepted By</td>
-                            <td class="p-3"><span class="badge bg-danger">10</span></td>
+                            <td class="p-3">Last Updated</td>
+                            <td class="p-3">{{schemeDetails.scheme.updatedAt | date}}</td>
                         </tr>
                         <tr>
                             <td class="p-3">Status</td>
@@ -111,10 +127,6 @@
                         <tr>
                             <td class="p-3">Update info</td>
                             <td class="p-3"> <a routerLink="/schemes/{{schemeDetails.scheme.schemeId}}/edit" class="btn link-primary">Update</a></td>
-                        </tr>
-                        <tr>
-                            <td class="p-3">Update Product / Vehicle type</td>
-                            <td class="p-3"> <a  class="btn link-primary">Update</a></td>
                         </tr>
                         <tr *ngIf="schemeDetails.scheme.status == false">
                             <td class="p-3">Restore Scheme</td>

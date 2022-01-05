@@ -28,6 +28,8 @@ export class OrdersComponent implements OnInit {
     this.fetchNewOrders();
     this.fetchAcceptedOrders();
     this.fetchCompletedOrders();
+    this.fetchNotAcceptedOrders();
+    this.fetchPastOrders();
   }
 
   fetchNewOrders() {
@@ -102,6 +104,11 @@ export class OrdersComponent implements OnInit {
   onOrderComplete() {
     this.fetchAcceptedOrders();
     this.fetchCompletedOrders();
+  }
+
+  onOrderDecline() {
+    this.fetchNewOrders();
+    this.fetchNotAcceptedOrders();
   }
 
 }

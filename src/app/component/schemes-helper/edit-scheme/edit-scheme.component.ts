@@ -38,6 +38,7 @@ export class EditSchemeComponent implements OnInit {
 
   submitLoadingFlag: boolean = false;
   submitSuccessFlag: boolean = false;
+  updateSuccessMsgFlag: boolean = false;
 
   isValidDates: boolean = true;
   checkStartAndEndDate: boolean = false;
@@ -73,6 +74,26 @@ export class EditSchemeComponent implements OnInit {
       // console.log(this.schemeDetails.startedAt)
       // console.log(this.schemeDetails.endedAt)
 
+
+      // dumb code :(
+      let tempVehicleType = {
+        twoWheeler: false,  
+        threeWheeler: false,  
+        fourWheeler: false,  
+        trucks: false
+      }
+
+      if(this.schemeDetails.scheme.vehicleType != null) {
+
+        this.schemeDetails.scheme.vehicleType.forEach(e => {
+          if(e == '2-wheelers') tempVehicleType.twoWheeler = true;
+          if(e == '3-wheelers') tempVehicleType.threeWheeler = true;
+          if(e == '4-wheelers') tempVehicleType.fourWheeler = true;
+          if(e == 'trucks') tempVehicleType.trucks = true;
+        })
+      }
+      // dumb code ends :)
+
       this.schemeInfo.setValue({
         schemeName: this.schemeDetails.scheme.schemeName,
         description: this.schemeDetails.scheme.description,
@@ -80,10 +101,10 @@ export class EditSchemeComponent implements OnInit {
         endedAt: this.datePipe.transform(this.schemeDetails.scheme.endedAt, 'yyyy-MM-dd'),
         targetGroup: this.schemeDetails.scheme.targetGroup,
         vehicleType: {
-          twoWheeler: false,  
-          threeWheeler: false,  
-          fourWheeler: false,  
-          trucks: false
+          twoWheeler: tempVehicleType.twoWheeler,  
+          threeWheeler: tempVehicleType.threeWheeler,  
+          fourWheeler: tempVehicleType.fourWheeler,  
+          trucks: tempVehicleType.trucks
         } 
       })
       console.log(this.schemeInfo.value.startedAt);
@@ -97,15 +118,51 @@ export class EditSchemeComponent implements OnInit {
 
   updateSchemeInfo() {
     console.log('update');
+    console.log(this.schemeInfo.value)
+    console.log(this.schemeProducts)
     
-    // this.validateForm();
-    // console.log("Do better validation!");
-    // this.updateLoadingFlag = true;
-    // this.schemeService.updateScheme(this.schemeDetails).subscribe( data => {
-    //   this.schemeDetails = data;
-    //   this.displayName = this.schemeDetails.schemeName;
-    //   this.updateLoadingFlag = false;
-    // })
+    let vehicleTypeArray: string[] = [];
+
+    if(this.schemeInfo.value.vehicleType.twoWheeler) vehicleTypeArray.push("2-wheelers")
+    if(this.schemeInfo.value.vehicleType.threeWheeler) vehicleTypeArray.push("3-wheelers")
+    if(this.schemeInfo.value.vehicleType.fourWheeler) vehicleTypeArray.push("4-wheelers")
+    if(this.schemeInfo.value.vehicleType.trucks) vehicleTypeArray.push("trucks")
+
+    const schemeSubmitObj:Scheme = {
+      schemeId: this.schemeDetails.scheme.schemeId,
+      schemeName: this.schemeInfo.value.schemeName,
+      description: this.schemeInfo.value.description,
+      status: true,
+      startedAt: this.schemeInfo.value.startedAt,
+      endedAt: this.schemeInfo.value.endedAt,
+      targetGroup: this.schemeInfo.value.targetGroup,
+      productList: this.schemeProducts,
+      vehicleType: vehicleTypeArray,
+      createdAt: this.schemeDetails.scheme.createdAt,
+      updatedAt: new Date(),
+    }
+
+    this.submitLoadingFlag = true;
+    this.schemeService.updateScheme(schemeSubmitObj).subscribe(data => {
+      //console.log(resp);
+      this.submitLoadingFlag = false;
+      this.submitSuccessFlag = true;
+      this.updateSuccessMsgFlag = true;
+
+      setTimeout(() => {
+        this.goToFormPage(0);
+      }, 1000);
+
+      setTimeout(() => {
+        this.submitSuccessFlag = false;
+      }, 5000);
+
+      // this.schemeInfo.setValue({startedAt: "", endedAt: ""})
+      // this.schemeInfo.reset();
+    }, err => {
+      //console.log("Error in scheme add" + err)
+    })
+
   }
 
   validateDate() {

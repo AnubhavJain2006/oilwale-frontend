@@ -15,6 +15,8 @@ export class NotAcceptedOrdersComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("not accepted")
+    console.log(  this.orders);
   }
 
 }

@@ -59,6 +59,13 @@ export class AddSchemeComponent implements OnInit {
     console.log(this.schemeInfo.value); 
     console.log(this.schemeProducts);
 
+    let vehicleTypeArray: string[] = [];
+
+    if(this.schemeInfo.value.vehicleType.twoWheeler) vehicleTypeArray.push("2-wheelers")
+    if(this.schemeInfo.value.vehicleType.threeWheeler) vehicleTypeArray.push("3-wheelers")
+    if(this.schemeInfo.value.vehicleType.fourWheeler) vehicleTypeArray.push("4-wheelers")
+    if(this.schemeInfo.value.vehicleType.trucks) vehicleTypeArray.push("trucks")
+
     const schemeSubmitObj:Scheme = {
       schemeId: "",
       schemeName: this.schemeInfo.value.schemeName,
@@ -68,6 +75,7 @@ export class AddSchemeComponent implements OnInit {
       endedAt: this.schemeInfo.value.endedAt,
       targetGroup: this.schemeInfo.value.targetGroup,
       productList: this.schemeProducts,
+      vehicleType: vehicleTypeArray,
       createdAt: new Date(),
       updatedAt: new Date(),
     }

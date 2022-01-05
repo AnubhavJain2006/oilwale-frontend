@@ -3,146 +3,130 @@
         <h5 class="h5">Accepted orders</h5>
     </div>
 
+    <div *ngIf="loading" class="text-center">
+        <div class="text-secondary">
+            <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              Loading...
+        </div>
+    </div>
+
     <div *ngIf="!loading && orders.length == 0" class="text-center">All orders complete.</div>
 
-    <div class="row d-flex flex-wrap">
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div *ngFor="let o of orders" class="accordion-item mx-3 my-4 border-0 shadow">
+          <h2 class="accordion-header border-left-orange" id="acc{{o.orderId}}h">
+            <a class="btn w-100 p-3" type="button" data-bs-toggle="collapse" attr.data-bs-target="#ac{{o.orderId}}-h" aria-expanded="false" attr.aria-controls="ac{{o.orderId}}-h">
+              <div class="d-flex justify-content-between">
+                  <div class="text-start">
+                      <p class="m-0">
+                          <span class="lead fw-normal m-0">{{o.garage.garageName}}</span>
+                          <span class="text-secondary m-0"> - {{o.garage.name}}</span>
+                        </p>
+                        <span><small class="text-secondary"><i class="fas fa-clipboard"></i> Kati zehar note.</small></span>
+                  </div>
+                  <div class="text-end">
+                      <small><p class="text-secondary m-0">Accepted by: {{ o.admin.name }} ( {{ o.admin.phoneNumber }} )</p></small>
+                      <small><p class="text-secondary m-0">{{ o.acceptedAt | date:'medium'}}</p></small>
 
-        <div *ngFor="let orderinfo of orders" class="col-lg-6">
-            <div class="p-3 ">
-                <div class="card shadow border-0">
-                    <div class=" border-left-orange p-3">
-                    <div class="">
-                        <div class="position-relative order-garage-name d-flex justify-content-between border-bottom pb-1">
-                                <div>
-                                    <h6 class="lead fw-normal mb-0">{{ orderinfo.garage.garageName }}</h6>
-                                    <p class="m-0"><small class="text-secondary">{{ orderinfo.garage.name}}</small></p>
-
-                                </div>
-                                <div class="text-end">
-                                    <p class="m-0"><small class="text-secondary">{{ orderinfo.garage.address}}</small></p>
-                                    <p class="m-0"><small class="text-secondary">{{ orderinfo.garage.phoneNumber}}</small></p>
-                                </div>
-                                <div class="position-absolute top-100 display-on-hover w-100">
-                                    <div class="card overflow-card shadow border border-5 bg-light">
-                                        <div class="p-3">
-                                            <div class="row">
-                                                <div class="col-4">Name</div>
-                                                <div class="col-8">{{ orderinfo.garage.garageName}}</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4">Owner</div>
-                                                <div class="col-8">{{ orderinfo.garage.name}}</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4">Phone</div>
-                                                <div class="col-8">{{ orderinfo.garage.phoneNumber}}</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4">GST number</div>
-                                                <div class="col-8">{{ orderinfo.garage.gstNumber}}</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4">Address</div>
-                                                <div class="col-8">{{ orderinfo.garage.address}}</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4">Pincode</div>
-                                                <div class="col-8">{{ orderinfo.garage.pincode }}</div>
-                                            </div>
-                                        </div>
+                    </div>
+              </div>
+            </a>
+          </h2>
+          <div id="ac{{o.orderId}}-h" class="accordion-collapse collapse border border-left-orange" attr.aria-labelledby="acc{{o.orderId}}h">
+            <div class="accordion-body">
+                <div class="row border-bottom">
+                    <div class="col-md-6 border-end">
+                        <p class="mb-3"><small class="text-secondary fw-bold">PRODUCT LIST</small></p>
+                        <div class="px-3 mb-3">
+                            <ul class="list-group list-group-flush list-group-numbered">
+                                <li class="list-group-item d-flex justify-content-between d-inline align-items-start" *ngFor="let pro of o.product">
+                                    <div class="ms-2 me-auto">
+                                        
+                                        <p class="m-0">{{ pro.productName }}</p>
+                                        <span><small class="text-secondary">{{pro.grade}}</small></span>
                                     </div>
-                                </div>
-                        </div>
-
-
-                        <div *ngFor="let pro of orderinfo.product" class=" mt-3 px-2">
-                            <div class="d-flex justify-content-between">
-                                <span>{{ pro.productName }}</span>
-                                <span><small>{{pro.qty}}</small></span>
-                            </div>
-                            <small class="text-secondary">Garde - {{ pro.grade }}</small>
-                        </div>
-
-                        <div class="mt-1">
-                            <div class="text-end">
-                                <button class="btn text-info" [disabled]="orderinfo.status == -999" (click)="completeOrder(orderinfo)">
-                                    
-                                    <span *ngIf="orderinfo.status != -999">
-                                        Mark as complete
-                                    </span>
-                                    <span *ngIf="orderinfo.status == -999">
-                                        <div class="spinner-border spinner-border-sm" role="status">
-                                            <span class="visually-hidden">Loading...</span>
-                                          </div>
-                                          Completing Order ...
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <hr>
-                        <div class="text-start">
-                            <div>
-                                <small class="text-secondary"><p class="m-0"> {{ orderinfo.createdAt | date:'medium' }} - Order placed</p> </small>
-                                <small class="text-secondary"><p class="m-0"> {{ orderinfo.acceptedAt | date:'medium' }} - Accepted by - {{ orderinfo.admin.name}}</p> </small>
-                            </div>
+                                    <span class="badge bg-primary rounded-pill">{{pro.qty}}</span>
+                                </li>
+                                
+                                
+                              </ul>
                         </div>
                         
+                    </div>
+                    <div class="col-md-6">
+                        
+                        <p class="mb-1"><small class="text-secondary fw-bold">CONTACT</small></p>
+                        <div class="px-3 mb-3">
+                            <p class="m-0">
+                                <small>{{ o.garage.phoneNumber }}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.garage.address}}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.garage.area}}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.garage.pincode}}</small>
+                            </p>
+                        </div>
+
+                        <p class="mb-1"><small class="text-secondary fw-bold">ACCEPTED BY</small></p>
+                        <div class="px-3 mb-3">
+                            <p class="m-0">
+                                <small>{{ o.admin.name }} - {{ o.admin.privilege | titlecase }}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.admin.phoneNumber}}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.admin.email}}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.admin.address}}</small>
+                            </p>
+                        </div>
+
+                        <p class="mb-1"><small class="text-secondary fw-bold">TIMELINE</small></p>
+                        <div class="px-3 mb-3">
+                            <p class="m-0">
+                                <small>{{ o.placedAt | date: 'medium' }} - Order placed </small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{ o.acceptedAt | date: 'medium' }} - Order accepted </small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                    <button class="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="fas fa-clipboard"></i> Add Note </button>
+                    <div>
+                        <button class="btn btn-outline-info mx-1" [disabled]="o.status == -999" (click)="completeOrder(o)">
+                            <span *ngIf="o.status != -999">
+                                <i class="fas fa-check"></i> Mark as Complete
+                            </span>
+                            <span *ngIf="o.status == -999">
+                                <span class="spinner-border spinner-border-sm">
+                                    <span class="visually-hidden" role="status">
+                                        Loading...
+                                    </span>
+                                </span>
+                                Completing order...
+                            </span> 
+                        </button>
                         
                     </div>
                 </div>
 
-                </div>
             </div>
+          </div>
         </div>
-
-       
     </div>
 
 
 
-        
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Order - Garage name</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-        
-            <p class="lead fw-normal m-0">Garage Details: </p>
-            <div class="px-3">
-                <div class="row">
-                    <div class="col-4">Name</div>
-                    <div class="col-8">Garage name</div>
-                </div>
-                <div class="row">
-                    <div class="col-4">Owner</div>
-                    <div class="col-8">Cool man</div>
-                </div>
-                <div class="row">
-                    <div class="col-4">Phone</div>
-                    <div class="col-8">+915695865</div>
-                </div>
-                <div class="row">
-                    <div class="col-4">Address</div>
-                    <div class="col-8">Lorem ipsum dolor sit amet.</div>
-                </div>
-                <div class="row">
-                    <div class="col-4">Pincode</div>
-                    <div class="col-8">958565</div>
-                </div>
-            </div>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </div>

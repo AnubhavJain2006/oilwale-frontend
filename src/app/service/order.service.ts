@@ -30,7 +30,7 @@ export class OrderService {
   }
 
   fetchPastOrders():Observable<OrderGet[]> {
-    return this.httpClient.get<OrderGet[]>(this.apiUrl + 'pastOrders');
+    return this.httpClient.get<OrderGet[]>(this.apiUrl + '/pastOrders');
   }
 
   fetchNotAcceptedOrders():Observable<OrderGet[]> {
@@ -63,6 +63,18 @@ export class OrderService {
       status: 2
     };
     return this.httpClient.put<OrderUpdate>(this.apiUrl, completeOrder);
+  }
+
+  declineOrder(id: string):Observable<OrderUpdate> {
+    let authToken: string | null = localStorage.getItem('authToken');
+    let token = authToken != null ? jwt_decode(authToken) : null;
+    
+    const declineOrderObj = {
+      adminEmailId: JSON.parse(JSON.stringify(token)).sub,
+      id: id,
+      status: 4
+    };
+    return this.httpClient.put<OrderUpdate>(this.apiUrl, declineOrderObj);
   }
 
 }

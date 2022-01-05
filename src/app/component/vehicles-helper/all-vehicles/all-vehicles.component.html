@@ -39,7 +39,7 @@
             <tbody class="border-0">
                 <ng-container *ngFor="let vehicle of allVehicles">
 
-                    <tr class="shadow shadow-sm rounded-3">
+                    <tr class="shadow shadow-sm rounded-3"  (click)="onClick(vehicle._id)">
                         <td class=" p-3"> {{vehicle.vehicleModel }}</td>
                         <td class=" p-3">{{vehicle.vehicleCompany}}</td>
                         <td class="p-3">{{ vehicle.suggestedProduct.length }}</td>

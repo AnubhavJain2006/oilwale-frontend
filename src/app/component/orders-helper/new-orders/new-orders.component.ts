@@ -14,12 +14,14 @@ export class NewOrdersComponent implements OnInit {
   @Input() orders!: OrderGet[];
   @Input() loading!: boolean;
   @Output() acceptEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() declineEvent: EventEmitter<string> = new EventEmitter<string>();
 
   acceptOrderResponse!: OrderUpdate;
   // auxAcceptanceArray: boolean[]
 
   // flag
   acceptOrderFlag: boolean = false;
+  declineOrderFlag: boolean = false;
 
   constructor(private orderService: OrderService) { }
 
@@ -35,6 +37,17 @@ export class NewOrdersComponent implements OnInit {
       console.log(this.acceptOrderResponse);
       this.acceptOrderFlag = false;
       this.acceptEvent.emit();
+    })
+  }
+
+  declineOrder(order: OrderGet) {
+    order.status = -999;
+    this.declineOrderFlag = true;
+    this.orderService.declineOrder(order.orderId).subscribe((data) => {
+      this.acceptOrderResponse = data;
+      console.log(this.acceptOrderResponse);
+      this.declineOrderFlag = false;
+      this.declineEvent.emit();
     })
   }
 

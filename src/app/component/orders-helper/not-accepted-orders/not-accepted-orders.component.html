@@ -1,1 +1,161 @@
-<p>not-accepted-orders works!</p>
+<div class="py-3">
+    <div class="p-2 text-center">
+        <h5 class="h5">Not Accepted Orders</h5>
+    </div>
+
+    <div *ngIf="loading" class="text-center">
+        <div class="text-secondary">
+            <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              Loading...
+        </div>
+    </div>
+
+    <div *ngIf="!loading && orders.length == 0" class="text-center">List empty.</div>
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div *ngFor="let o of orders" class="accordion-item mx-3 my-4 border-0 shadow">
+          <h2 class="accordion-header border-left-orange" id="acc{{o.orderId}}h">
+            <a class="btn w-100 p-3" type="button" data-bs-toggle="collapse" attr.data-bs-target="#ac{{o.orderId}}-h" aria-expanded="false" attr.aria-controls="ac{{o.orderId}}-h">
+              <div class="d-flex justify-content-between">
+                  <div class="text-start">
+                      <p class="m-0">
+                          <span class="lead fw-normal m-0">{{o.garage.garageName}}</span>
+                          <span class="text-secondary m-0"> - {{o.garage.name}}</span>
+                        </p>
+                        <span><small class="text-secondary"><i class="fas fa-clipboard"></i> Kati zehar note.</small></span>
+                  </div>
+                  <div class="text-end">
+                      <small><p class="text-secondary m-0">{{ o.completedAt | date:'medium'}}</p></small>
+
+                    </div>
+              </div>
+            </a>
+          </h2>
+          <div id="ac{{o.orderId}}-h" class="accordion-collapse collapse border border-left-orange" attr.aria-labelledby="acc{{o.orderId}}h">
+            <div class="accordion-body">
+                <div class="row ">
+                    <div class="col-md-6 border-end">
+                        <p class="mb-3"><small class="text-secondary fw-bold">PRODUCT LIST</small></p>
+                        <div class="px-3 mb-3">
+                            <ul class="list-group list-group-flush list-group-numbered">
+                                <li class="list-group-item d-flex justify-content-between d-inline align-items-start" *ngFor="let pro of o.product">
+                                    <div class="ms-2 me-auto">
+                                        
+                                        <p class="m-0">{{ pro.productName }}</p>
+                                        <span><small class="text-secondary">{{pro.grade}}</small></span>
+                                    </div>
+                                    <span class="badge bg-primary rounded-pill">{{pro.qty}}</span>
+                                </li>
+                                
+                                
+                              </ul>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-6">
+                        
+                        <p class="mb-1"><small class="text-secondary fw-bold">CONTACT</small></p>
+                        <div class="px-3 mb-3">
+                            <p class="m-0">
+                                <small>{{ o.garage.phoneNumber }}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.garage.address}}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.garage.area}}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.garage.pincode}}</small>
+                            </p>
+                        </div>
+
+                        <p class="mb-1"><small class="text-secondary fw-bold">DECLINED BY</small></p>
+                        <div class="px-3 mb-3">
+                            <p class="m-0">
+                                <small>{{ o.admin.name }} - {{ o.admin.privilege | titlecase }}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.admin.phoneNumber}}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.admin.email}}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.admin.address}}</small>
+                            </p>
+                        </div>
+
+                        <p class="mb-1"><small class="text-secondary fw-bold">TIMELINE</small></p>
+                        <div class="px-3 mb-3">
+                            <p class="m-0">
+                                <small>{{ o.placedAt | date: 'medium' }} - Order placed </small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{ o.updatedAt | date: 'medium' }} - Order declined </small>
+                            </p>
+                        </div>
+
+                        <!-- <div *ngIf="o.notes != null"> -->
+
+                            <p class="mb-1"><small class="text-secondary fw-bold">NOTES</small></p>
+                            <div class="px-3 mb-3">
+                                Hum karte h kuch iska :)
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+                
+
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+        
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Order - Garage name</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        
+            <p class="lead fw-normal m-0">Garage Details: </p>
+            <div class="px-3">
+                <div class="row">
+                    <div class="col-4">Name</div>
+                    <div class="col-8">Garage name</div>
+                </div>
+                <div class="row">
+                    <div class="col-4">Owner</div>
+                    <div class="col-8">Cool man</div>
+                </div>
+                <div class="row">
+                    <div class="col-4">Phone</div>
+                    <div class="col-8">+915695865</div>
+                </div>
+                <div class="row">
+                    <div class="col-4">Address</div>
+                    <div class="col-8">Lorem ipsum dolor sit amet.</div>
+                </div>
+                <div class="row">
+                    <div class="col-4">Pincode</div>
+                    <div class="col-8">958565</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

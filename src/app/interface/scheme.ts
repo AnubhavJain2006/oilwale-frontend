@@ -6,7 +6,8 @@ export interface Scheme {
     startedAt: Date;
     endedAt: Date;
     targetGroup: string;
-    productList: Array<string>;
+    productList: string[];
+    vehicleType: string[];
     createdAt: Date;
     updatedAt: Date;
 }

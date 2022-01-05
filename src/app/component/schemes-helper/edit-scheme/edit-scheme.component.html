@@ -12,6 +12,7 @@
         </h3>
     </div>
     <div class="text-center my-2 fw-normal lead">Editing - <span class="font-monospace">{{ displayName }}</span></div>
+       
         <div class="mx-auto col-lg-8 com-md-10 col-sm-12">
 
             <div class="progress" style="height: 5px;">
@@ -22,8 +23,8 @@
         </div>
 
         <form [formGroup]="schemeInfo" class="mx-auto col-lg-8 col-md-10 col-sm-12 mb-3 mt-4" id="add_scheme_form" (ngSubmit)="updateSchemeInfo()">
-            <div *ngIf="submitSuccessFlag" class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong><i class="fas fa-check-circle"></i> Success!</strong> Scheme added successfully. <a routerLink="/schemes/{{schemeDetails.scheme}}" class="alert-link"> Click </a> to see details.
+            <div *ngIf="updateSuccessMsgFlag" class="alert alert-success alert-dismissible fade show my-2" role="alert">
+                <strong>Update success!</strong> <a href="/schemes/{{schemeDetails.scheme.schemeId}}" class="alert-link ms-2">Click here</a> to see details.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
@@ -162,13 +163,16 @@
             <div *ngIf="showFormPart(3)">
                 <p class="fw-bold">PRODUCTS</p>
                 <div class="row mb-3">
-                    <p>Select produt for the scheme, if any</p>
+                    <p>Select all products for the scheme:</p>
                     <div class="col-sm-10">
                         <div *ngIf="productFetchLoading" class="text-center">Loading products as per your choice ... </div>
                         <div class="form-check" *ngFor="let product of productList">
                             <input class="form-check-input" type="checkbox" name="product" id="{{ product.productId }}" (click)="addSchemeProduct(product.productId)">
                             <label class="form-check-label" for="{{ product.productId }}">
-                                {{ product.productName }} - {{ product.grade }} - {{ product.packingSize }}
+                                {{ product.productName }} <span><small class="text-secondary">
+
+                                    {{ product.grade }} - {{ product.packingSize }}
+                                </small></span>
                             </label>
                         </div>
                     </div>
@@ -177,7 +181,7 @@
                     <button class="btn background-orange text-white" (click)="progressBarOneStepBack()">
                         <i class="fas fa-angle-left"></i> Back
                     </button>
-                    <button type="submit" class="btn background-orange text-white" (click)="progressBarOneStepForward()" [disabled]="submitLoadingFlag">
+                    <button type="submit" class="btn background-orange text-white" (click)="progressBarOneStepForward()" [disabled]="submitLoadingFlag || schemeProducts.length == 0">
                         <span *ngIf="!submitLoadingFlag">
                             Submit <i class="fas fa-angle-right"></i>
                         </span>

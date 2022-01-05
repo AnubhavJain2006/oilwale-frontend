@@ -3,86 +3,118 @@
         <h5 class="h5">Completed orders</h5>
     </div>
 
-    <div *ngIf="!loading && orders.length == 0" class="text-center">List empty.</div>
-
-    <div class="row d-flex flex-wrap">
-
-        <div *ngFor="let orderinfo of orders" class="col-lg-6">
-            <div class="p-3 ">
-                <div class="card shadow border-0">
-                    <div class=" border-left-orange p-3">
-                    <div class="">
-                        <div class="position-relative order-garage-name d-flex justify-content-between border-bottom pb-1">
-                                <div>
-                                    <h6 class="lead fw-normal mb-0">{{ orderinfo.garage.garageName }}</h6>
-                                    <p class="m-0"><small class="text-secondary">{{ orderinfo.garage.name}}</small></p>
-
-                                </div>
-                                <div class="text-end">
-                                    <p class="m-0"><small class="text-secondary">{{ orderinfo.garage.address}}</small></p>
-                                    <p class="m-0"><small class="text-secondary">{{ orderinfo.garage.phoneNumber}}</small></p>
-                                </div>
-                                <div class="position-absolute top-100 display-on-hover w-100">
-                                    <div class="card overflow-card shadow border border-5 bg-light">
-                                        <div class="p-3">
-                                            <div class="row">
-                                                <div class="col-4">Name</div>
-                                                <div class="col-8">{{ orderinfo.garage.garageName}}</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4">Owner</div>
-                                                <div class="col-8">{{ orderinfo.garage.name}}</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4">Phone</div>
-                                                <div class="col-8">{{ orderinfo.garage.phoneNumber}}</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4">GST number</div>
-                                                <div class="col-8">{{ orderinfo.garage.gstNumber}}</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4">Address</div>
-                                                <div class="col-8">{{ orderinfo.garage.address}}</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4">Pincode</div>
-                                                <div class="col-8">{{ orderinfo.garage.pincode }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-
-
-                        <div *ngFor="let pro of orderinfo.product" class=" mt-3 px-2">
-                            <div class="d-flex justify-content-between">
-                                <span>{{ pro.productName }}</span>
-                                <span><small>{{pro.qty}}</small></span>
-                            </div>
-                            <small class="text-secondary">Garde - {{ pro.grade }}</small>
-                        </div>
-
-                        <hr>
-                        <div class="text-start">
-                            <div>
-                                <small class="text-secondary"><p class="m-0"> {{ orderinfo.createdAt | date:'medium' }} - Order placed</p> </small>
-                                <small class="text-secondary"><p class="m-0"> <span> {{ orderinfo.acceptedAt | date:'medium' }} </span> - Accepted by - <span> {{ orderinfo.admin.name}}</span></p> </small>
-                                <small class="text-secondary"><p class="m-0"> <span> {{ orderinfo.completedAt | date:'medium' }}</span> - <span class="text-success"> Order completed </span></p> </small>
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-
-                </div>
-            </div>
+    <div *ngIf="loading" class="text-center">
+        <div class="text-secondary">
+            <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              Loading...
         </div>
-
-       
     </div>
 
+    <div *ngIf="!loading && orders.length == 0" class="text-center">List empty.</div>
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div *ngFor="let o of orders" class="accordion-item mx-3 my-4 border-0 shadow">
+          <h2 class="accordion-header border-left-orange" id="acc{{o.orderId}}h">
+            <a class="btn w-100 p-3" type="button" data-bs-toggle="collapse" attr.data-bs-target="#ac{{o.orderId}}-h" aria-expanded="false" attr.aria-controls="ac{{o.orderId}}-h">
+              <div class="d-flex justify-content-between">
+                  <div class="text-start">
+                      <p class="m-0">
+                          <span class="lead fw-normal m-0">{{o.garage.garageName}}</span>
+                          <span class="text-secondary m-0"> - {{o.garage.name}}</span>
+                        </p>
+                        <span><small class="text-secondary"><i class="fas fa-clipboard"></i> Kati zehar note.</small></span>
+                  </div>
+                  <div class="text-end">
+                      <small><p class="text-secondary m-0">{{ o.completedAt | date:'medium'}}</p></small>
+
+                    </div>
+              </div>
+            </a>
+          </h2>
+          <div id="ac{{o.orderId}}-h" class="accordion-collapse collapse border border-left-orange" attr.aria-labelledby="acc{{o.orderId}}h">
+            <div class="accordion-body">
+                <div class="row ">
+                    <div class="col-md-6 border-end">
+                        <p class="mb-3"><small class="text-secondary fw-bold">PRODUCT LIST</small></p>
+                        <div class="px-3 mb-3">
+                            <ul class="list-group list-group-flush list-group-numbered">
+                                <li class="list-group-item d-flex justify-content-between d-inline align-items-start" *ngFor="let pro of o.product">
+                                    <div class="ms-2 me-auto">
+                                        
+                                        <p class="m-0">{{ pro.productName }}</p>
+                                        <span><small class="text-secondary">{{pro.grade}}</small></span>
+                                    </div>
+                                    <span class="badge bg-primary rounded-pill">{{pro.qty}}</span>
+                                </li>
+                                
+                                
+                              </ul>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-6">
+                        
+                        <p class="mb-1"><small class="text-secondary fw-bold">CONTACT</small></p>
+                        <div class="px-3 mb-3">
+                            <p class="m-0">
+                                <small>{{ o.garage.phoneNumber }}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.garage.address}}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.garage.area}}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.garage.pincode}}</small>
+                            </p>
+                        </div>
+
+                        <p class="mb-1"><small class="text-secondary fw-bold">ACCEPTED BY</small></p>
+                        <div class="px-3 mb-3">
+                            <p class="m-0">
+                                <small>{{ o.admin.name }} - {{ o.admin.privilege | titlecase }}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.admin.phoneNumber}}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.admin.email}}</small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{o.admin.address}}</small>
+                            </p>
+                        </div>
+
+                        <p class="mb-1"><small class="text-secondary fw-bold">TIMELINE</small></p>
+                        <div class="px-3 mb-3">
+                            <p class="m-0">
+                                <small>{{ o.placedAt | date: 'medium' }} - Order placed </small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{ o.acceptedAt | date: 'medium' }} - Order accepted </small>
+                            </p>
+                            <p class="m-0">
+                                <small>{{ o.completedAt | date: 'medium' }} - Order completed </small>
+                            </p>
+                        </div>
+
+                        <!-- <div *ngIf="o.notes != null"> -->
+
+                            <p class="mb-1"><small class="text-secondary fw-bold">NOTES</small></p>
+                            <div class="px-3 mb-3">
+                                Hum karte h kuch iska :)
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+                
+
+            </div>
+          </div>
+        </div>
+    </div>
 
 
         

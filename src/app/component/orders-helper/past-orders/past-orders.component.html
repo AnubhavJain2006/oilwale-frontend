@@ -19,45 +19,44 @@
     </div>
     <div class="table-responsive">
         <table datatable
-            class="table table-bordered  table-hover rounded text-center pt-3 mb-3">
-            <thead class="background-orange text-white">
+            class="table table-borderless  table-hover  spacetr">
+            <thead class="text-secondary">
                 <tr>
                     <th >
-                        <p class="my-1">Garage Name</p>
+                        <small class="text-secondary">GARAGE NAME</small>
                     </th>
                     <th>
-                        <p class="my-1">Owner Name</p>
+                        <small class="text-secondary">OWNER NAME</small>
                     </th>
                     <th>
-                        <p class="my-1">Total Products</p>
+                        <small class="text-secondary">TOTAL PRODUCTS</small>
                     </th>
-                    <th style="width: 100px;">
-                        <p class="my-1">Started At</p>
+                    <th>
+                        <small class="text-secondary">HANDLED BY</small>
                     </th>
-                    <th style="width: 100px;">
-                        <p class="my-1">Completed At</p>
+                    <th >
+                        <small class="text-secondary">STARTED AT</small>
                     </th>
-                    <th style="width: 40px;">
-                        <p class="my-1">Info</p>
+                    <th >
+                        <small class="text-secondary">COMPLETED AT</small>
                     </th>
+                    
                 </tr>
             </thead>
-            <!-- <tbody>
-                <tr *ngFor="let o of orders">
-                    <td class=" p-3"> {{o.garage.garageName}}</td>
-                    <td class=" p-3">{{o.garage.name}}</td>
-                    <td class=" p-3">
-                        <p *ngFor="let pro of o.product" class="mb-1">{{ pro.productName }} - {{ pro.qty }}</p>
-                    </td>
-                    <td class=" p-3">{{o.createdAt}}</td>
-                    <td class=" p-3">{{o.completedAt}}</td>
-                    <td>
-                        <a routerLink="/orders/{{ o.orderId }}">
-                            <button class="btn btn-outline-primary"><i class="fas fa-info-circle"></i></button> 
-                        </a>
-                    </td>
-                </tr>
-            </tbody> -->
+            <tbody class="border-0">
+                <ng-container *ngFor="let o of orders">
+
+                    <tr class="shadow shadow-sm rounded-3"  (click)="onClick(o.orderId)">
+                        <td class=" p-3"> {{o.garage.garageName}}</td>
+                        <td class=" p-3">{{o.garage.name}}</td>
+                        <td class=" p-3">{{o.product.length}}</td>
+                        <td class="p-3">{{o.admin.name}}</td>
+                        <td class=" p-3">{{o.createdAt | date:"MMM dd, yyyy"}}</td>
+                        <td class=" p-3">{{o.completedAt | date:"MMM dd, yyyy"}}</td>
+                       
+                    </tr>
+                </ng-container>
+            </tbody>
         </table>
     </div>
 </div>
