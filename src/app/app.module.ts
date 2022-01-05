@@ -1,5 +1,5 @@
 import { AuthGuard } from './service/AuthGaurd/auth.guard';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -65,6 +65,7 @@ import { NotAcceptedOrdersComponent } from './component/orders-helper/not-accept
 import { PastOrdersComponent } from './component/orders-helper/past-orders/past-orders.component';
 import { OrderActivitiesComponent } from './component/orders-helper/order-activities/order-activities.component';
 import { DeletedVehiclesComponent } from './component/vehicles-helper/deleted-vehicles/deleted-vehicles.component';
+import { GlobalerrorhandlerService } from './service/ErrorHandler/globalerrorhandler.service';
 
 @NgModule({
   declarations: [
@@ -140,6 +141,10 @@ import { DeletedVehiclesComponent } from './component/vehicles-helper/deleted-ve
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useClass: GlobalerrorhandlerService
     },
     DatePipe
   ],
