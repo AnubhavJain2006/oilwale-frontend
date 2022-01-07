@@ -8,6 +8,7 @@ import { Vehicle } from 'src/app/interface/vehicle';
 import { VehicleInfo } from 'src/app/interface/vehicle-info';
 import { Product } from 'src/app/interface/product';
 import { VehicleCompany } from '../../interface/vehicle-company';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-vehicles',
@@ -36,7 +37,7 @@ export class VehiclesComponent implements OnInit {
   allVehicleListLoading: boolean = true;
   allDeletedVehicleLoading: boolean = true;
 
-  constructor(private productService: ProductService, private vehicleCompanyService: VehicleCompanyService, private vehicleService: VehicleService) { 
+  constructor(private productService: ProductService, private vehicleCompanyService: VehicleCompanyService, private vehicleService: VehicleService, private headerComponent: HeaderComponent) { 
     if (this.vehicleService.vehicleList.length == 0) {
       this.fetchVehiclesFromPromise();
     }
@@ -55,6 +56,10 @@ export class VehiclesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    // changing sidebar active tab
+    this.headerComponent.active = "vehicles"; 
+
     this.fetchVehicles();
     this.fetchVehicleComapnies();
     this.fetchProducts(); 

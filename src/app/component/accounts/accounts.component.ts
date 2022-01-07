@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Output } from '@angular/core';
 
 import { Admin } from 'src/app/interface/admin';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-accounts',
@@ -18,7 +19,7 @@ export class AccountsComponent implements OnInit {
   activeAccountsLoading: boolean = true;
   deactiveAccountLoading: boolean = true;
 
-  constructor(private accountService: AdminService) {
+  constructor(private accountService: AdminService, private headerComponent: HeaderComponent) {
     
     if (this.accountService.activeAccountList.length == 0) {
       this.loadAccounts();
@@ -37,6 +38,10 @@ export class AccountsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    // changing sidebar active tab
+    this.headerComponent.active = "accounts"; 
+
     this.accountService.refreshNeeded.subscribe(() => {
       this.loadAccounts();
     })

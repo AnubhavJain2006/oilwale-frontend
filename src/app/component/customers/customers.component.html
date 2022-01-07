@@ -21,6 +21,12 @@
             type="button" role="tab" aria-controls="restrictedCustomers" aria-selected="false">
             <i class="fas fa-ban"></i> <span class="d-none d-md-inline "> Restricted </span> </a>
     </li>
+    <li class="nav-item mx-1" role="presentation">
+        <a class="nav-link text-dark customers-tab" id="messageCustomers-tab"
+            onclick="change_tab('customers-tab', 3)" data-bs-toggle="tab" data-bs-target="#messageCustomers"
+            type="button" role="tab" aria-controls="messageCustomers" aria-selected="false">
+            <i class="fas fa-envelope"></i> <span class="d-none d-md-inline "> Message </span> </a>
+    </li>
 </ul>
 <!-- page nav ends -->
 
@@ -37,6 +43,10 @@
     
     <div class="tab-pane fade" id="restrictedCustomers" role="tabpanel" aria-labelledby="restrictedCustomers-tab">
         <app-restricted-customers [restrictedCustomers]="restrictedCustomers" [loading]="restrictedCustomersLoadingFlag"></app-restricted-customers>
+     </div>
+
+     <div class="tab-pane fade" id="messageCustomers" role="tabpanel" aria-labelledby="messageCustomers-tab">
+        <app-message-customer></app-message-customer>
      </div>
 </div>
 

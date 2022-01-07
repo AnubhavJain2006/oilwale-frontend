@@ -22,7 +22,7 @@
     cursor: pointer;
   }
 
-  tr:hover tr>td>button>i {
-      color: white !important;
+  tr:hover td>div>button>i {
+    color: white;
   }
   

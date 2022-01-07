@@ -38,11 +38,32 @@
 <div class="py-2">
     <ul class="list-group list-group-flush border-0">
         <li class="list-group-item border-0" *ngFor="let act of userActivities">
-            {{ act.createdAt | date:'medium' }} <i class="fas fa-caret-right mx-1"></i>
-            <!-- <span class="link-primary mx-1"> @{{ act.user }}</span> -->
+            <!-- {{ act.createdAt | date:'medium' }} <i class="fas fa-caret-right mx-1"></i>
             <span class="badge mx-1" [ngClass]="{'bg-success': act.act == 'create', 'bg-warning': act.act == 'update', 'bg-danger': act.act == 'delete'}"> {{act.act}}d </span> 
             <span class="link-primary mx-1">#{{ act.subject }}</span> in 
-            <span class="link-primary mx-1">{{ act.domain }}</span>
+            <span class="link-primary mx-1">{{ act.domain }}</span> -->
+            <div class="d-flex d-inline">
+
+
+            <div style="width: 180px;" class="">
+                {{ act.createdAt | date:'medium' }} 
+            </div>
+
+            <div style="width: 80px;" class="">
+                <span class="badge mx-1" [ngClass]="{'bg-success': act.act == 'create', 'bg-warning': act.act == 'update', 'bg-danger': act.act == 'delete'}"> {{act.act}}d </span> 
+            </div>
+
+            <div style="width: 180px;" class="">
+                <span class="link-primary mx-1"> <a href="/garages/{{act.subjectId}}" class="text-decoration-none"> #{{ act.subject }}</a></span>
+                in
+                <span class="link-primary mx-1"><a href="/{{act.domain}}" class="text-decoration-none">{{ act.domain }}</a> </span> 
+            </div>
+<!-- 
+            <div style="width: 110px;" class="">
+            </div> -->
+
+
+            </div>
         </li>
     </ul>
 </div>

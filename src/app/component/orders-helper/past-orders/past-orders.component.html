@@ -14,50 +14,77 @@
     <div class="text-center">
         <!-- <p *ngIf="orders.length==0">No Data Available</p> -->
     </div>
-<div class="mx-2 mt-4 rounded">
-    <div class="my-2">
-    </div>
-    <div class="table-responsive">
-        <table datatable
-            class="table table-borderless  table-hover  spacetr">
-            <thead class="text-secondary">
-                <tr>
-                    <th >
-                        <small class="text-secondary">GARAGE NAME</small>
-                    </th>
-                    <th>
-                        <small class="text-secondary">OWNER NAME</small>
-                    </th>
-                    <th>
-                        <small class="text-secondary">TOTAL PRODUCTS</small>
-                    </th>
-                    <th>
-                        <small class="text-secondary">HANDLED BY</small>
-                    </th>
-                    <th >
-                        <small class="text-secondary">STARTED AT</small>
-                    </th>
-                    <th >
-                        <small class="text-secondary">COMPLETED AT</small>
-                    </th>
-                    
-                </tr>
-            </thead>
-            <tbody class="border-0">
-                <ng-container *ngFor="let o of orders">
-
-                    <tr class="shadow shadow-sm rounded-3"  (click)="onClick(o.orderId)">
-                        <td class=" p-3"> {{o.garage.garageName}}</td>
-                        <td class=" p-3">{{o.garage.name}}</td>
-                        <td class=" p-3">{{o.product.length}}</td>
-                        <td class="p-3">{{o.admin.name}}</td>
-                        <td class=" p-3">{{o.createdAt | date:"MMM dd, yyyy"}}</td>
-                        <td class=" p-3">{{o.completedAt | date:"MMM dd, yyyy"}}</td>
-                       
+    <div class="mx-2 mt-4 rounded">
+        <div class="my-2">
+        </div>
+        <div class="table-responsive">
+            <table datatable
+                class="table table-borderless  table-hover  spacetr">
+                <thead class="text-secondary">
+                    <tr>
+                        <th >
+                            <small class="text-secondary">GARAGE NAME</small>
+                        </th>
+                        <th>
+                            <small class="text-secondary">OWNER NAME</small>
+                        </th>
+                        <th>
+                            <small class="text-secondary">TOTAL PRODUCTS</small>
+                        </th>
+                        <th>
+                            <small class="text-secondary">HANDLED BY</small>
+                        </th>
+                        <th >
+                            <small class="text-secondary">STARTED AT</small>
+                        </th>
+                        <th >
+                            <small class="text-secondary">COMPLETED AT</small>
+                        </th>
+                        <th >
+                            <small class="text-secondary">INFO</small>
+                        </th>
+                        
                     </tr>
-                </ng-container>
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="border-0">
+                    <ng-container *ngFor="let o of orders">
+
+                        <tr class="shadow shadow-sm rounded-3" >
+                            <td class=" p-3"> {{o.garage.garageName}}</td>
+                            <td class=" p-3">{{o.garage.name}}</td>
+                            <td class=" p-3">{{o.product.length}}</td>
+                            <td class="p-3">{{o.admin.name}}</td>
+                            <td class=" p-3">{{o.createdAt | date:"MMM dd, yyyy"}}</td>
+                            <td class=" p-3">{{o.completedAt | date:"MMM dd, yyyy"}}</td>
+                            <td class=" p-3">
+                                <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#orderDetailsModel"  (click)="displayOrder(o)">
+                                    <i class="fas fa-info"></i>
+                              </button>
+                            </td>
+                        
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+
+    <!-- modal -->
+    <div class="modal fade" id="orderDetailsModel" tabindex="-1" aria-labelledby="orderDetailsModelLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="orderDetailsModelLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>

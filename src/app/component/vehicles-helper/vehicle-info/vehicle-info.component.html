@@ -8,7 +8,7 @@
             <a routerLink="/vehicles" class="text-decoration-none text-dark">
                 <i class="fas fa-motorcycle"></i> Vehicles 
             </a>
-            <i class="fas fa-angle-right"></i> {{ vehicleDetails.vehicleModel.toUpperCase() }}</h3>
+            <i class="fas fa-angle-right"></i> {{vehicleDetails.vehicleCompany.vehicleCompany}} {{ vehicleDetails.vehicleModel }}</h3>
     </div>
 
     <div class="row my-3">
@@ -26,16 +26,20 @@
                             <td class="p-3"> {{ vehicleDetails.vehicleModel }}</td>
                         </tr>
                         <tr>
+                            <td class="p-3">Vehicle type</td>
+                            <td class="p-3"> {{ vehicleDetails.vehicleType }}</td>
+                        </tr>
+                        <tr>
                             <td class="p-3">Suggested Products</td>
-                            <td class="p-3"> <span class="badge background-orange"> {{ vehicleDetails.suggestedProduct.length }}  </span> </td>
+                            <td class="p-3"> <span class="badge background-orange"> {{ vehicleDetails.suggestedProductDetails.length }}  </span> </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="p-3" *ngIf="vehicleDetails.suggestedProduct.length > 0">
+            <div class="p-3" *ngIf="vehicleDetails.suggestedProductDetails.length > 0">
                 <p class="fw-bold">SUGGESTED PRODUCTS LIST</p>
                 <div class="vstack gap-2">
-                    <div *ngFor="let prod of vehicleDetails.suggestedProduct" class="px-md-2">
+                    <div *ngFor="let prod of vehicleDetails.suggestedProductDetails" class="px-md-2">
 
                         <div > - <a class="text-decoration-none text-dark" routerLink="/products/{{ prod.productId }}"> {{ prod.productName }} <sup> <i class="fas fa-link"></i></sup></a> </div>
                     </div>

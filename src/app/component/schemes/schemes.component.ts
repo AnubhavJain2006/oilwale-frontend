@@ -3,6 +3,8 @@ import { SchemeService } from './../../service/scheme.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SchemeInfo } from 'src/app/interface/scheme-info';
+import { GarageResponseCount } from 'src/app/interface/utilities/garage-response-count';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-schemes',
@@ -19,12 +21,15 @@ export class SchemesComponent implements OnInit {
   upcomingSchemeList: SchemeInfo[] = [];
   pastSchemeList: SchemeInfo[] = [];
 
+  activeSchemeIdList: string[] = [];
+  activeSchemeStatsList: any = {};
+
   // flags
   activeSchemesLoading: boolean = true;
   pastSchemesLoading: boolean = true;
 
-  constructor(private schemeService: SchemeService) {
-
+  constructor(private schemeService: SchemeService, private headerComponent: HeaderComponent) {
+    
     this.loadSchemes("Active")
 
     if (this.activeSchemeList.length == 0) {
@@ -52,6 +57,10 @@ export class SchemesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    // changing sidebar active tab
+    this.headerComponent.active = "schemes"; 
+
     this.schemeService.refreshNeeded.subscribe(() => {
       this.fetchActiveSchemes();
       this.fetchUpcomingSchemes();
@@ -112,6 +121,13 @@ export class SchemesComponent implements OnInit {
   async fetchActiveSchemes() {
     await this.schemeService.loadAllActiveScheme().then(data => {
       this.activeSchemeList = data;
+
+      this.activeSchemeList.map(x => {
+        this.activeSchemeIdList.push(x.scheme.schemeId);
+
+      })
+      this.getSchemeStats(this.activeSchemeIdList);
+
       // console.log(data);
       this.activeSchemesLoading = false;
 
@@ -172,6 +188,15 @@ export class SchemesComponent implements OnInit {
 
     let days = Math.floor((date.getTime() - currentDate.getTime() ) / 1000 / 60 / 60 / 24);
     return days;
+  }
+
+  getSchemeStats(schemeId: string[]) {
+    schemeId.forEach(e => {
+      this.schemeService.getSchemeStats(e).subscribe(data => {
+          this.activeSchemeStatsList[e] = data;
+          console.log(this.activeSchemeStatsList);
+      })
+    })
   }
 
 }

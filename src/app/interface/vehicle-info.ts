@@ -4,10 +4,10 @@ import { Product } from "./product";
 export interface VehicleInfo {
     "vehicleCompanyId": string,
     "_id": string,
-        "vehicleCompany": VehicleCompany,
+    "vehicleCompany": VehicleCompany,
     "vehicleModel": string,
     "suggestedProduct": Array<Product>;
-    "suggestedProductDetais": Product[];
+    "suggestedProductDetails": Product[];
     "vehicleType": string;
     "createdAt": string,
     "updatedAt": string,

@@ -42,12 +42,12 @@
                 <tr class="shadow shadow-sm rounded-3" (click)="onClick(s.scheme.schemeId)">
                     <td class="p-2">{{ s.scheme.schemeName }}</td>
                     <td class="p-2">{{ s.scheme.description }}</td>
-                    <td class="p-2"><strong>26</strong> / <span class="">50</span> 
-                        <div class="progress m-0" style="height: 3px;">
-                            <div class="progress-bar " role="progressbar" [ngStyle]="{'width': '20%' }" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                            </div>
-                        </div>
-                    </td>
+                    <!-- <td class="p-2">
+                      <small class="text-secondary"> 
+                        <strong>26</strong> / <span class="">50</span> 
+                      </small>
+                       
+                    </td> -->
                     <td class="p-2">{{ s.scheme.startedAt | date: "MMM dd, yyyy" }}</td>
                     <td class="p-2">{{ s.scheme.endedAt | date: "MMM dd, yyyy" }}</td>
                     

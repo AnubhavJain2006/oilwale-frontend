@@ -63,9 +63,11 @@ import { AcceptedOrdersComponent } from './component/orders-helper/accepted-orde
 import { CompletedOrdersComponent } from './component/orders-helper/completed-orders/completed-orders.component';
 import { NotAcceptedOrdersComponent } from './component/orders-helper/not-accepted-orders/not-accepted-orders.component';
 import { PastOrdersComponent } from './component/orders-helper/past-orders/past-orders.component';
+import { GlobalerrorhandlerService } from './service/ErrorHandler/globalerrorhandler.service';
 import { OrderActivitiesComponent } from './component/orders-helper/order-activities/order-activities.component';
 import { DeletedVehiclesComponent } from './component/vehicles-helper/deleted-vehicles/deleted-vehicles.component';
-import { GlobalerrorhandlerService } from './service/ErrorHandler/globalerrorhandler.service';
+import { NewRequestsComponent } from './component/garages-helper/new-requests/new-requests.component';
+import { MessageCustomerComponent } from './component/customers-helper/message-customer/message-customer.component';
 
 @NgModule({
   declarations: [
@@ -123,7 +125,9 @@ import { GlobalerrorhandlerService } from './service/ErrorHandler/globalerrorhan
     NotAcceptedOrdersComponent,
     PastOrdersComponent,
     OrderActivitiesComponent,
-    DeletedVehiclesComponent
+    DeletedVehiclesComponent,
+    NewRequestsComponent,
+    MessageCustomerComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/interface/customer';
 import { ActivityService } from 'src/app/service/activity.service';
 import { Activity } from 'src/app/interface/activity';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-customers',
@@ -19,7 +20,7 @@ export class CustomersComponent implements OnInit {
   restrictedCustomersLoadingFlag: boolean = true;
   activitiesLoading: boolean = false;;
 
-  constructor(private customerService: CustomerService, private activityService: ActivityService) {
+  constructor(private customerService: CustomerService, private activityService: ActivityService, private headerComponent: HeaderComponent) {
     if (this.customerService.customerList.length == 0) {
       this.loadAllCustomers();
     }
@@ -39,6 +40,10 @@ export class CustomersComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    // changing sidebar active tab
+    this.headerComponent.active = "customers"; 
+
     this.customerService.customerListSubject.subscribe(() => {
       this.loadAllCustomers();
     })
