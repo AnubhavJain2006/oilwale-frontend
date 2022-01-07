@@ -1,0 +1,65 @@
+<div class="my-3 text-center">
+    <div class="py-2">
+        <h5 class="h5">Message All Customers </h5>
+        <div class="d-flex justify-content-end">
+            <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="fas fa-plus"></i> New Message </button>
+        </div>
+    </div>
+</div>
+
+<div class="">
+    <div class="mx-2 mt-4 rounded">
+        <table class="table table-borderless ">
+            <thead class="text-secondary">
+                <tr class="">
+                    <th><small class="text-secondary">DATE</small></th>
+                    <th><small class="text-secondary">MESSGAE</small></th>
+                    <!-- <th>Vehicle Number</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>23 Jan, 2021</td>
+                    <td>Hey all customers! This is the message from MP Lubricants.</td>
+                </tr>
+                <tr>
+                    <td>30 Jan, 2021</td>
+                    <td>Today is martyr's day, In sight of this we are offering some discont, come to us and get it out. :).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-center text-secondary">
+            No past messages
+        </div>
+       
+
+
+    </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-plus"></i> New Message for Customers</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">New message</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">This is a broadcast message that will besent to every customer. </div>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> <i class="fas fa-times"></i> Close</button>
+          <button type="button" class="btn background-orange text-white"> <i class="fas fa-paper-plane"></i> Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
