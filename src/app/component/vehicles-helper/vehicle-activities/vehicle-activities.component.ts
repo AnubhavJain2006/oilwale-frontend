@@ -10,7 +10,8 @@ import { Activity } from 'src/app/interface/activity';
 })
 export class VehicleActivitiesComponent implements OnInit {
 
-  allActivities:Activity[] = [];
+  activities:Activity[] = [];
+  loading: boolean = true;
 
   constructor(private activityService: ActivityService) { }
 
@@ -20,8 +21,9 @@ export class VehicleActivitiesComponent implements OnInit {
 
   fetchAllActivities() {
     this.activityService.getDomainActivities('vehicles').subscribe((data) => {
-      this.allActivities = data;
-      console.log(this.allActivities);
+      this.activities = data;
+      this.loading = false;
+      console.log(this.activities);
 
     })
   }

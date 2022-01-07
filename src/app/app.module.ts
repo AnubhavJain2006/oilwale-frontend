@@ -65,6 +65,7 @@ import { NotAcceptedOrdersComponent } from './component/orders-helper/not-accept
 import { PastOrdersComponent } from './component/orders-helper/past-orders/past-orders.component';
 import { OrderActivitiesComponent } from './component/orders-helper/order-activities/order-activities.component';
 import { DeletedVehiclesComponent } from './component/vehicles-helper/deleted-vehicles/deleted-vehicles.component';
+import { NewRequestsComponent } from './component/garages-helper/new-requests/new-requests.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +123,8 @@ import { DeletedVehiclesComponent } from './component/vehicles-helper/deleted-ve
     NotAcceptedOrdersComponent,
     PastOrdersComponent,
     OrderActivitiesComponent,
-    DeletedVehiclesComponent
+    DeletedVehiclesComponent,
+    NewRequestsComponent
   ],
   imports: [
     BrowserModule,

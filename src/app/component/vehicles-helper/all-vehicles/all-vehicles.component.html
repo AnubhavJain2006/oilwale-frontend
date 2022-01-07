@@ -23,10 +23,10 @@
             <thead class="text-secondary">
                 <tr>
                     <th >
-                        <small class="text-secondary">MODEL</small>
+                        <small class="text-secondary">COMPANY</small>
                     </th>
                     <th >
-                        <small class="text-secondary">COMPANY</small>
+                        <small class="text-secondary">MODEL</small>
                     </th>
                     <th >
                         <small class="text-secondary">SUGGESTED PRODUCTS</small>
@@ -40,10 +40,18 @@
                 <ng-container *ngFor="let vehicle of allVehicles">
 
                     <tr class="shadow shadow-sm rounded-3"  (click)="onClick(vehicle._id)">
-                        <td class=" p-3"> {{vehicle.vehicleModel }}</td>
                         <td class=" p-3">{{vehicle.vehicleCompany}}</td>
-                        <td class="p-3">{{ vehicle.suggestedProduct.length }}</td>
-                        <td class="p-3"> {{ vehicle.vehicleType }}</td>
+                        <td class=" p-3"> {{vehicle.vehicleModel }}</td>
+                        <td class="p-3">
+                            {{ vehicle.suggestedProduct.length }}
+                        </td>
+                        <td class="p-3"> 
+                            <!-- {{ vehicle.vehicleType }} -->
+                            <i *ngIf="vehicle.vehicleType == '2-wheeler'" class="fas fa-motorcycle mx-1 text-secondary"></i>
+                                    <img  *ngIf="vehicle.vehicleType == '3-wheeler'" src="/assets/img/auto-icon.svg" alt="3 Wheeler" width="25 px">
+                                    <i *ngIf="vehicle.vehicleType == '4-wheeler'" class="fas fa-car mx-1 text-secondary"></i>
+                                    <i *ngIf="vehicle.vehicleType == 'truck'" class="fas fa-truck mx-1 text-secondary"></i>
+                        </td>
                         
                     </tr>
                 </ng-container>

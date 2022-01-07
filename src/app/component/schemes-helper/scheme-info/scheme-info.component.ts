@@ -18,21 +18,20 @@ export class SchemeInfoComponent implements OnInit {
   // flags
   deleteSchemeLoading: boolean = false;
   restoreSchemeLoading: boolean = false;
+  schemeStatsLoading: boolean = true;
+
+  // utilities
+  garageStatsArray: number[] = [];
 
   type = 'pie';
   data = {
     datasets: [
       {
-        // label: "My First dataset",
-        data: [34,50],
+        data: this.garageStatsArray,
         backgroundColor: [
           'rgba(54, 162, 235, 0.6)',
           'rgba(255, 99, 132, 0.6)',
-          // 'rgba(255, 206, 86, 0.2)',
-          // 'rgba(75, 192, 192, 0.2)',
-          // 'rgba(153, 102, 255, 0.2)',
-          // 'rgba(255, 159, 64, 0.2)'
-      ],
+        ]
       }
     ],
     labels: ["Accepted", "Not Accepted"],
@@ -49,6 +48,8 @@ export class SchemeInfoComponent implements OnInit {
     this.schemeService.getSchemeById(this.id).subscribe(resp => {
       this.schemeDetails = resp;
       this.dataLoadingStatus = false;
+
+      this.fetchStats();
 
       console.log(resp);
 
@@ -85,6 +86,15 @@ export class SchemeInfoComponent implements OnInit {
       this.schemeDetails.scheme.status = data.status;
       this.restoreSchemeLoading = false;
     })
+  }
 
+  fetchStats() {
+    this.schemeService.getSchemeStats(this.schemeDetails.scheme.schemeId).subscribe(data => {
+      this.garageStatsArray.push(data.NumberOfGarageAccepted);
+      this.garageStatsArray.push(data.NumberOfGarageRejected);
+
+      this.schemeStatsLoading = false;
+      
+    })
   }
 }

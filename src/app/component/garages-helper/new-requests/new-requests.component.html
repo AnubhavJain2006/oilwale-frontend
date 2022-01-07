@@ -1,0 +1,61 @@
+<div class="my-3 text-center">
+    <div class="py-2">
+        <h5 class="h5">New Garage Requests </h5>
+    </div>
+</div>
+
+<div *ngIf="loading" class="text-center">
+    <p>Fetching data ...</p>
+</div>
+
+<div *ngIf="!loading">
+
+    <div class="text-center">
+        <p *ngIf="requests.length==0">All caught up :) </p>
+    </div>
+<div class="mx-2 mt-4 rounded">
+    <div class="my-2">
+    </div>
+    <div class="table-responsive">
+        <table datatable *ngIf="requests.length>0"
+            class="table table-borderless spacetr">
+            <thead class="text-secondary">
+                <tr>
+                    <th><small class="text-secondary">FULL NAME</small></th>
+                    <th><small class="text-secondary">ADDRESS</small></th>
+                    <th><small class="text-secondary">PHONE</small></th>
+                    <th><small class="text-secondary">REQUESTED AT</small></th>
+                    <th><small class="text-secondary">ACTION</small></th>
+                </tr>
+            </thead>
+            <tbody class="border-0">
+                <ng-container *ngFor="let req of requests" >
+
+                <tr class="shadow shadow-sm rounded-3" >
+                    <td class=" p-3"> {{req.fullName}}</td>
+                    <td class=" p-3">{{req.address}}</td>
+                    <td class=" p-3">{{req.phoneNumber}}</td>
+                    <td class=" p-3">{{req.requestAt | date:'medium'}}</td>
+                    <td class=" p-3">
+                        <div class="">
+                            <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>                            
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                              <li><a class="dropdown-item text-success" href="#"> <i class="fas fa-check"></i> Approve</a></li>
+                              <li><a class="dropdown-item text-danger" href="#"> <i class="fas fa-times"></i> Decline</a></li>
+                             
+                            </ul>
+                          </div>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+        </table>
+    </div>
+</div>
+
+<div class=" my-5">
+    <!-- for some space in end -->
+</div>
+</div>

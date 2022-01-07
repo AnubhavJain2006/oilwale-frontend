@@ -12,7 +12,7 @@
         <img class="img-thumbnail mr-1" src="/assets/img/user.png" alt="User" width="180px"><br>
         <p class="lead fw-bold pb-0 mb-0">{{garageDetails.garageName}}</p>
     </div> -->
-    <chart [type]="type" [data]="data" [options]="options"></chart>
+
     <div class="row my-3">
         <div class="col-lg-6">
             <div class="p-md-3">
@@ -66,7 +66,7 @@
                         </tr>
                         <tr>
                             <td class="p-3">Accepted By</td>
-                            <td class="p-3"><span class="badge bg-danger">10</span></td>
+                            <td class="p-3"><span class="badge bg-danger"> {{ schemeDetails.garages.length }} </span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -120,6 +120,7 @@
                     </tbody>
                 </table>
             </div>
+            
             <div class="p-md-3">
                 <p class="fw-bold">ACTION ZONE!</p>
                 <table class="table table-hover table-bordered p-md-3">
@@ -138,7 +139,7 @@
                                     <span *ngIf="restoreSchemeLoading">
                                         <div class="spinner-border spinner-border-sm" role="status">
                                             <span class="visually-hidden">Loading...</span>
-                                          </div>
+                                        </div>
                                     </span>
                                 </button>
                             </td>
@@ -148,18 +149,23 @@
                             <td class="p-3">
                                 <button (click)="onDeleteScheme(id)" class=" btn text-danger" [disabled]="deleteSchemeLoading">
                                     <span *ngIf="!deleteSchemeLoading">
-                                    Delete Scheme
+                                        Delete Scheme
                                     </span>
                                     <span *ngIf="deleteSchemeLoading">
                                         <div class="spinner-border spinner-border-sm" role="status">
                                             <span class="visually-hidden">Loading...</span>
-                                          </div>
+                                        </div>
                                     </span>
                                 </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            
+            <div class="p-md-3" *ngIf="!schemeStatsLoading" >
+                <p class="fw-bold">STATS</p>
+                <chart [type]="type" [data]="data" [options]="options"></chart>
             </div>
         </div>
     </div>

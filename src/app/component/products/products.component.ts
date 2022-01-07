@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Activity } from 'src/app/interface/activity';
 import { ActivityService } from 'src/app/service/activity.service';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-products',
@@ -22,7 +23,7 @@ export class ProductsComponent implements OnInit {
   activitiesLoading: boolean = false;
   deletedProductsFetchLoading: boolean = true;
 
-  constructor(private productService: ProductService, private activityService: ActivityService) {
+  constructor(private productService: ProductService, private activityService: ActivityService, private headerComponent: HeaderComponent) {
     
     console.log("ProductList size" + this.productService.productList.length);
 
@@ -44,6 +45,10 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    // changing sidebar active tab
+    this.headerComponent.active = "products"; 
+
     this.productService.refreshNeeded.subscribe(() => {
       this.loadAllProduct();
       this.getDeletedProducts();

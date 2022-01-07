@@ -9,6 +9,7 @@ import { __assign } from 'tslib';
 
 import { Customer } from '../interface/customer';
 import { Garagepointsredeem } from '../interface/utilities/garagepointsredeem';
+import { NewGarageRequest } from '../interface/new-garage-request';
 
 @Injectable({
   providedIn: 'root'
@@ -105,5 +106,9 @@ export class GarageService {
     return this.httpClient.put<Garage>(this.apiUrl, this.tempGarage).pipe(tap(() => {
       this._refreshNeeded.next();
     }));
+  }
+
+  fetchNewRequests(): Observable<NewGarageRequest[]> {
+    return this.httpClient.get<NewGarageRequest[]>( environment.baseUrl + 'api/newGarages');
   }
 }

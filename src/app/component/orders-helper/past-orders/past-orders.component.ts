@@ -18,8 +18,10 @@ export class PastOrdersComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onClick(id: string) {
-    this.router.navigate(['/orders/' + id]);
+  displayOrderObj?: OrderGet;
+
+  displayOrder(order: OrderGet) {
+    this.displayOrderObj = order;
   }
 
 }

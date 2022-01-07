@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/interface/order';
 import { OrderGet } from 'src/app/interface/order-get';
 import { OrderService } from 'src/app/service/order.service';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-orders',
@@ -22,9 +23,13 @@ export class OrdersComponent implements OnInit {
   notAcceptedOrdersLoading: boolean = true;
   pastOrderLoading: boolean = true;
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private headerComponent: HeaderComponent) { }
 
   ngOnInit(): void {
+
+    // changing sidebar active tab
+    this.headerComponent.active = "orders"; 
+
     this.fetchNewOrders();
     this.fetchAcceptedOrders();
     this.fetchCompletedOrders();

@@ -7,6 +7,8 @@ import { Subscription, timer } from 'rxjs';
 import { JsonPipe } from '@angular/common';
 import { Activity } from 'src/app/interface/activity';
 import { ActivityService } from 'src/app/service/activity.service';
+import { HeaderComponent } from '../header/header.component';
+import { NewGarageRequest } from 'src/app/interface/new-garage-request';
 
 @Component({
   selector: 'app-garages',
@@ -17,13 +19,15 @@ export class GaragesComponent implements OnInit {
   garages: Array<Garage> = [];
   deactivatedGarages: Array<Garage> = [];
   garageActivities: Activity[] = [];
+  newGarageRequests: NewGarageRequest[] = [];
   
   // flags
   activeGaragesLoading: boolean = true;
   deactiveGaragesLoading: boolean = true;
   activitiesLoading: boolean = false;
+  newGarageRequestLoadingFLag: boolean = false;
 
-  constructor(private garageService: GarageService, private activityService: ActivityService, private router: Router) {
+  constructor(private garageService: GarageService, private activityService: ActivityService, private router: Router, private headerComponent: HeaderComponent) {
     
     if (this.garageService.garageList.length == 0) {
       this.loadAllGarages();
@@ -44,10 +48,16 @@ export class GaragesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    // changing sidebar active tab
+    this.headerComponent.active = "garages"; 
+
     this.garageService.refreshNeeded.subscribe(() => {
       this.loadAllGarages();
       this.loadDeactivatedGarages();
     });
+
+    this.fetchNewGarageRequests();
 
   }
 
@@ -88,5 +98,14 @@ export class GaragesComponent implements OnInit {
 
   getGarageDetail(garageId: string) {
     // console.log(garageId);
+  }
+
+  fetchNewGarageRequests() {
+    this.newGarageRequestLoadingFLag = true;
+    this.garageService.fetchNewRequests().subscribe(data => {
+      console.log("Fetching new requests");
+      this.newGarageRequests = data;
+      this.newGarageRequestLoadingFLag = false;
+    })
   }
 }

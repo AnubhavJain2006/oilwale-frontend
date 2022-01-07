@@ -5,6 +5,7 @@ import { Subject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { SchemeInfo } from '../interface/scheme-info';
+import { GarageResponseCount } from '../interface/utilities/garage-response-count';
 
 @Injectable({
   providedIn: 'root'
@@ -57,5 +58,9 @@ export class SchemeService {
       this.refreshNeeded.next();
     }));
   } 
+
+  getSchemeStats(schemeId: string): Observable<GarageResponseCount> {
+    return this.httpClient.get<GarageResponseCount>(this.apiUrl + '/response/count/' + schemeId);
+  }
 
 }
