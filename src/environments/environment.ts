@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // baseUrl: "https://oilwale.herokuapp.com/"
-  baseUrl: "http://localhost:9999/"
+  baseUrl: "https://oilwale.herokuapp.com/"
+  // baseUrl: "http://localhost:9999/"
 };
 
 /*
