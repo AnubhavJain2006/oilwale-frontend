@@ -15,16 +15,16 @@ import { NewGarageRequest } from '../interface/new-garage-request';
   providedIn: 'root'
 })
 export class GarageService {
-  
+
   garageList: Array<Garage> = [];
   deactivatedGarageList: Array<Garage> = [];
   _refreshNeeded = new Subject<void>();
 
-  apiUrl:string = environment.baseUrl + "api/garage";
+  apiUrl: string = environment.baseUrl + "api/garage";
 
   tempGarage: Garage;
 
-  constructor(private httpClient: HttpClient) { 
+  constructor(private httpClient: HttpClient) {
 
     // just temp variable to store values
     this.tempGarage = {
@@ -75,15 +75,15 @@ export class GarageService {
     return this.httpClient.get<Garage>(environment.baseUrl + 'api/garage/' + id);
   }
 
-  getGarageCustomers(id: string):Observable<Customer[]> {
+  getGarageCustomers(id: string): Observable<Customer[]> {
     return this.httpClient.get<Customer[]>(this.apiUrl + "/customers/" + id);
   }
 
-  getGarageInSameArea(pincode:string): Observable<Garage[]>{
+  getGarageInSameArea(pincode: string): Observable<Garage[]> {
     return this.httpClient.get<Garage[]>(this.apiUrl + "/search/" + pincode);
   }
 
-  updateGarageAccount(garage:Garage): Observable<Garage> {
+  updateGarageAccount(garage: Garage): Observable<Garage> {
     return this.httpClient.put<Garage>(this.apiUrl, garage).pipe(tap(() => {
       this._refreshNeeded.next();
     }));
@@ -96,8 +96,8 @@ export class GarageService {
   }
 
   redeemGaragePoints(id: string, points: number): Observable<Garagepointsredeem> {
-    const data = {data: points};
-    return this.httpClient.post<Garagepointsredeem>( this.apiUrl + '/redeemPoints/' + id, data);
+    const data = { data: points };
+    return this.httpClient.post<Garagepointsredeem>(this.apiUrl + '/redeemPoints/' + id, data);
   }
 
   restoreGarageAccount(garage: Garage): Observable<Garage> {

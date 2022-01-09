@@ -1,5 +1,5 @@
 import { AuthGuard } from './service/AuthGaurd/auth.guard';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -63,10 +63,11 @@ import { AcceptedOrdersComponent } from './component/orders-helper/accepted-orde
 import { CompletedOrdersComponent } from './component/orders-helper/completed-orders/completed-orders.component';
 import { NotAcceptedOrdersComponent } from './component/orders-helper/not-accepted-orders/not-accepted-orders.component';
 import { PastOrdersComponent } from './component/orders-helper/past-orders/past-orders.component';
+import { BroadcastsComponent } from './component/broadcasts/broadcasts.component';
+import { GlobalerrorhandlerService } from './service/ErrorHandler/globalerrorhandler.service';
 import { OrderActivitiesComponent } from './component/orders-helper/order-activities/order-activities.component';
 import { DeletedVehiclesComponent } from './component/vehicles-helper/deleted-vehicles/deleted-vehicles.component';
 import { NewRequestsComponent } from './component/garages-helper/new-requests/new-requests.component';
-import { BroadcastsComponent } from './component/broadcasts/broadcasts.component';
 
 @NgModule({
   declarations: [
@@ -144,6 +145,10 @@ import { BroadcastsComponent } from './component/broadcasts/broadcasts.component
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useClass: GlobalerrorhandlerService
     },
     DatePipe
   ],

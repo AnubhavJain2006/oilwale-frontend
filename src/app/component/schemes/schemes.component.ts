@@ -130,7 +130,7 @@ export class SchemesComponent implements OnInit {
 
       // console.log(data);
       this.activeSchemesLoading = false;
-      
+
     }, err => {
       console.log(err);
     })
@@ -146,7 +146,7 @@ export class SchemesComponent implements OnInit {
     })
     this.schemeService.upcomingSchemeList = this.upcomingSchemeList;
   }
-  
+
   async fetchPastSchemes() {
     await this.schemeService.loadAllConcludedScheme().then(data => {
       this.pastSchemeList = data;
@@ -167,19 +167,19 @@ export class SchemesComponent implements OnInit {
     // console.log(start.getTime());
     // // var diffDays:any = Math.floor((end - start) / (1000 * 60 * 60 * 24));
     // return passed/duration;
-    
-    var date1:any = new Date(start);
-    var date2:any = new Date(end);
-    var date3:any = new Date();
-    var diffDays:any = Math.floor((Number(date2) - Number(date1)) / (1000 * 60 * 60 * 24));
-    var diffToday:any = Math.floor((Number(date3) - Number(date1))/ (1000*60*60*24));
+
+    var date1: any = new Date(start);
+    var date2: any = new Date(end);
+    var date3: any = new Date();
+    var diffDays: any = Math.floor((Number(date2) - Number(date1)) / (1000 * 60 * 60 * 24));
+    var diffToday: any = Math.floor((Number(date3) - Number(date1)) / (1000 * 60 * 60 * 24));
     // console.log(date1);
     // console.log(diffDays);
     // console.log(diffToday);
-    
-    
-    return (diffToday/diffDays)*100;
-  
+
+
+    return (diffToday / diffDays) * 100;
+
   }
 
   calculateDiff(data: any){
