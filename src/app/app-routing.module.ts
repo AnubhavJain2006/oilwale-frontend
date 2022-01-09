@@ -4,6 +4,8 @@ import { AccountsComponent } from './component/accounts/accounts.component';
 import { AccountInfoComponent } from './component/accounts-helper/account-info/account-info.component';
 import { AccountEditComponent } from './component/accounts-helper/account-edit/account-edit.component';
 
+import { BroadcastsComponent } from './component/broadcasts/broadcasts.component';
+
 import { VehiclesComponent } from './component/vehicles/vehicles.component';
 import { VehicleInfoComponent } from './component/vehicles-helper/vehicle-info/vehicle-info.component';
 import { VehicleEditComponent } from './component/vehicles-helper/vehicle-edit/vehicle-edit.component';
@@ -65,7 +67,9 @@ const routes: Routes = [
   { path: "accounts/:id/edit", component: AccountEditComponent, canActivate: [AuthGuard] },
   
   { path: "myaccount", component: MyaccountComponent, canActivate: [AuthGuard] },
-  { path: "myactivities", component: MyactivitiesComponent, canActivate: [AuthGuard] }
+  { path: "myactivities", component: MyactivitiesComponent, canActivate: [AuthGuard] },
+
+  { path: "broadcasts", component: BroadcastsComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

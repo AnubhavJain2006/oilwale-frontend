@@ -66,7 +66,7 @@ import { PastOrdersComponent } from './component/orders-helper/past-orders/past-
 import { OrderActivitiesComponent } from './component/orders-helper/order-activities/order-activities.component';
 import { DeletedVehiclesComponent } from './component/vehicles-helper/deleted-vehicles/deleted-vehicles.component';
 import { NewRequestsComponent } from './component/garages-helper/new-requests/new-requests.component';
-import { MessageCustomerComponent } from './component/customers-helper/message-customer/message-customer.component';
+import { BroadcastsComponent } from './component/broadcasts/broadcasts.component';
 
 @NgModule({
   declarations: [
@@ -126,7 +126,7 @@ import { MessageCustomerComponent } from './component/customers-helper/message-c
     OrderActivitiesComponent,
     DeletedVehiclesComponent,
     NewRequestsComponent,
-    MessageCustomerComponent
+    BroadcastsComponent
   ],
   imports: [
     BrowserModule,

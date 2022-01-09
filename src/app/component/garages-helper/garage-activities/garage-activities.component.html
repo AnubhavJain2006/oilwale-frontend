@@ -19,19 +19,19 @@
             <li class="list-group-item border-0" *ngFor="let act of activities">
                 <div class="d-flex d-inline">
 
-                    <div style="width: 180px;" class="">
+                    <div style="min-width: 180px;" class="">
                         {{ act.createdAt | date:'medium' }} 
                     </div>
 
-                    <div style="width: 110px;" class="">
+                    <div style="min-width: 110px;" class="">
                         <span class="link-primary mx-1"><a href="/accounts/{{act.userId}}" class="text-decoration-none">{{ act.user }}</a> </span> 
                     </div>
 
-                    <div style="width: 80px;" class="">
+                    <div style="min-width: 80px;" class="">
                         <span class="badge mx-1" [ngClass]="{'bg-success': act.act == 'create', 'bg-warning': act.act == 'update', 'bg-danger': act.act == 'delete'}"> {{act.act}}d </span> 
                     </div>
 
-                    <div style="width: 180px;" class="">
+                    <div style="min-width: 180px;" class="">
                         <span class="link-primary mx-1"> <a href="/garages/{{act.subjectId}}" class="text-decoration-none"> #{{ act.subject }}</a></span>
                     </div>
 

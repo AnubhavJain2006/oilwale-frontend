@@ -17,7 +17,7 @@ export class DeletedGaragesComponent implements OnInit {
   ngOnInit(): void {
   }
   onClick(id: string) {
-    this.router.navigate(['/customers/' + id]);
+    this.router.navigate(['/garages/' + id]);
   }
 
 }

@@ -129,13 +129,19 @@
                         <li (click)="setActive('garages')" [ngClass]="{'active-tab':active=='garages'}"
                             class="nav-item pt-1"><a class="nav-link tab-item text-light " routerLink="/garages">
                                 <i class="fas fa-wrench"></i> Garages
-                            </a></li>
-
+                            </a>
+                        </li>
 
                         <li (click)="setActive('customers')" [ngClass]="{'active-tab':active=='customers'}"
                             class="nav-item pt-1"><a class="nav-link tab-item text-light active"
                                 routerLink="/customers"> <i class="fas fa-users"></i> Customers
                             </a></li>
+
+                        <li (click)="setActive('broadcasts')" [ngClass]="{'active-tab':active=='broadcasts'}"
+                            class="nav-item pt-1"><a class="nav-link tab-item text-light active"
+                                routerLink="/broadcasts"> <i class="fas fa-bullhorn"></i> Broadcasts
+                            </a></li>
+
                         <li (click)="setActive('products')" [ngClass]="{'active-tab':active=='products'}"
                             class="nav-item pt-1"><a class="nav-link tab-item text-light  active"
                                 routerLink="/products"> <i class="fas fa-tags"></i> Products

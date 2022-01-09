@@ -109,6 +109,6 @@ export class GarageService {
   }
 
   fetchNewRequests(): Observable<NewGarageRequest[]> {
-    return this.httpClient.get<NewGarageRequest[]>( environment.baseUrl + 'api/newGarages');
+    return this.httpClient.get<NewGarageRequest[]>( environment.baseUrl + 'api/pending/newGarages');
   }
 }
