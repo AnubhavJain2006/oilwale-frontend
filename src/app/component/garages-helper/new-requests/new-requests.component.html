@@ -72,9 +72,18 @@
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <div class="card">
+    <div *ngFor="let r of acceptedRequest" class="card my-1">
         <div class="card-body">
-            
+            <p class=" m-0 lead fw-bold">
+                {{r.fullName}}
+            </p>
+            <p class="m-0">
+                {{r.address}}
+            </p>
+            <p class="m-0 text-secondary">
+                {{r.phoneNumber}}
+            </p>            
+
         </div>
     </div>
   </div>
