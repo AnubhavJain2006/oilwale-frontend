@@ -21,4 +21,8 @@
     background-color: #ff6a3c !important;
     cursor: pointer;
   }
+
+  tr:hover td>small {
+    color: white !important;
+  }
   

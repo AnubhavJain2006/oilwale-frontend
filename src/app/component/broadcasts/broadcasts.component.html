@@ -11,31 +11,51 @@
             <h5 class="h5">All Broadcasts</h5>
         </div>
     </div>
+    <div *ngIf="broadcastAddSuccessFlag" class="text-center text-success">
+        <div class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          Broadcast added successfully! Reloading data..
+    </div>
+    
 </div>
 
 
-<div class="">
+<div class="text-center mt-3" *ngIf="broadcastLoadingFlag">
+    Loading...
+</div>
+
+<div *ngIf="!broadcastLoadingFlag" class="">
     <div class="mx-2 mt-4 rounded">
         <div class="table-responsive">
             <table datatable class="table table-borderless  table-hover  spacetr">
                 <thead class="text-secondary">
                     <tr class="">
                         <th><small class="text-secondary">DATE</small></th>
+                        <th><small class="text-secondary">AUTHOR</small></th>
                         <th><small class="text-secondary">TITLE</small></th>
                         <th><small class="text-secondary">DESCRIPTION</small></th>
                         <th><small class="text-secondary">IMAGE</small></th>
-                        <th><small class="text-secondary">TARGET</small></th>
+                        <th><small class="text-secondary">TARGET GROUP</small></th>
                         <!-- <th>Vehicle Number</th> -->
                     </tr>
                 </thead>
                 <tbody class="border-0">
-                    <ng-container>
+                    <ng-container *ngFor="let b of broadcasts">
                         <tr class="shadow shadow-sm rounded-3" >
-                            <td class=" p-3">23 Jan, 2021</td>
-                            <td class=" p-3">Some title</td>
-                            <td class=" p-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</td>
-                            <td class=" p-3">Mai nahi dukhauga</td>
-                            <td class=" p-3">Garages</td>
+                            <td class=" p-3">{{b.createdAt| date:"medium"}}</td>
+                            <td class=" p-3">{{b.createdBy}}</td>
+                            <td class=" p-3">{{b.title}}</td>
+                            <td class=" p-3">{{b.description}}</td>
+                            <td class=" p-3"> - </td>
+                            <td class=" p-3">
+                                <!-- <div *ngFor="let tg of b.targetGroup">
+                                    <div class="row">
+                                        <small class="text-secondary">{{ tg | uppercase }}</small>
+                                    </div>
+                                </div> -->
+                                <small *ngFor="let tg of b.targetGroup" class="text-secondary mx-1">{{ tg | titlecase }}</small>
+                            </td>
                             
                         </tr>
                     </ng-container>
@@ -55,35 +75,57 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+           
+            <form (submit)="addBroadcast()"  [formGroup]="broadcastForm">
 
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Title</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <!-- <div id="emailHelp" class="form-text">Title will be shown as heading</div> -->
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Description</label>
-                <textarea name="exampleInputPassword1" id="exampleInputPassword1" cols="30" rows="3" class="form-control"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="broadcastImage" class="form-label">Image</label>
-                <input type="file" name="broadcastImage" id="broadcastImage" class="form-control">
-              </div>
-              <div class="mb-3 ">
-                <label for="targetGroup" class="form-label">Target Group</label>
-                <div class="mb-1 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Garages</label>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Title</label>
+                    <input type="text" name="title" formControlName="title" class="form-control" id="exampleInputEmail1">
+                    <div *ngIf="broadcastForm.get('title')?.touched"> 
+                        <span class="text-danger" *ngIf="broadcastForm.get('title')?.hasError('required')"><small>This field is required.</small></span>
+                    </div>  
                 </div>
-                <div class="mb-1 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck2">
-                    <label class="form-check-label" for="exampleCheck2">Customers</label>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Description</label>
+                    <textarea name="description" formControlName="description" id="exampleInputPassword1" cols="30" rows="3" class="form-control"></textarea>
+                    <div *ngIf="broadcastForm.get('description')?.touched"> 
+                        <span class="text-danger" *ngIf="broadcastForm.get('description')?.hasError('required')"><small>This field is required.</small></span>
+                    </div> 
                 </div>
-              </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Cancel</button>
-          <button type="button" class="btn background-orange text-white"><i class="fas fa-check"></i> Send Broadcast</button>
+                <div class="mb-3">
+                    <label for="broadcastImage" class="form-label">Image</label>
+                    <input type="file" name="broadcastImage" id="broadcastImage" class="form-control">
+                </div>
+                <div class="mb-3 ">
+                    <label for="targetGroup" class="form-label">Target Group</label>
+                    <div class="mb-1 form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" (click)="targetGroupPush('garages')" >
+                        <label class="form-check-label" for="exampleCheck1">Garages</label>
+                    </div>
+                    <div class="mb-1 form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck2" (click)="targetGroupPush('customers')">
+                        <label class="form-check-label" for="exampleCheck2">Customers</label>
+                    </div>
+                    <small *ngIf="targetGroupFormTouched && targetGroupArray.length == 0" class="text-danger">Choose at least one group</small>
+                </div>
+
+                <div class="mt-5 mb-3 d-flex justify-content-end">
+                  <button type="button" id="modalClosebtn" class="btn btn-secondary mx-1" data-bs-dismiss="modal"><i class="fas fa-times"></i> Cancel</button>
+                  <button type="submit" class="btn background-orange text-white mx-1" [disabled]="!broadcastForm.valid || targetGroupArray.length == 0 || broadcastAddLoadingFLag" >
+                      <div *ngIf="broadcastAddLoadingFLag">
+                        <div class="spinner-border spinner-border-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                          Sending Broadcast
+                      </div>
+
+                      <div *ngIf="!broadcastAddLoadingFLag">
+
+                          <i class="fas fa-check"></i> Send Broadcast
+                        </div>
+                    </button>
+                </div>
+            </form>
         </div>
       </div>
     </div>

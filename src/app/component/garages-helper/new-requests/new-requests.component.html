@@ -2,7 +2,12 @@
     <div class="py-2">
         <h5 class="h5">New Garage Requests </h5>
     </div>
+    
+    <div class="text-end">
+        <button class="btn background-orange text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">See Accepted Requests</button>
+    </div>
 </div>
+
 
 <div *ngIf="loading" class="text-center">
     <p>Fetching data ...</p>
@@ -58,4 +63,19 @@
 <div class=" my-5">
     <!-- for some space in end -->
 </div>
+</div>
+
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Accepted Requests </h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="card">
+        <div class="card-body">
+            
+        </div>
+    </div>
+  </div>
 </div>

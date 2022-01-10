@@ -20,12 +20,14 @@ export class GaragesComponent implements OnInit {
   deactivatedGarages: Array<Garage> = [];
   garageActivities: Activity[] = [];
   newGarageRequests: NewGarageRequest[] = [];
+  acceptedGarageRequests: NewGarageRequest[] = [];
   
   // flags
   activeGaragesLoading: boolean = true;
   deactiveGaragesLoading: boolean = true;
   activitiesLoading: boolean = false;
   newGarageRequestLoadingFLag: boolean = false;
+  acceptedGarageRequestLoadingFlag: boolean = false;
 
   constructor(private garageService: GarageService, private activityService: ActivityService, private router: Router, private headerComponent: HeaderComponent) {
     
@@ -58,7 +60,7 @@ export class GaragesComponent implements OnInit {
     });
 
     this.fetchNewGarageRequests();
-
+    this.fetchPendingGarageRequests();
   }
 
   async loadAllGarages() {
@@ -106,6 +108,17 @@ export class GaragesComponent implements OnInit {
       console.log("Fetching new requests");
       this.newGarageRequests = data;
       this.newGarageRequestLoadingFLag = false;
+    })
+  }
+
+  fetchPendingGarageRequests() {
+    this.acceptedGarageRequestLoadingFlag = true;
+    this.garageService.fetchAcceptedRequests().subscribe(data => {
+      console.log("Fetching accepted requests");
+      console.log(data);
+      
+      this.acceptedGarageRequests = data;
+      this.acceptedGarageRequestLoadingFlag = false;
     })
   }
 }

@@ -9,7 +9,9 @@ import { NewGarageRequest } from 'src/app/interface/new-garage-request';
 export class NewRequestsComponent implements OnInit {
 
   @Input() requests:NewGarageRequest[] = [];
+  @Input() acceptedRequest: NewGarageRequest[] = [];
   @Input() loading: boolean = true;
+  @Input() acceptedLoading: boolean = true;
 
   constructor() { }
 

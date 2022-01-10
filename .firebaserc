@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "demo1-4c8a4"
+  },
+  "targets": {
+    "demo1-4c8a4": {
+      "hosting": {
+        "oilwale": [
+          "demo1-4c8a4"
+        ]
+      }
+    }
+  }
+}
