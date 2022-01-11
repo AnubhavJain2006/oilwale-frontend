@@ -1,12 +1,12 @@
 {
   "projects": {
-    "default": "demo1-4c8a4"
+    "default": "oilwale"
   },
   "targets": {
-    "demo1-4c8a4": {
+    "oilwale": {
       "hosting": {
         "oilwale": [
-          "demo1-4c8a4"
+          "oilwale"
         ]
       }
     }

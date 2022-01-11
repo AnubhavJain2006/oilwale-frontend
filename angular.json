@@ -115,8 +115,8 @@
             "prerender": false,
             "ssr": false,
             "browserTarget": "oilwale:build:production",
-            "firebaseProject": "demo1-4c8a4",
-            "firebaseHostingSite": "demo1-4c8a4"
+            "firebaseProject": "oilwale",
+            "firebaseHostingSite": "oilwale"
           }
         }
       }

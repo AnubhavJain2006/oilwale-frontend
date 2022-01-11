@@ -38,6 +38,10 @@ export class HeaderComponent implements OnInit {
   
   setActive(activeLink: string) {
     this.active = activeLink;
+
+    if(window.innerWidth < 576){
+      document.getElementById('navbar-toggle-btn')?.click();
+    }
   }
 
   logout() {
