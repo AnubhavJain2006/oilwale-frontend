@@ -41,7 +41,8 @@ export class EditGarageComponent implements OnInit {
       pincode: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
       area: new FormControl('', Validators.required),
       panCard: new FormControl('', [Validators.pattern("[A-Z]{5}[0-9]{4}[A-Z]{1}")]),
-      active: new FormControl('', Validators.required)
+      active: new FormControl('', Validators.required),
+      premium: new FormControl('', [Validators.required])
     })
   }
 
@@ -64,7 +65,8 @@ export class EditGarageComponent implements OnInit {
         pincode: this.garageDetails.pincode,
         area: this.garageDetails.area,
         panCard: this.garageDetails.panCard,
-        active: this.garageDetails.active
+        active: this.garageDetails.active,
+        premium: this.garageDetails.premium
       })
 
     })
@@ -107,7 +109,8 @@ export class EditGarageComponent implements OnInit {
       totalScore: this.garageDetails.totalScore,
       createdAt: this.garageDetails.createdAt,
       updatedAt: this.garageDetails.updatedAt,
-      active: this.garageEditForm.value.active
+      active: this.garageEditForm.value.active,
+      premium: this.garageEditForm.value.premium
     } 
 
     this.updateSubitLoadingFlag = true;

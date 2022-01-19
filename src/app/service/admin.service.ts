@@ -16,6 +16,13 @@ export class AdminService {
     return this.httpClient.post(environment.baseUrl + "api/authenticate", loginText);
   }
 
+  sendotp(email: string) : Observable<any> {
+    let reqObj = {
+      data: email
+    }
+    return this.httpClient.post(environment.baseUrl + "api/authenticate/forgotPassword", reqObj)
+  }
+
   loadDeactivAccounts(): Promise<any> {
     return this.httpClient.get(environment.baseUrl + "api/admins/deactive").toPromise();
   }
@@ -68,7 +75,10 @@ export class AdminService {
   }
 
   forgotPassword(email: string): Observable<any> {
-    return this.httpClient.post(environment.baseUrl + "api/authenticate/forgotPassword", email);
+    let reqObj = {
+      data: email
+    }
+    return this.httpClient.post(environment.baseUrl + "api/authenticate/forgotPassword", reqObj);
   }
 
 

@@ -35,7 +35,10 @@
                 <ng-container *ngFor="let garage of deactivatedGarages" >
 
                 <tr class="shadow shadow-sm rounded-3" (click)="onClick(garage.garageId)">
-                    <td class=" p-3"> {{garage.garageName}}</td>
+                    <td class=" p-3">
+                        <span *ngIf="garage.premium"><i class="fas fa-crown"></i></span>
+                         {{garage.garageName}}
+                    </td>
                     <td class=" p-3">{{garage.name}}</td>
                     <td class=" p-3">{{garage.phoneNumber}}</td>
                     <td class=" p-3">{{garage.address}}</td>

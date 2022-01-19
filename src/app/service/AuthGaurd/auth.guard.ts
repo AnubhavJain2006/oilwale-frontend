@@ -19,4 +19,8 @@ export class AuthGuard implements CanActivate {
     }
   }
 
+  isAdmin(): boolean {
+    return (this.sessionService.currentUserObject.privilege == 'admin');
+  }
+
 }

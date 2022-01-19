@@ -40,7 +40,7 @@ export class ForgetPaaswordComponent implements OnInit {
   }
 
   verifyOtp() {
-    this.adminService.verifyOtp()
+    // this.adminService.sendotp()
   }
 
 }

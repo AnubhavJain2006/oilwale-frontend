@@ -15,16 +15,31 @@ export class AllAccountsComponent implements OnInit {
   // @Input() currentUser!: Admin;
 
   currentUserEmail:string = this.accountService.getAdminNameFromToken();
-  
+  currentUserDetails!: Admin;
+
   modalAdminId: string = "";
   modalName: string = "";
   modalEmail: string = "";
+
+  // flags
+  currentUserDetailsLoadingFlag: boolean = true;
 
   constructor(private accountService: AdminService) { }
 
   ngOnInit(): void {
     console.log(this.currentUserEmail + "this");
     
+    this.accountService.getAdminByEmail().subscribe(data => {
+      this.currentUserDetails = data;
+    },
+    error => {
+      alert("Error in fetching details of current user!")
+      console.log(error);
+    },
+    () => {
+      this.currentUserDetailsLoadingFlag = false;
+    })
+
   }
 
   //     console.log(JSON.parse(JSON.stringify(token)).sub)

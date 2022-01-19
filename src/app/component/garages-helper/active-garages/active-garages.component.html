@@ -21,8 +21,8 @@
             class="table table-borderless spacetr">
             <thead class="text-secondary">
                 <tr>
-                    <th><small class="text-secondary">GARAGE</small></th>
-                    <th><small class="text-secondary">OWNER</small></th>
+                    <th><small class="text-secondary text-wrap">GARAGE</small></th>
+                    <th><small class="text-secondary text-wrap">OWNER</small></th>
                     <th><small class="text-secondary">PHONE</small></th>
                     <th><small class="text-secondary">ADDRESS</small></th>
                     <th><small class="text-secondary">PINCODE</small></th>
@@ -35,7 +35,10 @@
                 <ng-container *ngFor="let garage of garages" >
 
                 <tr class="shadow shadow-sm rounded-3" (click)="onClick(garage.garageId)">
-                    <td class=" p-3"> {{garage.garageName}}</td>
+                    <td class=" p-3">
+                        <span *ngIf="garage.premium"><i class="fas fa-crown"></i></span>
+                        {{garage.garageName}}
+                    </td>
                     <td class=" p-3">{{garage.name}}</td>
                     <td class=" p-3">{{garage.phoneNumber}}</td>
                     <td class=" p-3">{{garage.address}}</td>

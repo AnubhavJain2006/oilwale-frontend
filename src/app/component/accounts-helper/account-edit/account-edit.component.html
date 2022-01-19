@@ -1,5 +1,7 @@
 <p class="lead" *ngIf="dataLoadingStatus">Fetching data ...</p>
-<div *ngIf="!dataLoadingStatus && !sameUserEdit">
+
+
+<div *ngIf="!dataLoadingStatus && (updateCondition || sameUserEdit)">
     <div class="d-flex flex-wrap py-3">
         <h3 class="h3">
             <a routerLink="/accounts" class="text-decoration-none text-dark">
@@ -20,6 +22,14 @@
         <div id="add_account_response" class="my-3"></div>
         <form class="py-3" id="add_accounts_form" method="POST" [formGroup]=" accountForm"
             (ngSubmit)="updateUser()">
+
+            <!-- success message -->
+            <div *ngIf="updateAccountSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Update success!</strong> Account update successfull.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+
+
             <div class="row mb-3">
                 <label for="Full_Name" class="col-sm-3 col-form-label">Full Name</label>
                 <div class="col-sm-9">
@@ -106,7 +116,7 @@
                 <button type="submit" class="btn background-orange text-white" [disabled]="!accountForm.valid || updateAccountLoading"
                     id="add_account_submit">
                     <span *ngIf="!updateAccountLoading">
-                        Add Account
+                        Update {{displayName}}
                     </span>
                     <span *ngIf="updateAccountLoading">
                         <div class="spinner-border spinner-border-sm">
@@ -114,7 +124,7 @@
                                 Loading ...
                             </span>
                         </div>
-                        Adding Account
+                        Updating {{displayName}}
                     </span>
                 </button>
             </div>
@@ -122,6 +132,6 @@
     </div>
 </div>
 
-<div *ngIf="sameUserEdit">
-    <div class="text-center"><p>You cannot edit yourself!</p></div>
+<div *ngIf="!dataLoadingStatus && !(updateCondition || sameUserEdit)">
+    <div class="text-center"><p>Access denied!</p></div>
 </div>

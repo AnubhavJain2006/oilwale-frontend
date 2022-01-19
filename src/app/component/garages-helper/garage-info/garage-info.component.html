@@ -10,7 +10,7 @@
 
     <div class="w-100 text-center py-2">
         <img class="img-thumbnail mr-1" src="/assets/img/user.png" alt="User" width="180px"><br>
-        <p class="lead fw-bold pb-0 mb-0">{{garageDetails.garageName}}</p>
+        <p class="lead fw-bold pb-0 mb-0"> <span *ngIf="garageDetails.premium"><i class="fas fa-crown"></i></span> {{garageDetails.garageName}}</p>
     </div>
 
     <div class="row my-3">
@@ -21,7 +21,7 @@
                     <tbody>
                         <tr>
                             <td class="p-3">Garage Name</td>
-                            <td class="p-3">{{ garageDetails.garageName }}</td>
+                            <td class="p-3 text-wrap">{{ garageDetails.garageName }}</td>
                         </tr>
                         <tr>
                             <td class="p-3">Owner Name</td>
@@ -50,6 +50,13 @@
                             <td class="p-3">
                                 <span *ngIf="!garageDetails.panCard"> - </span>
                                 <span *ngIf="garageDetails.panCard"> {{ garageDetails.panCard }} </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Premium</td>
+                            <td class="p-3">
+                                <span *ngIf="!garageDetails.premium"> No </span>
+                                <span *ngIf="garageDetails.premium"> Yes </span>
                             </td>
                         </tr>
                         <tr>

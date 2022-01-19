@@ -16,4 +16,5 @@ export interface Garage {
     createdAt: string;
     updatedAt: string;
     active: boolean;
+    premium: boolean;
 }

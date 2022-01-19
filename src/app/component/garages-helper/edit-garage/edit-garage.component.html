@@ -103,6 +103,16 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row mb-3">
+                <label for="premium" class="col-sm-3 col-form-label">Premium</label>
+                <div class="col-sm-9">
+                    <select name="premium" id="premium" class="form-select" formControlName="premium">
+                        <option [selected]="true == garageDetails.premium" value=true>Yes</option>
+                        <option [selected]="false == garageDetails.premium" value=false>No</option>
+                    </select>
+                </div>
+            </div>
     
             <div class="row mb-3">
                 <label for="Address" class="col-sm-3 col-form-label">Address</label>

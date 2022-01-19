@@ -19,6 +19,8 @@ export class AddGarageComponent implements OnInit {
   isSubmitted: boolean = false;
   pincodeAreaFetchLoading: boolean = false;
   addGarageLoadingFlag: boolean = false;
+  phoneNumberCheck: boolean = false;
+  phoneNumberCheckLoading: boolean = true;
 
   // utilities
   fieldTextTypePass: boolean = false;
@@ -26,8 +28,8 @@ export class AddGarageComponent implements OnInit {
 
   constructor(private garageService: GarageService, private router: Router) { 
     this.garage = new FormGroup({
-      name: new FormControl('', Validators.required),
-      garageName: new FormControl('', Validators.required),
+      name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
+      garageName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
       phoneNumber: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
       alternateNumber: new FormControl('', [Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
       gstNumber: new FormControl('', [Validators.minLength(15), Validators.maxLength(15), Validators.pattern("[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[A-Z]{1}[0-9]{1}")]),
@@ -37,7 +39,8 @@ export class AddGarageComponent implements OnInit {
       // image: new FormControl(''),
       panCard: new FormControl('', [Validators.pattern("[A-Z]{5}[0-9]{4}[A-Z]{1}")]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      confirmPassword: new FormControl('', [Validators.required])
+      confirmPassword: new FormControl('', [Validators.required]),
+      premium: new FormControl('', [Validators.required])
     })
   }
 
@@ -80,12 +83,16 @@ export class AddGarageComponent implements OnInit {
     this.addGarageLoadingFlag = true;
     this.garageService.addNewGarage(this.garage.value).subscribe(resp => {
       console.log(resp);
-      this.addGarageLoadingFlag = false;
       this.newAddedGarage = resp;
       // this.isSubmitted = true;
       this.garage.reset();
     }, err => {
       console.log(err)
+      alert("Some error occured");
+      this.addGarageLoadingFlag = false;
+    },
+    () => {
+      this.addGarageLoadingFlag = false;
     })
   }
 
@@ -96,4 +103,17 @@ export class AddGarageComponent implements OnInit {
   toggleFieldTextTypeConf() {
     this.fieldTextTypeConf = !this.fieldTextTypeConf;
   }
+
+  checkPhoneNumber() {
+    console.log("check started");
+    
+    if (this.garage.get('phoneNumber')?.touched) {
+      if (this.garage.get('phoneNumber')?.valid) {
+        this.garageService.checkPhoneNumber(this.garage.value.phoneNumber).subscribe(data => {
+          if (data.available) this.phoneNumberCheck = true;
+        })
+      }
+    }
+  }
+
 }

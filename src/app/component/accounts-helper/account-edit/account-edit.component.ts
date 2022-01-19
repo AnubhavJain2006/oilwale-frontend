@@ -17,13 +17,17 @@ export class AccountEditComponent implements OnInit {
 
   accountForm: FormGroup;
 
+  currentUserDetails!: Admin;
   
-  currentUserEmail:string = this.adminService.getAdminNameFromToken();
+  private currentUserEmail:string = this.adminService.getAdminNameFromToken();
   
   // flags
   dataLoadingStatus:boolean = true;
-  sameUserEdit:boolean = false;
   updateAccountLoading: boolean = false;
+  updateAccountSuccess: boolean = false;
+  
+  sameUserEdit:boolean = false;
+  updateCondition: boolean = false;
 
   constructor(private router: ActivatedRoute, private adminService: AdminService) { 
     this.accountForm = new FormGroup({
@@ -42,14 +46,23 @@ export class AccountEditComponent implements OnInit {
     this.id = this.router.snapshot.params.id;
     this.adminService.getAdminById(this.id).subscribe(data => {
       this.adminDetails = data;
-      this.dataLoadingStatus = false;
       this.displayName = this.adminDetails.name;
+      
+      
+      // bad code
+      // getting details of current user and comparing for the condition
+      this.adminService.getAdminByEmail().subscribe (currUser => {
+        this.dataLoadingStatus = false;
+        
+        this.currentUserDetails = currUser;
+        
+        if(this.adminDetails.email == this.currentUserEmail) {
+          this.sameUserEdit = true;
+        }
 
-      if(this.adminDetails.email == this.currentUserEmail) {
-        this.sameUserEdit = true;
-        return;
-      }
-
+        this.updateCondition = this.calculateUpdateCondition();
+      
+      
       // setting the form
       this.accountForm.setValue({
         name: this.adminDetails.name,
@@ -60,14 +73,55 @@ export class AccountEditComponent implements OnInit {
         pincode: this.adminDetails.pincode,
         privilege: this.adminDetails.privilege,
       })
-
+      
+    })
 
     });
   }
 
   updateUser() {
     console.log("pending implementation");
+
+    let updateObj:Admin = {
+      adminId: this.adminDetails.adminId,
+      name: this.accountForm.value.name,
+      email: this.accountForm.value.email,
+      phoneNumber: this.accountForm.value.phoneNumber,
+      alternateNumber: this.accountForm.value.alternateNumber,
+      address: this.accountForm.value.address,
+      pincode: this.accountForm.value.pincode,
+      image: this.adminDetails.image,
+      privilege: this.accountForm.value.privilege,
+      createdAt: this.adminDetails.createdAt,
+      updateAt: this.adminDetails.updateAt,
+      active: this.adminDetails.active
+    }
+
+    this.updateAccountLoading = true;
+    // this.updateAccountSuccess = false;
+    this.adminService.updateAdmin(updateObj).subscribe(data => {
+      this.adminDetails = data;
+
+      // this.updateCondition = this.calculateUpdateCondition();
+
+      this.updateAccountSuccess = true;
+      setTimeout(() => {
+        this.updateAccountSuccess = false;
+      }, 5000);
+    },
+    error => {
+      alert("Some error in update!")
+      console.log(error);
+    },
+    () => {
+      this.updateAccountLoading = false;
+    })
     
+  }
+
+
+  calculateUpdateCondition(): boolean {
+    return this.currentUserDetails.privilege == 'admin' && this.adminDetails.privilege == 'moderator';
   }
 
 }

@@ -10,6 +10,7 @@ import { __assign } from 'tslib';
 import { Customer } from '../interface/customer';
 import { Garagepointsredeem } from '../interface/utilities/garagepointsredeem';
 import { NewGarageRequest } from '../interface/new-garage-request';
+import { CheckPhoneNumber } from '../interface/utilities/check-phone-number';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,7 @@ export class GarageService {
       createdAt: "",
       updatedAt: "",
       active: false,
+      premium: false,
     }
   }
 
@@ -115,4 +117,12 @@ export class GarageService {
   fetchAcceptedRequests(): Observable<NewGarageRequest[]> {
     return this.httpClient.get<NewGarageRequest[]>( environment.baseUrl + 'api/accepted/newGarages');
   }
+
+  checkPhoneNumber( phoneNumber: string ): Observable<CheckPhoneNumber> {
+    let reqObj = {
+      data: phoneNumber
+    }
+    return this.httpClient.post<CheckPhoneNumber>( environment.baseUrl + 'api/checkPhoneNumber', reqObj)
+  }
+
 }

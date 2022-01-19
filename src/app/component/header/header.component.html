@@ -18,8 +18,7 @@
 <body>
 
     <header class="navbar navbar-light sticky-top bg-light flex-md-nowrap p-0 shadow navbar-color border-bottom-orange">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 " routerLink="/dashboard"> <i class="fas fa-oil-can px-1"></i> OIL
-            WALE</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 " routerLink="/dashboard"> <i class="fas fa-oil-can px-1"></i> OilMart</a>
 
         <button id="navbar-toggle-btn" class="navbar-toggler position-absolute d-md-none collapsed border-0" type="button" data-bs-toggle="collapse"
             data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
@@ -164,7 +163,7 @@
 
                     <hr>
                     <ul class="nav flex-column mb-2">
-                        <li (click)="setActive('accounts')" [ngClass]="{'active-tab':active=='accounts'}"
+                        <li *ngIf="currentUserObj.privilege == 'admin'" (click)="setActive('accounts')" [ngClass]="{'active-tab':active=='accounts'}"
                             class="nav-item pt-1"><a class="nav-link tab-item text-light active" routerLink="/accounts">
                                 <i class="fas fa-user-circle"></i> Manage Accounts
                             </a></li>

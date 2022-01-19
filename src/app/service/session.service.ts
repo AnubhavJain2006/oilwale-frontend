@@ -2,6 +2,8 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 import { AdminService } from './admin.service';
+import { Admin } from '../interface/admin';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,8 @@ export class SessionService {
   private _userPhoneNumber: string = "";
   private _userPriviledge: string = "";
   private _id: string = "";
+
+  currentUserObject!:Admin;
 
   public get id(): string {
     return this._id;
@@ -53,15 +57,11 @@ export class SessionService {
     this._userPriviledge = resp.role;
     this._userPhoneNumber = resp.phoneNumber;
     this._id = resp.id;
-
-    console.log("credentials le kar aaya");
-    console.log( this._userName);
   }
 
-    
-    // console.log("service details:")
-    // console.log(this._userName);
-    // console.log(this._userPriviledge);
-  
+  fetchCurrentUserObject(): Observable<Admin> {
+    return this.adminService.getAdminByEmail();
+  }
+
 
 }

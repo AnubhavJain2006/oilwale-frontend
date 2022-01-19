@@ -25,6 +25,8 @@
                     
                     <div *ngIf="garage.get('garageName')?.touched">
                         <span class="error" *ngIf="garage.get('garageName')?.hasError('required')">This field is required.</span>
+                        <span class="error" *ngIf="garage.get('garageName')?.hasError('minlength')">Garage Name should be at least 3 characters long.</span>
+                        <span class="error" *ngIf="garage.get('garageName')?.hasError('maxLength')">Garage Name should less then 80 characters.</span>
                     </div>
                 </div>
             </div>
@@ -36,6 +38,8 @@
 
                     <div *ngIf="garage.get('name')?.touched">
                         <span class="error" *ngIf="garage.get('name')?.hasError('required')">This field is required.</span>
+                        <span class="error" *ngIf="garage.get('name')?.hasError('minlength')">Name should be at least 3 characters long.</span>
+                        <span class="error" *ngIf="garage.get('name')?.hasError('maxlength')">Name should less then 80 characters.</span>
                     </div>
                 </div>
             </div>
@@ -43,8 +47,8 @@
             <div class="row mb-3">
                 <label for="Phone_Number" class="col-sm-3 col-form-label">Phone Number</label>
                 <div class="col-sm-9">
-                    <input type="text" name="phoneNumber" formControlName="phoneNumber" class="form-control" id="Phone_Number" placeholder="9999999999" />
-
+                    <input type="text" name="phoneNumber" formControlName="phoneNumber" class="form-control" id="Phone_Number" placeholder="9999999999" (change)="checkPhoneNumber()" />
+                    {{phoneNumberCheck}}
                     <div *ngIf="garage.get('phoneNumber')?.touched">
                         <span class="error" *ngIf="garage.get('phoneNumber')?.hasError('required')">This field is required.</span>
                         <span class="error" *ngIf="garage.get('phoneNumber')?.hasError('minlength')">Phone number should be of 10 digits.</span>
@@ -136,6 +140,20 @@
                         <div *ngIf="garage.get('confirmPassword')?.touched">
                             <span class="error" *ngIf="garage.get('confirmPassword')?.hasError('required')">Confirm your password</span>
                         </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="premium" class="col-sm-3 col-form-label">Premium</label>
+                <div class="col-sm-9">
+                    <select name="premium" id="premium" class="form-select" name="premium" formControlName="premium">
+                        <option value=true>Yes</option>
+                        <option value=false>No</option>
+                    </select>
+
+                    <div *ngIf="garage.get('address')?.touched"> 
+                        <span class="error" *ngIf="garage.get('address')?.hasError('required')">This field is required.</span>
+                    </div>  
                 </div>
             </div>
 

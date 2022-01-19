@@ -82,28 +82,51 @@
                     </tbody>
                 </table>
             </div>
-            <div class="p-md-3" *ngIf="adminDetails.adminId != currentUser.adminId">
-                <p class="fw-bold text-danger">ACTION ZONE!</p>
-                <table class="table table-hover table-bordered p-md-3">
-                    <tbody>
-                        <tr>
-                            <td class="p-3">Update garage info</td>
-                            <td class="p-3"> <a routerLink="/accounts/{{ adminDetails.adminId }}/edit" class="btn text-decoration-none text-dark">Update</a></td>
-                        </tr>
-                        <tr *ngIf="adminDetails.active">
-                            <td class="p-3">Deactivate Account</td>
-                            <td class="p-3"><a href="#" class="link-danger">Deactivate Account</a></td>
-                        </tr>
-                        <tr *ngIf="!adminDetails.active">
-                            <td class="p-3">Enable Account</td>
-                            <td class="p-3"><a href="#" class="link-success">Enable Account</a></td>
-                        </tr>
-                        <tr>
-                            <td class="p-3">Delete Account</td>
-                            <td class="p-3"><a href="#" class="link-danger">Delete Account</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div *ngIf="!currentUserdatailLoading">
+                <div class="p-md-3" *ngIf="(adminDetails.adminId == currentUser.adminId) || (this.currentUser.privilege == 'admin' && this.adminDetails.privilege == 'moderator')">
+                    <p class="fw-bold text-danger">ACTION ZONE!</p>
+                    <table class="table table-hover table-bordered p-md-3">
+                        <tbody>
+                            <tr>
+                                <td class="p-3">Update info</td>
+                                <td class="p-3"> <a routerLink="/accounts/{{ adminDetails.adminId }}/edit" class="btn text-decoration-none text-dark">Update</a></td>
+                            </tr>
+                            <tr *ngIf="adminDetails.active && (this.currentUser.privilege == 'admin' && this.adminDetails.privilege == 'moderator')">
+                                <td class="p-3">Deactivate Account</td>
+                                <td class="p-3">
+                                    <button  class="btn link-danger" [disabled]="deleteAccountLoadingFlag" (click)="deleteUser(adminDetails)">
+                                        <div *ngIf="deleteAccountLoadingFlag">
+                                            <div class="spinner-border spinner-border-sm" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                              </div>
+                                              Deactivating account
+                                        </div>
+                                        <div *ngIf="!deleteAccountLoadingFlag">
+                                            Deactivate Account
+                                        </div>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!adminDetails.active && (this.currentUser.privilege == 'admin' && this.adminDetails.privilege == 'moderator')">
+                                <td class="p-3">Enable Account</td>
+                                <td class="p-3">
+                                    <button href="#" class="btn link-success" [disabled]="restoreAccountLoadingFlag" (click)="restoreUser(adminDetails)">
+                                        <div *ngIf="restoreAccountLoadingFlag">
+                                            <div class="spinner-border spinner-border-sm" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                              </div>
+                                              Restoring account
+                                        </div>
+                                        <div *ngIf="!restoreAccountLoadingFlag">
+                                            Enable Account
+                                        </div>
+                                    </button>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

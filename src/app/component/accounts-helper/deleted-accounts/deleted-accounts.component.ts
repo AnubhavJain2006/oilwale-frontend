@@ -12,9 +12,13 @@ export class DeletedAccountsComponent implements OnInit {
   @Input() accounts!: Admin[];
   @Input() loading!: boolean;
 
+  currentUser!: Admin;
+
   // flags 
   revertAccountFlagLoading: boolean = false;
   revertAccountFlagSuccess: boolean = false;
+  currentUserDetailsLoadingFlag: boolean = true;
+
 
   // dumb variables
 
@@ -37,7 +41,19 @@ export class DeletedAccountsComponent implements OnInit {
   constructor(private accountService: AdminService) { }
 
   ngOnInit(): void {
+    this.accountService.getAdminByEmail().subscribe(data => {
+      this.currentUser = data;
+    },
+    error => {
+      alert("Error in fetching current user details!")
+      console.log(error);
+      
+    },
+    () => {
+      this.currentUserDetailsLoadingFlag = false;
+    })
   }
+
 
   setModal(admin: Admin) {
     this.tempAdmin = admin;

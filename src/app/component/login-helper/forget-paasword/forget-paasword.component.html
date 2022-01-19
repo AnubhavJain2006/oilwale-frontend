@@ -6,6 +6,7 @@
 
     <div class="col-md-11">
         <small class="text-muted">Enter your email id for OTP</small>
+        <!-- {{email}} -->
         <input type="email" [readonly]="emailValidationSuccess?true:false" name="email" [(ngModel)]="email"
             placeholder="Email-address" class="form-control my-3 py-3">
 
@@ -19,8 +20,8 @@
 </div>
 <div class="form-row">
     <div class="col-md-11">
-        <button class="btn1 mt-3" (click)="verifyEmail()" *ngIf="!emailValidationSuccess">Send Otp </button>
-        <button class="btn1 mt-3" (click)="verifyEmail()" *ngIf="emailValidationSuccess">Verify Otp</button>
+        <button class="btn1 mt-3" (click)="verifyEmail()" *ngIf="!emailValidationSuccess">Send OTP </button>
+        <button class="btn1 mt-3" (click)="verifyEmail()" *ngIf="emailValidationSuccess">Verify OTP</button>
     </div>
 </div>
 
