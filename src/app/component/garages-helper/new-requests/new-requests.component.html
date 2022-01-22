@@ -3,8 +3,14 @@
         <h5 class="h5">New Garage Requests </h5>
     </div>
     
-    <div class="text-end">
-        <button class="btn background-orange text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">See Accepted Requests</button>
+    <div class="d-flex justify-content-between">
+        
+        <div>
+            <button class="btn background-orange text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">See Accepted Requests</button>
+        </div>
+        <div *ngIf="refreshingApproveReqFlag">
+            Refreshing...
+        </div>
     </div>
 </div>
 
@@ -42,16 +48,8 @@
                     <td class=" p-3">{{req.phoneNumber}}</td>
                     <td class=" p-3">{{req.requestAt | date:'medium'}}</td>
                     <td class=" p-3">
-                        <div class="">
-                            <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v"></i>                            
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                              <li><a class="dropdown-item text-success" href="#"> <i class="fas fa-check"></i> Approve</a></li>
-                              <li><a class="dropdown-item text-danger" href="#"> <i class="fas fa-times"></i> Decline</a></li>
-                             
-                            </ul>
-                          </div>
+                       <button class="btn mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="requestConfirmation(req, 'approve')"><i class="fas fa-check"></i></button>
+                       <button class="btn mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="requestConfirmation(req, 'decline')"><i class="fas fa-times"></i></button>
                     </td>
                 </tr>
             </ng-container>
@@ -69,6 +67,7 @@
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
     <h5 id="offcanvasRightLabel">Accepted Requests </h5>
+    <small *ngIf="refreshingDeclineReqFlag" class="text-secondary">Refreshing...</small>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
@@ -87,4 +86,45 @@
         </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="!loading">
+
+    <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <span *ngIf="methodCall == 'approve'" class="text-success"><i class="fas fa-check"></i> Approve Request</span>
+                    <span *ngIf="methodCall == 'decline'" class="text-danger"><i class="fas fa-times"></i> Decline Request</span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                
+                    <div class="mx-md-2">
+                        <small class="text-secondary">ARE YOU SURE YOU WANT TO PERFORM THIS ACTIONS</small>
+                        <div class="my-1">
+                            <p class="m-0">Name: {{requestOfIntrest?.fullName}}</p>
+                            <p class="m-0">Address: {{requestOfIntrest?.address}}</p>
+                            <p class="m-0">Phone: {{requestOfIntrest?.phoneNumber}}</p>
+                            <p class="m-0">Request : {{requestOfIntrest?.requestAt | date:'medium'}}</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="confirmationModalCloseBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button *ngIf="methodCall == 'approve'" type="button" class="btn btn-success" (click)="approveRequest(requestOfIntrest)" [disabled]="approveReqFlag">
+                        <span *ngIf="!approveReqFlag"> Approve Request </span>
+                        <span *ngIf="approveReqFlag"> Approving Request ... </span>
+                    </button>
+                    <button *ngIf="methodCall == 'decline'" type="button" class="btn btn-danger" (click)="declineRequest(requestOfIntrest)" [disabled]="declineReqFlag">
+                        <span *ngIf="!declineReqFlag"> Decline Request </span>
+                        <span *ngIf="declineReqFlag"> Declining Request ... </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

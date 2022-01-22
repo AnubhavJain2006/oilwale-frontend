@@ -21,7 +21,7 @@ export class GarageService {
   deactivatedGarageList: Array<Garage> = [];
   _refreshNeeded = new Subject<void>();
 
-  apiUrl: string = environment.baseUrl + "api/garage";
+  private apiUrl: string = environment.baseUrl + "api/garage";
 
   tempGarage: Garage;
 
@@ -116,6 +116,17 @@ export class GarageService {
 
   fetchAcceptedRequests(): Observable<NewGarageRequest[]> {
     return this.httpClient.get<NewGarageRequest[]>( environment.baseUrl + 'api/accepted/newGarages');
+  }
+
+  acceptNewRequest(request: NewGarageRequest): Observable<NewGarageRequest> {
+    let reqObj = request;
+    reqObj.status = true;
+    return this.httpClient.put<NewGarageRequest>( environment.baseUrl + 'api/newGarage', request);
+  }
+
+  declineNewRequest(request: NewGarageRequest): Observable<NewGarageRequest> {
+    
+    return this.httpClient.delete<NewGarageRequest>( environment.baseUrl + 'api/newGarage/' + request.newGarageRequestId);
   }
 
   checkPhoneNumber( phoneNumber: string ): Observable<CheckPhoneNumber> {
