@@ -20,11 +20,12 @@ export class AddGarageComponent implements OnInit {
   pincodeAreaFetchLoading: boolean = false;
   addGarageLoadingFlag: boolean = false;
   phoneNumberCheck: boolean = false;
-  phoneNumberCheckLoading: boolean = true;
+  phoneNumberCheckLoading: boolean = false;
 
   // utilities
   fieldTextTypePass: boolean = false;
   fieldTextTypeConf: boolean = false;
+  phoneNumberChecked: string = "";
 
   constructor(private garageService: GarageService, private router: Router) { 
     this.garage = new FormGroup({
@@ -106,11 +107,16 @@ export class AddGarageComponent implements OnInit {
 
   checkPhoneNumber() {
     console.log("check started");
+
+    this.phoneNumberChecked = this.garage.value.phoneNumber;
     
     if (this.garage.get('phoneNumber')?.touched) {
       if (this.garage.get('phoneNumber')?.valid) {
+        this.phoneNumberCheckLoading = true;
         this.garageService.checkPhoneNumber(this.garage.value.phoneNumber).subscribe(data => {
           if (data.available) this.phoneNumberCheck = true;
+          else this.phoneNumberCheck = false;
+          this.phoneNumberCheckLoading = false;
         })
       }
     }

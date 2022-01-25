@@ -1,52 +1,149 @@
-<div class="d-flex flex-wrap flex-md-nowrap pt-3">
-  <h3 class="h3"> <i class="fas fa-home"></i> Dashboard</h3>
+<div class=" row pt-3">
+  <div class="col-sm-9">
+
+    <h3 class="h3 mb-1">Hello, Username</h3>
+    <p class="m-0"><small class="text-secondary">Welcome back</small></p>
+  </div>
+
+  <div class="col-sm-3">
+    <input type="search" name="search" id="search" class="form-control p-2" placeholder="Search">
+  </div>
+
 </div>
 
-
-
-<div class="p-2">
-  <!-- overview  -->
-  <div class="py-3 d-flex" style="flex-wrap: wrap;">
-    <div class="p-1 m-2 border bg-white rounded border-bottom-orange">
-      <div class="d-flex align-items-center">
-        <div class="p-2 ">
-          <span *ngIf="!statsLoadingFlag" class="h1 text-center">{{ dashBoardStats.numberOfActiveGarages + dashBoardStats.numberOfDeactiveGarages }}</span>
-        </div>
-        <div class="p-2">
-          <div class="text-center">
-            <i class="fas fa-wrench fa-2x"></i> <br>
-            Total Affiliated Garages
-          </div>
-        </div>
+<!-- overview  -->
+<div class="mt-3 py-3 d-flex flex-wrap">
+  <div class="p-1 m-2 border bg-white rounded border-bottom-orange">
+    <div class="d-flex align-items-center">
+      <div class="p-2 ">
+        <span *ngIf="!statsLoadingFlag" class="h1 text-center">{{ dashBoardStats.numberOfActiveGarages + dashBoardStats.numberOfDeactiveGarages }}</span>
       </div>
-    </div>
-    <div class="p-1 m-2 border bg-white rounded border-bottom-orange">
-      <div class="d-flex align-items-center">
-        <div class="p-2 ">
-          <span *ngIf="!statsLoadingFlag"  class="h1 text-center">{{ dashBoardStats.numberOfCustomers }}</span>
-        </div>
-        <div class="p-2">
-          <div class="text-center">
-            <i class="fas fa-users fa-2x"></i> <br>
-            Total Serving Customers
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="p-1 m-2 border bg-white rounded border-bottom-orange">
-      <div class="d-flex align-items-center">
-        <div class="p-2 ">
-          <span *ngIf="!statsLoadingFlag"  class="h1 text-center">{{ dashBoardStats.numberOfActiveScheme + dashBoardStats.numberOfConcludeScheme + dashBoardStats.numberOfUpComingScheme}}</span>
-        </div>
-        <div class="p-2">
-          <div class="text-center">
-            <i class="fas fa-road fa-2x"></i> <br>
-            Total Schemes Organised
-          </div>
+      <div class="p-2">
+        <div class="text-center">
+          <i class="fas fa-wrench fa-2x"></i> <br>
+          Total Affiliated Garages
         </div>
       </div>
     </div>
   </div>
+  <div class="p-1 m-2 border bg-white rounded border-bottom-orange">
+    <div class="d-flex align-items-center">
+      <div class="p-2 ">
+        <span *ngIf="!statsLoadingFlag"  class="h1 text-center">{{ dashBoardStats.numberOfCustomers }}</span>
+      </div>
+      <div class="p-2">
+        <div class="text-center">
+          <i class="fas fa-users fa-2x"></i> <br>
+          Total Serving Customers
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-1 m-2 border bg-white rounded border-bottom-orange">
+    <div class="d-flex align-items-center">
+      <div class="p-2 ">
+        <span *ngIf="!statsLoadingFlag"  class="h1 text-center">{{ dashBoardStats.numberOfActiveScheme + dashBoardStats.numberOfConcludeScheme + dashBoardStats.numberOfUpComingScheme}}</span>
+      </div>
+      <div class="p-2">
+        <div class="text-center">
+          <i class="fas fa-road fa-2x"></i> <br>
+          Total Schemes Organised
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-8 px-md-3">
+    <h6 class="h6 text-secondary">ORGANIZE SCHEME</h6>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At id nostrum natus sunt nam sapiente aliquam temporibus libero harum!</p>
+    
+  </div>
+
+  <div class="col-md-4 px-md-3">
+    
+    <!-- orders -->
+    <div>
+      <h6 class="h6 text-secondary">RECENT ORDERS</h6>
+
+      <div class="card  rounded-0 border-0 my-3">
+        <div class="card-body border-left-orange">
+          <h6 class="card-title">Garage Name Here</h6>
+          <p class="text-secondary m-0">The Garage name - placeholder</p> 
+
+          <small>
+            <a href="/orders" class="stretched-link">See Order</a>
+          </small>
+
+        </div>
+      </div>
+
+
+      <div class="card  rounded-0 border-0 my-3">
+        <div class="card-body border-left-orange">
+          <h6 class="card-title">Garage Name Here</h6>
+          <p class="text-secondary m-0">The Garage name - placeholder</p> 
+
+          <small>
+            <a href="/orders" class="stretched-link">See Order</a>
+          </small>
+
+        </div>
+      </div>
+
+
+      <div class="card  rounded-0 border-0 my-3">
+        <div class="card-body border-left-orange">
+          <h6 class="card-title">Garage Name Here</h6>
+          <p class="text-secondary m-0">The Garage name - placeholder</p> 
+
+          <small>
+            <a href="/orders" class="stretched-link">See Order</a>
+          </small>
+
+        </div>
+      </div>
+
+
+      <div class="card  rounded-0 border-0 my-3">
+        <div class="card-body border-left-orange">
+          <h6 class="card-title">Garage Name Here</h6>
+          <p class="text-secondary m-0">The Garage name - placeholder</p> 
+
+          <small>
+            <a href="/orders" class="stretched-link">See Order</a>
+          </small>
+
+        </div>
+      </div>
+
+
+      <div class="card  rounded-0 border-0 my-3">
+        <div class="card-body border-left-orange">
+          <h6 class="card-title">Garage Name Here</h6>
+          <p class="text-secondary m-0">The Garage name - placeholder</p> 
+
+          <small>
+            <a href="/orders" class="stretched-link">See Order</a>
+          </small>
+
+        </div>
+      </div>
+
+      
+
+
+      
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- <div class="p-2">
+  
 
   <div class="mt-md-5 ms-md-5">
     <p class="lead fw-normal m-1">Visit page</p>
@@ -89,4 +186,4 @@
     </button>
   </div>
 
-</div>
+</div> -->
