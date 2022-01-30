@@ -24,7 +24,7 @@
                           <span class="lead fw-normal m-0">{{o.garage.garageName}}</span>
                           <span class="text-secondary m-0"> - {{o.garage.name}}</span>
                         </p>
-                        <!-- <span *ngIf="o.notes.length != 0" ><small class="text-secondary"><i class="fas fa-clipboard"></i> {{ o.notes }}</small></span> -->
+                        <span *ngIf="o.notes.length != 0" ><small class="text-secondary"><i class="fas fa-clipboard"></i> {{ o.notes }}</small></span>
                   </div>
                   <small><p class="text-secondary">{{ o.createdAt | date:'medium'}}</p></small>
               </div>
@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between mt-3">
-                    <button class="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setAddNoteModel(o.orderId)" > <i class="fas fa-clipboard"></i> Add Note </button>
+                    <button class="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setAddNoteModel(o.orderId, o.notes)" > <i class="fas fa-clipboard"></i> Add Note </button>
                     <div>
                         <button class="btn btn-outline-danger mx-1" [disabled]="o.status == -999" (click)="declineOrder(o)">
                             <span *ngIf="o.status != -999 || !declineOrderFlag">
@@ -119,17 +119,22 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            {{ addNoteOrderId }}
-            {{ addNoteNote }}
             <div class="mb-3">
                 <label for="addNote" class="form-label">Add Note</label>
-                <input type="text" class="form-control" id="addNote" aria-describedby="noteHelp" [(ngModel)]="addNoteNote" >
+                <input type="text" class="form-control" id="addNote" aria-describedby="noteHelp" [(ngModel)]="addNoteNote" [value]="addNoteNote" >
                 <div id="noteHelp" class="form-text">If you want to remember something about order for the future, then add it here.</div>
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn background-orange text-white" [disabled]="addNoteNote.length == 0" (click)="addNoteToOrder(addNoteOrderId, addNoteNote)" >Add Note</button>
+          <button type="button" id="notesModalCloseBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn background-orange text-white" [disabled]="addNoteNote.length == 0 || addNoteLoadingFlag" (click)="addNoteToOrder(addNoteOrderId, addNoteNote)" >
+                <span *ngIf="!addNoteLoadingFlag">
+                    Add Note
+                </span>
+                <span *ngIf="addNoteLoadingFlag">
+                    Adding Note...
+                </span>
+            </button>
         </div>
       </div>
     </div>

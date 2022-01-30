@@ -21,6 +21,8 @@ export class AcceptedOrdersComponent implements OnInit {
   
   acceptOrderResponse!: OrderUpdate;
 
+  addNoteLoadingFlag: boolean = false;
+
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
@@ -38,15 +40,23 @@ export class AcceptedOrdersComponent implements OnInit {
   }
 
 
-  setAddNoteModel(orderId: string) {
+  setAddNoteModel(orderId: string, note: string) {
     this.addNoteOrderId = orderId;
+    this.addNoteNote = note;
   }
-
   addNoteToOrder(orderId: string, note: string) {
+    this.addNoteLoadingFlag = true;
     this.orderService.addNoteToOrder(orderId, note).subscribe({
       next: data => {
         console.log(data);
-        
+        for ( let i=0; i< this.orders.length; i++) {
+          if (this.orders[i].orderId == orderId) {
+            this.orders[i].notes = data.notes;
+            break;
+          }
+        }
+
+        document.getElementById("notesModalCloseBtn1")?.click();
       }
     })
   }

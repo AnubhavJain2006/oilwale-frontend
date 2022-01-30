@@ -26,6 +26,7 @@ export class NewOrdersComponent implements OnInit {
   // flag
   acceptOrderFlag: boolean = false;
   declineOrderFlag: boolean = false;
+  addNoteLoadingFlag: boolean = false;
 
   constructor(private orderService: OrderService) { }
 
@@ -55,15 +56,26 @@ export class NewOrdersComponent implements OnInit {
     })
   }
 
-  setAddNoteModel(orderId: string) {
+  setAddNoteModel(orderId: string, note: string) {
     this.addNoteOrderId = orderId;
+    this.addNoteNote = note;
   }
 
   addNoteToOrder(orderId: string, note: string) {
+    this.addNoteLoadingFlag = true;
     this.orderService.addNoteToOrder(orderId, note).subscribe({
       next: data => {
         console.log(data);
-        
+
+        for ( let i=0; i< this.orders.length; i++) {
+          if (this.orders[i].orderId == orderId) {
+            this.orders[i].notes = data.notes;
+            break;
+          }
+        }
+
+        document.getElementById("notesModalCloseBtn")?.click();
+
       }
     })
   }

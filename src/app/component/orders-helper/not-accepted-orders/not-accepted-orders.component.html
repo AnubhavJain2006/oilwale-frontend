@@ -23,7 +23,7 @@
                           <span class="lead fw-normal m-0">{{o.garage.garageName}}</span>
                           <span class="text-secondary m-0"> - {{o.garage.name}}</span>
                         </p>
-                        <span><small class="text-secondary"><i class="fas fa-clipboard"></i> Kati zehar note.</small></span>
+                        <span *ngIf="o.notes.length != 0" ><small class="text-secondary"><i class="fas fa-clipboard"></i> {{ o.notes }}</small></span>
                   </div>
                   <div class="text-end">
                       <small><p class="text-secondary m-0">{{ o.completedAt | date:'medium'}}</p></small>

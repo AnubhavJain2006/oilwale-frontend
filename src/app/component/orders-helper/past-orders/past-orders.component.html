@@ -34,6 +34,9 @@
                         <th>
                             <small class="text-secondary">HANDLED BY</small>
                         </th>
+                        <th>
+                            <small class="text-secondary">NOTE</small>
+                        </th>
                         <th >
                             <small class="text-secondary">STARTED AT</small>
                         </th>
@@ -54,6 +57,7 @@
                             <td class=" p-3">{{o.garage.name}}</td>
                             <td class=" p-3">{{o.product.length}}</td>
                             <td class="p-3">{{o.admin.name}}</td>
+                            <td class="p-3">{{o.notes?o.notes:"-"}}</td>
                             <td class=" p-3">{{o.createdAt | date:"MMM dd, yyyy"}}</td>
                             <td class=" p-3">{{o.completedAt | date:"MMM dd, yyyy"}}</td>
                             <td class=" p-3">
