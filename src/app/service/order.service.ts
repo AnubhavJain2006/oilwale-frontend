@@ -77,4 +77,13 @@ export class OrderService {
     return this.httpClient.put<OrderUpdate>(this.apiUrl, declineOrderObj);
   }
 
+  addNoteToOrder(orderId: string, note: string): Observable<OrderGet> {
+    let reqObj = {
+      orderId: orderId,
+      notes: note
+    }
+
+    return this.httpClient.put<OrderGet>(this.apiUrl + '/note', reqObj);
+  }
+
 }

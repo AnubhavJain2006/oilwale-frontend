@@ -1,5 +1,7 @@
 export interface Order {
     orderId: string;
+    adminEmailId?: string;
+    adminId?: string;
     garageId: string;
     products: [{
         productId: string;
@@ -10,6 +12,7 @@ export interface Order {
     }];
     acceptedBy: string;
     placedAt: Date;
+    notes?: string;
     acceptedAt: Date;
     completedAt: Date;
     createdAt: Date;

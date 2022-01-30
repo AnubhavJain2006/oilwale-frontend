@@ -63,5 +63,20 @@ export class SessionService {
     return this.adminService.getAdminByEmail();
   }
 
+  async getCurrentUserObject() {
+    await this.fetchCurrentUserObject().subscribe({
+      next: (data) => {
+        return data;
+      },
+      error: (error) => {
+        alert ("Error in fetching user details.. Login again!")
+        console.log(error);
+        
+        setTimeout(() => {
+          // this.loggedOut();
+        }, 3000);
+      }
+    });
+  }
 
 }

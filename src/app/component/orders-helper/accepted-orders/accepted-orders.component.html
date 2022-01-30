@@ -26,7 +26,7 @@
                         </p>
                         <span><small class="text-secondary"><i class="fas fa-clipboard"></i> Kati zehar note.</small></span>
                   </div>
-                  <div class="text-end">
+                  <div class="text-end" *ngIf="o.admin">
                       <small><p class="text-secondary m-0">Accepted by: {{ o.admin.name }} ( {{ o.admin.phoneNumber }} )</p></small>
                       <small><p class="text-secondary m-0">{{ o.acceptedAt | date:'medium'}}</p></small>
 
@@ -74,7 +74,7 @@
                         </div>
 
                         <p class="mb-1"><small class="text-secondary fw-bold">ACCEPTED BY</small></p>
-                        <div class="px-3 mb-3">
+                        <div class="px-3 mb-3" *ngIf="o.admin">
                             <p class="m-0">
                                 <small>{{ o.admin.name }} - {{ o.admin.privilege | titlecase }}</small>
                             </p>
@@ -125,8 +125,29 @@
         </div>
     </div>
 
-
-
-
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-clipboard"></i> Add Note - Garage Name </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            {{ addNoteOrderId }}
+            {{ addNoteNote }}
+            <div class="mb-3">
+                <label for="addNote" class="form-label">Add Note</label>
+                <input type="text" class="form-control" id="addNote" aria-describedby="noteHelp" [(ngModel)]="addNoteNote" >
+                <div id="noteHelp" class="form-text">If you want to remember something about order for the future, then add it here.</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn background-orange text-white" [disabled]="addNoteNote.length == 0" (click)="addNoteToOrder(addNoteOrderId, addNoteNote)" >Add Note</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>

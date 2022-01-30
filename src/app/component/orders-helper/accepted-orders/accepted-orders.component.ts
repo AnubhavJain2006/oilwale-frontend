@@ -14,7 +14,11 @@ export class AcceptedOrdersComponent implements OnInit {
   @Input() orders!: OrderGet[];
   @Input() loading!: boolean;
   @Output() completeEvent:EventEmitter<string> = new EventEmitter<string>();
-
+  
+  // utils 
+  addNoteOrderId: string = "Not set";
+  addNoteNote: string = "";
+  
   acceptOrderResponse!: OrderUpdate;
 
   constructor(private orderService: OrderService) { }
@@ -32,5 +36,20 @@ export class AcceptedOrdersComponent implements OnInit {
       this.completeEvent.emit();
     })
   }
+
+
+  setAddNoteModel(orderId: string) {
+    this.addNoteOrderId = orderId;
+  }
+
+  addNoteToOrder(orderId: string, note: string) {
+    this.orderService.addNoteToOrder(orderId, note).subscribe({
+      next: data => {
+        console.log(data);
+        
+      }
+    })
+  }
+
 
 }

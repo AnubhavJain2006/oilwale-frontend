@@ -72,7 +72,7 @@
                         </div>
 
                         <p class="mb-1"><small class="text-secondary fw-bold">DECLINED BY</small></p>
-                        <div class="px-3 mb-3">
+                        <div class="px-3 mb-3" *ngIf="o.admin">
                             <p class="m-0">
                                 <small>{{ o.admin.name }} - {{ o.admin.privilege | titlecase }}</small>
                             </p>

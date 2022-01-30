@@ -19,6 +19,10 @@ export class NewOrdersComponent implements OnInit {
   acceptOrderResponse!: OrderUpdate;
   // auxAcceptanceArray: boolean[]
 
+  // utils 
+  addNoteOrderId: string = "Not set";
+  addNoteNote: string = "";
+
   // flag
   acceptOrderFlag: boolean = false;
   declineOrderFlag: boolean = false;
@@ -48,6 +52,19 @@ export class NewOrdersComponent implements OnInit {
       console.log(this.acceptOrderResponse);
       this.declineOrderFlag = false;
       this.declineEvent.emit();
+    })
+  }
+
+  setAddNoteModel(orderId: string) {
+    this.addNoteOrderId = orderId;
+  }
+
+  addNoteToOrder(orderId: string, note: string) {
+    this.orderService.addNoteToOrder(orderId, note).subscribe({
+      next: data => {
+        console.log(data);
+        
+      }
     })
   }
 

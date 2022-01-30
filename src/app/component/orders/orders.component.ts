@@ -41,11 +41,17 @@ export class OrdersComponent implements OnInit {
     this.orderService.fetchNewOrders().subscribe((data) => {
       this.newOrders = data;
       console.log("haha");
+      this.newOrdersLoading = false;
       console.log(this.newOrders);
     }, 
     (error) => {
-      this.acceptedOrdersLoading = false;
+      this.newOrdersLoading = false;
       console.log(error.message);
+      console.log(error.status);
+      
+      if ( error.status == 404) {
+        this.newOrders = [];
+      }
     },
     () => {
       this.newOrdersLoading = false;
@@ -59,6 +65,10 @@ export class OrdersComponent implements OnInit {
     (error) => {
       this.acceptedOrdersLoading = false;
       console.log(error.message);
+
+      if (error.status == 404) {
+        this.acceptedOrders = [];
+      }
     },
     () => {
       this.acceptedOrdersLoading = false;
@@ -71,6 +81,10 @@ export class OrdersComponent implements OnInit {
     }, 
     (error) => {
       console.log(error.message);
+
+      if (error.status == 404) {
+        this.pastOrders = [];
+      }
     },
     () => {
       this.pastOrderLoading = false;
@@ -79,9 +93,11 @@ export class OrdersComponent implements OnInit {
 
   fetchCompletedOrders() {
     this.orderService.fetchCompletedOrders().subscribe((data) => {
+      this.completedOrdersLoading = false;
       this.completedOrders = data;
     }, 
     (error) => {
+      this.completedOrdersLoading = false;
       console.log(error.message);
     },
     () => {
@@ -95,6 +111,10 @@ export class OrdersComponent implements OnInit {
     }, 
     (error) => {
       console.log(error.message);
+
+      if (error.status == 404) {
+        this.notAcceptedOrders = [];
+      }
     },
     () => {
       this.notAcceptedOrdersLoading = false;

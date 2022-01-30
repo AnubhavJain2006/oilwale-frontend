@@ -32,6 +32,7 @@ export class HeaderService {
     else if ( urlArray[1] === "products") this._activeTab = "products"
     else if ( urlArray[1] === "schemes") this._activeTab = "schemes"
     else if ( urlArray[1] === "orders") this._activeTab = "orders"
+    else if ( urlArray[1] === "broadcasts") this._activeTab = "broadcasts"
     else if ( urlArray[1] === "accounts") this._activeTab = "accounts"
     else if( urlArray[1] === "myactivities") this._activeTab = "myactivities"
     else if( urlArray[1] === "myaccount") this._activeTab = "myaccount"
