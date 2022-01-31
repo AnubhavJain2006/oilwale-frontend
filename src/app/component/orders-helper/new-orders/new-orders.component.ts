@@ -66,6 +66,7 @@ export class NewOrdersComponent implements OnInit {
     this.orderService.addNoteToOrder(orderId, note).subscribe({
       next: data => {
         console.log(data);
+        this.addNoteLoadingFlag = false;
 
         for ( let i=0; i< this.orders.length; i++) {
           if (this.orders[i].orderId == orderId) {
@@ -76,6 +77,11 @@ export class NewOrdersComponent implements OnInit {
 
         document.getElementById("notesModalCloseBtn")?.click();
 
+      },
+      error: e => {
+        console.log(e);
+        this.addNoteLoadingFlag = false;
+        alert("Error in adding note")
       }
     })
   }
