@@ -76,15 +76,25 @@ export class AdminService {
 
   forgotPassword(email: string): Observable<any> {
     let reqObj = {
+      userType: "admin", 
       data: email
     }
     return this.httpClient.post(environment.baseUrl + "api/authenticate/forgotPassword", reqObj);
   }
 
 
-  verifyOtp() {
-
+  verifyOtp(email: string, otp: string):Observable<any> {
+    let reqObj = {
+      userType: "admin", 
+      otp: otp,
+      data: email,
+      timeStamp: new Date()
+    }
+    return this.httpClient.post(environment.baseUrl + "api/authenticate/verifyOTP", reqObj);
   }
+
+
+
   constructor(private httpClient: HttpClient) { }
 
   getAdminById(id: string): Observable<Admin> {

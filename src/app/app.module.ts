@@ -66,6 +66,7 @@ import { BroadcastsComponent } from './component/broadcasts/broadcasts.component
 import { GlobalerrorhandlerService } from './service/ErrorHandler/globalerrorhandler.service';
 import { DeletedVehiclesComponent } from './component/vehicles-helper/deleted-vehicles/deleted-vehicles.component';
 import { NewRequestsComponent } from './component/garages-helper/new-requests/new-requests.component';
+import { PasswordResetComponent } from './component/login-helper/password-reset/password-reset.component';
 
 @NgModule({
   declarations: [
@@ -123,7 +124,8 @@ import { NewRequestsComponent } from './component/garages-helper/new-requests/ne
     PastOrdersComponent,
     DeletedVehiclesComponent,
     NewRequestsComponent,
-    BroadcastsComponent
+    BroadcastsComponent,
+    PasswordResetComponent
   ],
   imports: [
     BrowserModule,
