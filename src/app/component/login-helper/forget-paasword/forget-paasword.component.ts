@@ -2,6 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { AdminService } from './../../../service/admin.service';
 import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from '../../login/login.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-forget-paasword',
@@ -15,6 +16,15 @@ export class ForgetPaaswordComponent implements OnInit {
   otp: string = "";
   email: string = "";
 
+  // not so bad variables
+  passwordResetShow: boolean = false;
+
+  passwordResetForm: FormGroup;
+  passwordResetMatchFlag: boolean = true;
+  passwordResetSubmitLoading: boolean = false;
+  passwordResetComplete: boolean = false;
+  passwordResetRequestComplete: boolean = false;
+
   // booleans
   isValidOtp: boolean = true;
   isValidEmail: boolean = true;
@@ -26,7 +36,15 @@ export class ForgetPaaswordComponent implements OnInit {
   verifyOtpLoading: boolean = false;
 
   constructor(private loginComp: LoginComponent, private adminService: AdminService) {
+    this.passwordResetForm = new FormGroup({
+      newPassword: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]),
+      newPasswordConfirm: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')])
+    })
 
+  }
+
+  toggle() {
+    this.passwordResetShow = !this.passwordResetShow;
   }
 
   ngOnInit(): void {
@@ -85,8 +103,9 @@ export class ForgetPaaswordComponent implements OnInit {
       resp => {
         console.log("OTP verify function");
         
-        if (resp.data == "Success") {
+        if (resp.data == "success") {
           console.log("OTP verified")
+          this.passwordResetShow = true;
         }
         else {
           this.otpValidationFromServer = false;
@@ -107,5 +126,41 @@ export class ForgetPaaswordComponent implements OnInit {
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
   };
+
+  checkNewPasswordMatch(): boolean {
+    return this.passwordResetForm.value.newPassword === this.passwordResetForm.value.newPasswordConfirm;
+  }
+
+  runPasswordMatch() {
+    let check = this.checkNewPasswordMatch();
+    if (check) {
+      this.passwordResetMatchFlag = true;
+      return;
+    }
+    this.passwordResetMatchFlag = false;
+  }
+
+
+  resetPasswordSubmit() {
+    console.log("Password reset request!");
+    this.passwordResetSubmitLoading = true;
+
+    this.adminService.resetPassword(this.email, this.passwordResetForm.value.newPassword).subscribe(
+      (res) => {
+        console.log("Password reset complete");
+        this.passwordResetSubmitLoading = false;
+        
+        this.passwordResetRequestComplete = true;
+        if (res.data == "success") {
+          this.passwordResetComplete = true;
+        }
+
+      },
+      (err) => {
+        console.log(err);
+      }
+    )
+
+  }
 
 }

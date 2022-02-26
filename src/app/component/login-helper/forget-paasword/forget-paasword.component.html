@@ -1,46 +1,103 @@
 <h1 class="font-weight-bold py-4 d-none d-md-block">OilWale</h1>
 <h1 class="font-weight-bold py-4 text-center d-md-none d-sm-block">OilWale</h1>
 
-<h4 class="">Forget Password</h4>
-<div class="form-row">
+<div *ngIf="!passwordResetShow">
+    <h4 class="">Forget Password</h4>
+    <div class="form-row">
 
-    <div class="col-md-11">
-        <small class="text-muted">Enter your email id for OTP</small>
-        <!-- {{email}} -->
-        <input type="email" [readonly]="emailValidationSuccess?true:false" name="email" [(ngModel)]="email" (change)="removeValidationMsg()"
-            placeholder="Email-address" class="form-control my-3 py-3">
-        <small *ngIf="!isValidEmail" class="text-danger">Email format is not correct!</small>
-        <small *ngIf="!isValidRegisteredEmail" class="text-danger">Email not valid!</small>
+        <div class="col-md-11">
+            <small class="text-muted">Enter your email id for OTP</small>
+            <!-- {{email}} -->
+            <input type="email" [readonly]="emailValidationSuccess?true:false" name="email" [(ngModel)]="email"
+                (change)="removeValidationMsg()" placeholder="Email-address" class="form-control my-3 py-3">
+            <small *ngIf="!isValidEmail" class="text-danger">Email format is not correct!</small>
+            <small *ngIf="!isValidRegisteredEmail" class="text-danger">Email not valid!</small>
 
+        </div>
     </div>
-</div>
-<div *ngIf="emailValidationSuccess" class="form-row">
-    <div class="col-md-11">
-        <input type="text" placeholder="Enter OTP send to your email id" name="otp" [(ngModel)]="otp"
-            class="form-control my-3 py-3">
-        <small *ngIf="!isValidOtp" class="text-danger">OTP format is not correct!</small>
-        <small *ngIf="!otpValidationFromServer" class="text-danger">OTP verification failed!</small>
+    <div *ngIf="emailValidationSuccess" class="form-row">
+        <div class="col-md-11">
+            <input type="text" placeholder="Enter OTP send to your email id" name="otp" [(ngModel)]="otp"
+                class="form-control my-3 py-3">
+            <small *ngIf="!isValidOtp" class="text-danger">OTP format is not correct!</small>
+            <small *ngIf="!otpValidationFromServer" class="text-danger">OTP verification failed!</small>
+        </div>
     </div>
+    <div class="form-row">
+        <div class="col-md-11">
+            <button class="btn1 mt-3" (click)="verifyEmail()" *ngIf="!emailValidationSuccess"
+                [disabled]="verifiyEmailLoading">
+                <div *ngIf="verifiyEmailLoading" class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+
+                Send OTP
+            </button>
+
+
+            <button class="btn1 mt-3" (click)="verifyOtp()" *ngIf="emailValidationSuccess"
+                [disabled]="verifyOtpLoading">
+                <div *ngIf="verifyOtpLoading" class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+
+                Verify OTP
+            </button>
+        </div>
+    </div>
+
+    <p class="pt-4"><button class="btn" (click)="signInClick()">Sign In?</button></p>
 </div>
-<div class="form-row">
-    <div class="col-md-11">
-        <button class="btn1 mt-3" (click)="verifyEmail()" *ngIf="!emailValidationSuccess" [disabled] = "verifiyEmailLoading">
-            <div *ngIf="verifiyEmailLoading" class="spinner-border spinner-border-sm" role="status">
-                <span class="visually-hidden">Loading...</span>
+
+
+<div *ngIf="passwordResetShow">
+    <h4>Reset your password</h4>
+    <div class="form-row">
+
+        <form [formGroup]="passwordResetForm" (submit)="resetPasswordSubmit()">
+
+            <div class="col-md-11">
+                <small class="text-muted">Enter your new password</small>
+                <!-- {{email}} -->
+                <input type="password" name="newPassword" formControlName="newPassword" placeholder="New Password" class="form-control my-3 py-3">
+                <span *ngIf="passwordResetForm.get('newPassword')?.touched">
+                    <p class="m-0">
+                        <small class="text-danger" *ngIf="passwordResetForm.get('newPassword')?.hasError('required')">New Password is required</small>
+                    </p>
+                    <p class="m-0">
+                        <small class="text-danger" *ngIf="passwordResetForm.get('newPassword')?.hasError('minlength')">Password should be of at least 8 characters</small>
+                    </p>
+                    <p class="m-0">
+                        <small class="text-danger" *ngIf="passwordResetForm.get('newPassword')?.hasError('pattern')">Password must contain atleast one special character one upper
+                            character and one lower character</small>
+                    </p>
+                </span>
             </div>
-
-            Send OTP 
-        </button>
-
-
-        <button class="btn1 mt-3" (click)="verifyOtp()" *ngIf="emailValidationSuccess" [disabled] = "verifyOtpLoading">
-            <div *ngIf="verifyOtpLoading" class="spinner-border spinner-border-sm" role="status">
-                <span class="visually-hidden">Loading...</span>
+            <div class="col-md-11">
+                <input type="password" name="newPasswordConfirm" formControlName="newPasswordConfirm" placeholder="Confirm Password" (change)="runPasswordMatch()" class="form-control my-3 py-3">
+                <span class="text-danger" *ngIf="!passwordResetMatchFlag">
+                    Both passwords do not match!
+                </span>
             </div>
-
-            Verify OTP
-        </button>
+            <div class="form-row">
+                <div class="col-md-11">
+                    <button class="btn1 mt-3" [disabled]="!passwordResetForm.valid || !passwordResetMatchFlag || passwordResetSubmitLoading">
+                        <div *ngIf="passwordResetSubmitLoading" class="spinner-border spinner-border-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+        
+                        Reset Passsword
+                    </button>
+                </div>
+            </div>
+            <div class="form-row" *ngIf="passwordResetRequestComplete">
+                <div class="col-md-11">
+                    <span *ngIf="passwordResetComplete" class="text-success"> <i class="fas fa-check"></i> Password Reset complete <button class="btn" (click)="signInClick()"><strong>Sign in</strong></button> </span>
+                    <span *ngIf="!passwordResetComplete" class="text-danger"> <i class="fas fa-times"></i> Some error in password change!</span>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 
-<p class="pt-4"><button class="btn" (click)="signInClick()">Sign In?</button></p>
+<button (click)="toggle()">Change</button>

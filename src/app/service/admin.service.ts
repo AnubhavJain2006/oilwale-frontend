@@ -36,12 +36,14 @@ export class AdminService {
   get deletedAccount() {
     return this._deleteAccount;
   }
-
+  
   _refreshNeeded = new Subject<void>();
-
+  
   get refreshNeeded() {
     return this._refreshNeeded;
   }
+  
+  constructor(private httpClient: HttpClient) { }
 
   deleteAccount(adminId: string): Observable<any> {
     return this.httpClient.delete(environment.baseUrl + "api/admin/" + adminId).pipe(tap(() => {
@@ -87,15 +89,20 @@ export class AdminService {
     let reqObj = {
       userType: "admin", 
       otp: otp,
-      data: email,
-      timeStamp: new Date()
+      data: email
     }
     return this.httpClient.post(environment.baseUrl + "api/authenticate/verifyOTP", reqObj);
   }
 
+  resetPassword(email: string, password: string):Observable<any> {
+    let reqObj = {
+      userType: "admin", 
+      data: email,
+      newPassword: password
+    }
+    return this.httpClient.post(environment.baseUrl + "api/authenticate/resetPassword", reqObj);
+  }
 
-
-  constructor(private httpClient: HttpClient) { }
 
   getAdminById(id: string): Observable<Admin> {
     return this.httpClient.get<Admin>(environment.baseUrl + 'api/admin/' + id);
