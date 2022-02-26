@@ -1,6 +1,6 @@
 <div class="py-3">
     <div class="py-2 text-center">
-        <h5 class="h5">Deleted Accounts</h5>
+        <h5 class="h5">DELETED ACCOUNTS</h5>
     </div>
 
     <div *ngIf="loading" class="text-center">
@@ -8,10 +8,11 @@
     </div>
 </div>
 <div *ngIf="!loading">
-    <div class="d-flex justify-content-end mr-3 my-2">
-        <button id="fetch_accounts_list_deleted" class="btn d-none" onclick="get_admin_list('inactive')"><i
-                class="fas fa-sync-alt"></i> Refreh List</button>
+
+    <div *ngIf="accounts.length == 0" class="text-center">
+        No Data
     </div>
+
     <div id="accounts_message_div_deleted"></div>
     <ul class="list-group list-group-flush" id="all_deleted_accounts_list">
 

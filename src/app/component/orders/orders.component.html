@@ -34,12 +34,6 @@
             type="button" role="tab" aria-controls="pastOrders" aria-selected="false">
             <i class="fas fa-coins"></i> Past Orders </a>
     </li>
-    <!-- <li class="nav-item mx-1" role="presentation">
-        <a class="nav-link text-dark customers-tab" id="orderActivities-tab"
-            onclick="change_tab('customers-tab', 5)" data-bs-toggle="tab" data-bs-target="#orderActivities"
-            type="button" role="tab" aria-controls="orderActivities" aria-selected="false">
-            <i class="fas fa-code-branch"></i> Activities </a>
-    </li> -->
 </ul>
 <!-- page nav ends -->
 
@@ -64,10 +58,6 @@
 
     <div class="tab-pane fade" id="pastOrders" role="tabpanel" aria-labelledby="pastOrders-tab">
         <app-past-orders [orders]="pastOrders" [loading]="pastOrderLoading"></app-past-orders>
-    </div>
-
-    <div class="tab-pane fade" id="orderActivities" role="tabpanel" aria-labelledby="orderActivities-tab">
-        <app-order-activities></app-order-activities>
     </div>
 
 </div>

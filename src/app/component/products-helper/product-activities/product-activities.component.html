@@ -1,7 +1,7 @@
 <div class="">
     <div class="my-3 text-center">
         <div class="py-2">
-            <h5 class="h5">Products Activities</h5>
+            <h5 class="h5">PRODUCTS ACTIVITIES</h5>
         </div>
     </div>
 
@@ -15,36 +15,29 @@
     </div>
 
     <div class="py-2 w-100 mx-auto" *ngIf="!loading">
-        <ul class="list-group list-group-flush" >
-            <li class="list-group-item border-0" *ngFor="let act of activities">
-                <div class="d-flex d-inline">
-
-                    <div style="width: 180px;" class="">
-                        {{ act.createdAt | date:'medium' }} 
-                    </div>
-
-                    <div style="width: 110px;" class="">
-                        <span class="link-primary mx-1"><a href="/accounts/{{act.userId}}" class="text-decoration-none">{{ act.user }}</a> </span> 
-                    </div>
-
-                    <div style="width: 80px;" class="">
-                        <span class="badge mx-1" [ngClass]="{'bg-success': act.act == 'create', 'bg-warning': act.act == 'update', 'bg-danger': act.act == 'delete'}"> {{act.act}}d </span> 
-                    </div>
-
-                    <div style="width: 180px;" class="">
-                        <span class="link-primary mx-1"> <a href="/products/{{act.subjectId}}" class="text-decoration-none"> #{{ act.subject }}</a></span>
-                    </div>
-
+        <table datatable data-order='[[ 0, "desc" ]]'
+            class="table table-borderless">
+            <thead class="text-secondary">
+                <tr>
+                    <th><small class="text-secondary">TIMESTAMP</small></th>
+                    <th><small class="text-secondary">USER</small></th>
+                    <th><small class="text-secondary">ACT</small></th>
+                    <th><small class="text-secondary">PRODUCT</small></th>
                     
-
-
-                </div>
-                
-            </li>
-        </ul>
-
-
-
-
+                </tr>
+            </thead>
+            <tbody class="border-0">
+                <tr *ngFor="let act of activities">
+                    <td>{{act.createdAt | date:'medium'}}</td>
+                    <td>{{act.user}}</td>
+                    <td>
+                        <span class="badge" [ngClass]="{'bg-danger': act.act === 'delete', 'bg-success': act.act === 'create', 'bg-warning': act.act === 'update'}" >
+                            {{act.act | titlecase}}
+                        </span>
+                    </td>
+                    <td>{{act.subject}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

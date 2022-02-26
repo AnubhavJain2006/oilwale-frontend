@@ -52,7 +52,6 @@ import { ProductActivitiesComponent } from './component/products-helper/product-
 import { AddProductComponent } from './component/products-helper/add-product/add-product.component';
 import { PastSchemesComponent } from './component/schemes-helper/past-schemes/past-schemes.component';
 import { DatePipe } from '@angular/common';
-import { AccountActivitiesComponent } from './component/accounts-helper/account-activities/account-activities.component';
 import { AllAccountsComponent } from './component/accounts-helper/all-accounts/all-accounts.component';
 import { AddAccountsComponent } from './component/accounts-helper/add-accounts/add-accounts.component';
 import { DeletedAccountsComponent } from './component/accounts-helper/deleted-accounts/deleted-accounts.component';
@@ -65,7 +64,6 @@ import { NotAcceptedOrdersComponent } from './component/orders-helper/not-accept
 import { PastOrdersComponent } from './component/orders-helper/past-orders/past-orders.component';
 import { BroadcastsComponent } from './component/broadcasts/broadcasts.component';
 import { GlobalerrorhandlerService } from './service/ErrorHandler/globalerrorhandler.service';
-import { OrderActivitiesComponent } from './component/orders-helper/order-activities/order-activities.component';
 import { DeletedVehiclesComponent } from './component/vehicles-helper/deleted-vehicles/deleted-vehicles.component';
 import { NewRequestsComponent } from './component/garages-helper/new-requests/new-requests.component';
 
@@ -113,7 +111,6 @@ import { NewRequestsComponent } from './component/garages-helper/new-requests/ne
     ProductActivitiesComponent,
     AddProductComponent,
     PastSchemesComponent,
-    AccountActivitiesComponent,
     AllAccountsComponent,
     AddAccountsComponent,
     DeletedAccountsComponent,
@@ -124,7 +121,6 @@ import { NewRequestsComponent } from './component/garages-helper/new-requests/ne
     CompletedOrdersComponent,
     NotAcceptedOrdersComponent,
     PastOrdersComponent,
-    OrderActivitiesComponent,
     DeletedVehiclesComponent,
     NewRequestsComponent,
     BroadcastsComponent
