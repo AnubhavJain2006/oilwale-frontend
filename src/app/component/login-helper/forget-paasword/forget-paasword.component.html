@@ -17,8 +17,9 @@
     </div>
     <div *ngIf="emailValidationSuccess" class="form-row">
         <div class="col-md-11">
-            <input type="text" placeholder="Enter OTP send to your email id" name="otp" [(ngModel)]="otp"
+            <input type="password" placeholder="Enter OTP send to your email id" name="otp" [(ngModel)]="otp"
                 class="form-control my-3 py-3">
+            <small class="text-warning">OTP will be valid for 5 minutes</small>
             <small *ngIf="!isValidOtp" class="text-danger">OTP format is not correct!</small>
             <small *ngIf="!otpValidationFromServer" class="text-danger">OTP verification failed!</small>
         </div>
