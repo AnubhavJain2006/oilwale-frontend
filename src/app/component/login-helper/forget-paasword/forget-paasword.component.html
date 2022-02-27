@@ -93,11 +93,9 @@
             <div class="form-row" *ngIf="passwordResetRequestComplete">
                 <div class="col-md-11">
                     <span *ngIf="passwordResetComplete" class="text-success"> <i class="fas fa-check"></i> Password Reset complete <button class="btn" (click)="signInClick()"><strong>Sign in</strong></button> </span>
-                    <span *ngIf="!passwordResetComplete" class="text-danger"> <i class="fas fa-times"></i> Some error in password change!</span>
+                    <span *ngIf="!passwordResetComplete" class="text-danger"> <i class="fas fa-times"></i> Some error in password change! Try again</span>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
-<button (click)="toggle()">Change</button>

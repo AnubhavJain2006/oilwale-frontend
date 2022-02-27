@@ -24,6 +24,7 @@ export class ForgetPaaswordComponent implements OnInit {
   passwordResetSubmitLoading: boolean = false;
   passwordResetComplete: boolean = false;
   passwordResetRequestComplete: boolean = false;
+  secretTokenForPasswordReset: string = "";
 
   // booleans
   isValidOtp: boolean = true;
@@ -34,6 +35,7 @@ export class ForgetPaaswordComponent implements OnInit {
   // utils
   verifiyEmailLoading: boolean = false;
   verifyOtpLoading: boolean = false;
+  secretTokenForOtp: string = "";
 
   constructor(private loginComp: LoginComponent, private adminService: AdminService) {
     this.passwordResetForm = new FormGroup({
@@ -41,10 +43,6 @@ export class ForgetPaaswordComponent implements OnInit {
       newPasswordConfirm: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')])
     })
 
-  }
-
-  toggle() {
-    this.passwordResetShow = !this.passwordResetShow;
   }
 
   ngOnInit(): void {
@@ -73,9 +71,9 @@ export class ForgetPaaswordComponent implements OnInit {
     this.adminService.forgotPassword(this.email).subscribe(resp => {
       console.log(resp.data);
 
-      if (resp.data == "Success") {
+      if (resp.data.toLowerCase() == "success") {
         this.emailValidationSuccess = true;
-
+        this.secretTokenForOtp = resp.token;
         this.verifiyEmailLoading = false;
       }
       else {
@@ -99,13 +97,14 @@ export class ForgetPaaswordComponent implements OnInit {
     this.verifyOtpLoading = true;
 
     // this.adminService.sendotp()
-    this.adminService.verifyOtp(this.email, this.otp).subscribe(
+    this.adminService.verifyOtp(this.email, this.otp, this.secretTokenForOtp).subscribe(
       resp => {
         console.log("OTP verify function");
         
-        if (resp.data == "success") {
+        if (resp.data.toLowerCase() == "success") {
           console.log("OTP verified")
           this.passwordResetShow = true;
+          this.secretTokenForPasswordReset = resp.token;
         }
         else {
           this.otpValidationFromServer = false;
@@ -145,13 +144,13 @@ export class ForgetPaaswordComponent implements OnInit {
     console.log("Password reset request!");
     this.passwordResetSubmitLoading = true;
 
-    this.adminService.resetPassword(this.email, this.passwordResetForm.value.newPassword).subscribe(
+    this.adminService.resetPassword(this.email, this.passwordResetForm.value.newPassword, this.secretTokenForPasswordReset).subscribe(
       (res) => {
         console.log("Password reset complete");
         this.passwordResetSubmitLoading = false;
         
         this.passwordResetRequestComplete = true;
-        if (res.data == "success") {
+        if (res.data.toLowerCase() == "success") {
           this.passwordResetComplete = true;
         }
 

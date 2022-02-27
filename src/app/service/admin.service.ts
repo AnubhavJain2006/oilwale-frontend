@@ -85,20 +85,22 @@ export class AdminService {
   }
 
 
-  verifyOtp(email: string, otp: string):Observable<any> {
+  verifyOtp(email: string, otp: string, token: string):Observable<any> {
     let reqObj = {
       userType: "admin", 
       otp: otp,
-      data: email
+      data: email,
+      token: token
     }
     return this.httpClient.post(environment.baseUrl + "api/authenticate/verifyOTP", reqObj);
   }
 
-  resetPassword(email: string, password: string):Observable<any> {
+  resetPassword(email: string, password: string, token: string):Observable<any> {
     let reqObj = {
       userType: "admin", 
       data: email,
-      newPassword: password
+      newPassword: password,
+      token: token
     }
     return this.httpClient.post(environment.baseUrl + "api/authenticate/resetPassword", reqObj);
   }
